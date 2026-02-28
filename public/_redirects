@@ -1,0 +1,5 @@
+/*
+  Cloudflare Pages SPA redirect rule
+  Ensures all routes fall back to index.html (required for React Router BrowserRouter)
+*/
+/*    /index.html   200
