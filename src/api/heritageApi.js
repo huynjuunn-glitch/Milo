@@ -58,7 +58,7 @@ export async function fetchHeritageList({ pageIndex = 1, pageUnit = 100, ccbaKdc
 
         const res = await axios.get(`${API_BASE}/SearchKindOpenapiList.do`, {
             params,
-            timeout: 10000,
+            timeout: 30000,
         });
 
         // Parse XML response
@@ -81,7 +81,7 @@ export async function fetchHeritageDetail({ ccbaKdcd, ccbaAsno, ccbaCtcd }) {
                 ccbaCtcd,
                 serviceKey: API_KEY,
             },
-            timeout: 10000,
+            timeout: 30000,
         });
         return parseDetailXML(res.data);
     } catch (err) {
@@ -102,13 +102,27 @@ export async function fetchHeritageImages({ ccbaKdcd, ccbaAsno, ccbaCtcd }) {
                 ccbaCtcd,
                 serviceKey: API_KEY,
             },
-            timeout: 10000,
+            timeout: 30000,
         });
         return parseImageXML(res.data);
     } catch (err) {
         console.warn('Heritage image fetch warning:', err);
         return [];
     }
+}
+
+/**
+ * Fetch just the first image for list thumbnails
+ */
+const thumbnailCache = new Map();
+export async function fetchFirstImage({ ccbaKdcd, ccbaAsno, ccbaCtcd }) {
+    const key = `${ccbaKdcd}-${ccbaAsno}-${ccbaCtcd}`;
+    if (thumbnailCache.has(key)) return thumbnailCache.get(key);
+
+    const images = await fetchHeritageImages({ ccbaKdcd, ccbaAsno, ccbaCtcd });
+    const first = images.length > 0 ? images[0].imageUrl : null;
+    thumbnailCache.set(key, first);
+    return first;
 }
 
 // ─── XML Parsers ──────────────────────────────────────────────────────────────
@@ -143,18 +157,21 @@ function parseDetailXML(xmlString) {
     const item = doc.querySelector('item');
     if (!item) return null;
 
+    // KHS uses either 'content' or 'ccbaAbmi' for description
+    const description = getText(item, 'content') || getText(item, 'ccbaAbmi');
+
     return {
         ccbaKdcd: getText(item, 'ccbaKdcd'),
         ccbaAsno: getText(item, 'ccbaAsno'),
         ccbaCtcd: getText(item, 'ccbaCtcd'),
         ccbaMnm1: getText(item, 'ccbaMnm1'),
         ccbaMnm2: getText(item, 'ccbaMnm2'),
-        ccbaAbmi: cleanHtml(getText(item, 'ccbaAbmi')),  // 설명
+        ccbaAbmi: cleanHtml(description),  // 설명
         ccbaLcad: getText(item, 'ccbaLcad'),
         ccbaCtcdNm: getText(item, 'ccbaCtcdNm'),
         ccbaKdcdNm: getText(item, 'ccbaKdcdNm'),
         ccbaAsdt: formatDate(getText(item, 'ccbaAsdt')),
-        ccbaCncl: getText(item, 'ccbaCncl'),   // 취소 여부
+        ccbaCncl: getText(item, 'ccbaCncl'),
         imageUrl: getText(item, 'imageUrl') || '',
     };
 }

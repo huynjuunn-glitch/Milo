@@ -5,15 +5,15 @@ export default function About() {
     return (
         <>
             <Helmet>
-                <title>아카이브 소개 - Milo 국가유산 디지털 아카이브</title>
-                <meta name="description" content="Milo는 국가유산청과 협력하여 대한민국의 소중한 문화유산을 누구나 쉽게 접근할 수 있도록 디지털 아카이브로 구축한 플랫폼입니다." />
+                <title>아카이브 소개 - 담아 국가유산 디지털 아카이브</title>
+                <meta name="description" content="담아는 국가유산청과 협력하여 대한민국의 소중한 문화유산을 누구나 쉽게 접근할 수 있도록 디지털 아카이브로 구축한 플랫폼입니다." />
             </Helmet>
 
             <div className="info-page">
                 <div className="info-page__hero">
                     <div className="container--narrow">
                         <div className="section-label">소개</div>
-                        <h1 className="info-page__title">Milo 디지털 아카이브</h1>
+                        <h1 className="info-page__title">담아(Dama) 디지털 아카이브</h1>
                         <p className="info-page__subtitle">
                             대한민국의 국보급 문화유산을 고해상도 디지털 아카이브로 보존하고 공유합니다.
                             국가유산청 공식 데이터베이스와 연동하여 신뢰할 수 있는 정보를 제공합니다.
@@ -25,7 +25,7 @@ export default function About() {
                     <div className="container--narrow prose">
                         <h2>우리의 사명</h2>
                         <p>
-                            밀로(Milo)는 대한민국의 소중한 문화유산을 디지털 혁신을 통해 보존하고,
+                            담아(Dama)는 대한민국의 소중한 문화유산을 디지털 혁신을 통해 보존하고,
                             누구나 쉽게 접근할 수 있는 열린 아카이브를 구축하는 것을 사명으로 합니다.
                             수천 년에 걸쳐 쌓인 한국의 역사와 문화는 우리 모두의 공동 유산입니다.
                         </p>

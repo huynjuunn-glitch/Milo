@@ -4,8 +4,8 @@ export default function Terms() {
     return (
         <>
             <Helmet>
-                <title>이용약관 - Milo</title>
-                <meta name="description" content="Milo 디지털 아카이브 이용약관입니다." />
+                <title>이용약관 - 담아</title>
+                <meta name="description" content="담아 디지털 아카이브 이용약관입니다." />
             </Helmet>
             <div className="info-page">
                 <div className="info-page__hero">
@@ -18,7 +18,7 @@ export default function Terms() {
                 <div className="info-page__body">
                     <div className="container--narrow prose">
                         <h2>제1조 (목적)</h2>
-                        <p>이 약관은 Milo 디지털 아카이브(이하 "서비스")의 이용과 관련하여 서비스를 제공하는 Milo(이하 "회사")와 이를 이용하는 이용자(이하 "이용자") 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+                        <p>이 약관은 담아 디지털 아카이브(이하 "서비스")의 이용과 관련하여 서비스를 제공하는 담아(이하 "회사")와 이를 이용하는 이용자(이하 "이용자") 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
 
                         <h2>제2조 (정의)</h2>
                         <ul>

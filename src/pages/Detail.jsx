@@ -63,9 +63,9 @@ export default function Detail() {
     return (
         <>
             <Helmet>
-                <title>{item.ccbaMnm1} - Milo 국가유산 디지털 아카이브</title>
+                <title>{item.ccbaMnm1} - 담아 국가유산 디지털 아카이브</title>
                 <meta name="description" content={metaDesc} />
-                <meta property="og:title" content={`${item.ccbaMnm1} - Milo`} />
+                <meta property="og:title" content={`${item.ccbaMnm1} - 담아`} />
                 <meta property="og:description" content={metaDesc} />
                 {currentImage && <meta property="og:image" content={currentImage} />}
             </Helmet>

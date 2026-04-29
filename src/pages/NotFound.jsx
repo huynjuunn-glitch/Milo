@@ -5,7 +5,7 @@ export default function NotFound() {
     return (
         <>
             <Helmet>
-                <title>404 - 페이지를 찾을 수 없습니다 | Milo</title>
+                <title>404 - 페이지를 찾을 수 없습니다 | 담아</title>
             </Helmet>
             <div style={{
                 minHeight: '100vh',

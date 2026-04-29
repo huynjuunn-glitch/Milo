@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, ScrollRestoration } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Navbar, Footer } from './components';
 import Home from './pages/Home';
@@ -11,7 +12,12 @@ import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
-  // Ensure scroll to top on route change
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return null;
 }
 
@@ -19,6 +25,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <main>
           <Routes>

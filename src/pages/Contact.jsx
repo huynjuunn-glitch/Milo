@@ -18,8 +18,8 @@ export default function Contact() {
     return (
         <>
             <Helmet>
-                <title>고객지원 - Milo 국가유산 디지털 아카이브</title>
-                <meta name="description" content="Milo 디지털 아카이브에 대한 문의 사항을 남겨주세요. 서비스 개선 요청이나 오류 신고는 고객지원 페이지를 통해 연락하세요." />
+                <title>고객지원 - 담아 국가유산 디지털 아카이브</title>
+                <meta name="description" content="담아 디지털 아카이브에 대한 문의 사항을 남겨주세요. 서비스 개선 요청이나 오류 신고는 고객지원 페이지를 통해 연락하세요." />
             </Helmet>
 
             <div className="info-page">
@@ -53,7 +53,7 @@ export default function Contact() {
                                     </h2>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {[
-                                            { icon: '📧', label: '이메일', value: 'support@milo-archive.kr' },
+                                            { icon: '📧', label: '이메일', value: 'support@dama-archive.kr' },
                                             { icon: '📞', label: '전화', value: '02-0000-0000' },
                                             { icon: '🕐', label: '운영시간', value: '평일 09:00 - 18:00 (주말·공휴일 제외)' },
                                         ].map(c => (

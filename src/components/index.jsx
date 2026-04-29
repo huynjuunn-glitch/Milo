@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { fetchFirstImage } from '../api/heritageApi';
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 export function Navbar() {
@@ -17,7 +18,7 @@ export function Navbar() {
                             <path d="M6 12V22H22V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M10 22V17H18V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                         </svg>
-                        <span className="navbar__logo-text">Milo</span>
+                        <span className="navbar__logo-text">Dama</span>
                     </Link>
 
                     <div className="navbar__nav">
@@ -69,10 +70,10 @@ export function Footer() {
                                 <path d="M6 12V22H22V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 <path d="M10 22V17H18V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
-                            <span className="footer__brand-name">Milo</span>
+                            <span className="footer__brand-name">Dama</span>
                         </div>
                         <p className="footer__brand-desc">
-                            Milo: 대한민국의 가치를 기록하는<br />
+                            담아: 대한민국의 가치를 기록하는<br />
                             디지털 아카이브
                         </p>
                     </div>
@@ -100,7 +101,7 @@ export function Footer() {
                     </div>
                 </div>
                 <div className="footer__bottom">
-                    <span className="footer__copy">© 2024 Milo Heritage Archive. All rights reserved.</span>
+                    <span className="footer__copy">© 2024 Dama Heritage Archive. All rights reserved.</span>
                     <div className="footer__bottom-links">
                         <Link to="/privacy" className="footer__bottom-link">개인정보처리방침</Link>
                         <Link to="/terms" className="footer__bottom-link">이용약관</Link>
@@ -114,9 +115,29 @@ export function Footer() {
 
 // ─── HeritageCard ─────────────────────────────────────────────────────────────
 export function HeritageCard({ item }) {
+    const [fetchedImg, setFetchedImg] = useState(null);
     const [imgErr, setImgErr] = useState(false);
+    const [loading, setLoading] = useState(!item.imageUrl);
+
     const id = `${item.ccbaKdcd}-${item.ccbaAsno}-${item.ccbaCtcd}`;
-    const hasImage = item.imageUrl && !imgErr;
+    const displayImage = item.imageUrl || fetchedImg;
+    const hasImage = displayImage && !imgErr;
+
+    useEffect(() => {
+        if (!item.imageUrl) {
+            setLoading(true);
+            fetchFirstImage({
+                ccbaKdcd: item.ccbaKdcd,
+                ccbaAsno: item.ccbaAsno,
+                ccbaCtcd: item.ccbaCtcd
+            }).then(url => {
+                setFetchedImg(url);
+                setLoading(false);
+            }).catch(() => {
+                setLoading(false);
+            });
+        }
+    }, [item.ccbaKdcd, item.ccbaAsno, item.ccbaCtcd, item.imageUrl]);
 
     // Badge color: 국보 → dark, others → red
     const badgeDark = item.ccbaKdcdNm === '국보';
@@ -125,9 +146,11 @@ export function HeritageCard({ item }) {
         <Link to={`/archive/${id}`} className="heritage-card">
             <div className="heritage-card__image-wrap">
                 {hasImage ? (
-                    <img src={item.imageUrl} alt={item.ccbaMnm1} onError={() => setImgErr(true)} loading="lazy" />
+                    <img src={displayImage} alt={item.ccbaMnm1} onError={() => setImgErr(true)} loading="lazy" />
                 ) : (
-                    <div className="heritage-card__placeholder">🏛</div>
+                    <div className="heritage-card__placeholder">
+                        {loading ? <div className="spinner-mini" /> : '🏛'}
+                    </div>
                 )}
                 {item.ccbaKdcdNm && (
                     <span className={`heritage-card__badge${badgeDark ? ' heritage-card__badge--dark' : ''}`}>

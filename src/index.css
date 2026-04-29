@@ -916,6 +916,15 @@ ul, ol { list-style: none; }
   animation: spin 0.7s linear infinite;
 }
 
+.spinner-mini {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .loading-text {

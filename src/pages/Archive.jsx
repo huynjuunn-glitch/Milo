@@ -56,7 +56,7 @@ export default function Archive() {
     return (
         <>
             <Helmet>
-                <title>유산 라이브러리 - Milo 국가유산 디지털 아카이브</title>
+                <title>유산 라이브러리 - 담아 국가유산 디지털 아카이브</title>
                 <meta name="description" content="국보, 보물, 사적, 명승 등 대한민국의 모든 국가유산을 지역별, 종류별로 탐색하세요." />
             </Helmet>
 

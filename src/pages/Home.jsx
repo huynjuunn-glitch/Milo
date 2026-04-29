@@ -5,7 +5,7 @@ import { fetchHeritageList, buildHeritageId } from '../api/heritageApi';
 import { HeritageCard, LoadingScreen, ErrorScreen, SectionHeader } from '../components';
 
 // Korean palace hero image (public domain / Pixabay)
-const HERO_BG = 'https://images.unsplash.com/photo-1604076913837-52ab5629fba9?w=1920&q=80&auto=format&fit=crop';
+const HERO_BG = 'https://images.unsplash.com/photo-1548115184-bc6544d06a58?w=1920&q=80&auto=format&fit=crop';
 
 export default function Home() {
     const [featured, setFeatured] = useState([]);
@@ -48,7 +48,7 @@ export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Milo - 국가유산 디지털 아카이브</title>
+                <title>Dama - 국가유산 디지털 아카이브</title>
                 <meta name="description" content="대한민국의 국보급 문화유산을 고해상도 디지털 아카이브로 만나보세요. 국보, 보물, 사적, 명승 등 수천 건의 유산을 탐색하세요." />
             </Helmet>
 
@@ -64,7 +64,7 @@ export default function Home() {
                 <div className="hero__content">
                     <h1 className="hero__title">
                         세월이 빚은 가치,<br />
-                        밀로(Milo)에서 다시 태어나다
+                        담아(Dama)에서 다시 태어나다
                     </h1>
                     <p className="hero__subtitle">
                         대한민국의 국보급 문화유산을 고해상도 디지털 아카이브로 만나보세요.<br />
@@ -117,7 +117,7 @@ export default function Home() {
             <section className="about-mini">
                 <div className="container">
                     <div style={{ textAlign: 'center', marginBottom: 'var(--space-2xl)' }}>
-                        <span className="section-label">Milo 소개</span>
+                        <span className="section-label">담아 소개</span>
                         <h2 className="section-title">대한민국의 유산을 디지털로</h2>
                     </div>
                     <div className="about-mini-grid">
