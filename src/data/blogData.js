@@ -41,7 +41,7 @@ export const BLOG_POSTS = [
         date: '2024-04-15',
         author: '이수진 연구원',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1621516244673-90956b6b3e7f?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=800&q=80'
     },
     {
         id: 3,
@@ -63,7 +63,7 @@ export const BLOG_POSTS = [
         date: '2024-04-10',
         author: '박지훈 디렉터',
         category: '아카이브 뉴스',
-        image: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'
     },
     {
         id: 4,
@@ -85,7 +85,7 @@ export const BLOG_POSTS = [
         date: '2024-05-01',
         author: '최윤아 연구원',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1599396305592-80c082005087?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80'
     },
     {
         id: 5,
@@ -107,7 +107,7 @@ export const BLOG_POSTS = [
         date: '2024-05-05',
         author: '정민호 건축가',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1583508463868-809548483838?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80'
     },
     {
         id: 6,
@@ -129,7 +129,7 @@ export const BLOG_POSTS = [
         date: '2024-05-10',
         author: '김민수 큐레이터',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1612438214708-f428a707dd4e?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=800&q=80'
     },
     {
         id: 7,
@@ -151,7 +151,7 @@ export const BLOG_POSTS = [
         date: '2024-05-15',
         author: '이수진 연구원',
         category: '탐방기',
-        image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&q=80'
     },
     {
         id: 8,
@@ -173,7 +173,7 @@ export const BLOG_POSTS = [
         date: '2024-05-20',
         author: '박지훈 디렉터',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1585664811087-47f65abbad64?w=800&q=80'
     },
     {
         id: 9,
@@ -195,7 +195,7 @@ export const BLOG_POSTS = [
         date: '2024-05-25',
         author: '최윤아 연구원',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1612462780759-8c91d5a8a7b2?w=800&q=80'
     },
     {
         id: 10,
@@ -217,7 +217,7 @@ export const BLOG_POSTS = [
         date: '2024-05-30',
         author: '정민호 건축가',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1580247817119-c6cb496270a4?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1569587112025-0d460e81a126?w=800&q=80'
     },
     {
         id: 11,
@@ -239,7 +239,7 @@ export const BLOG_POSTS = [
         date: '2024-06-05',
         author: '김민수 큐레이터',
         category: '탐방기',
-        image: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1576866209830-589e1bfbaa4d?w=800&q=80'
     },
     {
         id: 12,
@@ -261,6 +261,6 @@ export const BLOG_POSTS = [
         date: '2024-06-10',
         author: '이수진 연구원',
         category: '문화 유산',
-        image: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=800&q=80'
+        image: 'https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800&q=80'
     }
 ];
