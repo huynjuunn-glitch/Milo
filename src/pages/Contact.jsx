@@ -57,8 +57,8 @@ export default function Contact() {
                                     </h2>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {[
-                                            { icon: '📧', label: '이메일', value: 'contact@dama-archive.kr' },
-                                            { icon: '📞', label: '전화', value: '010-1234-5678' },
+                                            { icon: '📧', label: '이메일', value: 'support@damaheritage.com' },
+                                            { icon: '📞', label: '전화', value: '070-9214-3197' },
                                             { icon: '🕐', label: '운영시간', value: '평일 10:00 - 17:00 (점심시간 12:00 - 13:00)' },
                                         ].map(c => (
                                             <div key={c.label} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1rem', background: 'var(--color-bg-card)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
