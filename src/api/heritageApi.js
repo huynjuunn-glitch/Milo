@@ -4,8 +4,8 @@
 // In development: routes through Vite proxy (/api/heritage -> https://www.khs.go.kr/cha)
 import axios from 'axios';
 
-// Both dev (Vite proxy) and prod (CF Pages Function) use the same path
-const API_BASE = '/api/heritage';
+// Direct API call since KHS supports CORS natively (Access-Control-Allow-Origin: *)
+const API_BASE = 'https://www.khs.go.kr/cha';
 
 // API key: CF Function injects server-side in prod; dev uses .env.local
 const API_KEY = import.meta.env.VITE_HERITAGE_API_KEY || 'sample';

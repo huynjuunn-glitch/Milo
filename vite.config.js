@@ -17,15 +17,6 @@ export default defineConfig({
     }
   },
   server: {
-    port: 5173,
-    // Proxy API calls to avoid CORS issues in development
-    proxy: {
-      '/api/heritage': {
-        target: 'https://www.khs.go.kr',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/heritage/, '/cha'),
-        secure: false,
-      }
-    }
+    port: 5173
   }
 })
