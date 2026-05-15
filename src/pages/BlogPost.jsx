@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { BLOG_POSTS } from '../data/blogData';
-import { NotFound } from './NotFound';
+import NotFound from './NotFound';
 
 export default function BlogPost() {
     const { slug } = useParams();
