@@ -12,7 +12,7 @@ export default function Privacy() {
                     <div className="container--narrow">
                         <div className="section-label">법적</div>
                         <h1 className="info-page__title">개인정보처리방침</h1>
-                        <p className="info-page__subtitle">최종 업데이트: 2024년 1월 1일</p>
+                        <p className="info-page__subtitle">최종 업데이트: 2026년 5월 15일</p>
                     </div>
                 </div>
                 <div className="info-page__body">

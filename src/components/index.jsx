@@ -108,7 +108,7 @@ export function Footer() {
                     </div>
                 </div>
                 <div className="footer__bottom">
-                    <span className="footer__copy">© 2024 담아(Dama) Heritage Archive. All rights reserved.</span>
+                    <span className="footer__copy">© 2026 담아(Dama) Heritage Archive. All rights reserved.</span>
                     <div className="footer__bottom-links">
                         <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>공공데이터 제공: 국가유산청</span>
                     </div>
