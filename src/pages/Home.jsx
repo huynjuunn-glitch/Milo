@@ -48,8 +48,10 @@ export default function Home() {
     return (
         <>
             <Helmet>
-                <title>Dama - 국가유산 디지털 아카이브</title>
-                <meta name="description" content="대한민국의 국보급 문화유산을 고해상도 디지털 아카이브로 만나보세요. 국보, 보물, 사적, 명승 등 수천 건의 유산을 탐색하세요." />
+                <title>담아(Dama) - 대한민국 국가유산 디지털 아카이브</title>
+                <meta name="description" content="대한민국의 국보, 보물, 사적 등 소중한 국가유산을 고해상도 디지털 아카이브로 만나보세요. 국가유산청 공식 데이터를 기반으로 신뢰할 수 있는 정보를 제공합니다." />
+                <meta property="og:title" content="담아(Dama) - 국가유산 디지털 아카이브" />
+                <meta property="og:description" content="대한민국의 소중한 국가유산을 디지털로 담아내다. 고해상도 이미지와 깊이 있는 이야기를 만나보세요." />
             </Helmet>
 
             {/* ─── HERO ─── */}

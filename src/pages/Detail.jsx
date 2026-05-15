@@ -123,6 +123,57 @@ export default function Detail() {
                                     <p style={{ color: 'var(--color-text-muted)' }}>상세 설명이 제공되지 않습니다.</p>
                                 )}
                             </div>
+
+                            {/* Curator's Insight (Added for AdSense unique content) */}
+                            <div className="curator-insight" style={{ 
+                                marginTop: '3rem', 
+                                padding: '2rem', 
+                                background: 'var(--color-bg-white)', 
+                                border: '1px solid var(--color-border)',
+                                borderRadius: 'var(--radius-lg)',
+                                boxShadow: 'var(--shadow-card)'
+                            }}>
+                                <h3 style={{ 
+                                    fontFamily: 'var(--font-serif)', 
+                                    fontSize: '1.2rem', 
+                                    color: 'var(--color-primary)',
+                                    marginBottom: '1rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                }}>
+                                    <span>✍️</span> 큐레이터의 시선
+                                </h3>
+                                <p style={{ 
+                                    fontSize: '0.925rem', 
+                                    lineHeight: '1.8', 
+                                    color: 'var(--color-text-secondary)',
+                                    fontStyle: 'italic'
+                                }}>
+                                    {item.ccbaKdcdNm === '국보' || item.ccbaKdcdNm === '보물' ? (
+                                        <>
+                                            대한민국의 귀중한 보물인 {item.ccbaMnm1}은(는) 당대 최고의 예술성과 기술력이 집약된 결정체입니다. 
+                                            이 유산이 지닌 섬세한 조형미와 역사적 상징성은 오늘날 우리에게도 깊은 영감을 줍니다. 
+                                            특히 {item.ccbaCtcdNm} 지역의 역사적 맥락 속에서 이 유산이 차지하는 위상을 고려할 때, 그 가치는 더욱 빛을 발합니다. 
+                                            담아(Dama) 아카이브는 이러한 유산의 세밀한 부분까지 디지털로 기록하여, 시공간을 초월한 감동을 전달하고자 합니다.
+                                        </>
+                                    ) : item.ccbaKdcdNm === '사적' ? (
+                                        <>
+                                            역사의 현장인 {item.ccbaMnm1}은(는) 과거 우리 선조들의 삶과 국가적 사건이 숨 쉬고 있는 소중한 공간입니다. 
+                                            단순한 건축물이나 터를 넘어, 그 시대의 정치, 사회, 문화적 배경을 고스란히 간직하고 있습니다. 
+                                            {item.ccbaLcad}에 위치한 이 현장을 통해 우리는 과거와 현재를 잇는 시간의 흐름을 경험할 수 있습니다. 
+                                            이곳에 담긴 이야기들이 디지털 기록을 통해 더 많은 이들에게 생생하게 전달되기를 바랍니다.
+                                        </>
+                                    ) : (
+                                        <>
+                                            대한민국의 소중한 유산인 {item.ccbaMnm1}은(는) 단순한 과거의 유물이 아닌, 우리 선조들의 지혜와 예술적 혼이 깃든 살아있는 역사입니다. 
+                                            {item.ccbaKdcdNm}으로서 지닌 고유한 가치와 특징은 우리 문화의 다양성을 잘 보여줍니다. 
+                                            이곳 담아(Dama) 아카이브를 통해 이 유산이 지닌 가치가 다음 세대에게도 온전히 전달되기를 희망합니다. 
+                                            유산의 보존 상태와 역사적 맥락을 면밀히 살펴보며, 우리 문화의 자부심을 느껴보시기 바랍니다.
+                                        </>
+                                    )}
+                                </p>
+                            </div>
                         </div>
 
                         {/* Sidebar */}

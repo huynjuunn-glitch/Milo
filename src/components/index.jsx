@@ -24,6 +24,7 @@ export function Navbar() {
                     <div className="navbar__nav">
                         <NavLink to="/" className={({ isActive }) => `navbar__link${isActive ? ' active' : ''}`} end>홈</NavLink>
                         <NavLink to="/archive" className={({ isActive }) => `navbar__link${isActive ? ' active' : ''}`}>유산 라이브러리</NavLink>
+                        <NavLink to="/blog" className={({ isActive }) => `navbar__link${isActive ? ' active' : ''}`}>유산 이야기</NavLink>
                         <NavLink to="/about" className={({ isActive }) => `navbar__link${isActive ? ' active' : ''}`}>아카이브 소개</NavLink>
                         <NavLink to="/contact" className={({ isActive }) => `navbar__link${isActive ? ' active' : ''}`}>고객지원</NavLink>
                     </div>
@@ -50,6 +51,7 @@ export function Navbar() {
             <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
                 <NavLink to="/" className="mobile-menu__link" onClick={() => setMenuOpen(false)}>홈</NavLink>
                 <NavLink to="/archive" className="mobile-menu__link" onClick={() => setMenuOpen(false)}>유산 라이브러리</NavLink>
+                <NavLink to="/blog" className="mobile-menu__link" onClick={() => setMenuOpen(false)}>유산 이야기</NavLink>
                 <NavLink to="/about" className="mobile-menu__link" onClick={() => setMenuOpen(false)}>아카이브 소개</NavLink>
                 <NavLink to="/contact" className="mobile-menu__link" onClick={() => setMenuOpen(false)}>고객지원</NavLink>
             </div>
@@ -73,8 +75,9 @@ export function Footer() {
                             <span className="footer__brand-name">Dama</span>
                         </div>
                         <p className="footer__brand-desc">
-                            담아: 대한민국의 가치를 기록하는<br />
-                            디지털 아카이브
+                            담아(Dama)는 대한민국의 소중한 국가유산을<br />
+                            디지털로 보존하고 그 가치를 공유하는<br />
+                            독립적인 디지털 아카이브입니다.
                         </p>
                     </div>
                     <div>
@@ -82,30 +85,32 @@ export function Footer() {
                         <div className="footer__col-links">
                             <Link to="/" className="footer__col-link">홈</Link>
                             <Link to="/archive" className="footer__col-link">유산 라이브러리</Link>
+                            <Link to="/blog" className="footer__col-link">유산 이야기</Link>
                             <Link to="/about" className="footer__col-link">아카이브 소개</Link>
                         </div>
                     </div>
                     <div>
-                        <div className="footer__col-title">지원</div>
+                        <div className="footer__col-title">데이터 출처</div>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: '1.6', marginBottom: '1rem' }}>
+                            본 사이트에서 제공하는 정보 및 이미지는 <strong>국가유산청(KHS)</strong>의 공공데이터 API를 활용하고 있습니다.
+                        </p>
                         <div className="footer__col-links">
-                            <Link to="/contact" className="footer__col-link">고객지원</Link>
-                            <Link to="/contact" className="footer__col-link">문의하기</Link>
+                            <Link to="/contact" className="footer__col-link">데이터 오류 제보</Link>
                         </div>
                     </div>
                     <div>
-                        <div className="footer__col-title">법적</div>
+                        <div className="footer__col-title">법적/지원</div>
                         <div className="footer__col-links">
+                            <Link to="/contact" className="footer__col-link">고객지원</Link>
                             <Link to="/privacy" className="footer__col-link">개인정보처리방침</Link>
                             <Link to="/terms" className="footer__col-link">이용약관</Link>
                         </div>
                     </div>
                 </div>
                 <div className="footer__bottom">
-                    <span className="footer__copy">© 2024 Dama Heritage Archive. All rights reserved.</span>
+                    <span className="footer__copy">© 2024 담아(Dama) Heritage Archive. All rights reserved.</span>
                     <div className="footer__bottom-links">
-                        <Link to="/privacy" className="footer__bottom-link">개인정보처리방침</Link>
-                        <Link to="/terms" className="footer__bottom-link">이용약관</Link>
-                        <Link to="/contact" className="footer__bottom-link">고객지원</Link>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>공공데이터 제공: 국가유산청</span>
                     </div>
                 </div>
             </div>

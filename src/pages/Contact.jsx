@@ -11,15 +11,19 @@ export default function Contact() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // In production, connect to a backend or formspree
+        // Simulate API call
+        console.log('문의 내용:', form);
         setSent(true);
+        // Reset form
+        setForm({ name: '', email: '', subject: '', message: '' });
     }
 
     return (
         <>
             <Helmet>
-                <title>고객지원 - 담아 국가유산 디지털 아카이브</title>
-                <meta name="description" content="담아 디지털 아카이브에 대한 문의 사항을 남겨주세요. 서비스 개선 요청이나 오류 신고는 고객지원 페이지를 통해 연락하세요." />
+                <title>고객지원 | 담아(Dama)</title>
+                <meta name="description" content="담아(Dama) 디지털 아카이브에 대한 문의 사항이 있으신가요? 서비스 개선 제안, 오류 제보 등 여러분의 소중한 의견을 기다립니다." />
+                <meta property="og:title" content="고객지원 | 담아" />
             </Helmet>
 
             <div className="info-page">
@@ -53,9 +57,9 @@ export default function Contact() {
                                     </h2>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {[
-                                            { icon: '📧', label: '이메일', value: 'support@dama-archive.kr' },
-                                            { icon: '📞', label: '전화', value: '02-0000-0000' },
-                                            { icon: '🕐', label: '운영시간', value: '평일 09:00 - 18:00 (주말·공휴일 제외)' },
+                                            { icon: '📧', label: '이메일', value: 'contact@dama-archive.kr' },
+                                            { icon: '📞', label: '전화', value: '010-1234-5678' },
+                                            { icon: '🕐', label: '운영시간', value: '평일 10:00 - 17:00 (점심시간 12:00 - 13:00)' },
                                         ].map(c => (
                                             <div key={c.label} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1rem', background: 'var(--color-bg-card)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                                                 <span style={{ fontSize: '1.2rem' }}>{c.icon}</span>

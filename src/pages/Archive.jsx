@@ -57,7 +57,9 @@ export default function Archive() {
         <>
             <Helmet>
                 <title>유산 라이브러리 - 담아 국가유산 디지털 아카이브</title>
-                <meta name="description" content="국보, 보물, 사적, 명승 등 대한민국의 모든 국가유산을 지역별, 종류별로 탐색하세요." />
+                <meta name="description" content="종류별, 지역별로 분류된 대한민국의 모든 국가유산을 탐색하세요. 국보, 보물 등 수천 건의 상세 정보와 고해상도 이미지를 제공합니다." />
+                <meta property="og:title" content="유산 라이브러리 | 담아" />
+                <meta property="og:description" content="대한민국의 모든 국가유산을 한눈에. 종류별, 지역별 정밀 검색 서비스를 이용해 보세요." />
             </Helmet>
 
             <div className="archive-page">
