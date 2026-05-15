@@ -6,7 +6,7 @@ import { HeritageCard, LoadingScreen, ErrorScreen, Pagination } from '../compone
 
 const REGIONS = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주'];
 const TYPES = ['전체', ...Object.keys(HERITAGE_TYPES)];
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 9;
 
 export default function Archive() {
     const [searchParams] = useSearchParams();
