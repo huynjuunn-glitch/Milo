@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';import GuideCard from '../../components/GuideCard.astro';import { byCategory } from '../../data/guides';const items=byCategory('visit');
+---
+<BaseLayout title="Visit Korea" description="Practical transport, connectivity and planning guides for visiting Korea."><section class="page-hero"><div class="shell"><span class="eyebrow">Visit Korea</span><h1>Spend less time solving logistics.</h1><p>Make better decisions about airport transfers, connectivity, payments and navigation before small uncertainties consume your trip.</p></div></section><section class="section"><div class="shell category-layout"><aside class="side-nav"><strong>Visit Korea</strong><a href="#getting-around">Getting around</a><a href="/culture/">Culture & heritage</a><a href="/tools/">Checklists</a></aside><div id="getting-around" class="content-list">{items.map((guide)=><GuideCard guide={guide}/>)}</div></div></section></BaseLayout>

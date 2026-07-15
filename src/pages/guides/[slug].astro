@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { guides, categoryNames } from '../../data/guides';
+import { guideDetails } from '../../data/guideDetails';
+interface Guide { slug:string; category:'start'|'visit'|'live'|'culture'; title:string; description:string; readTime:string; updated:string; }
+interface DetailSection { title:string; text:string[]; bullets?:string[]; }
+interface Detail { quick:string; sections:DetailSection[]; sources:[string,string][]; }
+export function getStaticPaths(){
+  const staticDetails=guideDetails as unknown as Record<string,Detail>;
+  return guides.map((guide)=>({params:{slug:guide.slug},props:{guide,detail:staticDetails[guide.slug]}}));
+}
+const { guide, detail }=Astro.props as {guide:Guide;detail:Detail};
+const categoryPath=guide.category==='start'?'/start-here/':`/${guide.category}/`;
+const related=guides.filter((item)=>item.slug!==guide.slug&&(item.category===guide.category||guide.category==='start')).slice(0,3);
+const schema={"@context":"https://schema.org","@type":"Article",headline:guide.title,description:guide.description,datePublished:'2026-07-15',dateModified:'2026-07-15',author:{"@type":"Organization",name:'Dama Korea Editorial Team',url:'https://damaheritage.com/about/'},publisher:{"@type":"Organization",name:'Dama Korea',url:'https://damaheritage.com'}};
+---
+<BaseLayout title={guide.title} description={guide.description} type="article">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <div class="article-shell"><div class="breadcrumbs"><a href="/">Home</a> / <a href={categoryPath}>{categoryNames[guide.category]}</a> / Guide</div>
+    <header class="article-head"><span class="eyebrow">{categoryNames[guide.category]}</span><h1>{guide.title}</h1><p class="dek">{guide.description}</p><div class="article-meta"><span>By Dama Korea Editorial Team</span><span>{guide.readTime}</span><span>Information checked {guide.updated}</span></div></header>
+    <article class="article-body"><div class="quick-answer"><strong>Quick answer</strong>{detail.quick}</div>
+      {detail.sections.map((section)=><section><h2>{section.title}</h2>{section.text.map((p)=><p>{p}</p>)}{section.bullets&&<ul class="checklist">{section.bullets.map((item)=><li>{item}</li>)}</ul>}</section>)}
+      <div class="note"><strong>Important</strong>Rules, schedules and provider requirements can change. Use the official sources below for the final check that applies to your date and circumstances.</div>
+      <aside class="source-box"><h2>Official sources and further checks</h2><ul>{detail.sources.map(([label,url])=><li><a href={url} rel="external">{label}</a></li>)}</ul><p>This guide is independently written. It is not sponsored by the organizations listed above.</p></aside>
+    </article>
+  </div>
+  {related.length>0&&<section class="section alt"><div class="shell"><div class="section-head"><div><span class="eyebrow">Continue planning</span><h2>Related practical guides</h2></div></div><div class="guide-grid">{related.map((item)=><GuideCard guide={item}/>)}</div></div></section>}
+</BaseLayout>

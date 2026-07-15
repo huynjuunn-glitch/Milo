@@ -1,23 +1,29 @@
-# Deployment Guide for 담아 (Dama)
+# Cloudflare Pages Deployment
 
-이 프로젝트는 **Cloudflare Pages**를 사용하여 배포하도록 최적화되어 있습니다.
+The GitHub repository `huynjuunn-glitch/Milo` is connected to Cloudflare Pages. A push to `main` triggers the production build and deployment.
 
-## 배포 설정 요약
-- **Framework Preset**: `Vite`
-- **Build command**: `npm run build`
-- **Build output directory**: `dist`
-- **Node.js version**: 18 이상 권장
+## Cloudflare build settings
 
-## ⚠️ 환경 변수 설정 불필요
-이 프로젝트는 국가유산청 홈페이지 데이터를 직접 호출하므로, **공공데이터포털 API 키(VITE_HERITAGE_API_KEY)를 설정할 필요가 없습니다.** 대시보드의 Environment Variables 설정을 비워두셔도 정상 작동합니다.
+- Framework preset: Astro
+- Production branch: `main`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Node.js: 20 or later recommended
 
-## 배포 단계
-1. 현재 소스코드를 GitHub 저장소에 푸시합니다.
-2. [Cloudflare Pages](https://pages.cloudflare.com/) 대시보드에 접속합니다.
-3. **Create a project** -> **Connect to Git**을 선택합니다.
-4. 해당 GitHub 저장소를 연결합니다.
-5. 위에서 설명한 빌드 명령(`npm run build`)과 출력 디렉토리(`dist`)를 확인합니다.
-6. **Save and Deploy**를 클릭하여 배포를 완료합니다.
+No API key is required by the current static site.
 
-## CORS 프록시
-배포 시 `functions/` 폴더 내의 프록시 로직이 Cloudflare Pages Functions로 자동 배포되어, 국가유산청 데이터 호출 시 발생하는 CORS 문제를 자동으로 해결합니다.
+## Before pushing
+
+1. Run `npm run build` locally.
+2. Confirm that Astro reports zero errors and warnings.
+3. Review the home page, one category page and at least two article pages at desktop and mobile widths.
+4. Verify `dist/sitemap-index.xml`, `robots.txt`, `ads.txt` and redirects.
+5. Check `git diff` and ensure no environment file or generated `dist/` output is included.
+
+## After Cloudflare deploys
+
+1. Open `https://damaheritage.com/` in a private browser window.
+2. Check `/start-here/`, `/visit/`, `/live/`, `/culture/` and a guide URL.
+3. Confirm that the old `/archive` and `/blog` routes redirect.
+4. Submit the generated sitemap at `https://damaheritage.com/sitemap-index.xml` in Google Search Console.
+5. Inspect representative URLs in Search Console before requesting an AdSense review.

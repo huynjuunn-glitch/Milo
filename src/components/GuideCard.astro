@@ -1,0 +1,12 @@
+---
+import { categoryNames } from '../data/guides';
+interface Guide { slug:string; category:string; title:string; description:string; readTime:string; updated:string; }
+const { guide, featured = false } = Astro.props as { guide:Guide; featured?:boolean };
+const categoryName=categoryNames[guide.category as keyof typeof categoryNames] ?? 'Guide';
+---
+<a class:list={['guide-card', { featured }]} href={`/guides/${guide.slug}/`}>
+  <span class="category">{categoryName}</span>
+  <h3>{guide.title}</h3>
+  <p>{guide.description}</p>
+  <span class="meta">{guide.readTime} · Checked {guide.updated}</span>
+</a>

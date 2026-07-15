@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';import GuideCard from '../components/GuideCard.astro';import { guides } from '../data/guides';
+---
+<BaseLayout title="Start Here" description="A practical starting point for your first trip, longer stay or move to Korea."><section class="page-hero"><div class="shell"><span class="eyebrow">Start here</span><h1>Your Korea plan, in the right order.</h1><p>Skip the hundred open tabs. Start with the decisions that unlock everything else, then move into travel or settling-in guides as your plans become clearer.</p></div></section><section class="section"><div class="shell"><div class="guide-grid">{guides.filter((guide)=>guide.category==='start'||guide.featured).map((guide)=><GuideCard guide={guide}/>)}</div></div></section></BaseLayout>

@@ -1,27 +1,48 @@
-# 담아 (Dama) - 국가유산 디지털 아카이브 🏛️
+# Dama Korea
 
-대한민국의 국보, 보물, 사적 등 소중한 국가유산을 탐색하고 감상할 수 있는 디지털 아카이브 사이트입니다.
+An independent English-language guide for international visitors and residents navigating Korea.
 
-## ⚠️ 데이터 연동 방식 안내 (중요)
+## Editorial goal
 
-이 프로젝트는 **공공데이터포털(data.go.kr)의 API 방식을 사용하지 않습니다.**
+1. Publish original, useful and clearly sourced content suitable for AdSense review.
+2. Grow sustainable search traffic around travel, connectivity, banking, housing and everyday life in Korea.
 
-- **연동 방식**: 국가유산청(khs.go.kr) 홈페이지의 공개 XML 데이터를 직접 호출합니다.
-- **API 키 필요 없음**: 별도의 서비스 키 발급이나 `.env` 설정이 전혀 필요하지 않습니다. 
-- **CORS 해결**: 브라우저 직접 호출 시 발생하는 CORS 문제는 프로젝트 내 `functions/`에 구현된 **Cloudflare Pages Functions Proxy**가 자동으로 처리합니다.
+The site does not present third-party API data as original publisher content. Time-sensitive guides show a checked date and link to the organizations responsible for current rules.
 
-> **주의**: 향후 작업 시 공공데이터포털 API나 별도의 API 키 발급이 필요하다는 잘못된 안내를 하지 않도록 이 내용을 반드시 확인하십시오.
+## Technology
 
-## 기술 스택
-- **Frontend**: React + Vite
-- **Styling**: Vanilla CSS (Stitch 디자인 시스템 적용)
-- **Deployment**: Cloudflare Pages (with Functions Proxy)
+- Astro static site generation
+- Plain CSS
+- Markdown-ready structured guide data
+- Automatic XML sitemap
+- Cloudflare Pages deployment
 
-## 로컬 실행 방법
+Every public route is generated as complete HTML during the build. JavaScript is not required to read core content.
+
+## Local development
+
 ```bash
 npm install
 npm run dev
 ```
 
-## 배포 방법
-`DEPLOYMENT.md` 파일을 참조하십시오.
+## Quality check
+
+```bash
+npm run build
+```
+
+This runs Astro diagnostics before generating the production site in `dist/`.
+
+## Publishing workflow
+
+1. Research and verify the guide.
+2. Add or update guide metadata in `src/data/guides.js`.
+3. Add the structured article body and official sources in `src/data/guideDetails.js`.
+4. Run `npm run build`.
+5. Review desktop and mobile output.
+6. Commit and push to `main` only after approval.
+
+## Advertising
+
+The AdSense publisher ID remains in `public/ads.txt` and the global verification script. Ad units should not be added to 404, empty, navigation-only or confirmation pages.

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideCard from '../components/GuideCard.astro';
+import { guides } from '../data/guides';
+const featured=guides.filter((g)=>g.featured);
+const latest=guides.filter((g)=>!g.featured).slice(0,4);
+---
+<BaseLayout title="Dama Korea" description="Independent, practical guides for traveling, moving to and living in Korea.">
+  <section class="hero"><div class="shell hero-grid">
+    <div><span class="eyebrow">Independent Korea guides</span><h1>Korea,<br/><em>made easier.</em></h1><p class="hero-copy">Clear, carefully researched guidance for the moments that matter—from landing at the airport to finding your feet in everyday life.</p><div class="actions"><a class="button" href="/start-here/">Start planning <span>→</span></a><a class="button secondary" href="/about/">How we research</a></div></div>
+    <div class="hero-art" aria-label="Abstract illustration of a path through Korean mountains"><div class="sun"></div><div class="mountain"></div><div class="path"></div><div class="floating-note"><strong>One clear next step.</strong>No recycled listicles. No pretending every traveler has the same needs.</div></div>
+  </div></section>
+  <section class="section alt"><div class="shell"><div class="section-head"><div><span class="eyebrow">Find your starting point</span><h2>What brings you to Korea?</h2></div><p>Choose the situation closest to yours. Each path collects the decisions that usually need to happen in the right order.</p></div><div class="journey-grid">
+    <a class="journey-card" href="/start-here/"><span>01 · PREPARE</span><h3>My first trip</h3><p>Documents, connectivity, money and the first 24 hours.</p></a>
+    <a class="journey-card" href="/visit/"><span>02 · EXPLORE</span><h3>I am visiting</h3><p>Transport, useful apps and routes with realistic timing.</p></a>
+    <a class="journey-card" href="/live/"><span>03 · SETTLE</span><h3>I am moving</h3><p>Housing, banking, mobile service and everyday systems.</p></a>
+    <a class="journey-card" href="/culture/"><span>04 · UNDERSTAND</span><h3>I want context</h3><p>Heritage and etiquette explained for a real visit.</p></a>
+  </div></div></section>
+  <section class="section"><div class="shell"><div class="section-head"><div><span class="eyebrow">Essential guides</span><h2>Begin with the big decisions.</h2></div><a href="/start-here/">See the complete path →</a></div><div class="guide-grid">{featured.map((guide,i)=><GuideCard guide={guide} featured={i===0}/>) }{latest.map((guide)=><GuideCard guide={guide}/>)}</div></div></section>
+  <section class="section alt"><div class="shell"><div class="trust-band"><h2>Useful information should show its work.</h2><div class="trust-points"><div><strong>Official sources first</strong><span>We link to the agencies and operators responsible for the rules.</span></div><div><strong>Checked dates</strong><span>Time-sensitive guides state when their core information was reviewed.</span></div><div><strong>Experience labeled</strong><span>Research, observation and first-hand experience are never blurred together.</span></div><div><strong>Corrections welcomed</strong><span>Readers can report a change and see how to reach the editor.</span></div></div></div></div></section>
+</BaseLayout>

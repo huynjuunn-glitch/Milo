@@ -1,2 +1,7 @@
-# Support Single Page Application (SPA) routing
-/* /index.html 200
+# Previous information architecture
+/archive/* /culture/ 301
+/archive /culture/ 301
+/blog /culture/ 301
+/blog/* /culture/ 301
+
+# Cloudflare Pages SPA fallback is no longer needed; Astro emits real pages.
