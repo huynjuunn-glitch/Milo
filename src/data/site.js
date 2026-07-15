@@ -3,7 +3,7 @@ export const SITE = {
   shortName: 'Dama',
   url: 'https://damaheritage.com',
   description: 'Independent, practical guides for visiting, moving to, and living in Korea.',
-  email: 'support@damaheritage.com',
+  correctionsUrl: 'https://github.com/huynjuunn-glitch/Milo/issues/new',
 };
 
 export const navigation = [
