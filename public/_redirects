@@ -3,5 +3,15 @@
 /archive /culture/ 301
 /blog /culture/ 301
 /blog/* /culture/ 301
+/guides/korean-temple-etiquette/ /guides/gyeongbokgung-first-visit/ 301
+/guides/gyeongju-without-car/ /culture/ 301
+/guides/open-bank-account-korea/ /guides/first-week-living-korea/ 301
+/guides/korea-housing-basics/ /guides/first-week-living-korea/ 301
+/guides/korean-phone-plan-residents/ /guides/korea-esim-sim-wifi/ 301
+/guides/seoul-palace-one-day-route/ /guides/gyeongbokgung-first-visit/ 301
+/guides/bulguksa-seokguram-visit/ /culture/ 301
+/guides/short-term-housing-seoul/ /guides/first-week-living-korea/ 301
+/guides/bank-account-without-residence-card/ /guides/first-week-living-korea/ 301
+/guides/after-receiving-residence-card/ /guides/first-week-living-korea/ 301
 
 # Cloudflare Pages SPA fallback is no longer needed; Astro emits real pages.

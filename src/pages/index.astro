@@ -5,7 +5,7 @@ import { guides } from '../data/guides';
 const featured=guides.filter((g)=>g.featured);
 const latest=guides.filter((g)=>!g.featured).slice(0,4);
 ---
-<BaseLayout title="Dama Korea" description="Independent, practical guides for traveling, moving to and living in Korea.">
+<BaseLayout title="Dama Korea" description="Independent, practical guides for traveling, moving to and living in Korea." adsEligible={true}>
   <section class="hero"><div class="shell hero-grid">
     <div><span class="eyebrow">Independent Korea guides</span><h1>Korea,<br/><em>made easier.</em></h1><p class="hero-copy">Clear, carefully researched guidance for the moments that matter—from landing at the airport to finding your feet in everyday life.</p><div class="actions"><a class="button" href="/start-here/">Start planning <span>→</span></a><a class="button secondary" href="/about/">How we research</a></div></div>
     <div class="hero-art" aria-label="Abstract illustration of a path through Korean mountains"><div class="sun"></div><div class="mountain"></div><div class="path"></div><div class="floating-note"><strong>One clear next step.</strong>No recycled listicles. No pretending every traveler has the same needs.</div></div>

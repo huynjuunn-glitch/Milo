@@ -1,8 +1,35 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Korea Checklists & Tools" description="Simple checklists for preparing, arriving and settling into life in Korea."><section class="page-hero"><div class="shell"><span class="eyebrow">Tools & checklists</span><h1>Turn a complicated move into small decisions.</h1><p>These lightweight tools are designed to be used—not padded with filler. Save a list, compare your options and return when your plans change.</p></div></section><section class="section"><div class="shell guide-grid">
-  <a class="tool-card" href="/guides/first-trip-korea-checklist/"><span class="eyebrow">Travel</span><h2>Pre-departure checklist</h2><p>Documents, payment, connectivity and your first night.</p></a>
-  <a class="tool-card" href="/guides/first-week-living-korea/"><span class="eyebrow">Moving</span><h2>First-week sequence</h2><p>Complete connected tasks in a practical order.</p></a>
-  <a class="tool-card" href="/guides/korea-esim-sim-wifi/"><span class="eyebrow">Compare</span><h2>Connectivity decision</h2><p>Choose by phone, group size and verification needs.</p></a>
-</div></section></BaseLayout>
+<BaseLayout title="Korea Arrival Checklists" description="Interactive, printable checklists for preparing for Korea and leaving Incheon Airport with a working backup plan." adsEligible={true}>
+  <section class="page-hero"><div class="shell"><span class="eyebrow">Free practical tools</span><h1>Check the plan, not just the packing list.</h1><p>Use these browser-based checklists before departure. Your selections stay on this device and are not sent to Dama Korea.</p></div></section>
+  <section class="section"><div class="article-shell article-body">
+    <div class="interactive-tool" data-checklist="departure"><h2>Pre-departure readiness check</h2><p>Complete the items that could block the first 24 hours of your trip.</p><div class="tool-checks">
+      <label><input type="checkbox"/><span>I checked entry requirements for my passport and trip purpose on an official government or embassy site.</span></label>
+      <label><input type="checkbox"/><span>I saved my accommodation name, Korean address and phone number offline.</span></label>
+      <label><input type="checkbox"/><span>I have two independent payment methods stored separately.</span></label>
+      <label><input type="checkbox"/><span>I confirmed that my phone is unlocked and compatible with my chosen SIM or eSIM.</span></label>
+      <label><input type="checkbox"/><span>I chose an airport transfer for my actual arrival time and saved a backup.</span></label>
+      <label><input type="checkbox"/><span>I can access insurance and emergency details without mobile data.</span></label>
+    </div><div class="tool-progress"><span></span></div><p class="tool-result" aria-live="polite">0 of 6 critical items ready</p></div>
+    <div class="interactive-tool" data-checklist="airport"><h2>Before leaving Incheon Airport</h2><p>Do not leave the staffed, connected airport environment until the essentials work.</p><div class="tool-checks">
+      <label><input type="checkbox"/><span>Mobile data loads a new webpage and my map, not only a signal icon.</span></label>
+      <label><input type="checkbox"/><span>The Korean destination address is open and also saved as a screenshot.</span></label>
+      <label><input type="checkbox"/><span>I know the correct terminal, platform or bus stop for the chosen transfer.</span></label>
+      <label><input type="checkbox"/><span>I confirmed the service is operating now rather than relying on an old timetable.</span></label>
+      <label><input type="checkbox"/><span>I know what I will do if I miss the service or cannot find the accommodation.</span></label>
+    </div><div class="tool-progress"><span></span></div><p class="tool-result" aria-live="polite">0 of 5 arrival items ready</p></div>
+    <h2>How to use the result</h2><p>An incomplete result is not a score or a reason to cancel a trip. It identifies which assumptions still depend on airport Wi-Fi, one bank card or a perfect transport connection. Fix the items that can strand you first; sightseeing decisions can remain flexible.</p>
+    <div class="actions"><button class="button" type="button" onclick="window.print()">Print or save as PDF</button><a class="button secondary" href="/guides/first-trip-korea-checklist/">Read the full arrival guide</a></div>
+  </div></section>
+  <script is:inline>
+    document.querySelectorAll('[data-checklist]').forEach((tool)=>{
+      const key=`dama-checklist-${tool.getAttribute('data-checklist')}`;
+      const boxes=[...tool.querySelectorAll('input[type="checkbox"]')];
+      const bar=tool.querySelector('.tool-progress span'); const result=tool.querySelector('.tool-result');
+      try{const saved=JSON.parse(localStorage.getItem(key)||'[]'); boxes.forEach((box,i)=>box.checked=Boolean(saved[i]));}catch{}
+      const update=()=>{const done=boxes.filter((box)=>box.checked).length; bar.style.width=`${done/boxes.length*100}%`; result.textContent=`${done} of ${boxes.length} ${tool.getAttribute('data-checklist')==='departure'?'critical':'arrival'} items ready`; localStorage.setItem(key,JSON.stringify(boxes.map((box)=>box.checked)));};
+      boxes.forEach((box)=>box.addEventListener('change',update)); update();
+    });
+  </script>
+</BaseLayout>

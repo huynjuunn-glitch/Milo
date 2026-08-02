@@ -3,26 +3,34 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import { guides, categoryNames } from '../../data/guides';
 import { guideDetails } from '../../data/guideDetails';
+import { guideUtilities } from '../../data/guideUtilities';
 interface Guide { slug:string; category:'start'|'visit'|'live'|'culture'; title:string; description:string; readTime:string; updated:string; }
 interface DetailSection { title:string; text:string[]; bullets?:string[]; }
 interface Comparison { title:string; headers:string[]; rows:string[][]; }
 interface Detail { quick:string; comparison?:Comparison; sections:DetailSection[]; sources:[string,string][]; }
+interface Utility { testedFor:string; steps:[string,string][]; pack:string[]; avoid:string[]; phrases:[string,string][]; }
 export function getStaticPaths(){
   const staticDetails=guideDetails as unknown as Record<string,Detail>;
   return guides.map((guide)=>({params:{slug:guide.slug},props:{guide,detail:staticDetails[guide.slug]}}));
 }
 const { guide, detail }=Astro.props as {guide:Guide;detail:Detail};
+const utility=(guideUtilities as unknown as Record<string,Utility>)[guide.slug];
 const categoryPath=guide.category==='start'?'/start-here/':`/${guide.category}/`;
 const related=guides.filter((item)=>item.slug!==guide.slug&&(item.category===guide.category||guide.category==='start')).slice(0,3);
-const schema={"@context":"https://schema.org","@type":"Article",headline:guide.title,description:guide.description,datePublished:'2026-07-15',dateModified:'2026-07-15',author:{"@type":"Organization",name:'Dama Korea Editorial Team',url:'https://damaheritage.com/about/'},publisher:{"@type":"Organization",name:'Dama Korea',url:'https://damaheritage.com'}};
+const schema={"@context":"https://schema.org","@type":"Article",headline:guide.title,description:guide.description,datePublished:'2026-07-15',dateModified:'2026-07-28',author:{"@type":"Organization",name:'Dama Korea Editorial Team',url:'https://damaheritage.com/about/'},publisher:{"@type":"Organization",name:'Dama Korea',url:'https://damaheritage.com'}};
 ---
-<BaseLayout title={guide.title} description={guide.description} type="article">
+<BaseLayout title={guide.title} description={guide.description} type="article" adsEligible={true}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   <div class="article-shell"><div class="breadcrumbs"><a href="/">Home</a> / <a href={categoryPath}>{categoryNames[guide.category]}</a> / Guide</div>
     <header class="article-head"><span class="eyebrow">{categoryNames[guide.category]}</span><h1>{guide.title}</h1><p class="dek">{guide.description}</p><div class="article-meta"><span>By Dama Korea Editorial Team</span><span>{guide.readTime}</span><span>Information checked {guide.updated}</span></div></header>
     <article class="article-body"><div class="quick-answer"><strong>Quick answer</strong>{detail.quick}</div>
       {detail.comparison&&<section class="comparison-block"><h2>{detail.comparison.title}</h2><div class="table-scroll"><table><thead><tr>{detail.comparison.headers.map((header)=><th>{header}</th>)}</tr></thead><tbody>{detail.comparison.rows.map((row)=><tr>{row.map((cell)=><td>{cell}</td>)}</tr>)}</tbody></table></div></section>}
       {detail.sections.map((section)=><section><h2>{section.title}</h2>{section.text.map((p)=><p>{p}</p>)}{section.bullets&&<ul class="checklist">{section.bullets.map((item)=><li>{item}</li>)}</ul>}</section>)}
+      {utility&&<>
+        <section><h2>Use this guide in five steps</h2><p class="scope-note"><strong>Scope:</strong> {utility.testedFor}</p><ol class="action-steps">{utility.steps.map(([title,text],index)=><li><span>{index+1}</span><div><strong>{title}</strong><p>{text}</p></div></li>)}</ol></section>
+        <section class="practical-grid"><div><h2>Have this ready</h2><ul class="checklist">{utility.pack.map((item)=><li>{item}</li>)}</ul></div><div><h2>Avoid these mistakes</h2><ul class="warning-list">{utility.avoid.map((item)=><li>{item}</li>)}</ul></div></section>
+        <section><h2>Useful Korean to show or say</h2><div class="phrase-list">{utility.phrases.map(([english,korean])=><div><span>{english}</span><strong lang="ko">{korean}</strong></div>)}</div><p class="microcopy">Pronunciation varies; showing the Korean sentence on screen is often clearer than reading a romanization.</p></section>
+      </>}
       <div class="note"><strong>Important</strong>Rules, schedules and provider requirements can change. Use the official sources below for the final check that applies to your date and circumstances.</div>
       <aside class="source-box"><h2>Official sources and further checks</h2><ul>{detail.sources.map(([label,url])=><li><a href={url} rel="external">{label}</a></li>)}</ul><p>This guide is independently written. It is not sponsored by the organizations listed above.</p></aside>
     </article>

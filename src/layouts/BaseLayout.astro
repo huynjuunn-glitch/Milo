@@ -11,6 +11,7 @@ const {
   image = '/social-card.svg',
   noindex = false,
   type = 'website',
+  adsEligible = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url);
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
@@ -33,7 +34,8 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
     <meta property="og:image" content={new URL(image, SITE.url)} />
     <meta property="og:site_name" content={SITE.name} />
     <meta name="twitter:card" content="summary_large_image" />
-    <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5504483871402657" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-5504483871402657" />
+    {adsEligible&&<script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5504483871402657" crossorigin="anonymous"></script>}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
