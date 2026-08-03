@@ -15,6 +15,26 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url);
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
+const socialImage = new URL(image, SITE.url);
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+  inLanguage: 'en',
+  publisher: { '@id': `${SITE.url}/#organization` },
+};
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#organization`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: new URL('/favicon.svg', SITE.url).toString(),
+  description: SITE.description,
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -24,6 +44,7 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
     <meta name="theme-color" content="#173f35" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -31,10 +52,18 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, SITE.url)} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${SITE.name} — practical Korea guides`} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={SITE.name} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={`${SITE.name} — practical Korea guides`} />
     <meta name="google-adsense-account" content="ca-pub-5504483871402657" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     {adsEligible&&<script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5504483871402657" crossorigin="anonymous"></script>}
   </head>
   <body>

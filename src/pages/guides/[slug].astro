@@ -4,26 +4,61 @@ import GuideCard from '../../components/GuideCard.astro';
 import { guides, categoryNames } from '../../data/guides';
 import { guideDetails } from '../../data/guideDetails';
 import { guideUtilities } from '../../data/guideUtilities';
+import { guideEditorial, guideSourceRoles } from '../../data/guideEditorial';
 interface Guide { slug:string; category:'start'|'visit'|'live'|'culture'; title:string; description:string; readTime:string; updated:string; }
 interface DetailSection { title:string; text:string[]; bullets?:string[]; }
 interface Comparison { title:string; headers:string[]; rows:string[][]; }
 interface Detail { quick:string; comparison?:Comparison; sections:DetailSection[]; sources:[string,string][]; }
 interface Utility { testedFor:string; steps:[string,string][]; pack:string[]; avoid:string[]; phrases:[string,string][]; }
+interface EditorialNote { purpose:string; decisionQuestions:string[]; verificationSteps:string[]; failurePlan:[string,string][]; faq:[string,string][]; }
 export function getStaticPaths(){
   const staticDetails=guideDetails as unknown as Record<string,Detail>;
   return guides.map((guide)=>({params:{slug:guide.slug},props:{guide,detail:staticDetails[guide.slug]}}));
 }
 const { guide, detail }=Astro.props as {guide:Guide;detail:Detail};
 const utility=(guideUtilities as unknown as Record<string,Utility>)[guide.slug];
+const editorial=(guideEditorial as unknown as Record<string,EditorialNote>)[guide.slug];
+const sourceRoles=(guideSourceRoles as unknown as Record<string,string[]>)[guide.slug] ?? [];
 const categoryPath=guide.category==='start'?'/start-here/':`/${guide.category}/`;
 const related=guides.filter((item)=>item.slug!==guide.slug&&(item.category===guide.category||guide.category==='start')).slice(0,3);
-const schema={"@context":"https://schema.org","@type":"Article",headline:guide.title,description:guide.description,datePublished:'2026-07-15',dateModified:'2026-07-28',author:{"@type":"Organization",name:'Dama Korea Editorial Team',url:'https://damaheritage.com/about/'},publisher:{"@type":"Organization",name:'Dama Korea',url:'https://damaheritage.com'}};
+const monthNumbers: Record<string, string> = { January:'01', February:'02', March:'03', April:'04', May:'05', June:'06', July:'07', August:'08', September:'09', October:'10', November:'11', December:'12' };
+const updatedMatch = guide.updated.match(/^([A-Za-z]+)\s+(\d{1,2}),\s+(\d{4})$/);
+const updatedIso = updatedMatch ? `${updatedMatch[3]}-${monthNumbers[updatedMatch[1]]}-${updatedMatch[2].padStart(2, '0')}` : undefined;
+const canonical = new URL(`/guides/${guide.slug}/`, 'https://damaheritage.com').toString();
+const schema={
+  '@context':'https://schema.org',
+  '@type':'Article',
+  '@id':`${canonical}#article`,
+  headline:guide.title,
+  description:guide.description,
+  ...(updatedIso ? { dateModified: updatedIso } : {}),
+  inLanguage:'en',
+  isAccessibleForFree:true,
+  mainEntityOfPage:{'@type':'WebPage','@id':canonical},
+  image:new URL('/social-card.svg', 'https://damaheritage.com').toString(),
+  author:{'@type':'Organization',name:'Dama Korea',url:'https://damaheritage.com/about/'},
+  publisher:{'@type':'Organization',name:'Dama Korea',url:'https://damaheritage.com',logo:{'@type':'ImageObject',url:'https://damaheritage.com/favicon.svg'}},
+};
+const breadcrumbSchema={
+  '@context':'https://schema.org',
+  '@type':'BreadcrumbList',
+  itemListElement:[
+    {'@type':'ListItem',position:1,name:'Home',item:'https://damaheritage.com/'},
+    {'@type':'ListItem',position:2,name:categoryNames[guide.category],item:`https://damaheritage.com${categoryPath}`},
+    {'@type':'ListItem',position:3,name:guide.title,item:canonical},
+  ],
+};
 ---
 <BaseLayout title={guide.title} description={guide.description} type="article" adsEligible={true}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <div class="article-shell"><div class="breadcrumbs"><a href="/">Home</a> / <a href={categoryPath}>{categoryNames[guide.category]}</a> / Guide</div>
-    <header class="article-head"><span class="eyebrow">{categoryNames[guide.category]}</span><h1>{guide.title}</h1><p class="dek">{guide.description}</p><div class="article-meta"><span>By Dama Korea Editorial Team</span><span>{guide.readTime}</span><span>Information checked {guide.updated}</span></div></header>
+    <header class="article-head"><span class="eyebrow">{categoryNames[guide.category]}</span><h1>{guide.title}</h1><p class="dek">{guide.description}</p><div class="article-meta"><span>By <a href="/about/">Dama Korea</a></span><span>{guide.readTime}</span><time datetime={updatedIso}>Information checked {guide.updated}</time></div></header>
     <article class="article-body"><div class="quick-answer"><strong>Quick answer</strong>{detail.quick}</div>
+      {editorial&&<>
+        <section class="editorial-purpose"><h2>What this guide helps you decide</h2><p>{editorial.purpose}</p><ul class="checklist">{editorial.decisionQuestions.map((question)=><li>{question}</li>)}</ul></section>
+        <section><h2>Verify these three things before you rely on the plan</h2><ol class="action-steps">{editorial.verificationSteps.map((step,index)=><li><span>{index+1}</span><div><p>{step}</p></div></li>)}</ol></section>
+      </>}
       {detail.comparison&&<section class="comparison-block"><h2>{detail.comparison.title}</h2><div class="table-scroll"><table><thead><tr>{detail.comparison.headers.map((header)=><th>{header}</th>)}</tr></thead><tbody>{detail.comparison.rows.map((row)=><tr>{row.map((cell)=><td>{cell}</td>)}</tr>)}</tbody></table></div></section>}
       {detail.sections.map((section)=><section><h2>{section.title}</h2>{section.text.map((p)=><p>{p}</p>)}{section.bullets&&<ul class="checklist">{section.bullets.map((item)=><li>{item}</li>)}</ul>}</section>)}
       {utility&&<>
@@ -31,8 +66,11 @@ const schema={"@context":"https://schema.org","@type":"Article",headline:guide.t
         <section class="practical-grid"><div><h2>Have this ready</h2><ul class="checklist">{utility.pack.map((item)=><li>{item}</li>)}</ul></div><div><h2>Avoid these mistakes</h2><ul class="warning-list">{utility.avoid.map((item)=><li>{item}</li>)}</ul></div></section>
         <section><h2>Useful Korean to show or say</h2><div class="phrase-list">{utility.phrases.map(([english,korean])=><div><span>{english}</span><strong lang="ko">{korean}</strong></div>)}</div><p class="microcopy">Pronunciation varies; showing the Korean sentence on screen is often clearer than reading a romanization.</p></section>
       </>}
+      {editorial&&<>
+        <section class="practical-grid"><div><h2>If the plan fails</h2><ul class="warning-list">{editorial.failurePlan.map(([scenario,action])=><li><strong>{scenario}:</strong> {action}</li>)}</ul></div><div><h2>Questions readers ask</h2><div class="faq-list">{editorial.faq.map(([question,answer])=><div><h3>{question}</h3><p>{answer}</p></div>)}</div></div></section>
+      </>}
       <div class="note"><strong>Important</strong>Rules, schedules and provider requirements can change. Use the official sources below for the final check that applies to your date and circumstances.</div>
-      <aside class="source-box"><h2>Official sources and further checks</h2><ul>{detail.sources.map(([label,url])=><li><a href={url} rel="external">{label}</a></li>)}</ul><p>This guide is independently written. It is not sponsored by the organizations listed above.</p></aside>
+      <aside class="source-box"><h2>Official sources and further checks</h2><ul>{detail.sources.map(([label,url])=><li><a href={url} rel="external">{label}</a></li>)}</ul>{sourceRoles.length>0&&<><h3>What each source is for</h3><ul class="source-roles">{sourceRoles.map((role)=><li>{role}</li>)}</ul></>}<p>This guide is independently written. It is not sponsored by the organizations listed above.</p></aside>
     </article>
   </div>
   {related.length>0&&<section class="section alt"><div class="shell"><div class="section-head"><div><span class="eyebrow">Continue planning</span><h2>Related practical guides</h2></div></div><div class="guide-grid">{related.map((item)=><GuideCard guide={item}/>)}</div></div></section>}

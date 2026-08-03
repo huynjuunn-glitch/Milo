@@ -16,6 +16,7 @@
 .practical-grid>div{padding:1.25rem;border:1px solid var(--line);border-radius:1rem;background:#fff}
 .practical-grid h2{margin-top:0;font-size:1.25rem}
 .warning-list{padding-left:1.2rem}.warning-list li{margin:.65rem 0}.warning-list li::marker{color:#a84b38}
+.faq-list{display:grid;gap:1rem}.faq-list h3{font-size:1rem;line-height:1.35;margin:0 0 .25rem;color:var(--forest)}.faq-list p{font-size:.95rem;margin:0;color:var(--muted)}.faq-list>div+div{border-top:1px solid var(--line);padding-top:1rem}
 .phrase-list{display:grid;gap:.75rem}.phrase-list>div{display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;padding:1rem;border-bottom:1px solid var(--line)}
 .phrase-list strong{font-size:1.08rem;color:var(--forest)}.microcopy{font-size:.9rem;color:var(--muted)}
 .interactive-tool{padding:1.5rem;border:1px solid var(--line);border-radius:1.1rem;background:#fff;margin:1.25rem 0}.interactive-tool h2{margin-top:0}
