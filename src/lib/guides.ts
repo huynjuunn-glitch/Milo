@@ -14,7 +14,19 @@ export interface GuideData {
   publishedAt?: Date;
   updatedAt?: Date;
   checkedAt?: Date;
-  heroImage?: { src: string; alt: string; width: number; height: number; credit: string; license: string; sourceUrl?: string; caption?: string };
+  heroImage?: {
+    src: string;
+    kind: 'original-editorial-diagram';
+    aiAssisted: true;
+    documentary: false;
+    alt: string;
+    width: number;
+    height: number;
+    credit: string;
+    license: string;
+    sourceUrl?: string;
+    caption?: string;
+  };
   atAGlance: Array<{ label: string; value: string }>;
   sources: Array<{ label: string; url: string; role: string; checkedAt: Date }>;
   changes: Array<{ date: Date; summary: string }>;

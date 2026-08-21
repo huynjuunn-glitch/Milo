@@ -6,17 +6,21 @@ section: korean-temples
 category: etiquette
 region: Korea
 heritageType: [temple]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/korean-temple-etiquette/temple-etiquette-sequence.svg"
   alt: "Respect-first temple sequence to read, observe, reduce disruption and ask before entering, photographing or observing worship."
   width: 1600
   height: 1000
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A safe visitor framework for ambiguous situations; the specific temple, hall, event or program always supplies the final rule."
 atAGlance:
   - label: "First priority"
@@ -75,8 +79,8 @@ modules:
       - heading: "A route looks open"
         text: "Do not enter residential, kitchen, office or practice areas merely because a gate is unlocked. Follow public-route markers."
 related: [how-to-read-korean-temple, bulguksa-seokguram-visit, korea-heritage-trip-planning-checklist]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 ---

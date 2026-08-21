@@ -16,11 +16,14 @@ const source = z.object({
 
 const imageMetadata = z.object({
   src: z.string().startsWith('/'),
+  kind: z.literal('original-editorial-diagram'),
+  aiAssisted: z.literal(true),
+  documentary: z.literal(false),
   alt: z.string().min(8).max(180),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
   credit: z.string().min(2).max(120),
-  license: z.string().min(2).max(120),
+  license: z.literal('Original AI-assisted editorial SVG; rights reserved to the extent permitted by law'),
   sourceUrl: z.string().url().optional(),
   caption: z.string().min(8).max(240).optional(),
 });

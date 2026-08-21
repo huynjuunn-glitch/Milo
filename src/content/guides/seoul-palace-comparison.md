@@ -6,17 +6,21 @@ section: seoul-palaces
 category: comparison
 region: Seoul
 heritageType: [palace, shrine]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/seoul-palace-comparison/seoul-palace-choice-flow.svg"
   alt: "Decision flow matching six historical questions to five Seoul palaces and Jongmyo Shrine."
   width: 1600
   height: 1000
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Choose a royal site by its historical question, then verify closures, timed access, tickets and current notices."
 atAGlance:
   - { label: "Best first palace", value: "Gyeongbokgung for formal planning; Changdeokgung for landscape and long royal use" }
@@ -61,8 +65,8 @@ changes:
   - date: 2026-08-21
     summary: "Built a question-led comparison of five palaces and separated Jongmyo from palace sightseeing."
 related: [gyeongbokgung-first-visit, jongmyo-shrine-first-visit, seoul-palace-one-day-route]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 modules:

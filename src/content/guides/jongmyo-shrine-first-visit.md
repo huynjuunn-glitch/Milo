@@ -6,17 +6,21 @@ section: seoul-palaces
 category: site-guide
 region: Seoul
 heritageType: [shrine]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/jongmyo-shrine-first-visit/jongmyo-processional-layout.svg"
   alt: "Functional Jongmyo sequence from the wooded approach and preparation buildings to Jeongjeon and Yeongnyeongjeon."
   width: 1600
   height: 1100
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Read support buildings, ritual preparation, shrine halls and living practice as one system; this is not a site plan."
 atAGlance:
   - { label: "What it is", value: "A Confucian royal ancestral shrine, not a palace residence" }
@@ -57,8 +61,8 @@ changes:
   - date: 2026-08-21
     summary: "Created a day-specific access guide, ritual route and restoration-aware reading of Jongmyo."
 related: [seoul-palace-comparison, seoul-palace-one-day-route, how-to-read-korean-palace-architecture]
-draft: true
-index: false
+draft: false
+index: true
 featured: false
 adStatus: none
 modules:

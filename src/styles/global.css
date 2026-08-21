@@ -996,6 +996,14 @@ a {
   color: #c5d4ce;
 }
 
+.footer-intro .footer-disclosure {
+  max-width: 34rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #315147;
+  color: #a9bdb5;
+  font-size: 0.76rem;
+}
+
 .footer-grid > div:not(.footer-intro) {
   display: flex;
   flex-direction: column;

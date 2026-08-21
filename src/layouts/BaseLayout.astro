@@ -12,7 +12,6 @@ const {
   imageAlt = 'Dama Korea — independent Korean heritage field guides',
   noindex = false,
   type = 'website',
-  adsEligible = false,
   activeNav,
 } = Astro.props as {
   title?: string;
@@ -21,7 +20,6 @@ const {
   imageAlt?: string;
   noindex?: boolean;
   type?: 'website' | 'article';
-  adsEligible?: boolean;
   activeNav?: string;
 };
 
@@ -78,15 +76,6 @@ const organizationSchema = {
     <meta name="google-adsense-account" content={SITE.publisherId} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-    {adsEligible && (
-      <script
-        is:inline
-        async
-        data-cfasync="false"
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.publisherId}`}
-        crossorigin="anonymous"
-      ></script>
-    )}
     <slot name="head" />
   </head>
   <body>

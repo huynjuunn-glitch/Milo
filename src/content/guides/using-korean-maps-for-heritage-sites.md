@@ -6,17 +6,21 @@ section: visit
 category: planning
 region: Korea
 heritageType: [route, planning]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/using-korean-maps-for-heritage-sites/korean-map-search-workflow.svg"
   alt: "Six-step map verification chain from official place identity to entrance, transit, return and an offline recovery card."
   width: 1600
   height: 1100
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A brand-neutral workflow that treats place identity, practical entrance and route as separate claims to verify."
 atAGlance:
   - label: "Search with"
@@ -87,8 +91,8 @@ modules:
       - heading: "The return route vanishes"
         text: "Do not start the outbound segment until a realistic return is confirmed. Save an earlier option and local help contact."
 related: [korea-heritage-trip-planning-checklist, gyeongju-without-car, gyeongbokgung-first-visit]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 ---

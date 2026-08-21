@@ -1,15 +1,21 @@
 # Dama Korea guide authoring
 
-Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `index: false` and `adStatus: none` until research, image rights and editorial QA are complete.
+Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `index: false` and `adStatus: none` until research, visual-rights review and editorial QA are complete.
 
 ## Publication requirements
 
 - Use the real publication, update and source-check dates. Never backdate or invent a visit.
-- Add a licensed hero image with width, height, credit, license, alt text and source URL where applicable.
+- Add a licensed hero visual with width, height, credit, license and alt text. Current SVG schematics must declare `kind: original-editorial-diagram`, `aiAssisted: true` and `documentary: false`.
 - Give every source a precise role and checked date. Cite consequential claims near the relevant paragraph in the Markdown body.
 - Add at least two useful `atAGlance` facts, one change-log item and only relevant related-guide slugs.
 - Choose article-specific modules. Do not force every guide into the same sequence.
-- When the guide is finished, set `draft: false` and `index: true`. Use `adStatus: review` for AdSense connection without article ad units; use `article` only after approval and ad-placement review.
+- When the guide is finished, set `draft: false` and `index: true`, while keeping `adStatus: none`.
+
+## Advertising state
+
+The current site uses only the publisher meta tag and `public/ads.txt` for AdSense ownership and review verification. It must not load AdSense JavaScript or request ads while a certified consent management platform is not configured.
+
+`adStatus: review` may be introduced only after the required certified CMP is configured and the corresponding reviewed script implementation is added. `adStatus: article` is reserved for a later, approved ad-placement review. Until then, all guides remain `adStatus: none`.
 
 ## Variable module example
 
@@ -25,4 +31,4 @@ modules:
         text: "Explain the second clue without presenting an illustration as documentary evidence."
 ```
 
-Run `npm run quality` before requesting review. The command validates the content schema, builds the static site, checks required pages and internal links, and confirms that drafts do not enter public output or the sitemap.
+Run `npm run quality` before requesting review. The command validates the content schema, builds the static site, checks guide routes, links, visuals, JSON-LD and sitemap inclusion, and confirms that no AdSense JavaScript is present.

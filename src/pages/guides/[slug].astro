@@ -52,7 +52,6 @@ const breadcrumbSchema = {
   image={hero?.src}
   imageAlt={hero?.alt}
   type="article"
-  adsEligible={guide.data.adStatus !== 'none'}
   activeNav={sectionUrl(guide.data.section)}
 >
   <Fragment slot="head">
@@ -81,7 +80,7 @@ const breadcrumbSchema = {
         {hero && (
           <figure class="article-hero__figure">
             <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" />
-            {(hero.caption || hero.credit) && <figcaption>{hero.caption} <span>Image: {hero.credit} · {hero.license}</span></figcaption>}
+            {(hero.caption || hero.credit) && <figcaption>{hero.caption} <span>Visual: {hero.credit} · {hero.license}</span></figcaption>}
           </figure>
         )}
       </div>

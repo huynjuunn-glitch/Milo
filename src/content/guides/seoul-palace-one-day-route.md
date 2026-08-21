@@ -6,17 +6,21 @@ section: seoul-palaces
 category: itinerary
 region: Seoul
 heritageType: [palace, shrine, route]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/seoul-palace-one-day-route/seoul-palace-day-route.svg"
   alt: "Paced day sequence linking Gyeongbokgung, a museum or lunch break, a protected transfer and Jongmyo."
   width: 1800
   height: 1200
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A closure-aware sequence built around Jongmyo's verified access time; it is not a street map or permanent timetable."
 atAGlance:
   - { label: "Default pair", value: "Gyeongbokgung in the morning and Jongmyo in the afternoon" }
@@ -53,8 +57,8 @@ changes:
   - date: 2026-08-21
     summary: "Created a closure-aware Gyeongbokgung–museum–Jongmyo route with a Tuesday alternative and failure plan."
 related: [seoul-palace-comparison, gyeongbokgung-first-visit, jongmyo-shrine-first-visit]
-draft: true
-index: false
+draft: false
+index: true
 featured: false
 adStatus: none
 modules:

@@ -6,17 +6,21 @@ section: seoul-palaces
 category: site-guide
 region: Seoul
 heritageType: [palace, museum]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/gyeongbokgung-first-visit/gyeongbokgung-six-stop-route.svg"
   alt: "Six-step Gyeongbokgung reading route from the outer gates through ceremony, government and residence to one final focus."
   width: 1600
   height: 1200
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A functional reading sequence for a first visit; this is a schematic, not a site map or statement that every doorway is open."
 atAGlance:
   - { label: "Best for", value: "A first look at the formal planning and public authority of a Joseon palace" }
@@ -49,8 +53,8 @@ changes:
   - date: 2026-08-21
     summary: "Created a source-checked first-visit route, restoration reading guide and weather-aware fallback plan."
 related: [seoul-palace-comparison, seoul-palace-one-day-route, how-to-read-korean-palace-architecture]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 modules:

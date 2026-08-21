@@ -6,17 +6,21 @@ section: gyeongju
 category: site-guide
 region: Gyeongju
 heritageType: [temple, route]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/bulguksa-seokguram-visit/bulguksa-seokguram-plan.svg"
   alt: "Decision plan that either combines Bulguksa with a separately verified Seokguram transfer or protects a focused temple visit."
   width: 1800
   height: 1100
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Use live transport, mountain weather, access and mobility to decide whether the combined visit remains resilient."
 atAGlance:
   - label: "Heritage relationship"
@@ -106,8 +110,8 @@ modules:
       - heading: "Mobility constraint"
         text: "Ask the official information center about current accessible routes before travel; do not assume a vehicle reaches each entrance."
 related: [gyeongju-without-car, gyeongju-central-heritage-walk, korean-temple-etiquette, how-to-read-korean-temple]
-draft: true
-index: false
+draft: false
+index: true
 featured: false
 adStatus: none
 ---

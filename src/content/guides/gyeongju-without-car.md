@@ -6,17 +6,21 @@ section: gyeongju
 category: planning
 region: Gyeongju
 heritageType: [route, planning]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/gyeongju-without-car/gyeongju-transit-nodes.svg"
   alt: "Three-layer Gyeongju transport model connecting arrival gateways to central, Mount Toham and other heritage clusters."
   width: 1800
   height: 1400
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Choose a geographic cluster, live-check the long transfer and walk selectively within it; this is not a geographic map."
 atAGlance:
   - label: "Best base"
@@ -90,8 +94,8 @@ modules:
       - heading: "Fare and transfer"
         text: "Use the current city fare page or on-site notice because prices and transfer rules can change after publication."
 related: [gyeongju-central-heritage-walk, bulguksa-seokguram-visit, using-korean-maps-for-heritage-sites, korea-heritage-trip-planning-checklist]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 ---

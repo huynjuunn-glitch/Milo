@@ -45,4 +45,4 @@ This runs Astro diagnostics before generating the production site in `dist/`.
 
 ## Advertising
 
-The AdSense publisher ID remains in `public/ads.txt` and the global verification script. Ad units should not be added to 404, empty, navigation-only or confirmation pages.
+The AdSense publisher ID remains in `public/ads.txt` and the global ownership-verification meta tag. AdSense JavaScript and ad units stay disabled until the required consent-management setup has been completed and reviewed.

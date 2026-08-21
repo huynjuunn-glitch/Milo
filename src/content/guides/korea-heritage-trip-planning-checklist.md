@@ -6,17 +6,21 @@ section: visit
 category: planning
 region: Korea
 heritageType: [planning]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/korea-heritage-trip-planning-checklist/heritage-trip-planning-workflow.svg"
   alt: "Five-stage heritage trip workflow from early identity research through last-day checks, departure confirmation and onsite instructions."
   width: 1600
   height: 1100
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Separate stable identity research from time-sensitive operating checks, then keep, simplify, swap or cancel the plan."
 atAGlance:
   - label: "Verify twice"
@@ -83,8 +87,8 @@ modules:
       - heading: "Cancel"
         text: "An official closure, severe weather warning or unsafe last connection removes the plan's basic assumptions. Do not improvise around a barrier."
 related: [using-korean-maps-for-heritage-sites, seoul-palace-comparison, gyeongju-without-car]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 ---

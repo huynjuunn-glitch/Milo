@@ -6,17 +6,21 @@ section: korean-temples
 category: architecture
 region: Korea
 heritageType: [temple]
-author: { name: "Dama Korea Editorial Desk", url: "/about/" }
+author: { name: "Dama Korea", url: "/about/" }
 createdAt: 2026-08-21
+publishedAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
+  kind: original-editorial-diagram
+  aiAssisted: true
+  documentary: false
   src: "/images/guides/how-to-read-korean-temple/korean-temple-layout.svg"
   alt: "Six-stop temple reading sequence from landscape and thresholds to courtyard, main focus, stone elements and working edges."
   width: 1800
   height: 1350
-  credit: "Dama Korea Editorial Desk"
-  license: "Original editorial diagram © Dama Korea"
+  credit: "Dama Korea"
+  license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Reuse the six observation questions while allowing terrain, tradition and rebuilding to change each temple's actual layout."
 atAGlance:
   - label: "Start with"
@@ -77,8 +81,8 @@ modules:
       - heading: "Living use"
         text: "Cushions, offerings, schedules and circulation barriers reveal current practice. Observe them without touching or treating worship as a reenactment."
 related: [korean-temple-etiquette, bulguksa-seokguram-visit, how-to-read-korean-palace-architecture]
-draft: true
-index: false
+draft: false
+index: true
 featured: true
 adStatus: none
 ---
