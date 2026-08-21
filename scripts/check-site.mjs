@@ -21,7 +21,8 @@ const expectedGuides = new Set([
 ]);
 const requiredBaseRoutes = new Set([
   '/', '/start-here/', '/seoul-palaces/', '/gyeongju/', '/korean-temples/',
-  '/visit/', '/culture/', '/tools/', '/about/', '/contact/', '/privacy/', '/terms/',
+  '/visit/', '/culture/', '/tools/', '/about/', '/contributors/',
+  '/contact/', '/privacy/', '/terms/',
 ]);
 const sitemapExcluded = new Set(['/404/', '/contact/', '/privacy/', '/terms/']);
 const accessibleTableRoutes = new Set([
@@ -36,6 +37,21 @@ const expectedRedirects = new Map([
   ['/guides/naver-map-for-foreigners', '/guides/using-korean-maps-for-heritage-sites/'],
   ['/guides/naver-map-for-foreigners/', '/guides/using-korean-maps-for-heritage-sites/'],
 ]);
+const expectedAuthors = new Map([
+  ['gyeongbokgung-first-visit', ['Dama Korea Palace Desk', '/contributors/#palace-desk']],
+  ['seoul-palace-comparison', ['Dama Korea Palace Desk', '/contributors/#palace-desk']],
+  ['seoul-palace-one-day-route', ['Dama Korea Palace Desk', '/contributors/#palace-desk']],
+  ['how-to-read-korean-palace-architecture', ['Dama Korea Palace Desk', '/contributors/#palace-desk']],
+  ['jongmyo-shrine-first-visit', ['Dama Korea Palace Desk', '/contributors/#palace-desk']],
+  ['gyeongju-without-car', ['Dama Korea Gyeongju Desk', '/contributors/#gyeongju-desk']],
+  ['gyeongju-central-heritage-walk', ['Dama Korea Gyeongju Desk', '/contributors/#gyeongju-desk']],
+  ['bulguksa-seokguram-visit', ['Dama Korea Gyeongju Desk', '/contributors/#gyeongju-desk']],
+  ['korean-temple-etiquette', ['Dama Korea Temple Desk', '/contributors/#temple-desk']],
+  ['how-to-read-korean-temple', ['Dama Korea Temple Desk', '/contributors/#temple-desk']],
+  ['korea-heritage-trip-planning-checklist', ['Dama Korea Visit Desk', '/contributors/#visit-desk']],
+  ['using-korean-maps-for-heritage-sites', ['Dama Korea Visit Desk', '/contributors/#visit-desk']],
+]);
+const expectedContributorAnchors = new Set(['palace-desk', 'gyeongju-desk', 'temple-desk', 'visit-desk']);
 const ignoredProtocols = /^(?:https?:|mailto:|tel:|data:|javascript:)/;
 const failures = [];
 
@@ -134,12 +150,28 @@ for (const file of htmlFiles) {
     }
   }
   if (structuredData.length < 2) failures.push(`${route} is missing global WebSite or Organization JSON-LD.`);
+  if (route === '/contributors/') {
+    for (const anchor of expectedContributorAnchors) {
+      if (!html.includes(`id="${anchor}"`)) failures.push(`${route} is missing editorial desk anchor #${anchor}.`);
+    }
+    if (!html.includes('They are publishing labels within Dama Korea, not four people.')) {
+      failures.push(`${route} is missing the editorial-desk identity disclosure.`);
+    }
+  }
   if (route.startsWith('/guides/')) {
+    const guideId = route.split('/')[2];
+    const expectedAuthor = expectedAuthors.get(guideId);
     const article = structuredData.find((item) => item['@type'] === 'Article');
     const breadcrumb = structuredData.find((item) => item['@type'] === 'BreadcrumbList');
     if (!article) failures.push(`${route} is missing Article JSON-LD.`);
     if (!breadcrumb) failures.push(`${route} is missing BreadcrumbList JSON-LD.`);
-    if (article?.author?.name !== 'Dama Korea') failures.push(`${route} has an unexpected Article author.`);
+    const authorUrl = new URL(article?.author?.url ?? 'https://damaheritage.com/');
+    if (!expectedAuthor || article?.author?.name !== expectedAuthor[0] || `${authorUrl.pathname}${authorUrl.hash}` !== expectedAuthor[1]) {
+      failures.push(`${route} has an unexpected Article author.`);
+    }
+    if (article?.author?.['@type'] !== 'Organization' || article?.author?.parentOrganization?.['@id'] !== 'https://damaheritage.com/#organization') {
+      failures.push(`${route} must identify its desk as part of the Dama Korea organization.`);
+    }
     if (!article?.datePublished || !article?.dateModified || !article?.image) failures.push(`${route} has incomplete Article dates or image metadata.`);
     if (pageAdsenseScripts !== 0 || pageAdsenseUnits !== 0) failures.push(`${route} must not load or render ads before CMP setup.`);
     if (!html.includes('<span>Visual: Dama Korea · Original AI-assisted editorial SVG; rights reserved to the extent permitted by law</span>')) {
@@ -219,10 +251,12 @@ for (const fileName of sourceFiles) {
   }
 
   if (expectedGuides.has(id)) {
+    const expectedAuthor = expectedAuthors.get(id);
     if (!publicEntry) failures.push(`Expected guide is not public: ${id}`);
     if (!/^adStatus:\s*none\s*$/m.test(source)) failures.push(`${id} must keep adStatus: none before CMP setup.`);
     if (!/^publishedAt:\s*2026-08-21\s*$/m.test(source)) failures.push(`${id} has an unexpected publication date.`);
-    if (!/^author:\s*\{\s*name:\s*["']Dama Korea["']/m.test(source)) failures.push(`${id} has an unexpected author.`);
+    const authorMatch = source.match(/^author:\s*\{\s*name:\s*["']([^"']+)["'],\s*url:\s*["']([^"']+)["']\s*\}\s*$/m);
+    if (!expectedAuthor || !authorMatch || authorMatch[1] !== expectedAuthor[0] || authorMatch[2] !== expectedAuthor[1]) failures.push(`${id} has an unexpected author.`);
     if (!/^\s+kind:\s*original-editorial-diagram\s*$/m.test(source)) failures.push(`${id} is missing the editorial-diagram kind.`);
     if (!/^\s+aiAssisted:\s*true\s*$/m.test(source)) failures.push(`${id} is missing aiAssisted: true.`);
     if (!/^\s+documentary:\s*false\s*$/m.test(source)) failures.push(`${id} is missing documentary: false.`);

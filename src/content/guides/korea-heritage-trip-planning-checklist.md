@@ -6,7 +6,7 @@ section: visit
 category: planning
 region: Korea
 heritageType: [planning]
-author: { name: "Dama Korea", url: "/about/" }
+author: { name: "Dama Korea Visit Desk", url: "/contributors/#visit-desk" }
 createdAt: 2026-08-21
 publishedAt: 2026-08-21
 updatedAt: 2026-08-21

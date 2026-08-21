@@ -837,6 +837,66 @@ a {
   color: var(--pine);
 }
 
+.contributor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.contributor-card {
+  min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  background: var(--hanji);
+}
+
+.contributor-card > p:first-child {
+  margin: 0;
+  color: var(--rust);
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contributor-card h2 {
+  margin: 2rem 0 1rem;
+  font: 500 2rem/1.08 var(--serif);
+}
+
+.contributor-card h2 a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.contributor-card > p:not(:first-child) {
+  color: var(--muted);
+}
+
+.contributor-card h3 {
+  margin: 1.5rem 0 0.6rem;
+  font: 600 1.15rem/1.3 var(--serif);
+}
+
+.contributor-card ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.contributor-card li + li {
+  margin-top: 0.6rem;
+}
+
+.contributor-card .contributor-card__limit {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+}
+
 .tool-layout {
   display: grid;
   grid-template-columns: minmax(15rem, 0.65fr) minmax(0, 1.35fr);
@@ -1082,7 +1142,8 @@ a {
   .hub-card-grid,
   .guide-grid,
   .path-grid,
-  .hub-index {
+  .hub-index,
+  .contributor-grid {
     grid-template-columns: 1fr;
   }
   .page-hero--hub .visual-shell { grid-template-columns: 1fr; gap: 2rem; }

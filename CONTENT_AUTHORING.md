@@ -2,6 +2,8 @@
 
 Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `index: false` and `adStatus: none` until research, source-link, visual-metadata, schema and publication checks are complete.
 
+Assign the guide to the editorial desk that matches its section. Desk bylines are topical publishing labels within Dama Korea, not separate people, credentials or fieldwork claims. Their public definitions live in `src/data/contributors.ts`.
+
 ## Publication requirements
 
 - Use the real publication, update and source-check dates. Never backdate or invent a visit.

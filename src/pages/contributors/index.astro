@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { EDITORIAL_DESKS, editorialDeskUrl } from '../../data/contributors';
+---
+
+<BaseLayout title="Editorial Desks" description="Meet the transparent topic desks behind Dama Korea’s palace, Gyeongju, temple and practical visit field guides." activeNav="/about/">
+  <section class="page-hero">
+    <div class="shell visual-shell">
+      <div>
+        <p class="eyebrow">Authorship directory</p>
+        <h1>Topic expertise without invented identities.</h1>
+        <p class="page-hero__lede">Dama Korea uses four subject-specific editorial bylines so readers can see the scope and verification method behind a guide. They are publishing labels within Dama Korea, not four people.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell">
+      <div class="section-head">
+        <div><p class="eyebrow">Editorial structure</p><h2>Four accountable desks</h2></div>
+        <p>Each desk has a defined subject boundary, source hierarchy and limitations. No byline claims a biography, qualification or visit that cannot be documented.</p>
+      </div>
+      <div class="contributor-grid">
+        {EDITORIAL_DESKS.map((desk) => (
+          <article class="contributor-card" id={desk.id}>
+            <p>{desk.role}</p>
+            <h2><a href={editorialDeskUrl(desk)}>{desk.name}</a></h2>
+            <p>{desk.description}</p>
+            <h3>Verification method</h3>
+            <ol>{desk.method.map((item) => <li>{item}</li>)}</ol>
+            <p class="contributor-card__limit"><strong>Scope limit:</strong> {desk.limits}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell compact-prose">
+      <p class="eyebrow">Disclosure</p>
+      <h2>What these bylines do—and do not mean</h2>
+      <p>The desk name identifies which research method and subject scope applies to the article. It does not represent a separate employee, outside expert, academic title or personal field experience. AI-assisted tools support research organization, drafting and original editorial diagrams; the linked sources remain the evidence for factual claims.</p>
+      <p><a class="text-link" href="/about/">Read the complete editorial method →</a></p>
+    </div>
+  </section>
+</BaseLayout>

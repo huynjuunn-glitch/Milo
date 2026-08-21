@@ -6,7 +6,7 @@ section: seoul-palaces
 category: site-guide
 region: Seoul
 heritageType: [palace, museum]
-author: { name: "Dama Korea", url: "/about/" }
+author: { name: "Dama Korea Palace Desk", url: "/contributors/#palace-desk" }
 createdAt: 2026-08-21
 publishedAt: 2026-08-21
 updatedAt: 2026-08-21

@@ -32,7 +32,12 @@ const articleSchema = {
   isAccessibleForFree: true,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
   image: hero ? new URL(hero.src, SITE.url).toString() : undefined,
-  author: { '@type': 'Organization', name: guide.data.author.name, url: new URL(guide.data.author.url, SITE.url).toString() },
+  author: {
+    '@type': 'Organization',
+    name: guide.data.author.name,
+    url: new URL(guide.data.author.url, SITE.url).toString(),
+    parentOrganization: { '@id': `${SITE.url}/#organization` },
+  },
   publisher: { '@id': `${SITE.url}/#organization` },
 };
 const breadcrumbSchema = {

@@ -6,7 +6,7 @@ section: korean-temples
 category: architecture
 region: Korea
 heritageType: [temple]
-author: { name: "Dama Korea", url: "/about/" }
+author: { name: "Dama Korea Temple Desk", url: "/contributors/#temple-desk" }
 createdAt: 2026-08-21
 publishedAt: 2026-08-21
 updatedAt: 2026-08-21
