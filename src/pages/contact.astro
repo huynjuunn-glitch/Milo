@@ -1,4 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
 ---
-<BaseLayout title="Corrections & Suggestions" description="Report a correction or suggest a practical Dama Korea guide through our public issue tracker."><section class="page-hero"><div class="shell"><span class="eyebrow">Corrections</span><h1>Help us keep the details useful.</h1><p>We use a public issue tracker so readers can see what was reported and when it was addressed.</p></div></section><section class="section"><div class="article-shell article-body"><div class="quick-answer"><strong>Open a public report</strong><a href="https://github.com/huynjuunn-glitch/Milo/issues/new" rel="external">Create a correction or guide suggestion on GitHub →</a></div><h2>For a correction</h2><ul class="checklist"><li>Include the URL of the page.</li><li>Quote the sentence or section that may be wrong.</li><li>Explain what changed and when you observed it.</li><li>Include an official source when available.</li></ul><h2>For a guide suggestion</h2><p>Describe the practical problem, who encounters it and what existing guides fail to explain. We prioritize topics that affect international visitors or residents and can be verified responsibly.</p><h2>Privacy</h2><p>The tracker is public. Never post passport details, residence numbers, addresses, banking records, private screenshots or other personal information. A GitHub account may be required to submit a report.</p></div></section></BaseLayout>
+
+<BaseLayout title="Corrections & Suggestions" description="Report a correction or propose a Korean heritage field-guide topic through Dama Korea’s public issue tracker." noindex={true}>
+  <section class="page-hero"><div class="shell visual-shell"><div><p class="eyebrow">Corrections desk</p><h1>Help keep the field notes accurate.</h1><p class="page-hero__lede">Reports use a public tracker so the issue and response can remain visible. Never post personal or sensitive information.</p></div></div></section>
+  <article class="legal-shell article-body">
+    <div class="contact-action"><strong>Open a public report</strong><a class="button" href={SITE.correctionsUrl} rel="external">Create a correction or guide suggestion</a></div>
+    <h2>For a correction</h2><ul class="checklist"><li>Include the Dama Korea page URL.</li><li>Identify the sentence, map, caption or instruction in question.</li><li>Explain what changed and when you observed it.</li><li>Include the responsible organization’s current page when available.</li></ul>
+    <h2>For a guide suggestion</h2><p>Describe the place or practical problem, who encounters it and what existing English-language resources fail to make clear. We prioritize topics that fit the heritage field-guide mission and can be verified responsibly.</p>
+    <h2>Privacy</h2><p>The tracker is public and a GitHub account may be required. Do not post passport details, reservation codes, faces, private addresses, financial information or unpublished personal correspondence.</p>
+  </article>
+</BaseLayout>

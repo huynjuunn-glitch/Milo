@@ -1,11 +1,11 @@
 # Dama Korea
 
-An independent English-language guide for international visitors and residents navigating Korea.
+An independent English-language field-guide hub for Korean heritage sites, history and practical visits.
 
 ## Editorial goal
 
 1. Publish original, useful and clearly sourced content suitable for AdSense review.
-2. Grow sustainable search traffic around travel, connectivity, banking, housing and everyday life in Korea.
+2. Build sustainable search traffic through distinctive palace, temple, Gyeongju and heritage-planning resources.
 
 The site does not present third-party API data as original publisher content. Time-sensitive guides show a checked date and link to the organizations responsible for current rules.
 
@@ -37,11 +37,11 @@ This runs Astro diagnostics before generating the production site in `dist/`.
 ## Publishing workflow
 
 1. Research and verify the guide.
-2. Add or update guide metadata in `src/data/guides.js`.
-3. Add the structured article body and official sources in `src/data/guideDetails.js`.
+2. Add or update one Markdown file in `src/content/guides/`.
+3. Follow the schema and publication gate in `CONTENT_AUTHORING.md`.
 4. Run `npm run build`.
 5. Review desktop and mobile output.
-6. Commit and push to `main` only after approval.
+6. Run `npm run quality` and commit only after cross-role approval.
 
 ## Advertising
 

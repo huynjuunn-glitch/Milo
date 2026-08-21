@@ -2,17 +2,29 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import '../styles/tables.css';
+import '../styles/article.css';
 import { SITE } from '../data/site';
 
 const {
   title = SITE.name,
   description = SITE.description,
   image = '/social-card.svg',
+  imageAlt = 'Dama Korea — independent Korean heritage field guides',
   noindex = false,
   type = 'website',
   adsEligible = false,
-} = Astro.props;
+  activeNav,
+} = Astro.props as {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article';
+  adsEligible?: boolean;
+  activeNav?: string;
+};
+
 const canonical = new URL(Astro.url.pathname, SITE.url);
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 const socialImage = new URL(image, SITE.url);
@@ -32,16 +44,18 @@ const organizationSchema = {
   '@id': `${SITE.url}/#organization`,
   name: SITE.name,
   url: SITE.url,
-  logo: new URL('/favicon.svg', SITE.url).toString(),
+  logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', SITE.url).toString() },
   description: SITE.description,
+  publishingPrinciples: new URL('/about/', SITE.url).toString(),
 };
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#173f35" />
+    <meta name="theme-color" content="#173F35" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content={SITE.name} />
@@ -53,22 +67,31 @@ const organizationSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content={`${SITE.name} — practical Korea guides`} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={SITE.name} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:image:alt" content={`${SITE.name} — practical Korea guides`} />
-    <meta name="google-adsense-account" content="ca-pub-5504483871402657" />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <meta name="google-adsense-account" content={SITE.publisherId} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-    {adsEligible&&<script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5504483871402657" crossorigin="anonymous"></script>}
+    {adsEligible && (
+      <script
+        is:inline
+        async
+        data-cfasync="false"
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.publisherId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
+    <Header activeNav={activeNav} />
     <main id="main"><slot /></main>
     <Footer />
   </body>

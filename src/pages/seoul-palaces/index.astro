@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HubPage from '../../components/HubPage.astro';
 import { HUBS } from '../../data/site';
 import { getPublicGuides } from '../../lib/guides';
-const hub = HUBS.visit;
-const guides = await getPublicGuides('visit');
+const hub = HUBS['seoul-palaces'];
+const guides = await getPublicGuides('seoul-palaces');
 ---
 <BaseLayout title={hub.label} description={hub.description} activeNav={hub.href}><HubPage hub={hub} guides={guides} /></BaseLayout>

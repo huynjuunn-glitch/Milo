@@ -1,21 +1,67 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GuideCard from '../components/GuideCard.astro';
-import { guides } from '../data/guides';
-const featured=guides.filter((g)=>g.featured);
-const latest=guides.filter((g)=>!g.featured).slice(0,4);
+import { HUBS } from '../data/site';
+import { getPublicGuides } from '../lib/guides';
+
+const guides = await getPublicGuides();
+const featured = guides.filter((guide) => guide.data.featured).slice(0, 4);
+const hubOrder = ['seoul-palaces', 'gyeongju', 'korean-temples', 'visit'] as const;
 ---
-<BaseLayout title="Dama Korea" description="Independent, practical guides for traveling, moving to and living in Korea." adsEligible={true}>
-  <section class="hero"><div class="shell hero-grid">
-    <div><span class="eyebrow">Independent Korea guides</span><h1>Korea,<br/><em>made easier.</em></h1><p class="hero-copy">Clear, carefully researched guidance for the moments that matter—from landing at the airport to finding your feet in everyday life.</p><div class="actions"><a class="button" href="/start-here/">Start planning <span>→</span></a><a class="button secondary" href="/about/">How we research</a></div></div>
-    <div class="hero-art" aria-label="Abstract illustration of a path through Korean mountains"><div class="sun"></div><div class="mountain"></div><div class="path"></div><div class="floating-note"><strong>One clear next step.</strong>No recycled listicles. No pretending every traveler has the same needs.</div></div>
-  </div></section>
-  <section class="section alt"><div class="shell"><div class="section-head"><div><span class="eyebrow">Find your starting point</span><h2>What brings you to Korea?</h2></div><p>Choose the situation closest to yours. Each path collects the decisions that usually need to happen in the right order.</p></div><div class="journey-grid">
-    <a class="journey-card" href="/start-here/"><span>01 · PREPARE</span><h3>My first trip</h3><p>Documents, connectivity, money and the first 24 hours.</p></a>
-    <a class="journey-card" href="/visit/"><span>02 · EXPLORE</span><h3>I am visiting</h3><p>Transport, useful apps and routes with realistic timing.</p></a>
-    <a class="journey-card" href="/live/"><span>03 · SETTLE</span><h3>I am moving</h3><p>Housing, banking, mobile service and everyday systems.</p></a>
-    <a class="journey-card" href="/culture/"><span>04 · UNDERSTAND</span><h3>I want context</h3><p>Heritage and etiquette explained for a real visit.</p></a>
-  </div></div></section>
-  <section class="section"><div class="shell"><div class="section-head"><div><span class="eyebrow">Essential guides</span><h2>Begin with the big decisions.</h2></div><a href="/start-here/">See the complete path →</a></div><div class="guide-grid">{featured.map((guide,i)=><GuideCard guide={guide} featured={i===0}/>) }{latest.map((guide)=><GuideCard guide={guide}/>)}</div></div></section>
-  <section class="section alt"><div class="shell"><div class="trust-band"><h2>Useful information should show its work.</h2><div class="trust-points"><div><strong>Official sources first</strong><span>We link to the agencies and operators responsible for the rules.</span></div><div><strong>Checked dates</strong><span>Time-sensitive guides state when their core information was reviewed.</span></div><div><strong>Experience labeled</strong><span>Research, observation and first-hand experience are never blurred together.</span></div><div><strong>Corrections welcomed</strong><span>Readers can report a change and see how to reach the editor.</span></div></div></div></div></section>
+
+<BaseLayout
+  title="Dama Korea"
+  description="Independent English-language field guides to Korean palaces, temples, historic cities and practical heritage visits."
+>
+  <section class="home-hero">
+    <div class="shell home-hero__grid">
+      <div class="home-hero__copy">
+        <p class="eyebrow">Korean heritage field guides</p>
+        <h1>See the place.<br /><em>Read the layers.</em></h1>
+        <p>Practical, source-led guides for understanding Korean palaces, temples and historic landscapes while planning a visit that works on the ground.</p>
+        <div class="actions"><a class="button" href="/start-here/">Choose a starting point</a><a class="text-link" href="/about/">How the guides are made <span>→</span></a></div>
+      </div>
+      <div class="home-hero__visual" aria-hidden="true">
+        <div class="roof-lines"><span></span><span></span><span></span></div>
+        <div class="field-stamp"><strong>담</strong><small>FIELD GUIDE<br />NO. 01</small></div>
+        <p>Architecture · ritual · landscape · route</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell">
+      <div class="section-head"><div><p class="eyebrow">Explore by field</p><h2>Four ways into Korean heritage</h2></div><p>Start with a place, a living tradition or the practical decisions that connect the day.</p></div>
+      <div class="hub-card-grid">
+        {hubOrder.map((key, index) => {
+          const hub = HUBS[key];
+          return <a class="hub-card" href={hub.href}><span>{String(index + 1).padStart(2, '0')} · {hub.eyebrow}</span><h3>{hub.label}</h3><p>{hub.description}</p><strong>Open the collection →</strong></a>;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell editorial-principles">
+      <div><p class="eyebrow">Editorial method</p><h2>A field guide should show its work.</h2><p>We separate durable historical context from details that need a fresh official check. Every published guide identifies what each source verifies and records material updates.</p><a class="button button--secondary" href="/about/">Read the methodology</a></div>
+      <ol>
+        <li><span>01</span><div><strong>Begin with the responsible source</strong><p>Heritage authorities, museums and transport operators anchor claims that can change.</p></div></li>
+        <li><span>02</span><div><strong>Add original decision value</strong><p>Routes, comparisons and visual reading cues help readers act on the information.</p></div></li>
+        <li><span>03</span><div><strong>Keep uncertainty visible</strong><p>Access restrictions, weather and site-specific conduct are never hidden behind certainty.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  {featured.length > 0 && (
+    <section class="section section--paper">
+      <div class="shell">
+        <div class="section-head"><div><p class="eyebrow">Editorial selection</p><h2>Begin with these field guides</h2></div><a class="text-link" href="/culture/">Browse all guides →</a></div>
+        <div class="guide-grid">{featured.map((guide, index) => <GuideCard guide={guide} featured={index === 0} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="section source-callout">
+    <div class="shell source-callout__inner"><div><p class="eyebrow">Before the gate</p><h2>Check the plan, then stay curious.</h2></div><p>Use the free planning worksheet to save the official notice, Korean place name, practical entrance and one fallback before leaving reliable Wi-Fi.</p><a class="button button--light" href="/tools/">Open the visit worksheet</a></div>
+  </section>
 </BaseLayout>

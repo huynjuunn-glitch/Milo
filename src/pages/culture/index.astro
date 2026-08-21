@@ -1,4 +1,19 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';import GuideCard from '../../components/GuideCard.astro';import { byCategory } from '../../data/guides';const items=byCategory('culture');
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { HUBS } from '../../data/site';
+import { getPublicGuides } from '../../lib/guides';
+
+const guides = await getPublicGuides();
+const hubOrder = ['seoul-palaces', 'gyeongju', 'korean-temples', 'visit'] as const;
 ---
-<BaseLayout title="Culture & Heritage" description="Practical, respectful guides to experiencing Korean heritage and culture."><section class="page-hero"><div class="shell"><span class="eyebrow">Culture & heritage</span><h1>See more than the photo spot.</h1><p>Heritage makes more sense when practical planning and cultural context live in the same guide. Learn how to visit respectfully and what deserves your attention.</p></div></section><section class="section"><div class="shell category-layout"><aside class="side-nav"><strong>Culture</strong><a href="#guides">Heritage visits</a><a href="/visit/">Travel logistics</a><a href="/about/">Our research</a></aside><div id="guides" class="content-list">{items.map((guide)=><GuideCard guide={guide}/>)}</div></div></section></BaseLayout>
+
+<BaseLayout title="Korean Heritage Field Guides" description="Browse every verified Dama Korea field guide by place, heritage tradition and practical visit need.">
+  <section class="page-hero"><div class="shell visual-shell"><div><p class="eyebrow">Complete field index</p><h1>Korean heritage, organized for a real visit.</h1><p class="page-hero__lede">Explore every collection or move directly into a verified guide. Drafts never appear in this index.</p></div></div></section>
+  <section class="section section--paper"><div class="shell hub-index">
+    {hubOrder.map((key) => { const hub = HUBS[key]; const count = guides.filter((guide) => guide.data.section === key).length; return <a href={hub.href}><p>{hub.eyebrow}</p><h2>{hub.label}</h2><span>{hub.description}</span><strong>{count} published {count === 1 ? 'guide' : 'guides'} →</strong></a>; })}
+  </div></section>
+  <section class="section"><div class="shell"><div class="section-head"><div><p class="eyebrow">Publication index</p><h2>Every verified guide</h2></div><p>Publication requires source roles, image rights, dates, change history and editorial review.</p></div>
+    {guides.length > 0 ? <div class="guide-grid">{guides.map((guide) => <GuideCard guide={guide} />)}</div> : <div class="editorial-state"><strong>No drafts are exposed as finished guides.</strong><p>The publication index will populate only after the first editorial batch passes review.</p></div>}
+  </div></section>
+</BaseLayout>

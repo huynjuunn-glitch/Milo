@@ -1,35 +1,61 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Korea Arrival Checklists" description="Interactive, printable checklists for preparing for Korea and leaving Incheon Airport with a working backup plan." adsEligible={true}>
-  <section class="page-hero"><div class="shell"><span class="eyebrow">Free practical tools</span><h1>Check the plan, not just the packing list.</h1><p>Use these browser-based checklists before departure. Your selections stay on this device and are not sent to Dama Korea.</p></div></section>
-  <section class="section"><div class="article-shell article-body">
-    <div class="interactive-tool" data-checklist="departure"><h2>Pre-departure readiness check</h2><p>Complete the items that could block the first 24 hours of your trip.</p><div class="tool-checks">
-      <label><input type="checkbox"/><span>I checked entry requirements for my passport and trip purpose on an official government or embassy site.</span></label>
-      <label><input type="checkbox"/><span>I saved my accommodation name, Korean address and phone number offline.</span></label>
-      <label><input type="checkbox"/><span>I have two independent payment methods stored separately.</span></label>
-      <label><input type="checkbox"/><span>I confirmed that my phone is unlocked and compatible with my chosen SIM or eSIM.</span></label>
-      <label><input type="checkbox"/><span>I chose an airport transfer for my actual arrival time and saved a backup.</span></label>
-      <label><input type="checkbox"/><span>I can access insurance and emergency details without mobile data.</span></label>
-    </div><div class="tool-progress"><span></span></div><p class="tool-result" aria-live="polite">0 of 6 critical items ready</p></div>
-    <div class="interactive-tool" data-checklist="airport"><h2>Before leaving Incheon Airport</h2><p>Do not leave the staffed, connected airport environment until the essentials work.</p><div class="tool-checks">
-      <label><input type="checkbox"/><span>Mobile data loads a new webpage and my map, not only a signal icon.</span></label>
-      <label><input type="checkbox"/><span>The Korean destination address is open and also saved as a screenshot.</span></label>
-      <label><input type="checkbox"/><span>I know the correct terminal, platform or bus stop for the chosen transfer.</span></label>
-      <label><input type="checkbox"/><span>I confirmed the service is operating now rather than relying on an old timetable.</span></label>
-      <label><input type="checkbox"/><span>I know what I will do if I miss the service or cannot find the accommodation.</span></label>
-    </div><div class="tool-progress"><span></span></div><p class="tool-result" aria-live="polite">0 of 5 arrival items ready</p></div>
-    <h2>How to use the result</h2><p>An incomplete result is not a score or a reason to cancel a trip. It identifies which assumptions still depend on airport Wi-Fi, one bank card or a perfect transport connection. Fix the items that can strand you first; sightseeing decisions can remain flexible.</p>
-    <div class="actions"><button class="button" type="button" onclick="window.print()">Print or save as PDF</button><a class="button secondary" href="/guides/first-trip-korea-checklist/">Read the full arrival guide</a></div>
+
+<BaseLayout title="Korea Heritage Visit Worksheet" description="A private, browser-based worksheet for checking official notices, Korean map data, route effort and respectful conduct before a heritage visit.">
+  <section class="page-hero"><div class="shell visual-shell"><div><p class="eyebrow">Free planning tool</p><h1>Check the heritage day before leaving reliable Wi-Fi.</h1><p class="page-hero__lede">This worksheet stores selections only in this browser. It does not replace the official notice for a site or transport service.</p></div></div></section>
+  <section class="section section--paper"><div class="shell tool-layout">
+    <aside><p class="eyebrow">Use it in order</p><h2>Remove the failures that can erase the visit.</h2><p>Site context makes the day meaningful. These checks make sure the gate, route and conduct assumptions still hold when you arrive.</p><button class="button button--secondary" type="button" data-reset-checklists>Reset worksheet</button></aside>
+    <div class="tool-stack">
+      <section class="interactive-tool" data-checklist="authority"><span>01 · Authority</span><h2>Current site information</h2><div class="tool-checks">
+        <label><input type="checkbox" /><span>I opened the responsible heritage authority’s current notice, not only a map listing.</span></label>
+        <label><input type="checkbox" /><span>I checked closure days, last admission and any reservation or guided-access requirement.</span></label>
+        <label><input type="checkbox" /><span>I saved the official page or a current screenshot for the visit date.</span></label>
+      </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
+      <section class="interactive-tool" data-checklist="route"><span>02 · Route</span><h2>Place and transport data</h2><div class="tool-checks">
+        <label><input type="checkbox" /><span>I saved the official Korean place name and the practical entrance, not only a general pin.</span></label>
+        <label><input type="checkbox" /><span>I checked the final walk, slopes, stairs and the return journey.</span></label>
+        <label><input type="checkbox" /><span>I have an offline address or route if mobile data fails.</span></label>
+      </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
+      <section class="interactive-tool" data-checklist="respect"><span>03 · Respect</span><h2>Weather, access and conduct</h2><div class="tool-checks">
+        <label><input type="checkbox" /><span>I checked weather and walking conditions for exposed stone, mountain paths or large grounds.</span></label>
+        <label><input type="checkbox" /><span>I will follow posted photography, worship and restricted-access instructions on site.</span></label>
+        <label><input type="checkbox" /><span>I chose one fallback if a building, trail, ceremony or transport link is unavailable.</span></label>
+      </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
+      <div class="tool-summary"><strong data-total-result>0 of 9 visit checks complete</strong><p>Completion is not a safety guarantee. Recheck time-sensitive information with the responsible organization.</p><button class="button" type="button" onclick="window.print()">Print or save as PDF</button></div>
+    </div>
   </div></section>
   <script is:inline>
-    document.querySelectorAll('[data-checklist]').forEach((tool)=>{
-      const key=`dama-checklist-${tool.getAttribute('data-checklist')}`;
-      const boxes=[...tool.querySelectorAll('input[type="checkbox"]')];
-      const bar=tool.querySelector('.tool-progress span'); const result=tool.querySelector('.tool-result');
-      try{const saved=JSON.parse(localStorage.getItem(key)||'[]'); boxes.forEach((box,i)=>box.checked=Boolean(saved[i]));}catch{}
-      const update=()=>{const done=boxes.filter((box)=>box.checked).length; bar.style.width=`${done/boxes.length*100}%`; result.textContent=`${done} of ${boxes.length} ${tool.getAttribute('data-checklist')==='departure'?'critical':'arrival'} items ready`; localStorage.setItem(key,JSON.stringify(boxes.map((box)=>box.checked)));};
-      boxes.forEach((box)=>box.addEventListener('change',update)); update();
+    const tools = [...document.querySelectorAll('[data-checklist]')];
+    const total = document.querySelector('[data-total-result]');
+    const updateAll = () => {
+      let complete = 0;
+      let count = 0;
+      tools.forEach((tool) => {
+        const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
+        const boxes = [...tool.querySelectorAll('input[type="checkbox"]')];
+        const done = boxes.filter((box) => box.checked).length;
+        complete += done;
+        count += boxes.length;
+        tool.querySelector('.tool-progress span').style.width = `${done / boxes.length * 100}%`;
+        tool.querySelector('.tool-result').textContent = `${done} of ${boxes.length} checks complete`;
+        localStorage.setItem(key, JSON.stringify(boxes.map((box) => box.checked)));
+      });
+      total.textContent = `${complete} of ${count} visit checks complete`;
+    };
+    tools.forEach((tool) => {
+      const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
+      const boxes = [...tool.querySelectorAll('input[type="checkbox"]')];
+      try {
+        const saved = JSON.parse(localStorage.getItem(key) || '[]');
+        boxes.forEach((box, index) => { box.checked = Boolean(saved[index]); });
+      } catch {}
+      boxes.forEach((box) => box.addEventListener('change', updateAll));
     });
+    document.querySelector('[data-reset-checklists]')?.addEventListener('click', () => {
+      tools.forEach((tool) => tool.querySelectorAll('input[type="checkbox"]').forEach((box) => { box.checked = false; }));
+      updateAll();
+    });
+    updateAll();
   </script>
 </BaseLayout>

@@ -1,0 +1,47 @@
+---
+import type { GuideEntry } from '../lib/guides';
+import type { HUBS } from '../data/site';
+import GuideCard from './GuideCard.astro';
+
+type Hub = (typeof HUBS)[keyof typeof HUBS];
+const { hub, guides } = Astro.props as { hub: Hub; guides: GuideEntry[] };
+---
+
+<section class="page-hero page-hero--hub">
+  <div class="shell visual-shell">
+    <div>
+      <p class="eyebrow">{hub.eyebrow}</p>
+      <h1>{hub.title}</h1>
+      <p class="page-hero__lede">{hub.description}</p>
+    </div>
+    <div class="heritage-seal" aria-hidden="true"><span>담</span><small>FIELD<br />NOTES</small></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell hub-intro">
+    <div class="prose-lead">{hub.intro.map((paragraph) => <p>{paragraph}</p>)}</div>
+    <div class="focus-grid">
+      {hub.focus.map((item, index) => (
+        <article><span>{String(index + 1).padStart(2, '0')}</span><h2>{item.title}</h2><p>{item.text}</p></article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper" id="field-guides">
+  <div class="shell">
+    <div class="section-head">
+      <div><p class="eyebrow">Verified collection</p><h2>Field guides</h2></div>
+      <p>Only guides that have completed source review, image-rights checks and editorial QA appear here.</p>
+    </div>
+    {guides.length > 0 ? (
+      <div class="guide-grid">{guides.map((guide, index) => <GuideCard guide={guide} featured={index === 0} />)}</div>
+    ) : (
+      <div class="editorial-state" role="status">
+        <strong>No unverified draft is published.</strong>
+        <p>This collection remains intentionally empty until its first field guides pass the publication checklist.</p>
+      </div>
+    )}
+  </div>
+</section>

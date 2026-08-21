@@ -1,4 +1,21 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';import GuideCard from '../components/GuideCard.astro';import { guides } from '../data/guides';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HUBS } from '../data/site';
 ---
-<BaseLayout title="Start Here" description="A practical starting point for your first trip, longer stay or move to Korea."><section class="page-hero"><div class="shell"><span class="eyebrow">Start here</span><h1>Your Korea plan, in the right order.</h1><p>Skip the hundred open tabs. Start with the decisions that unlock everything else, then move into travel or settling-in guides as your plans become clearer.</p></div></section><section class="section"><div class="shell"><div class="guide-grid">{guides.filter((guide)=>guide.category==='start'||guide.featured).map((guide)=><GuideCard guide={guide}/>)}</div></div></section></BaseLayout>
+
+<BaseLayout title="Start Here" description="Choose the right Dama Korea field-guide path for Seoul’s palaces, Gyeongju, Buddhist temples or practical visit planning." activeNav="/start-here/">
+  <section class="page-hero">
+    <div class="shell visual-shell"><div><p class="eyebrow">Start here</p><h1>Choose one question before choosing ten sites.</h1><p class="page-hero__lede">The clearest heritage days begin with a focus: compare royal spaces, understand a living temple, connect a historic landscape or remove practical uncertainty.</p></div></div>
+  </section>
+  <section class="section section--paper">
+    <div class="shell path-grid">
+      <a href={HUBS['seoul-palaces'].href}><span>01</span><div><p>“I want to understand royal Seoul.”</p><h2>Start with Seoul Palaces</h2><small>Comparisons, architecture and focused routes →</small></div></a>
+      <a href={HUBS.gyeongju.href}><span>02</span><div><p>“I want to connect a historic city.”</p><h2>Start with Gyeongju</h2><small>Heritage clusters, walking and transport →</small></div></a>
+      <a href={HUBS['korean-temples'].href}><span>03</span><div><p>“I am visiting a living religious site.”</p><h2>Start with Korean Temples</h2><small>Etiquette, layouts and visual clues →</small></div></a>
+      <a href={HUBS.visit.href}><span>04</span><div><p>“I need the day to work first.”</p><h2>Start with Plan Your Visit</h2><small>Maps, timing, access and fallbacks →</small></div></a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="shell compact-prose"><p class="eyebrow">A useful order</p><h2>Context → official check → route → fallback</h2><p>Read enough context to know what deserves attention. Confirm the current notice with the responsible organization. Build a route that respects time and mobility. Save a fallback so a closure or weather change does not erase the day.</p><div class="actions"><a class="button" href="/tools/">Use the planning worksheet</a><a class="button button--secondary" href="/culture/">Browse every collection</a></div></div>
+  </section>
+</BaseLayout>
