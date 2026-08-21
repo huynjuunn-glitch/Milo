@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Read support buildings, ritual preparation, shrine halls and living practice as one system; this is not a site plan."
+editorialValue:
+  question: "How should a first visit to Jongmyo differ from a palace visit, especially when access and ritual shape the experience?"
+  contribution: "The page connects current entry rules, support buildings, hall proportions, conservation history and ritual music into one interpretation sequence instead of treating Jongmyo as an extra palace courtyard."
+  limits: "Tour systems, ceremony access and open routes are time-sensitive; visitors must use the responsible authority’s current notice for their date."
 atAGlance:
   - { label: "What it is", value: "A Confucian royal ancestral shrine, not a palace residence" }
   - { label: "World Heritage", value: "Inscribed in 1995 for its ritual architecture and continuing intangible tradition" }

@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Separate stable identity research from time-sensitive operating checks, then keep, simplify, swap or cancel the plan."
+editorialValue:
+  question: "What verification sequence prevents a heritage itinerary from depending on one stale map listing, screenshot or copied opening time?"
+  contribution: "This page assigns identity, significance, operations, transport, weather and access questions to different source roles, then turns them into a reusable offline-ready planning workflow."
+  limits: "The checklist does not make bookings, monitor live conditions or guarantee safety; each time-sensitive decision remains with the responsible organization."
 atAGlance:
   - label: "Verify twice"
     value: "Once while planning and again within 24 hours"

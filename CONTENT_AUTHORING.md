@@ -4,6 +4,8 @@ Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `i
 
 Assign the guide to the editorial desk that matches its section. Desk bylines are topical publishing labels within Dama Korea, not separate people, credentials or fieldwork claims. Their public definitions live in `src/data/contributors.ts`.
 
+Every guide must state its `editorialValue`: the reader question it solves, the original synthesis or tool it adds, and the limits readers still need to verify. These statements must describe the actual page rather than make generic quality claims.
+
 ## Publication requirements
 
 - Use the real publication, update and source-check dates. Never backdate or invent a visit.

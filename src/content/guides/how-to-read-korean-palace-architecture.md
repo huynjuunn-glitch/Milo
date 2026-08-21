@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A composite observation guide for combining route, function, hierarchy, terrain and restoration evidence—not a reconstruction."
+editorialValue:
+  question: "What repeatable observations help a non-specialist read palace architecture as a system of access, work and status?"
+  contribution: "This guide synthesizes official architectural terminology and museum interpretation into a five-part field method that connects route, name, platform, structure and roof to function."
+  limits: "It is an orientation framework rather than a measured architectural survey, conservation assessment or universal hierarchy for every building."
 atAGlance:
   - { label: "First clue", value: "The sequence of gates and courts usually explains more than color or ornament" }
   - { label: "Core zones", value: "External court, royal residential court, crown-prince area, rear garden and palace offices" }

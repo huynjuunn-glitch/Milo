@@ -7,8 +7,8 @@ category: planning
 region: Gyeongju
 heritageType: [route, planning]
 author: { name: "Dama Korea Gyeongju Desk", url: "/contributors/#gyeongju-desk" }
-createdAt: 2026-08-21
-publishedAt: 2026-08-21
+createdAt: 2026-07-15
+publishedAt: 2026-07-15
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Choose a geographic cluster, live-check the long transfer and walk selectively within it; this is not a geographic map."
+editorialValue:
+  question: "How can a visitor without a car group Gyeongju’s dispersed heritage without building a fragile, transfer-heavy itinerary?"
+  contribution: "This guide distinguishes the two rail arrival points, organizes sites into geographic blocks and supplies a live-check routine plus explicit taxi and weather fallback triggers."
+  limits: "It does not provide live bus arrivals, fares or guaranteed connections; those must be verified with current transport and site operators."
 atAGlance:
   - label: "Best base"
     value: "Central Gyeongju for the densest walkable heritage cluster"
@@ -62,7 +66,9 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Created the source-checked car-free planning framework and separated durable advice from live transport data."
+    summary: "Rebuilt the original guide as a source-checked car-free framework separating durable advice from live transport data."
+  - date: 2026-07-15
+    summary: "Published the original guide to planning Gyeongju without a car."
 modules:
   - type: decision
     title: "Choose the day shape before the bus"

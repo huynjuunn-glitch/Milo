@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "An interpretive sequence linking four kinds of Silla evidence, with shortening points and an optional evening finish—not a map."
+editorialValue:
+  question: "In what order can central Gyeongju’s subtle remains and monumental tombs form one understandable Silla landscape?"
+  contribution: "The route offers two evidence-based starting choices, then connects museum objects, palace archaeology, Cheomseongdae, Gyerim and the tomb district through a changing sequence of questions."
+  limits: "It is not a measured navigation track or accessibility audit, and construction, entrances, weather and opening conditions can alter the walk."
 atAGlance:
   - label: "Route logic"
     value: "Museum context, palace landscape, knowledge, woodland and tombs"

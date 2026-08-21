@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import '../styles/article.css';
 import { SITE } from '../data/site';
+import { EDITORIAL_DESKS, editorialDeskUrl } from '../data/contributors';
 
 const {
   title = SITE.name,
@@ -45,6 +46,13 @@ const organizationSchema = {
   logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', SITE.url).toString() },
   description: SITE.description,
   publishingPrinciples: new URL('/about/', SITE.url).toString(),
+  department: EDITORIAL_DESKS.map((desk) => ({
+    '@type': 'Organization',
+    '@id': new URL(editorialDeskUrl(desk), SITE.url).toString(),
+    name: desk.name,
+    url: new URL(editorialDeskUrl(desk), SITE.url).toString(),
+    description: desk.description,
+  })),
 };
 ---
 

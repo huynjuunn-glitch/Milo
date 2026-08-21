@@ -38,6 +38,12 @@ const fieldModule = z.object({
   })).min(2).max(8),
 });
 
+const editorialValue = z.object({
+  question: z.string().min(20).max(180),
+  contribution: z.string().min(40).max(320),
+  limits: z.string().min(30).max(260),
+});
+
 export const guideSchema = z.object({
     title: z.string().min(12).max(90),
     description: z.string().min(60).max(180),
@@ -55,6 +61,7 @@ export const guideSchema = z.object({
     updatedAt: z.coerce.date().optional(),
     checkedAt: z.coerce.date().optional(),
     heroImage: imageMetadata.optional(),
+    editorialValue,
     atAGlance: z.array(z.object({
       label: z.string().min(2).max(40),
       value: z.string().min(2).max(140),

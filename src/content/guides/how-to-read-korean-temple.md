@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Reuse the six observation questions while allowing terrain, tradition and rebuilding to change each temple's actual layout."
+editorialValue:
+  question: "How can a visitor interpret an unfamiliar Korean temple without forcing every compound into the same diagram or vocabulary?"
+  contribution: "This guide combines UNESCO landscape evidence, official site examples and a flexible field vocabulary into a terrain-to-detail observation sequence with checks against visual guesswork."
+  limits: "It cannot identify a specific building, statue or restoration from appearance alone; onsite interpretation and heritage records must settle those claims."
 atAGlance:
   - label: "Start with"
     value: "Terrain and the sequence of thresholds, not one building"
@@ -39,7 +43,7 @@ sources:
     role: "Defines the shared courtyard-centered characteristics and continuing religious functions of seven Korean mountain monasteries."
     checkedAt: 2026-08-21
   - label: "UNESCO — Sansa nomination dossier"
-    url: "https://whc.unesco.org/document/160497"
+    url: "https://whc.unesco.org/en/documents/160497"
     role: "Documents how temple layouts adapt to topography and how courtyards connect worship, ritual, teaching and communal buildings."
     checkedAt: 2026-08-21
   - label: "Korea Heritage Service — Daeungjeon at Bulguksa"
@@ -52,7 +56,7 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Added a terrain-to-detail reading method with site-specific evidence and explicit limits on universal layout claims."
+    summary: "Added a terrain-to-detail reading method, a stable UNESCO dossier link and explicit limits on universal layout claims."
 modules:
   - type: route
     title: "A six-stop reading sequence"
@@ -95,7 +99,7 @@ UNESCO identifies a recognizable feature among the seven Sansa mountain monaster
 
 Before reading a signboard, turn around. Where is the mountain ridge? Does the approach follow a stream, climb terraces or arrive directly from a city street? What disappears behind trees or walls as you move?
 
-The official Sansa nomination explains that mountain temples use valleys, ridges and streams as natural boundaries and adapt their buildings and open spaces to topography ([UNESCO nomination dossier](https://whc.unesco.org/document/160497)). This means an apparently irregular path may be doing deliberate work: slowing the approach, turning your view or using a rise in the land to separate public and monastic zones.
+The official Sansa nomination explains that mountain temples use valleys, ridges and streams as natural boundaries and adapt their buildings and open spaces to topography ([UNESCO nomination dossier](https://whc.unesco.org/en/documents/160497)). This means an apparently irregular path may be doing deliberate work: slowing the approach, turning your view or using a rise in the land to separate public and monastic zones.
 
 Do not judge the site only from an online plan. Walk the public route and record three transitions:
 

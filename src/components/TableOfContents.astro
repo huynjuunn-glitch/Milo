@@ -4,10 +4,12 @@ const { headings, moduleTitles = [] } = Astro.props as { headings: Heading[]; mo
 const articleHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const items = [
   { href: '#at-a-glance', text: 'At a glance', depth: 2 },
+  { href: '#editorial-value', text: 'Why this guide exists', depth: 2 },
   ...moduleTitles.map((text, index) => ({ href: `#field-module-${index + 1}`, text, depth: 2 })),
   ...articleHeadings.map((heading) => ({ href: `#${heading.slug}`, text: heading.text, depth: heading.depth })),
   { href: '#sources', text: 'Sources and verification', depth: 2 },
   { href: '#change-log', text: 'Change log', depth: 2 },
+  { href: '#author', text: 'Responsible desk', depth: 2 },
 ];
 ---
 

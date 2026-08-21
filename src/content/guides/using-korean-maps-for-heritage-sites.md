@@ -7,8 +7,8 @@ category: planning
 region: Korea
 heritageType: [route, planning]
 author: { name: "Dama Korea Visit Desk", url: "/contributors/#visit-desk" }
-createdAt: 2026-08-21
-publishedAt: 2026-08-21
+createdAt: 2026-07-15
+publishedAt: 2026-07-15
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A brand-neutral workflow that treats place identity, practical entrance and route as separate claims to verify."
+editorialValue:
+  question: "How can a visitor use Korean map apps without confusing a property pin, business listing or suggested route with authoritative access information?"
+  contribution: "The guide introduces a bilingual search packet, entrance-first verification chain, auditable transit legs and return-plan test that keep mapping functions separate from heritage and operating authority."
+  limits: "It does not promise current button labels, live routing accuracy or unrestricted access; app results must be checked against responsible sources and conditions."
 atAGlance:
   - label: "Search with"
     value: "Hangul name plus region or road address"
@@ -58,7 +62,9 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Created an identity-to-entrance map workflow with route cross-checking, failure signals and offline recovery."
+    summary: "Rebuilt the original Naver Map guide as a brand-neutral identity-to-entrance workflow with cross-checking and offline recovery."
+  - date: 2026-07-15
+    summary: "Published the original Korean-map guide for international visitors."
 modules:
   - type: route
     title: "From heritage record to usable entrance"

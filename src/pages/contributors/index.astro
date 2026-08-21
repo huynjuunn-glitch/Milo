@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { EDITORIAL_DESKS, editorialDeskUrl } from '../../data/contributors';
+import { getPublicGuides, guideUrl } from '../../lib/guides';
+
+const guides = await getPublicGuides();
 ---
 
 <BaseLayout title="Editorial Desks" description="Meet the transparent topic desks behind Dama Korea’s palace, Gyeongju, temple and practical visit field guides." activeNav="/about/">
@@ -21,16 +24,21 @@ import { EDITORIAL_DESKS, editorialDeskUrl } from '../../data/contributors';
         <p>Each desk has a defined subject boundary, source hierarchy and limitations. No byline claims a biography, qualification or visit that cannot be documented.</p>
       </div>
       <div class="contributor-grid">
-        {EDITORIAL_DESKS.map((desk) => (
-          <article class="contributor-card" id={desk.id}>
-            <p>{desk.role}</p>
-            <h2><a href={editorialDeskUrl(desk)}>{desk.name}</a></h2>
-            <p>{desk.description}</p>
-            <h3>Verification method</h3>
-            <ol>{desk.method.map((item) => <li>{item}</li>)}</ol>
-            <p class="contributor-card__limit"><strong>Scope limit:</strong> {desk.limits}</p>
-          </article>
-        ))}
+        {EDITORIAL_DESKS.map((desk) => {
+          const published = guides.filter((guide) => guide.data.section === desk.section);
+          return (
+            <article class="contributor-card" id={desk.id}>
+              <p>{desk.role}</p>
+              <h2><a href={editorialDeskUrl(desk)}>{desk.name}</a></h2>
+              <p>{desk.description}</p>
+              <h3>Verification method</h3>
+              <ol>{desk.method.map((item) => <li>{item}</li>)}</ol>
+              <h3>Published guides</h3>
+              <ul class="contributor-card__guides">{published.map((guide) => <li><a href={guideUrl(guide)}>{guide.data.title}</a></li>)}</ul>
+              <p class="contributor-card__limit"><strong>Scope limit:</strong> {desk.limits}</p>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>

@@ -7,8 +7,8 @@ category: etiquette
 region: Korea
 heritageType: [temple]
 author: { name: "Dama Korea Temple Desk", url: "/contributors/#temple-desk" }
-createdAt: 2026-08-21
-publishedAt: 2026-08-21
+createdAt: 2026-07-15
+publishedAt: 2026-07-15
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A safe visitor framework for ambiguous situations; the specific temple, hall, event or program always supplies the final rule."
+editorialValue:
+  question: "Which respectful habits transfer across Korean temple visits, and which instructions must remain specific to the site or program?"
+  contribution: "The page separates broad conduct from Templestay-only rules, organizes etiquette by visitor decision points and explains how to yield to worship without inventing one universal rulebook."
+  limits: "It is not religious authority or permission for photography, entry or participation; posted instructions and staff direction always take priority."
 atAGlance:
   - label: "First priority"
     value: "Posted signs, staff directions and the needs of worshippers"
@@ -52,7 +56,9 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Created a source-based visitor framework that separates safe defaults from temple- and program-specific rules."
+    summary: "Rebuilt the original etiquette guide around primary sources, safe defaults and temple- or program-specific rules."
+  - date: 2026-07-15
+    summary: "Published the original Korean temple etiquette guide."
 modules:
   - type: etiquette
     title: "The thirty-second arrival check"

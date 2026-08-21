@@ -27,6 +27,11 @@ export interface GuideData {
     sourceUrl?: string;
     caption?: string;
   };
+  editorialValue: {
+    question: string;
+    contribution: string;
+    limits: string;
+  };
   atAGlance: Array<{ label: string; value: string }>;
   sources: Array<{ label: string; url: string; role: string; checkedAt: Date }>;
   changes: Array<{ date: Date; summary: string }>;

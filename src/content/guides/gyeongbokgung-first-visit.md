@@ -7,8 +7,8 @@ category: site-guide
 region: Seoul
 heritageType: [palace, museum]
 author: { name: "Dama Korea Palace Desk", url: "/contributors/#palace-desk" }
-createdAt: 2026-08-21
-publishedAt: 2026-08-21
+createdAt: 2026-07-15
+publishedAt: 2026-07-15
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A functional reading sequence for a first visit; this is a schematic, not a site map or statement that every doorway is open."
+editorialValue:
+  question: "How can a first-time visitor understand Gyeongbokgung without reducing the palace to a list of famous buildings?"
+  contribution: "This guide converts official history, access rules and museum context into one spatial reading sequence from public ceremony to royal residence, with route cuts for time and weather."
+  limits: "It is not a live closure notice, accessibility survey or claim that every illustrated route segment will be open on the day."
 atAGlance:
   - { label: "Best for", value: "A first look at the formal planning and public authority of a Joseon palace" }
   - { label: "Core visit", value: "About two hours for the main axis, residential courts and one pavilion" }
@@ -51,7 +55,9 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Created a source-checked first-visit route, restoration reading guide and weather-aware fallback plan."
+    summary: "Rebuilt the original guide as a source-checked route with restoration interpretation and weather-aware fallbacks."
+  - date: 2026-07-15
+    summary: "Published the original Gyeongbokgung first-visit guide."
 related: [seoul-palace-comparison, seoul-palace-one-day-route, how-to-read-korean-palace-architecture]
 draft: false
 index: true

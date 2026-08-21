@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Choose a royal site by its historical question, then verify closures, timed access, tickets and current notices."
+editorialValue:
+  question: "Which Seoul royal heritage site best answers the historical question a visitor actually wants to explore?"
+  contribution: "This page compares six sites by interpretive value, planning constraint and likely misconception, replacing a generic popularity ranking with a decision framework tied to official records."
+  limits: "It does not predict personal preference, guarantee ticket availability or replace the current operating notice for the chosen site."
 atAGlance:
   - { label: "Best first palace", value: "Gyeongbokgung for formal planning; Changdeokgung for landscape and long royal use" }
   - { label: "Late opening", value: "Deoksugung and Changgyeonggung currently publish evening general-admission hours" }

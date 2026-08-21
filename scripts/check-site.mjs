@@ -51,6 +51,20 @@ const expectedAuthors = new Map([
   ['korea-heritage-trip-planning-checklist', ['Dama Korea Visit Desk', '/contributors/#visit-desk']],
   ['using-korean-maps-for-heritage-sites', ['Dama Korea Visit Desk', '/contributors/#visit-desk']],
 ]);
+const expectedPublicationDates = new Map([
+  ['gyeongbokgung-first-visit', '2026-07-15'],
+  ['korean-temple-etiquette', '2026-07-15'],
+  ['gyeongju-without-car', '2026-07-15'],
+  ['seoul-palace-one-day-route', '2026-07-15'],
+  ['bulguksa-seokguram-visit', '2026-07-15'],
+  ['using-korean-maps-for-heritage-sites', '2026-07-15'],
+  ['seoul-palace-comparison', '2026-08-21'],
+  ['how-to-read-korean-palace-architecture', '2026-08-21'],
+  ['jongmyo-shrine-first-visit', '2026-08-21'],
+  ['gyeongju-central-heritage-walk', '2026-08-21'],
+  ['how-to-read-korean-temple', '2026-08-21'],
+  ['korea-heritage-trip-planning-checklist', '2026-08-21'],
+]);
 const expectedContributorAnchors = new Set(['palace-desk', 'gyeongju-desk', 'temple-desk', 'visit-desk']);
 const ignoredProtocols = /^(?:https?:|mailto:|tel:|data:|javascript:)/;
 const failures = [];
@@ -157,6 +171,9 @@ for (const file of htmlFiles) {
     if (!html.includes('They are publishing labels within Dama Korea, not four people.')) {
       failures.push(`${route} is missing the editorial-desk identity disclosure.`);
     }
+    const publishedGuideLinks = [...html.matchAll(/<ul class="contributor-card__guides">([\s\S]*?)<\/ul>/g)]
+      .flatMap((match) => [...match[1].matchAll(/href="\/guides\/[^"#?]+\/"/g)]);
+    if (publishedGuideLinks.length !== expectedGuides.size) failures.push(`${route} lists ${publishedGuideLinks.length} desk guide links; expected ${expectedGuides.size}.`);
   }
   if (route.startsWith('/guides/')) {
     const guideId = route.split('/')[2];
@@ -192,6 +209,12 @@ for (const file of htmlFiles) {
     }
     if (!html.includes('class="article-toc article-toc--desktop"') || !html.includes('class="article-toc-mobile"')) {
       failures.push(`${route} is missing desktop or collapsed mobile table-of-contents markup.`);
+    }
+    if (!html.includes('class="editorial-value" id="editorial-value"') || !html.includes('class="author-box" id="author"')) {
+      failures.push(`${route} is missing its original-contribution or responsible-desk disclosure.`);
+    }
+    if (!html.includes('href="#editorial-value"') || !html.includes('href="#author"')) {
+      failures.push(`${route} table of contents is missing editorial-value or author links.`);
     }
     if (accessibleTableRoutes.has(route)) {
       const wrapper = html.match(/<section\b[^>]*class=["'][^"']*table-scroll[^"']*["'][^>]*>/i)?.[0] ?? '';
@@ -254,7 +277,12 @@ for (const fileName of sourceFiles) {
     const expectedAuthor = expectedAuthors.get(id);
     if (!publicEntry) failures.push(`Expected guide is not public: ${id}`);
     if (!/^adStatus:\s*none\s*$/m.test(source)) failures.push(`${id} must keep adStatus: none before CMP setup.`);
-    if (!/^publishedAt:\s*2026-08-21\s*$/m.test(source)) failures.push(`${id} has an unexpected publication date.`);
+    const expectedPublicationDate = expectedPublicationDates.get(id);
+    const publicationDate = source.match(/^publishedAt:\s*(\d{4}-\d{2}-\d{2})\s*$/m)?.[1];
+    if (!expectedPublicationDate || publicationDate !== expectedPublicationDate) failures.push(`${id} has an unexpected publication date.`);
+    if (!/^editorialValue:\s*$/m.test(source) || !/^\s+question:\s*["'][^"']{20,}["']\s*$/m.test(source) || !/^\s+contribution:\s*["'][^"']{40,}["']\s*$/m.test(source) || !/^\s+limits:\s*["'][^"']{30,}["']\s*$/m.test(source)) {
+      failures.push(`${id} is missing a complete editorial-value disclosure.`);
+    }
     const authorMatch = source.match(/^author:\s*\{\s*name:\s*["']([^"']+)["'],\s*url:\s*["']([^"']+)["']\s*\}\s*$/m);
     if (!expectedAuthor || !authorMatch || authorMatch[1] !== expectedAuthor[0] || authorMatch[2] !== expectedAuthor[1]) failures.push(`${id} has an unexpected author.`);
     if (!/^\s+kind:\s*original-editorial-diagram\s*$/m.test(source)) failures.push(`${id} is missing the editorial-diagram kind.`);
@@ -271,6 +299,10 @@ for (const fileName of sourceFiles) {
     if (!sourceIds.has(related)) failures.push(`${id} references unknown related guide ${related}.`);
   }
 }
+
+const allGuideSource = sourceFiles.map((fileName) => fs.readFileSync(path.join(contentRoot, fileName), 'utf8')).join('\n');
+if (allGuideSource.includes('https://whc.unesco.org/document/160497')) failures.push('The unstable UNESCO document/160497 URL is still present.');
+if (!allGuideSource.includes('https://whc.unesco.org/en/documents/160497')) failures.push('The canonical UNESCO documents/160497 URL is missing.');
 
 if (failures.length > 0) {
   console.error(`Site QA failed with ${failures.length} issue(s):`);

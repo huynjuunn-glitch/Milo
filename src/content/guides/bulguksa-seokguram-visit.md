@@ -7,8 +7,8 @@ category: site-guide
 region: Gyeongju
 heritageType: [temple, route]
 author: { name: "Dama Korea Gyeongju Desk", url: "/contributors/#gyeongju-desk" }
-createdAt: 2026-08-21
-publishedAt: 2026-08-21
+createdAt: 2026-07-15
+publishedAt: 2026-07-15
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "Use live transport, mountain weather, access and mobility to decide whether the combined visit remains resilient."
+editorialValue:
+  question: "When should Bulguksa and Seokguram be combined, reordered or deliberately separated during a Gyeongju visit?"
+  contribution: "This guide joins World Heritage significance to the mountain transfer problem, proposes focused observation circuits and gives explicit conditions for omitting Seokguram rather than forcing the pair."
+  limits: "It does not guarantee shuttle, bus, taxi or grotto access and should not replace the current notices of the site and transport operators."
 atAGlance:
   - label: "Heritage relationship"
     value: "One UNESCO property: temple terraces below, artificial grotto above"
@@ -66,7 +70,9 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Created a source-checked combined visit plan with transport, conservation and weather decision points."
+    summary: "Rebuilt the original combined-visit guide with primary sources, conservation context and explicit transport and weather decisions."
+  - date: 2026-07-15
+    summary: "Published the original Bulguksa and Seokguram planning guide."
 modules:
   - type: timeline
     title: "A resilient visit sequence"

@@ -886,6 +886,17 @@ a {
   color: var(--muted);
 }
 
+.contributor-card__guides {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.contributor-card__guides a {
+  color: var(--pine);
+  font-weight: 750;
+  text-underline-offset: 0.2em;
+}
+
 .contributor-card li + li {
   margin-top: 0.6rem;
 }

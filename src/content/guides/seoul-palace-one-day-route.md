@@ -7,8 +7,8 @@ category: itinerary
 region: Seoul
 heritageType: [palace, shrine, route]
 author: { name: "Dama Korea Palace Desk", url: "/contributors/#palace-desk" }
-createdAt: 2026-08-21
-publishedAt: 2026-08-21
+createdAt: 2026-07-15
+publishedAt: 2026-07-15
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
 heroImage:
@@ -22,6 +22,10 @@ heroImage:
   credit: "Dama Korea"
   license: "Original AI-assisted editorial SVG; rights reserved to the extent permitted by law"
   caption: "A closure-aware sequence built around Jongmyo's verified access time; it is not a street map or permanent timetable."
+editorialValue:
+  question: "How can one day connect two royal sites without turning both visits into a rushed sequence of photographs?"
+  contribution: "The route uses a fixed-point planning method, interprets the transition from palace government to ancestral ritual and identifies what to cut before meaning is lost."
+  limits: "It is not a live timetable or reservation service, and the correct alternative changes with closures, timed entry and walking capacity."
 atAGlance:
   - { label: "Default pair", value: "Gyeongbokgung in the morning and Jongmyo in the afternoon" }
   - { label: "Avoid", value: "Tuesday, the regular closure day for both sites" }
@@ -55,7 +59,9 @@ sources:
     checkedAt: 2026-08-21
 changes:
   - date: 2026-08-21
-    summary: "Created a closure-aware Gyeongbokgung–museum–Jongmyo route with a Tuesday alternative and failure plan."
+    summary: "Rebuilt the original route around current closures, a fixed Jongmyo visit, a Tuesday alternative and failure planning."
+  - date: 2026-07-15
+    summary: "Published the original one-day Seoul royal-palace route."
 related: [seoul-palace-comparison, gyeongbokgung-first-visit, jongmyo-shrine-first-visit]
 draft: false
 index: true
