@@ -110,14 +110,21 @@ Check the day before deciding. The current [official hours and closure table](ht
 
 ## Comparison at a glance
 
-| Site | Strongest reason to choose it | Main planning constraint | Do not expect |
-| --- | --- | --- | --- |
-| Gyeongbokgung | A legible primary-palace axis and restoration history | Large, exposed grounds; Tuesday closure | An untouched medieval complex |
-| Changdeokgung | Landscape integration and long use by Joseon kings | Monday closure; Secret Garden needs a separate timed plan | The garden to be included automatically |
-| Changgyeonggung | Royal residence and connected East Palace history | Monday closure; distinct entrances and current routes matter | A smaller copy of Changdeokgung |
-| Deoksugung | Korean Empire and traditional/Western architectural contrast | Monday closure; exhibition spaces have separate access | Only a Joseon-era palace story |
-| Gyeonghuigung | Fragment, excavation and restoration as historical evidence | Monday closure under Seoul Museum management | A complete royal precinct |
-| Jongmyo | Confucian royal ancestral ritual and austere ritual space | Tuesday closure; weekday timed-tour system | A palace or a casual extra courtyard |
+<p class="table-scroll-hint" id="palace-comparison-hint">On narrow screens, focus the table and scroll horizontally to compare every column.</p>
+<section class="table-scroll" aria-labelledby="palace-comparison-caption" aria-describedby="palace-comparison-hint" tabindex="0">
+<table>
+<caption id="palace-comparison-caption">Practical comparison of Seoul royal heritage sites</caption>
+<thead><tr><th scope="col">Site</th><th scope="col">Strongest reason to choose it</th><th scope="col">Main planning constraint</th><th scope="col">Do not expect</th></tr></thead>
+<tbody>
+<tr><th scope="row">Gyeongbokgung</th><td>A legible primary-palace axis and restoration history</td><td>Large, exposed grounds; Tuesday closure</td><td>An untouched medieval complex</td></tr>
+<tr><th scope="row">Changdeokgung</th><td>Landscape integration and long use by Joseon kings</td><td>Monday closure; Secret Garden needs a separate timed plan</td><td>The garden to be included automatically</td></tr>
+<tr><th scope="row">Changgyeonggung</th><td>Royal residence and connected East Palace history</td><td>Monday closure; distinct entrances and current routes matter</td><td>A smaller copy of Changdeokgung</td></tr>
+<tr><th scope="row">Deoksugung</th><td>Korean Empire and traditional/Western architectural contrast</td><td>Monday closure; exhibition spaces have separate access</td><td>Only a Joseon-era palace story</td></tr>
+<tr><th scope="row">Gyeonghuigung</th><td>Fragment, excavation and restoration as historical evidence</td><td>Monday closure under Seoul Museum management</td><td>A complete royal precinct</td></tr>
+<tr><th scope="row">Jongmyo</th><td>Confucian royal ancestral ritual and austere ritual space</td><td>Tuesday closure; weekday timed-tour system</td><td>A palace or a casual extra courtyard</td></tr>
+</tbody>
+</table>
+</section>
 
 Ticket details can change. The [official admission page](https://royal.khs.go.kr/ROYAL/contents/R703000000.do) is the authority for individual and integrated tickets and states that Changdeokgung's Secret Garden requires its own admission in addition to the palace area.
 

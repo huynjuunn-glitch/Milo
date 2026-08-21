@@ -22,13 +22,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <label><input type="checkbox" /><span>I will follow posted photography, worship and restricted-access instructions on site.</span></label>
         <label><input type="checkbox" /><span>I chose one fallback if a building, trail, ceremony or transport link is unavailable.</span></label>
       </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
-      <div class="tool-summary"><strong data-total-result>0 of 9 visit checks complete</strong><p>Completion is not a safety guarantee. Recheck time-sensitive information with the responsible organization.</p><button class="button" type="button" onclick="window.print()">Print or save as PDF</button></div>
+      <div class="tool-summary"><strong data-total-result>0 of 9 visit checks complete</strong><p>Completion is not a safety guarantee. Recheck time-sensitive information with the responsible organization.</p><button class="button" type="button" data-print-worksheet>Print or save as PDF</button></div>
     </div>
   </div></section>
   <script is:inline>
     const tools = [...document.querySelectorAll('[data-checklist]')];
     const total = document.querySelector('[data-total-result]');
-    const updateAll = () => {
+    const readChecklist = (key) => {
+      try {
+        const value = JSON.parse(localStorage.getItem(key) || '[]');
+        return Array.isArray(value) ? value : [];
+      } catch {
+        return [];
+      }
+    };
+    const writeChecklist = (key, value) => {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {}
+    };
+    const clearChecklist = (key) => {
+      try {
+        localStorage.removeItem(key);
+      } catch {}
+    };
+    const updateAll = (persist = true) => {
       let complete = 0;
       let count = 0;
       tools.forEach((tool) => {
@@ -39,23 +57,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         count += boxes.length;
         tool.querySelector('.tool-progress span').style.width = `${done / boxes.length * 100}%`;
         tool.querySelector('.tool-result').textContent = `${done} of ${boxes.length} checks complete`;
-        localStorage.setItem(key, JSON.stringify(boxes.map((box) => box.checked)));
+        if (persist) writeChecklist(key, boxes.map((box) => box.checked));
       });
       total.textContent = `${complete} of ${count} visit checks complete`;
     };
     tools.forEach((tool) => {
       const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
       const boxes = [...tool.querySelectorAll('input[type="checkbox"]')];
-      try {
-        const saved = JSON.parse(localStorage.getItem(key) || '[]');
-        boxes.forEach((box, index) => { box.checked = Boolean(saved[index]); });
-      } catch {}
+      const saved = readChecklist(key);
+      boxes.forEach((box, index) => { box.checked = Boolean(saved[index]); });
       boxes.forEach((box) => box.addEventListener('change', updateAll));
     });
     document.querySelector('[data-reset-checklists]')?.addEventListener('click', () => {
-      tools.forEach((tool) => tool.querySelectorAll('input[type="checkbox"]').forEach((box) => { box.checked = false; }));
-      updateAll();
+      tools.forEach((tool) => {
+        const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
+        tool.querySelectorAll('input[type="checkbox"]').forEach((box) => { box.checked = false; });
+        clearChecklist(key);
+      });
+      updateAll(false);
     });
+    document.querySelector('[data-print-worksheet]')?.addEventListener('click', () => window.print());
     updateAll();
   </script>
 </BaseLayout>

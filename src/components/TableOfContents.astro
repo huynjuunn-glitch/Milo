@@ -11,9 +11,18 @@ const items = [
 ];
 ---
 
-<nav class="article-toc" aria-label="On this page">
+<nav class="article-toc article-toc--desktop" aria-label="On this page">
   <strong>On this page</strong>
   <ol>
     {items.map((item) => <li class:list={{ nested: item.depth === 3 }}><a href={item.href}>{item.text}</a></li>)}
   </ol>
 </nav>
+
+<details class="article-toc-mobile">
+  <summary>On this page</summary>
+  <nav aria-label="On this page, mobile navigation">
+    <ol>
+      {items.map((item) => <li class:list={{ nested: item.depth === 3 }}><a href={item.href}>{item.text}</a></li>)}
+    </ol>
+  </nav>
+</details>

@@ -41,7 +41,7 @@ This runs Astro diagnostics before generating the production site in `dist/`.
 3. Follow the schema and publication gate in `CONTENT_AUTHORING.md`.
 4. Run `npm run build`.
 5. Review desktop and mobile output.
-6. Run `npm run quality` and commit only after cross-role approval.
+6. Commit only after source-link, schema, visual, route and accessibility checks pass.
 
 ## Advertising
 

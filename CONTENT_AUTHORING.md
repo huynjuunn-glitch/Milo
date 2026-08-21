@@ -1,6 +1,6 @@
 # Dama Korea guide authoring
 
-Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `index: false` and `adStatus: none` until research, visual-rights review and editorial QA are complete.
+Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `index: false` and `adStatus: none` until research, source-link, visual-metadata, schema and publication checks are complete.
 
 ## Publication requirements
 

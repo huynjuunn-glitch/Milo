@@ -24,6 +24,18 @@ const requiredBaseRoutes = new Set([
   '/visit/', '/culture/', '/tools/', '/about/', '/contact/', '/privacy/', '/terms/',
 ]);
 const sitemapExcluded = new Set(['/404/', '/contact/', '/privacy/', '/terms/']);
+const accessibleTableRoutes = new Set([
+  '/guides/seoul-palace-comparison/',
+  '/guides/how-to-read-korean-temple/',
+  '/guides/using-korean-maps-for-heritage-sites/',
+  '/guides/korea-heritage-trip-planning-checklist/',
+]);
+const expectedRedirects = new Map([
+  ['/guides/first-trip-korea-checklist', '/guides/korea-heritage-trip-planning-checklist/'],
+  ['/guides/first-trip-korea-checklist/', '/guides/korea-heritage-trip-planning-checklist/'],
+  ['/guides/naver-map-for-foreigners', '/guides/using-korean-maps-for-heritage-sites/'],
+  ['/guides/naver-map-for-foreigners/', '/guides/using-korean-maps-for-heritage-sites/'],
+]);
 const ignoredProtocols = /^(?:https?:|mailto:|tel:|data:|javascript:)/;
 const failures = [];
 
@@ -54,6 +66,31 @@ if (!fs.existsSync(adsTextPath) || !fs.readFileSync(adsTextPath, 'utf8').include
   failures.push('ads.txt is missing or does not contain the expected publisher record.');
 }
 
+const publicRedirectsPath = path.join(publicRoot, '_redirects');
+const builtRedirectsPath = path.join(root, '_redirects');
+if (!fs.existsSync(publicRedirectsPath) || !fs.existsSync(builtRedirectsPath)) {
+  failures.push('Cloudflare _redirects is missing from public/ or dist/.');
+} else {
+  const publicRedirects = fs.readFileSync(publicRedirectsPath, 'utf8');
+  const builtRedirects = fs.readFileSync(builtRedirectsPath, 'utf8');
+  if (publicRedirects !== builtRedirects) failures.push('Built _redirects does not match public/_redirects.');
+  const redirectRules = publicRedirects.split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'))
+    .map((line) => line.split(/\s+/));
+  const firstWildcardIndex = redirectRules.findIndex(([source]) => source.includes('*') || source.includes(':'));
+  for (const [source, destination] of expectedRedirects) {
+    const ruleIndex = redirectRules.findIndex(([candidate]) => candidate === source);
+    const rule = redirectRules[ruleIndex];
+    if (!rule || rule[1] !== destination || rule[2] !== '301') {
+      failures.push(`Missing exact 301 redirect: ${source} -> ${destination}`);
+    }
+    if (firstWildcardIndex !== -1 && ruleIndex > firstWildcardIndex) {
+      failures.push(`Exact redirect must appear before wildcard rules: ${source}`);
+    }
+  }
+}
+
 for (const required of requiredBaseRoutes) {
   if (!routes.has(required)) failures.push(`Missing required route: ${required}`);
 }
@@ -69,14 +106,23 @@ for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   const route = routeForFile(file);
   const h1Count = (html.match(/<h1(?:\s[^>]*)?>/g) || []).length;
-  const canonicalCount = (html.match(/<link[^>]+rel=["']canonical["']/g) || []).length;
+  const canonicals = [...html.matchAll(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/g)].map((match) => match[1]);
+  const canonicalCount = canonicals.length;
+  const descriptionCount = (html.match(/<meta[^>]+name=["']description["'][^>]+content=["'][^"']+["']/g) || []).length;
   const publisherMetaCount = (html.match(new RegExp(`<meta[^>]+name=["']google-adsense-account["'][^>]+content=["']${publisherId}["']`, 'g')) || []).length;
   if (h1Count !== 1) failures.push(`${route} has ${h1Count} h1 elements.`);
   if (canonicalCount !== 1) failures.push(`${route} has ${canonicalCount} canonical links.`);
+  if (canonicalCount === 1) {
+    const canonical = new URL(canonicals[0]);
+    if (canonical.origin !== 'https://damaheritage.com' || canonical.pathname !== route) failures.push(`${route} has an unexpected canonical URL: ${canonicals[0]}`);
+  }
+  if (descriptionCount !== 1) failures.push(`${route} has ${descriptionCount} meta descriptions.`);
   if (publisherMetaCount !== 1) failures.push(`${route} has ${publisherMetaCount} valid AdSense publisher meta tags.`);
 
-  adsenseScriptCount += (html.match(/<script[^>]+src=["'][^"']*pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["']/gi) || []).length;
-  adsenseUnitCount += (html.match(/class=["'][^"']*adsbygoogle[^"']*["']/gi) || []).length;
+  const pageAdsenseScripts = (html.match(/<script[^>]+src=["'][^"']*pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js[^"']*["']/gi) || []).length;
+  const pageAdsenseUnits = (html.match(/class=["'][^"']*adsbygoogle[^"']*["']/gi) || []).length;
+  adsenseScriptCount += pageAdsenseScripts;
+  adsenseUnitCount += pageAdsenseUnits;
 
   const structuredData = [];
   for (const match of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -95,8 +141,35 @@ for (const file of htmlFiles) {
     if (!breadcrumb) failures.push(`${route} is missing BreadcrumbList JSON-LD.`);
     if (article?.author?.name !== 'Dama Korea') failures.push(`${route} has an unexpected Article author.`);
     if (!article?.datePublished || !article?.dateModified || !article?.image) failures.push(`${route} has incomplete Article dates or image metadata.`);
+    if (pageAdsenseScripts !== 0 || pageAdsenseUnits !== 0) failures.push(`${route} must not load or render ads before CMP setup.`);
     if (!html.includes('<span>Visual: Dama Korea · Original AI-assisted editorial SVG; rights reserved to the extent permitted by law</span>')) {
       failures.push(`${route} is missing the required visual disclosure.`);
+    }
+    const fullSizeLinks = [...html.matchAll(/<a\b[^>]*class=["'][^"']*article-hero__fullsize[^"']*["'][^>]*>/gi)].map((match) => match[0]);
+    if (fullSizeLinks.length !== 1) {
+      failures.push(`${route} has ${fullSizeLinks.length} full-size diagram links.`);
+    } else {
+      const link = fullSizeLinks[0];
+      const href = link.match(/href=["']([^"']+)["']/i)?.[1];
+      const rel = link.match(/rel=["']([^"']+)["']/i)?.[1]?.split(/\s+/) ?? [];
+      const expectedImagePath = article?.image ? new URL(article.image).pathname : undefined;
+      if (!expectedImagePath || href !== expectedImagePath) failures.push(`${route} full-size diagram link does not match its Article image.`);
+      if (!/target=["']_blank["']/i.test(link) || !rel.includes('noopener') || !rel.includes('noreferrer')) {
+        failures.push(`${route} full-size diagram link is missing safe new-tab attributes.`);
+      }
+    }
+    if (!html.includes('class="article-toc article-toc--desktop"') || !html.includes('class="article-toc-mobile"')) {
+      failures.push(`${route} is missing desktop or collapsed mobile table-of-contents markup.`);
+    }
+    if (accessibleTableRoutes.has(route)) {
+      const wrapper = html.match(/<section\b[^>]*class=["'][^"']*table-scroll[^"']*["'][^>]*>/i)?.[0] ?? '';
+      if (!wrapper || !/tabindex=["']0["']/i.test(wrapper) || !/aria-labelledby=["'][^"']+["']/i.test(wrapper) || !/aria-describedby=["'][^"']+["']/i.test(wrapper)) {
+        failures.push(`${route} is missing a named, focusable table scroll region.`);
+      }
+      if (!/<caption\b[^>]*id=["'][^"']+["']/i.test(html) || !/<th\b[^>]*scope=["']col["']/i.test(html) || !/<th\b[^>]*scope=["']row["']/i.test(html)) {
+        failures.push(`${route} is missing an accessible table caption or scoped headers.`);
+      }
+      if (!html.includes('class="table-scroll-hint"')) failures.push(`${route} is missing table scroll instructions.`);
     }
   }
 

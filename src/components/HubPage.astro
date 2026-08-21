@@ -32,15 +32,15 @@ const { hub, guides } = Astro.props as { hub: Hub; guides: GuideEntry[] };
 <section class="section section--paper" id="field-guides">
   <div class="shell">
     <div class="section-head">
-      <div><p class="eyebrow">Verified collection</p><h2>Field guides</h2></div>
-      <p>Only guides that have completed source review, image-rights checks and editorial QA appear here.</p>
+      <div><p class="eyebrow">Published collection</p><h2>Field guides</h2></div>
+      <p>Only guides that pass publication, source-link, schema, visual-metadata and route checks appear here.</p>
     </div>
     {guides.length > 0 ? (
       <div class="guide-grid">{guides.map((guide, index) => <GuideCard guide={guide} featured={index === 0} />)}</div>
     ) : (
       <div class="editorial-state" role="status">
         <strong>No unverified draft is published.</strong>
-        <p>This collection remains intentionally empty until its first field guides pass the publication checklist.</p>
+        <p>This collection remains intentionally empty until its first field guides pass the publication checks.</p>
       </div>
     )}
   </div>

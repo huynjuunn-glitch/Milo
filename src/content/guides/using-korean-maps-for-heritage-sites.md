@@ -107,13 +107,20 @@ This guide describes functions rather than promising exact button labels. Map in
 
 Before opening a map, copy these fields from an authoritative page:
 
-| Field | Why it matters |
-|---|---|
-| Official English name | Helps you read international and heritage sources |
-| Hangul name | Reduces errors caused by variant romanization |
-| City, county or district | Separates places with the same or similar name |
-| Road address | Provides a second identity match |
-| Managing organization | Distinguishes the heritage asset from a nearby business |
+<p class="table-scroll-hint" id="map-search-packet-hint">On narrow screens, focus the table and scroll horizontally if both columns do not fit.</p>
+<section class="table-scroll" aria-labelledby="map-search-packet-caption" aria-describedby="map-search-packet-hint" tabindex="0">
+<table>
+<caption id="map-search-packet-caption">Fields to collect before searching a Korean map</caption>
+<thead><tr><th scope="col">Field</th><th scope="col">Why it matters</th></tr></thead>
+<tbody>
+<tr><th scope="row">Official English name</th><td>Helps you read international and heritage sources</td></tr>
+<tr><th scope="row">Hangul name</th><td>Reduces errors caused by variant romanization</td></tr>
+<tr><th scope="row">City, county or district</th><td>Separates places with the same or similar name</td></tr>
+<tr><th scope="row">Road address</th><td>Provides a second identity match</td></tr>
+<tr><th scope="row">Managing organization</th><td>Distinguishes the heritage asset from a nearby business</td></tr>
+</tbody>
+</table>
+</section>
 
 The [Korea Heritage Service Heritage Search](https://english.cha.go.kr/chaen/search/selectGeneralSearchList.do?mn=EN_02_02) is a useful identity source for designated heritage. It can provide the official name, classification, region and manager. For operating hours and gates, continue to the current site operator; the heritage record and visitor operation page perform different jobs.
 

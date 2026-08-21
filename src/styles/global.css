@@ -153,7 +153,7 @@ a {
 .brand-type small {
   margin-top: 0.36rem;
   color: var(--muted);
-  font-size: 0.56rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.15em;
 }
@@ -233,7 +233,7 @@ a {
 .eyebrow {
   margin: 0 0 0.8rem;
   color: var(--rust);
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -391,7 +391,7 @@ a {
 }
 
 .field-stamp small {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.12em;
   line-height: 1.35;
@@ -457,7 +457,7 @@ a {
 .hub-card > span,
 .hub-card > strong {
   color: var(--rust);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -583,7 +583,7 @@ a {
 }
 
 .heritage-seal small {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.1em;
   line-height: 1.4;
@@ -664,7 +664,7 @@ a {
 .guide-card__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .guide-card__body {
@@ -677,7 +677,7 @@ a {
 .guide-card__kicker {
   margin: 0;
   color: var(--rust);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -871,7 +871,7 @@ a {
 
 .interactive-tool > span {
   color: var(--rust);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1102,7 +1102,8 @@ a {
   .site-header,
   .site-footer,
   .button,
-  .article-toc { display: none !important; }
+  .article-toc,
+  .article-toc-mobile { display: none !important; }
   body { background: #fff; color: #000; }
   .section,
   .legal-shell { padding: 1rem 0; }

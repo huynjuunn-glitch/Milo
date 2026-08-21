@@ -114,13 +114,20 @@ Beware of names shared by several temples, gates or tombs. A translated name alo
 
 Make two source columns.
 
-| Question | Best starting authority |
-|---|---|
-| Why is this place important? | Korea Heritage Service, UNESCO or an official museum record |
-| Is it open on my date? | Current site operator notice or reservation page |
-| Which entrance should I use? | Operator access page plus a current local map |
-| Is a guided or restricted area available? | The operator or reservation provider named by it |
-| What is the weather risk? | Korea Meteorological Administration |
+<p class="table-scroll-hint" id="planning-authority-hint">On narrow screens, focus the table and scroll horizontally to pair each question with its starting authority.</p>
+<section class="table-scroll" aria-labelledby="planning-authority-caption" aria-describedby="planning-authority-hint" tabindex="0">
+<table>
+<caption id="planning-authority-caption">Starting authority for common heritage-trip questions</caption>
+<thead><tr><th scope="col">Question</th><th scope="col">Best starting authority</th></tr></thead>
+<tbody>
+<tr><th scope="row">Why is this place important?</th><td>Korea Heritage Service, UNESCO or an official museum record</td></tr>
+<tr><th scope="row">Is it open on my date?</th><td>Current site operator notice or reservation page</td></tr>
+<tr><th scope="row">Which entrance should I use?</th><td>Operator access page plus a current local map</td></tr>
+<tr><th scope="row">Is a guided or restricted area available?</th><td>The operator or reservation provider named by it</td></tr>
+<tr><th scope="row">What is the weather risk?</th><td>Korea Meteorological Administration</td></tr>
+</tbody>
+</table>
+</section>
 
 Do not let a strong historical source do an operational job it was not designed to do. Conversely, a map listing can help locate an entrance but is weak evidence for a restoration date or religious interpretation.
 

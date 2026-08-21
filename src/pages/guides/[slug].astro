@@ -80,6 +80,7 @@ const breadcrumbSchema = {
         {hero && (
           <figure class="article-hero__figure">
             <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" />
+            <a class="article-hero__fullsize" href={hero.src} target="_blank" rel="noopener noreferrer">Open full-size diagram <span aria-hidden="true">↗</span></a>
             {(hero.caption || hero.credit) && <figcaption>{hero.caption} <span>Visual: {hero.credit} · {hero.license}</span></figcaption>}
           </figure>
         )}

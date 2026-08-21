@@ -162,13 +162,20 @@ Look for route markers, low barriers and changes in ground surface. They often d
 
 ## A field vocabulary that stays flexible
 
-| Term | Useful first meaning | What to verify on site |
-|---|---|---|
-| *Madang* | Open courtyard linking buildings | Which rituals and routes use it here? |
-| *Daeungjeon* | Sakyamuni worship hall in many temples | Is it the current main hall at this temple? |
-| *Pagoda* | Monument associated with Buddhist relic and devotion | Date, contents, reconstruction and access |
-| *Dancheong* | Polychrome painting on timber architecture | Age, restoration and motif interpretation |
-| *Yosa* | Monastic living or service quarters | Whether the area is open to visitors |
+<p class="table-scroll-hint" id="temple-vocabulary-hint">On narrow screens, focus the table and scroll horizontally to see the verification column.</p>
+<section class="table-scroll" aria-labelledby="temple-vocabulary-caption" aria-describedby="temple-vocabulary-hint" tabindex="0">
+<table>
+<caption id="temple-vocabulary-caption">Flexible field vocabulary for reading a Korean temple</caption>
+<thead><tr><th scope="col">Term</th><th scope="col">Useful first meaning</th><th scope="col">What to verify on site</th></tr></thead>
+<tbody>
+<tr><th scope="row"><em>Madang</em></th><td>Open courtyard linking buildings</td><td>Which rituals and routes use it here?</td></tr>
+<tr><th scope="row"><em>Daeungjeon</em></th><td>Sakyamuni worship hall in many temples</td><td>Is it the current main hall at this temple?</td></tr>
+<tr><th scope="row"><em>Pagoda</em></th><td>Monument associated with Buddhist relic and devotion</td><td>Date, contents, reconstruction and access</td></tr>
+<tr><th scope="row"><em>Dancheong</em></th><td>Polychrome painting on timber architecture</td><td>Age, restoration and motif interpretation</td></tr>
+<tr><th scope="row"><em>Yosa</em></th><td>Monastic living or service quarters</td><td>Whether the area is open to visitors</td></tr>
+</tbody>
+</table>
+</section>
 
 The table is an orientation device, not authority for a specific object. Site panels and official heritage records should settle names, dates and designations.
 
