@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/bulguksa-seokguram-visit/bulguksa-seokguram-plan.svg"
+  alt: "Decision plan that either combines Bulguksa with a separately verified Seokguram transfer or protects a focused temple visit."
+  width: 1800
+  height: 1100
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "Use live transport, mountain weather, access and mobility to decide whether the combined visit remains resilient."
 atAGlance:
   - label: "Heritage relationship"
     value: "One UNESCO property: temple terraces below, artificial grotto above"

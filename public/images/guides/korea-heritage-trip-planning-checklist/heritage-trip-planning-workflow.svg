@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Two-pass workflow for planning a Korean heritage visit</title>
+  <desc id="desc">A five-stage verification timeline separates stable identity research from time-sensitive checks, then provides keep, simplify, swap and cancel decisions based on current conditions.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:59px;font-weight:600}.sub{font-size:26px}.label{font-size:21px;font-weight:850;letter-spacing:2px}.h{font-size:29px;font-weight:780}.body{font-size:22px}.small{font-size:19px}.num{font-size:22px;font-weight:900;fill:#fff}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="1100"/>
+  <text class="t label rust" x="90" y="78">PLANNING WORKFLOW · KOREA HERITAGE</text>
+  <text class="serif title ink" x="90" y="150">Verify stable facts early; refresh conditions late</text>
+  <text class="t sub muted" x="90" y="198">A resilient plan is one anchor visit, a checked entrance and a return that keeps its margin.</text>
+  <g class="t">
+    <path d="M160 340H1440" fill="none" stroke="#245849" stroke-width="8" marker-end="url(#arrow)"/>
+    <circle cx="160" cy="340" r="35" fill="#173f35"/><text class="num" x="147" y="348">01</text>
+    <circle cx="475" cy="340" r="35" fill="#173f35"/><text class="num" x="462" y="348">02</text>
+    <circle cx="790" cy="340" r="35" fill="#a94330"/><text class="num" x="777" y="348">03</text>
+    <circle cx="1105" cy="340" r="35" fill="#a94330"/><text class="num" x="1092" y="348">04</text>
+    <circle cx="1440" cy="340" r="35" fill="#a94330"/><text class="num" x="1427" y="348">05</text>
+    <text class="label rust" x="105" y="410">CHOOSE</text><text class="h ink" x="105" y="455">Identity</text><text class="body muted" x="105" y="492"><tspan x="105">Name · Hangul</tspan><tspan x="105" dy="30">manager · location</tspan></text>
+    <text class="label rust" x="390" y="410">3–7 DAYS</text><text class="h ink" x="390" y="455">Fit</text><text class="body muted" x="390" y="492"><tspan x="390">Calendar · access</tspan><tspan x="390" dy="30">broad transport</tspan></text>
+    <text class="label rust" x="690" y="410">WITHIN 24 H</text><text class="h ink" x="690" y="455">Refresh</text><text class="body muted" x="690" y="492"><tspan x="690">Notices · warning</tspan><tspan x="690" dy="30">final connection</tspan></text>
+    <text class="label rust" x="1015" y="410">DEPARTURE</text><text class="h ink" x="1015" y="455">Confirm</text><text class="body muted" x="1015" y="492"><tspan x="1015">Entrance · stop</tspan><tspan x="1015" dy="30">arrival estimate</tspan></text>
+    <text class="label rust" x="1360" y="410">ON SITE</text><text class="h ink" x="1360" y="455">Obey</text><text class="body muted" x="1360" y="492"><tspan x="1360">Signs · staff</tspan><tspan x="1360" dy="30">physical closure</tspan></text>
+  </g>
+  <rect x="90" y="610" width="1420" height="105" rx="16" fill="#173f35"/>
+  <text class="t label" x="130" y="653" fill="#f2c56b">AUTHORITY ORDER</text>
+  <text class="t body" x="130" y="690" fill="#fff">Operations: site operator → transport or weather authority · Significance: heritage service / UNESCO / official museum</text>
+  <g class="t">
+    <rect x="90" y="770" width="330" height="180" rx="16" fill="#dde9e2" stroke="#245849" stroke-width="3"/><text class="h ink" x="120" y="820">KEEP</text><text class="body muted" x="120" y="862"><tspan x="120">Open, safe, verified</tspan><tspan x="120" dy="31">and return buffer intact</tspan></text>
+    <rect x="450" y="770" width="330" height="180" rx="16" class="paper border"/><text class="h ink" x="480" y="820">SIMPLIFY</text><text class="body muted" x="480" y="862"><tspan x="480">Keep the anchor;</tspan><tspan x="480" dy="31">remove a transfer</tspan></text>
+    <rect x="810" y="770" width="330" height="180" rx="16" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/><text class="h ink" x="840" y="820">SWAP</text><text class="body muted" x="840" y="862"><tspan x="840">Use a confirmed</tspan><tspan x="840" dy="31">same-region fallback</tspan></text>
+    <rect x="1170" y="770" width="340" height="180" rx="16" fill="#fff" stroke="#a94330" stroke-width="4"/><text class="h rust" x="1200" y="820">CANCEL</text><text class="body muted" x="1200" y="862"><tspan x="1200">Official closure, warning</tspan><tspan x="1200" dy="31">or unsafe return</tspan></text>
+  </g>
+  <text class="t small muted" x="90" y="1050">Planning workflow—not a guarantee that conditions remain unchanged after the last check.</text>
+  <text class="t small pine" x="1510" y="1050" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

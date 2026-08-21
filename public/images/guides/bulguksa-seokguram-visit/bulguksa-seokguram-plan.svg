@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Decision plan for combining Bulguksa and Seokguram</title>
+  <desc id="desc">A resilient visit flow checks transport, weather and mobility, then either combines Bulguksa with a separately confirmed mountain transfer to Seokguram or protects a focused Bulguksa visit.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:62px;font-weight:600}.sub{font-size:28px}.label{font-size:22px;font-weight:850;letter-spacing:2px}.h{font-size:31px;font-weight:780}.body{font-size:24px}.small{font-size:20px}.yes{font-size:22px;font-weight:900;fill:#245849}.no{font-size:22px;font-weight:900;fill:#a94330}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1800" height="1100"/>
+  <text class="t label rust" x="100" y="82">MOUNTAIN VISIT · GYEONGJU</text>
+  <text class="serif title ink" x="100" y="156">One heritage property, two access decisions</text>
+  <text class="t sub muted" x="100" y="208">The temple and grotto explain each other, but they are not adjacent visitor entrances.</text>
+  <g class="t">
+    <rect x="460" y="275" width="880" height="170" rx="22" fill="#173f35"/>
+    <text class="label" x="900" y="326" text-anchor="middle" fill="#f2c56b">CHECK BEFORE DEPARTURE</text>
+    <text class="h" x="900" y="378" text-anchor="middle" fill="#fff">Live transport + Mount Toham weather + current access + mobility</text>
+    <text class="body" x="900" y="416" text-anchor="middle" fill="#d5e2dd">Does a safe uphill and return plan fit the remaining entry window?</text>
+    <path d="M900 445V525M900 525H450M900 525H1350M450 525V590M1350 525V590" fill="none" stroke="#245849" stroke-width="8" marker-end="url(#arrow)"/>
+    <text class="yes" x="1110" y="505">YES · COMBINE CAREFULLY</text>
+    <text class="no" x="470" y="505">NO · PROTECT THE ANCHOR</text>
+
+    <rect x="100" y="600" width="700" height="300" rx="22" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+    <text class="label rust" x="145" y="650">FOCUSED FALLBACK</text>
+    <text class="h ink" x="145" y="700">Keep Bulguksa as the full visit</text>
+    <text class="body muted" x="145" y="748"><tspan x="145">Read constructed ascent → stone terraces →</tspan><tspan x="145" dy="36">contrasting pagodas → maintained timber halls.</tspan><tspan x="145" dy="54" font-weight="800" fill="#17211d">Do not compensate by adding unrelated central sites.</tspan></text>
+
+    <rect x="1000" y="600" width="700" height="300" rx="22" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="label rust" x="1045" y="650">RESILIENT COMBINATION</text>
+    <text class="h ink" x="1045" y="700">Bulguksa → confirm again → Seokguram</text>
+    <text class="body muted" x="1045" y="748"><tspan x="1045">At the temple, confirm the next mountain departure.</tspan><tspan x="1045" dy="36">At the grotto, allow for the outdoor approach and</tspan><tspan x="1045" dy="36">protect the return before the last possible connection.</tspan></text>
+  </g>
+  <text class="t body ink" x="900" y="970" text-anchor="middle"><tspan font-weight="800">Interpretive thread:</tspan> Buddha lands staged on temple terraces → attention concentrated in an artificial grotto.</text>
+  <text class="t small muted" x="100" y="1050">Decision sequence—not a geographic map, distance diagram or permanent bus timetable.</text>
+  <text class="t small pine" x="1700" y="1050" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/gyeongju-central-heritage-walk/gyeongju-central-walk.svg"
+  alt: "Flexible central Gyeongju sequence from museum objects through the palace and knowledge landscape to royal tombs."
+  width: 1800
+  height: 1400
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "An interpretive sequence linking four kinds of Silla evidence, with shortening points and an optional evening finish—not a map."
 atAGlance:
   - label: "Route logic"
     value: "Museum context, palace landscape, knowledge, woodland and tombs"

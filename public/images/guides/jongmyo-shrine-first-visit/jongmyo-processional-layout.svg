@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Functional sequence for reading Jongmyo Shrine</title>
+  <desc id="desc">A schematic path moves from the wooded approach through administration, ritual supplies and preparation to Jeongjeon and Yeongnyeongjeon, emphasizing that the principal halls belong to a larger ritual system.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:60px;font-weight:600}.sub{font-size:27px}.label{font-size:21px;font-weight:850;letter-spacing:2px}.h{font-size:30px;font-weight:780}.body{font-size:23px}.small{font-size:19px}.num{font-size:22px;font-weight:900;fill:#fff}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="1100"/>
+  <text class="t label rust" x="90" y="80">FIELD ROUTE · JONGMYO</text>
+  <text class="serif title ink" x="90" y="150">The long shrine does not operate alone</text>
+  <text class="t sub muted" x="90" y="198">Read preparation, materials, participants and enshrinement as one ritual system.</text>
+  <g class="t">
+    <path d="M170 340H1380" fill="none" stroke="#245849" stroke-width="8" marker-end="url(#arrow)"/>
+    <circle cx="170" cy="340" r="34" fill="#173f35"/><text class="num" x="157" y="348">01</text>
+    <circle cx="470" cy="340" r="34" fill="#173f35"/><text class="num" x="457" y="348">02</text>
+    <circle cx="770" cy="340" r="34" fill="#173f35"/><text class="num" x="757" y="348">03</text>
+    <circle cx="1070" cy="340" r="34" fill="#a94330"/><text class="num" x="1057" y="348">04</text>
+    <circle cx="1380" cy="340" r="34" fill="#173f35"/><text class="num" x="1367" y="348">05</text>
+    <text class="h ink" x="95" y="420">Oedaemun</text><text class="body muted" x="95" y="454"><tspan x="95">City → wooded</tspan><tspan x="95" dy="31">ritual precinct</tspan></text>
+    <text class="h ink" x="365" y="420">Mangmyoru +</text><text class="h ink" x="365" y="455">Hyangdaecheong</text><text class="body muted" x="365" y="492"><tspan x="365">Administration,</tspan><tspan x="365" dy="31">incense and prayers</tspan></text>
+    <text class="h ink" x="700" y="420">Jaegung</text><text class="body muted" x="700" y="454"><tspan x="700">Participants</tspan><tspan x="700" dy="31">prepare</tspan></text>
+    <text class="h ink" x="980" y="420">Jeongjeon</text><text class="body muted" x="980" y="454"><tspan x="980">Principal shrine +</tspan><tspan x="980" dy="31">ritual court</tspan></text>
+    <text class="h ink" x="1285" y="420">Yeongnyeongjeon</text><text class="body muted" x="1285" y="454"><tspan x="1285">Related hall shaped</tspan><tspan x="1285" dy="31">by enshrinement rules</tspan></text>
+  </g>
+  <rect x="90" y="610" width="1420" height="305" rx="20" fill="#fff" stroke="#d5dcd6" stroke-width="3"/>
+  <text class="t label rust" x="130" y="658">READ THE PRINCIPAL HALL IN THREE LAYERS</text>
+  <g class="t">
+    <rect x="130" y="700" width="405" height="160" rx="14" fill="#dde9e2"/>
+    <text class="h ink" x="160" y="748">Spatial form</text><text class="body muted" x="160" y="786"><tspan x="160">Long repeated bays and</tspan><tspan x="160" dy="31">a broad raised ritual court</tspan></text>
+    <rect x="600" y="700" width="405" height="160" rx="14" fill="#f2e7d7"/>
+    <text class="h ink" x="630" y="748">Conservation</text><text class="body muted" x="630" y="786"><tspan x="630">Repair allows timber</tspan><tspan x="630" dy="31">architecture to continue</tspan></text>
+    <rect x="1070" y="700" width="405" height="160" rx="14" fill="#dde9e2"/>
+    <text class="h ink" x="1100" y="748">Living practice</text><text class="body muted" x="1100" y="786"><tspan x="1100">Ritual, music, song and</tspan><tspan x="1100" dy="31">dance give the space purpose</tspan></text>
+  </g>
+  <text class="t small muted" x="90" y="1040">Functional sequence—not a site plan. Timed groups and posted routes determine actual access.</text>
+  <text class="t small pine" x="1510" y="1040" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1400" role="img" aria-labelledby="title desc">
+  <title id="title">Decision model for visiting Gyeongju without a car</title>
+  <desc id="desc">A non-geographic diagram separates arrival gateways, cluster transfers and movement within central, Mount Toham and other outlying heritage clusters, with live checks and return planning at each transition.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:64px;font-weight:600}.sub{font-size:28px}.label{font-size:22px;font-weight:850;letter-spacing:2px}.h{font-size:31px;font-weight:780}.body{font-size:24px}.small{font-size:20px}.lane{font-size:26px;font-weight:850;fill:#fff}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1800" height="1400"/>
+  <text class="t label rust" x="100" y="86">TRANSPORT MODEL · GYEONGJU</text>
+  <text class="serif title ink" x="100" y="164">Choose a cluster before choosing a bus</text>
+  <text class="t sub muted" x="100" y="216">Public transport handles long transfers; walking works best inside one coherent heritage cluster.</text>
+
+  <g class="t">
+    <rect x="100" y="285" width="250" height="170" rx="18" fill="#173f35"/><text class="lane" x="225" y="350" text-anchor="middle">1 · GATEWAY</text><text class="body" x="225" y="395" text-anchor="middle" fill="#d5e2dd">Arrival is not yet</text><text class="body" x="225" y="428" text-anchor="middle" fill="#d5e2dd">the heritage visit.</text>
+    <rect x="420" y="285" width="560" height="170" rx="18" class="paper border"/><text class="h ink" x="455" y="335">High-speed rail: Gyeongju Station</text><text class="body muted" x="455" y="376"><tspan x="455">Outside the historic center; verify the current station</tspan><tspan x="455" dy="33">identity and transfer before counting sightseeing time.</tspan></text>
+    <rect x="1040" y="285" width="660" height="170" rx="18" class="paper border"/><text class="h ink" x="1075" y="335">Express / intercity bus terminal</text><text class="body muted" x="1075" y="376"><tspan x="1075">Closer to the central visitor base; still match the</tspan><tspan x="1075" dy="33">correct terminal-side stop for onward travel.</tspan></text>
+
+    <path d="M700 480V545M1370 480V545M700 545H1370" fill="none" stroke="#245849" stroke-width="7" marker-end="url(#arrow)"/>
+    <rect x="100" y="565" width="250" height="170" rx="18" fill="#173f35"/><text class="lane" x="225" y="630" text-anchor="middle">2 · CLUSTER</text><text class="body" x="225" y="675" text-anchor="middle" fill="#d5e2dd">Live-check the long</text><text class="body" x="225" y="708" text-anchor="middle" fill="#d5e2dd">transfer and return.</text>
+
+    <rect x="420" y="565" width="380" height="250" rx="18" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="label rust" x="455" y="610">A · CENTRAL</text><text class="h ink" x="455" y="655">Walkable heritage core</text><text class="body muted" x="455" y="698"><tspan x="455">Tombs · Wolseong ·</tspan><tspan x="455" dy="33">Cheomseongdae · museum</tspan><tspan x="455" dy="50" font-weight="750" fill="#17211d">Best default for one easy day</tspan></text>
+
+    <rect x="850" y="565" width="380" height="250" rx="18" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+    <text class="label rust" x="885" y="610">B · MOUNT TOHAM</text><text class="h ink" x="885" y="655">Bulguksa + Seokguram</text><text class="body muted" x="885" y="698"><tspan x="885">Separate mountain connection,</tspan><tspan x="885" dy="33">weather and return decision</tspan><tspan x="885" dy="50" font-weight="750" fill="#17211d">Protect its own time block</tspan></text>
+
+    <rect x="1280" y="565" width="420" height="250" rx="18" class="paper border"/>
+    <text class="label rust" x="1315" y="610">C · OUTLYING</text><text class="h ink" x="1315" y="655">Namsan, Yangdong, coast…</text><text class="body muted" x="1315" y="698"><tspan x="1315">Research one priority as the</tspan><tspan x="1315" dy="33">day's anchor—not an add-on.</tspan><tspan x="1315" dy="50" font-weight="750" fill="#17211d">Verify access independently</tspan></text>
+
+    <rect x="100" y="915" width="250" height="170" rx="18" fill="#173f35"/><text class="lane" x="225" y="980" text-anchor="middle">3 · WITHIN</text><text class="body" x="225" y="1025" text-anchor="middle" fill="#d5e2dd">Stop changing vehicles;</text><text class="body" x="225" y="1058" text-anchor="middle" fill="#d5e2dd">walk selectively.</text>
+    <rect x="420" y="900" width="1280" height="205" rx="18" class="paper border"/>
+    <text class="h ink" x="465" y="952">For every cluster transfer, check the whole chain</text>
+    <text class="body muted" x="465" y="1000">Direction + Korean stop name → live arrival → practical entrance → return stop + earlier option</text>
+    <text class="body ink" x="465" y="1050"><tspan font-weight="800">Stop rule:</tspan> if the next transfer threatens the final return, skip it.</text>
+  </g>
+  <rect x="420" y="1165" width="1280" height="100" rx="14" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+  <text class="t body ink" x="460" y="1225"><tspan font-weight="800">Controlled fallback:</tspan> authorize a taxi only at a preselected failure point; do not assume one will be waiting.</text>
+  <text class="t small muted" x="100" y="1350">Conceptual transport layers—not a geographic map, route schedule or distance diagram.</text>
+  <text class="t small pine" x="1700" y="1350" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

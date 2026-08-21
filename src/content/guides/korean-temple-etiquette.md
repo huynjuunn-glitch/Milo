@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/korean-temple-etiquette/temple-etiquette-sequence.svg"
+  alt: "Respect-first temple sequence to read, observe, reduce disruption and ask before entering, photographing or observing worship."
+  width: 1600
+  height: 1000
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "A safe visitor framework for ambiguous situations; the specific temple, hall, event or program always supplies the final rule."
 atAGlance:
   - label: "First priority"
     value: "Posted signs, staff directions and the needs of worshippers"

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1200" role="img" aria-labelledby="title desc">
+  <title id="title">A paced one-day route from Gyeongbokgung to Jongmyo</title>
+  <desc id="desc">A sequence beginning near Gyeongbokgung opening, pausing for museum context or lunch, protecting a transfer buffer and ending at Jongmyo's verified access time, with alternatives for closure and fatigue.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:64px;font-weight:600}.sub{font-size:28px}.label{font-size:23px;font-weight:850;letter-spacing:2px}.h{font-size:31px;font-weight:780}.body{font-size:24px}.small{font-size:20px}.num{font-size:24px;font-weight:900;fill:#fff}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1800" height="1200"/>
+  <text class="t label rust" x="100" y="82">ONE-DAY ROUTE · SEOUL</text>
+  <text class="serif title ink" x="100" y="158">Two places, one historical argument</text>
+  <text class="t sub muted" x="100" y="210">Government among the living → legitimacy maintained through royal ancestors</text>
+  <g class="t">
+    <path d="M245 336H1525" fill="none" stroke="#245849" stroke-width="8" marker-end="url(#arrow)"/>
+    <circle cx="245" cy="336" r="38" fill="#173f35"/><text class="num" x="230" y="344">01</text>
+    <circle cx="665" cy="336" r="38" fill="#173f35"/><text class="num" x="650" y="344">02</text>
+    <circle cx="1085" cy="336" r="38" fill="#a94330"/><text class="num" x="1070" y="344">03</text>
+    <circle cx="1525" cy="336" r="38" fill="#173f35"/><text class="num" x="1510" y="344">04</text>
+
+    <rect x="100" y="402" width="350" height="250" rx="18" class="paper border"/>
+    <text class="label rust" x="130" y="448">NEAR OPENING</text>
+    <text class="h ink" x="130" y="495">Gyeongbokgung core</text>
+    <text class="body muted" x="130" y="540"><tspan x="130" dy="0">Ceremony → governing</tspan><tspan x="130" dy="34">space → residence →</tspan><tspan x="130" dy="34">one landscape focus</tspan></text>
+
+    <rect x="515" y="402" width="350" height="250" rx="18" class="paper border"/>
+    <text class="label rust" x="545" y="448">MIDDAY</text>
+    <text class="h ink" x="545" y="495">Museum or lunch</text>
+    <text class="body muted" x="545" y="540"><tspan x="545" dy="0">Add material context,</tspan><tspan x="545" dy="34">or restore attention with</tspan><tspan x="545" dy="34">a real seated break.</tspan></text>
+
+    <rect x="930" y="402" width="350" height="250" rx="18" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+    <text class="label rust" x="960" y="448">PROTECTED MARGIN</text>
+    <text class="h ink" x="960" y="495">Transfer buffer</text>
+    <text class="body muted" x="960" y="540"><tspan x="960" dy="0">Find the actual public</tspan><tspan x="960" dy="34">entrance; allow for a</tspan><tspan x="960" dy="34">wrong exit and ticketing.</tspan></text>
+
+    <rect x="1345" y="402" width="350" height="250" rx="18" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="label rust" x="1375" y="448">VERIFIED ENTRY</text>
+    <text class="h ink" x="1375" y="495">Jongmyo Shrine</text>
+    <text class="body muted" x="1375" y="540"><tspan x="1375" dy="0">Preparation spaces →</tspan><tspan x="1375" dy="34">ritual courts → principal</tspan><tspan x="1375" dy="34">shrines</tspan></text>
+  </g>
+  <rect x="100" y="730" width="1595" height="310" rx="22" fill="#fff" stroke="#d5dcd6" stroke-width="3"/>
+  <text class="t label rust" x="145" y="782">IF AN ASSUMPTION FAILS</text>
+  <g class="t body">
+    <circle cx="155" cy="842" r="11" fill="#a94330"/><text class="ink" x="185" y="851"><tspan font-weight="800">Regular Tuesday closure:</tspan> use the historically linked Changdeokgung–Changgyeonggung pair.</text>
+    <circle cx="155" cy="908" r="11" fill="#a94330"/><text class="ink" x="185" y="917"><tspan font-weight="800">Jongmyo time does not fit:</tspan> keep Gyeongbokgung and the museum as a deep half day.</text>
+    <circle cx="155" cy="974" r="11" fill="#a94330"/><text class="ink" x="185" y="983"><tspan font-weight="800">Weather or fatigue reduces capacity:</tspan> shorten exposed crossings before sacrificing the transfer margin.</text>
+  </g>
+  <text class="t small muted" x="100" y="1145">Sequence only—not a street map or a permanent timetable. Rebuild the day from official operating information.</text>
+  <text class="t small pine" x="1700" y="1145" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

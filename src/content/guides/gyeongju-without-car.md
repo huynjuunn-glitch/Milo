@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/gyeongju-without-car/gyeongju-transit-nodes.svg"
+  alt: "Three-layer Gyeongju transport model connecting arrival gateways to central, Mount Toham and other heritage clusters."
+  width: 1800
+  height: 1400
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "Choose a geographic cluster, live-check the long transfer and walk selectively within it; this is not a geographic map."
 atAGlance:
   - label: "Best base"
     value: "Central Gyeongju for the densest walkable heritage cluster"

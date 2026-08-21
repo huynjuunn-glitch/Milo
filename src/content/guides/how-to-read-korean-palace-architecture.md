@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/how-to-read-korean-palace-architecture/palace-architecture-anatomy.svg"
+  alt: "Composite palace hall labeled from court and platform to columns, brackets and roof, beside a six-clue reading method."
+  width: 1800
+  height: 1350
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "A composite observation guide for combining route, function, hierarchy, terrain and restoration evidence—not a reconstruction."
 atAGlance:
   - { label: "First clue", value: "The sequence of gates and courts usually explains more than color or ornament" }
   - { label: "Core zones", value: "External court, royal residential court, crown-prince area, rear garden and palace offices" }

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1400" role="img" aria-labelledby="title desc">
+  <title id="title">Interpretive sequence for a central Gyeongju heritage walk</title>
+  <desc id="desc">A flexible non-geographic route connects museum objects, the palace landscape, Cheomseongdae and Gyerim, and the royal tomb district, with exit points and an optional evening finish.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:64px;font-weight:600}.sub{font-size:28px}.label{font-size:22px;font-weight:850;letter-spacing:2px}.h{font-size:31px;font-weight:780}.body{font-size:24px}.small{font-size:20px}.num{font-size:28px;font-weight:900;fill:#fff}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1800" height="1400"/>
+  <text class="t label rust" x="100" y="85">INTERPRETIVE WALK · CENTRAL GYEONGJU</text>
+  <text class="serif title ink" x="100" y="162">Build one Silla story from four kinds of evidence</text>
+  <text class="t sub muted" x="100" y="214">The sequence is flexible; current gates, excavation zones and pedestrian routes still need live checks.</text>
+  <path d="M245 395C480 300 550 500 780 405S1120 305 1335 410 1510 535 1535 665" fill="none" stroke="#245849" stroke-width="10" marker-end="url(#arrow)"/>
+  <g class="t">
+    <circle cx="245" cy="395" r="54" fill="#173f35"/><text class="num" x="228" y="405">01</text>
+    <rect x="100" y="485" width="360" height="245" rx="18" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="label rust" x="135" y="530">OBJECTS</text><text class="h ink" x="135" y="576">Gyeongju Museum</text><text class="body muted" x="135" y="620"><tspan x="135">Choose evidence threads:</tspan><tspan x="135" dy="34">burial, architecture,</tspan><tspan x="135" dy="34">Buddhist transformation.</tspan></text>
+
+    <circle cx="780" cy="405" r="54" fill="#173f35"/><text class="num" x="763" y="415">02</text>
+    <rect x="590" y="495" width="410" height="245" rx="18" class="paper border"/>
+    <text class="label rust" x="625" y="540">GROUND PLAN + WATER</text><text class="h ink" x="625" y="586">Palace landscape</text><text class="body muted" x="625" y="630"><tspan x="625">Wolseong and Donggung–Wolji:</tspan><tspan x="625" dy="34">government, court life and</tspan><tspan x="625" dy="34">excavated context.</tspan></text>
+
+    <circle cx="1280" cy="405" r="54" fill="#173f35"/><text class="num" x="1263" y="415">03</text>
+    <rect x="1090" y="495" width="420" height="245" rx="18" class="paper border"/>
+    <text class="label rust" x="1125" y="540">KNOWLEDGE + LINEAGE</text><text class="h ink" x="1125" y="586">Cheomseongdae + Gyerim</text><text class="body muted" x="1125" y="630"><tspan x="1125">Separate visible evidence,</tspan><tspan x="1125" dy="34">official interpretation and</tspan><tspan x="1125" dy="34">lineage tradition.</tspan></text>
+
+    <circle cx="1535" cy="665" r="54" fill="#a94330"/><text class="num" x="1518" y="675">04</text>
+    <rect x="1175" y="810" width="535" height="245" rx="18" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+    <text class="label rust" x="1210" y="855">BURIAL LANDSCAPE</text><text class="h ink" x="1210" y="901">Royal tomb district</text><text class="body muted" x="1210" y="945"><tspan x="1210">Read scale, grouping and relation</tspan><tspan x="1210" dy="34">to the city; use one interpreted</tspan><tspan x="1210" dy="34">interior if currently open.</tspan></text>
+  </g>
+  <rect x="100" y="835" width="965" height="220" rx="20" fill="#173f35"/>
+  <text class="t label" x="145" y="884" fill="#f2c56b">SHORTEN WITHOUT BREAKING THE STORY</text>
+  <text class="t body" x="145" y="935" fill="#fff"><tspan x="145">• Short visit: choose either museum + one palace-landscape stop</tspan><tspan x="145" dy="38">  or tombs + Cheomseongdae.</tspan><tspan x="145" dy="48">• Heat or rain: expand the museum; remove exposed lawns first.</tspan></text>
+  <rect x="100" y="1125" width="1610" height="120" rx="16" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+  <text class="t h ink" x="145" y="1175">Optional evening finish</text>
+  <text class="t body muted" x="145" y="1215">Choose Donggung and Wolji or the tomb district only if it adds meaning and protects the return journey.</text>
+  <text class="t small muted" x="100" y="1350">Interpretive sequence—not a geographic map, measured path or promise that every entrance is open.</text>
+  <text class="t small pine" x="1700" y="1350" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

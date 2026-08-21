@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/korea-heritage-trip-planning-checklist/heritage-trip-planning-workflow.svg"
+  alt: "Five-stage heritage trip workflow from early identity research through last-day checks, departure confirmation and onsite instructions."
+  width: 1600
+  height: 1100
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "Separate stable identity research from time-sensitive operating checks, then keep, simplify, swap or cancel the plan."
 atAGlance:
   - label: "Verify twice"
     value: "Once while planning and again within 24 hours"

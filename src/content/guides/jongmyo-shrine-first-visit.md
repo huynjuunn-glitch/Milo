@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/jongmyo-shrine-first-visit/jongmyo-processional-layout.svg"
+  alt: "Functional Jongmyo sequence from the wooded approach and preparation buildings to Jeongjeon and Yeongnyeongjeon."
+  width: 1600
+  height: 1100
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "Read support buildings, ritual preparation, shrine halls and living practice as one system; this is not a site plan."
 atAGlance:
   - { label: "What it is", value: "A Confucian royal ancestral shrine, not a palace residence" }
   - { label: "World Heritage", value: "Inscribed in 1995 for its ritual architecture and continuing intangible tradition" }

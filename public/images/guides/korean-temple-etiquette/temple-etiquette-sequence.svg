@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Respect-first sequence for visiting a Korean Buddhist temple</title>
+  <desc id="desc">Four arrival actions—read, observe, reduce and ask—lead to safe defaults for hall access, photography and ceremonies while emphasizing that local instructions always take priority.</desc>
+  <defs><style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:58px;font-weight:600}.sub{font-size:26px}.label{font-size:21px;font-weight:850;letter-spacing:2px}.h{font-size:31px;font-weight:780}.body{font-size:22px}.small{font-size:19px}.num{font-size:30px;font-weight:900;fill:#fff}</style></defs>
+  <rect class="bg" width="1600" height="1000"/>
+  <text class="t label rust" x="90" y="78">RESPECT ON SITE · KOREAN TEMPLES</text>
+  <text class="serif title ink" x="90" y="150">Local instructions win</text>
+  <text class="t sub muted" x="90" y="198">A living religious community is not a stage set. Choose the least disruptive option.</text>
+  <g class="t">
+    <rect x="90" y="255" width="330" height="245" rx="18" fill="#173f35"/><circle cx="140" cy="310" r="30" fill="#a94330"/><text class="num" x="131" y="320">1</text><text class="h" x="185" y="320" fill="#fff">Read</text><text class="body" x="130" y="374" fill="#d5e2dd"><tspan x="130">Access, shoes, camera</tspan><tspan x="130" dy="32">and ceremony signs.</tspan></text>
+    <rect x="450" y="255" width="330" height="245" rx="18" fill="#173f35"/><circle cx="500" cy="310" r="30" fill="#a94330"/><text class="num" x="491" y="320">2</text><text class="h" x="545" y="320" fill="#fff">Observe</text><text class="body" x="490" y="374" fill="#d5e2dd"><tspan x="490">Is the space serving</tspan><tspan x="490" dy="32">worship, work or visits?</tspan></text>
+    <rect x="810" y="255" width="330" height="245" rx="18" fill="#173f35"/><circle cx="860" cy="310" r="30" fill="#a94330"/><text class="num" x="851" y="320">3</text><text class="h" x="905" y="320" fill="#fff">Reduce</text><text class="body" x="850" y="374" fill="#d5e2dd"><tspan x="850">Lower voice and alerts;</tspan><tspan x="850" dy="32">put food away.</tspan></text>
+    <rect x="1170" y="255" width="330" height="245" rx="18" fill="#173f35"/><circle cx="1220" cy="310" r="30" fill="#a94330"/><text class="num" x="1211" y="320">4</text><text class="h" x="1265" y="320" fill="#fff">Ask</text><text class="body" x="1210" y="374" fill="#d5e2dd"><tspan x="1210">Unclear door, platform</tspan><tspan x="1210" dy="32">or camera policy?</tspan></text>
+
+    <rect x="90" y="575" width="1410" height="275" rx="20" class="paper border"/>
+    <text class="label rust" x="130" y="625">WHEN THE SITUATION IS AMBIGUOUS</text>
+    <line x1="560" y1="655" x2="560" y2="820" stroke="#d5dcd6" stroke-width="3"/><line x1="1030" y1="655" x2="1030" y2="820" stroke="#d5dcd6" stroke-width="3"/>
+    <text class="h ink" x="130" y="690">Entering a hall</text><text class="body muted" x="130" y="730"><tspan x="130">Check that doorway's shoes and</tspan><tspan x="130" dy="32">access rule; keep the center clear.</tspan></text>
+    <text class="h ink" x="600" y="690">Taking a photograph</text><text class="body muted" x="600" y="730"><tspan x="600">Another visitor's camera is not</tspan><tspan x="600" dy="32">permission. Check the closest sign.</tspan></text>
+    <text class="h ink" x="1070" y="690">A ceremony begins</text><text class="body muted" x="1070" y="730"><tspan x="1070">Move behind or aside; leave quietly</tspan><tspan x="1070" dy="32">if stillness is not possible.</tspan></text>
+  </g>
+  <text class="t body ink" x="800" y="905" text-anchor="middle"><tspan font-weight="850">Safe default:</tspan> quiet voice · modest practical clothing · unhurried movement · no invented participation</text>
+  <text class="t small muted" x="90" y="962">General framework only. The temple, hall, event or booked program may set more specific rules.</text>
+  <text class="t small pine" x="1500" y="962" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

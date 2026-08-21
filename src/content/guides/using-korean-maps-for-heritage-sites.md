@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/using-korean-maps-for-heritage-sites/korean-map-search-workflow.svg"
+  alt: "Six-step map verification chain from official place identity to entrance, transit, return and an offline recovery card."
+  width: 1600
+  height: 1100
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "A brand-neutral workflow that treats place identity, practical entrance and route as separate claims to verify."
 atAGlance:
   - label: "Search with"
     value: "Hangul name plus region or road address"

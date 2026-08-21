@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/seoul-palace-comparison/seoul-palace-choice-flow.svg"
+  alt: "Decision flow matching six historical questions to five Seoul palaces and Jongmyo Shrine."
+  width: 1600
+  height: 1000
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "Choose a royal site by its historical question, then verify closures, timed access, tickets and current notices."
 atAGlance:
   - { label: "Best first palace", value: "Gyeongbokgung for formal planning; Changdeokgung for landscape and long royal use" }
   - { label: "Late opening", value: "Deoksugung and Changgyeonggung currently publish evening general-admission hours" }

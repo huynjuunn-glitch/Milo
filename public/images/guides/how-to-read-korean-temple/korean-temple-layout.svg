@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Six-stop method for reading a Korean Buddhist temple</title>
+  <desc id="desc">A conceptual sequence moves from landscape and thresholds to courtyard, main focus, stone elements and working edges, while separating material, documentary and living-use evidence.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:62px;font-weight:600}.sub{font-size:27px}.label{font-size:21px;font-weight:850;letter-spacing:2px}.h{font-size:29px;font-weight:780}.body{font-size:22px}.small{font-size:19px}.num{font-size:24px;font-weight:900;fill:#fff}</style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1800" height="1350"/>
+  <text class="t label rust" x="100" y="82">ARCHITECTURE FIELD METHOD · KOREAN TEMPLES</text>
+  <text class="serif title ink" x="100" y="158">Read relationships, not a universal floor plan</text>
+  <text class="t sub muted" x="100" y="210">Terrain, tradition and rebuilding change the order; reuse the questions, not the geometry.</text>
+
+  <g class="t">
+    <path d="M205 385C430 275 540 480 770 380S1140 300 1340 415 1470 565 1535 680" fill="none" stroke="#245849" stroke-width="9" marker-end="url(#arrow)"/>
+    <circle cx="205" cy="385" r="42" fill="#173f35"/><text class="num" x="191" y="394">01</text>
+    <circle cx="520" cy="390" r="42" fill="#173f35"/><text class="num" x="506" y="399">02</text>
+    <circle cx="835" cy="375" r="42" fill="#173f35"/><text class="num" x="821" y="384">03</text>
+    <circle cx="1140" cy="390" r="42" fill="#173f35"/><text class="num" x="1126" y="399">04</text>
+    <circle cx="1395" cy="500" r="42" fill="#a94330"/><text class="num" x="1381" y="509">05</text>
+    <circle cx="1535" cy="680" r="42" fill="#173f35"/><text class="num" x="1521" y="689">06</text>
+
+    <rect x="100" y="480" width="310" height="200" rx="16" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="h ink" x="130" y="530">Landscape</text><text class="body muted" x="130" y="570"><tspan x="130">Slope, ridge, stream,</tspan><tspan x="130" dy="31">direction of approach</tspan></text>
+    <rect x="430" y="510" width="310" height="200" rx="16" class="paper border"/>
+    <text class="h ink" x="460" y="560">Thresholds</text><text class="body muted" x="460" y="600"><tspan x="460">What does each gate</tspan><tspan x="460" dy="31">hide, frame or reveal?</tspan></text>
+    <rect x="760" y="485" width="310" height="200" rx="16" class="paper border"/>
+    <text class="h ink" x="790" y="535">Courtyard</text><text class="body muted" x="790" y="575"><tspan x="790">Hall, opposite pavilion,</tspan><tspan x="790" dy="31">axis and circulation</tspan></text>
+    <rect x="1090" y="510" width="310" height="200" rx="16" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+    <text class="h ink" x="1120" y="560">Main focus</text><text class="body muted" x="1120" y="600"><tspan x="1120">Signboard + official</tspan><tspan x="1120" dy="31">interpretation first</tspan></text>
+    <rect x="1090" y="750" width="310" height="200" rx="16" class="paper border"/>
+    <text class="h ink" x="1120" y="800">Stone axis</text><text class="body muted" x="1120" y="840"><tspan x="1120">Pagodas, lanterns,</tspan><tspan x="1120" dy="31">stairs and platforms</tspan></text>
+    <rect x="1420" y="750" width="280" height="200" rx="16" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="h ink" x="1450" y="800">Working edges</text><text class="body muted" x="1450" y="840"><tspan x="1450">Residence, kitchen,</tspan><tspan x="1450" dy="31">teaching and service</tspan></text>
+  </g>
+  <rect x="100" y="1030" width="1600" height="175" rx="20" fill="#173f35"/>
+  <text class="t label" x="145" y="1080" fill="#f2c56b">THREE EVIDENCE LAYERS</text>
+  <text class="t h" x="145" y="1135" fill="#fff">Material</text><text class="t body" x="285" y="1135" fill="#d5e2dd">weathering · replacement · masonry</text>
+  <text class="t h" x="700" y="1135" fill="#fff">Document</text><text class="t body" x="855" y="1135" fill="#d5e2dd">onsite panel · heritage record</text>
+  <text class="t h" x="1240" y="1135" fill="#fff">Living use</text><text class="t body" x="1400" y="1135" fill="#d5e2dd">worship · work · barriers</text>
+  <text class="t small muted" x="100" y="1300">Comparative reading model—not a site plan, reconstruction or required sequence of gates.</text>
+  <text class="t small pine" x="1700" y="1300" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

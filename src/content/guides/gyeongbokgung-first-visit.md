@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/gyeongbokgung-first-visit/gyeongbokgung-six-stop-route.svg"
+  alt: "Six-step Gyeongbokgung reading route from the outer gates through ceremony, government and residence to one final focus."
+  width: 1600
+  height: 1200
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "A functional reading sequence for a first visit; this is a schematic, not a site map or statement that every doorway is open."
 atAGlance:
   - { label: "Best for", value: "A first look at the formal planning and public authority of a Joseon palace" }
   - { label: "Core visit", value: "About two hours for the main axis, residential courts and one pavilion" }

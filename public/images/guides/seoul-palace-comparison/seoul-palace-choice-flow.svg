@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Decision flow for choosing a Seoul royal heritage site</title>
+  <desc id="desc">Six choices connect a visitor's historical question to Gyeongbokgung, Changdeokgung, Changgyeonggung, Deoksugung, Gyeonghuigung or Jongmyo, followed by an operating-condition check.</desc>
+  <defs>
+    <style>.bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.border{stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:58px;font-weight:600}.sub{font-size:26px}.label{font-size:22px;font-weight:850;letter-spacing:2px}.h{font-size:30px;font-weight:780}.body{font-size:22px}.small{font-size:19px}.q{font-size:25px;font-weight:750}</style>
+  </defs>
+  <rect class="bg" width="1600" height="1000"/>
+  <text class="t label rust" x="90" y="78">DECISION GUIDE · SEOUL ROYAL HERITAGE</text>
+  <text class="serif title ink" x="90" y="150">Choose the question before the site</text>
+  <text class="t sub muted" x="90" y="197">There is no best palace without a historical purpose.</text>
+  <rect x="90" y="240" width="1420" height="90" rx="18" fill="#173f35"/>
+  <text class="t h" x="800" y="296" text-anchor="middle" fill="#fff">What do you most want the visit to explain?</text>
+  <g class="t">
+    <rect x="90" y="378" width="450" height="160" rx="16" class="paper border"/>
+    <text class="q rust" x="120" y="420">A new dynasty staging authority?</text>
+    <text class="h ink" x="120" y="468">Gyeongbokgung</text>
+    <text class="body muted" x="120" y="505">Formal axis · ceremony → residence</text>
+
+    <rect x="575" y="378" width="450" height="160" rx="16" class="paper border"/>
+    <text class="q rust" x="605" y="420">Architecture adapting to terrain?</text>
+    <text class="h ink" x="605" y="468">Changdeokgung</text>
+    <text class="body muted" x="605" y="505">Court life · landscape · long use</text>
+
+    <rect x="1060" y="378" width="450" height="160" rx="16" class="paper border"/>
+    <text class="q rust" x="1090" y="420">Royal family residence?</text>
+    <text class="h ink" x="1090" y="468">Changgyeonggung</text>
+    <text class="body muted" x="1090" y="505">East Palace · household · disruption</text>
+
+    <rect x="90" y="574" width="450" height="160" rx="16" class="paper border"/>
+    <text class="q rust" x="120" y="616">The Korean Empire?</text>
+    <text class="h ink" x="120" y="664">Deoksugung</text>
+    <text class="body muted" x="120" y="701">Court tradition · imperial modernity</text>
+
+    <rect x="575" y="574" width="450" height="160" rx="16" class="paper border"/>
+    <text class="q rust" x="605" y="616">Loss and partial recovery?</text>
+    <text class="h ink" x="605" y="664">Gyeonghuigung</text>
+    <text class="body muted" x="605" y="701">Fragment · excavation · restoration</text>
+
+    <rect x="1060" y="574" width="450" height="160" rx="16" fill="#dde9e2" stroke="#245849" stroke-width="3"/>
+    <text class="q rust" x="1090" y="616">Royal ancestral ritual?</text>
+    <text class="h ink" x="1090" y="664">Jongmyo Shrine</text>
+    <text class="body muted" x="1090" y="701">Not a palace · ritual memory</text>
+  </g>
+  <path d="M800 330V350M315 350H1285M315 350V378M800 350V378M1285 350V378" fill="none" stroke="#245849" stroke-width="5"/>
+  <rect x="90" y="790" width="1420" height="106" rx="16" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+  <text class="t label rust" x="125" y="833">THEN VERIFY THE OPERATING CONSTRAINT</text>
+  <text class="t body ink" x="125" y="871">Closure day · last admission · timed access or separate ticket · temporary notices · walking capacity</text>
+  <text class="t small muted" x="90" y="958">A choice framework, not a ranking or promise of current admission.</text>
+  <text class="t small pine" x="1510" y="958" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

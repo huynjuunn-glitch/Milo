@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/seoul-palace-one-day-route/seoul-palace-day-route.svg"
+  alt: "Paced day sequence linking Gyeongbokgung, a museum or lunch break, a protected transfer and Jongmyo."
+  width: 1800
+  height: 1200
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "A closure-aware sequence built around Jongmyo's verified access time; it is not a street map or permanent timetable."
 atAGlance:
   - { label: "Default pair", value: "Gyeongbokgung in the morning and Jongmyo in the afternoon" }
   - { label: "Avoid", value: "Tuesday, the regular closure day for both sites" }

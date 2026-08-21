@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Six-stop reading route through Gyeongbokgung Palace</title>
+  <desc id="desc">A schematic sequence from the outer gates through ceremony, government and residence to one chosen landscape or northern focus. It is a reading route, not a site map.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fbfaf6}.ink{fill:#17211d}.muted{fill:#56645e}.pine{fill:#173f35}.rust{fill:#a94330}.paper{fill:#fff}.soft{fill:#dde9e2}.clay{fill:#f2e7d7}.line{fill:none;stroke:#245849;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.border{fill:#fff;stroke:#d5dcd6;stroke-width:3}.t{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.serif{font-family:Georgia,"Times New Roman",serif}.title{font-size:62px;font-weight:600}.sub{font-size:28px}.label{font-size:23px;font-weight:800;letter-spacing:2px}.h{font-size:34px;font-weight:750}.body{font-size:25px}.small{font-size:21px}.num{font-size:25px;font-weight:900;fill:#fff}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#245849"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="1200"/>
+  <text class="t label rust" x="100" y="90">FIELD ROUTE · GYEONGBOKGUNG</text>
+  <text class="serif title ink" x="100" y="165">Read the palace as changing access</text>
+  <text class="t sub muted" x="100" y="215">Move from public authority toward private life, then choose one final focus.</text>
+
+  <path class="line" d="M246 324V1010" marker-end="url(#arrow)"/>
+  <g class="t">
+    <circle cx="246" cy="330" r="34" fill="#173f35"/><text class="num" x="230" y="339">01</text>
+    <rect class="border" x="330" y="280" width="1160" height="112" rx="14"/>
+    <text class="h ink" x="370" y="326">Gwanghwamun → Heungnyemun</text>
+    <text class="body muted" x="370" y="366">Layered gates separate the city from the royal precinct.</text>
+
+    <circle cx="246" cy="470" r="34" fill="#173f35"/><text class="num" x="229" y="479">02</text>
+    <rect class="border" x="330" y="420" width="1160" height="112" rx="14"/>
+    <rect x="330" y="420" width="16" height="112" rx="8" fill="#a94330"/>
+    <text class="h ink" x="370" y="466">Geunjeongjeon · state ceremony</text>
+    <text class="body muted" x="370" y="506">Read the broad court, rank markers, raised platform and controlled symmetry together.</text>
+
+    <circle cx="246" cy="610" r="34" fill="#173f35"/><text class="num" x="229" y="619">03</text>
+    <rect class="border" x="330" y="560" width="1160" height="112" rx="14"/>
+    <text class="h ink" x="370" y="606">Sajeongjeon · governing work</text>
+    <text class="body muted" x="370" y="646">Compare its working scale with the larger ceremonial court.</text>
+
+    <circle cx="246" cy="750" r="34" fill="#173f35"/><text class="num" x="229" y="759">04</text>
+    <rect class="border" x="330" y="700" width="1160" height="112" rx="14"/>
+    <rect x="330" y="700" width="16" height="112" rx="8" fill="#245849"/>
+    <text class="h ink" x="370" y="746">Gangnyeongjeon + Gyotaejeon · residence</text>
+    <text class="body muted" x="370" y="786">Courtyards, walls and side rooms narrow access; restoration remains part of the reading.</text>
+
+    <circle cx="246" cy="890" r="34" fill="#173f35"/><text class="num" x="229" y="899">05</text>
+    <rect class="border" x="330" y="840" width="1160" height="112" rx="14"/>
+    <text class="h ink" x="370" y="886">Gyeonghoeru · landscape and hospitality</text>
+    <text class="body muted" x="370" y="926">Use the pond and raised pavilion to change the pace without assuming interior access.</text>
+
+    <circle cx="246" cy="1030" r="34" fill="#a94330"/><text class="num" x="229" y="1039">06</text>
+    <rect x="330" y="980" width="1160" height="112" rx="14" fill="#f2e7d7" stroke="#a94330" stroke-width="3"/>
+    <text class="h ink" x="370" y="1026">Choose one final focus</text>
+    <text class="body muted" x="370" y="1066">Jagyeongjeon, Hyangwonjeong or an open northern area—not every optional stop.</text>
+  </g>
+  <text class="t small muted" x="100" y="1150">Schematic reading sequence—not a site map or statement that every doorway is open.</text>
+  <text class="t small pine" x="1500" y="1150" text-anchor="end">Dama Korea · Original editorial diagram</text>
+</svg>

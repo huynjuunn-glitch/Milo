@@ -10,6 +10,14 @@ author: { name: "Dama Korea Editorial Desk", url: "/about/" }
 createdAt: 2026-08-21
 updatedAt: 2026-08-21
 checkedAt: 2026-08-21
+heroImage:
+  src: "/images/guides/how-to-read-korean-temple/korean-temple-layout.svg"
+  alt: "Six-stop temple reading sequence from landscape and thresholds to courtyard, main focus, stone elements and working edges."
+  width: 1800
+  height: 1350
+  credit: "Dama Korea Editorial Desk"
+  license: "Original editorial diagram © Dama Korea"
+  caption: "Reuse the six observation questions while allowing terrain, tradition and rebuilding to change each temple's actual layout."
 atAGlance:
   - label: "Start with"
     value: "Terrain and the sequence of thresholds, not one building"
