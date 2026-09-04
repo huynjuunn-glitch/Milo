@@ -10,6 +10,7 @@ export const SITE = {
 export const NAVIGATION = [
   { href: '/tools/', label: 'Calculators' },
   { href: '/guides/', label: 'Workshop Guides' },
+  { href: '/standards/', label: 'Standards' },
   { href: '/about/', label: 'About' },
 ] as const;
 

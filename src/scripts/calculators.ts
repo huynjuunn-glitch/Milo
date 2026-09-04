@@ -1,9 +1,11 @@
 type ResultRow = { label: string; value: string; detail?: string };
-type CalculatorResult = { headline: string; rows: ResultRow[]; plan?: string[] };
+type LayoutPanel = { x: number; y: number; width: number; height: number; label: string; rotated: boolean };
+type SheetLayout = { width: number; height: number; panels: LayoutPanel[] };
+type CalculatorResult = { headline: string; rows: ResultRow[]; plan?: string[]; layouts?: SheetLayout[] };
 
 const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : Math.abs(a));
 
-const parseSimple = (raw: string): number => {
+export const parseSimple = (raw: string): number => {
   const cleaned = raw.trim().replaceAll(',', '').replace(/[″”]/g, '"').replace(/[′’]/g, "'");
   if (!cleaned) return Number.NaN;
   if (cleaned.includes("'")) {
@@ -50,7 +52,7 @@ const formatMoney = (value: number): string => new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 2,
 }).format(value);
 
-const toFraction = (value: number, denominator = 16): string => {
+export const toFraction = (value: number, denominator = 16): string => {
   if (!Number.isFinite(value)) return '—';
   const sign = value < 0 ? '−' : '';
   const absolute = Math.abs(value);
@@ -78,7 +80,7 @@ const formatFeetInches = (value: number, denominator = 16): string => {
 
 const listMarks = (values: number[], denominator: number): string => values.map((value, index) => `${index + 1}: ${toFraction(value, denominator)} in`).join(' · ');
 
-const calculators: Record<string, (form: HTMLFormElement) => CalculatorResult> = {
+export const calculators: Record<string, (form: HTMLFormElement) => CalculatorResult> = {
   'fraction-calculator': (form) => {
     const a = requireNumber(form, 'valueA');
     const b = requireNumber(form, 'valueB');
@@ -276,26 +278,80 @@ const calculators: Record<string, (form: HTMLFormElement) => CalculatorResult> =
     };
   },
   'plywood-sheet-estimator': (form) => {
-    const width = requirePositive(form, 'partWidth');
-    const length = requirePositive(form, 'partLength');
-    const quantity = Math.round(requirePositive(form, 'partQuantity'));
     const sheetWidth = requirePositive(form, 'sheetWidth');
     const sheetLength = requirePositive(form, 'sheetLength');
-    const waste = requirePositive(form, 'sheetWaste', true);
-    const area = width * length * quantity;
-    const sheetArea = sheetWidth * sheetLength;
-    const fitsNormally = width <= sheetWidth && length <= sheetLength;
-    const fitsRotated = width <= sheetLength && length <= sheetWidth;
-    if (!fitsNormally && !fitsRotated) throw new Error('A single part does not fit on the selected sheet in either orientation.');
-    const theoretical = area / sheetArea;
-    const adjusted = theoretical * (1 + waste / 100);
+    const kerf = requirePositive(form, 'sheetKerf', true);
+    const trim = requirePositive(form, 'sheetTrim', true);
+    const rotate = getValue(form, 'allowRotation') === 'yes';
+    const usableWidth = sheetWidth - trim * 2;
+    const usableHeight = sheetLength - trim * 2;
+    if (usableWidth <= 0 || usableHeight <= 0) throw new Error('Edge trim leaves no usable sheet area.');
+    const lines = getValue(form, 'panelList').split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    if (!lines.length) throw new Error('Add at least one panel line in the format width × length × quantity.');
+    const pieces: { width: number; height: number; label: string }[] = [];
+    for (const line of lines) {
+      const match = line.match(/^(.+?)\s*[x×]\s*(.+?)\s*[x×]\s*(\d+)$/i);
+      if (!match) throw new Error(`Could not read “${line}”. Use the format 18 x 30 x 10.`);
+      const width = parseSimple(match[1]);
+      const height = parseSimple(match[2]);
+      const quantity = Number(match[3]);
+      if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0 || quantity < 1) throw new Error(`Invalid panel line: “${line}”.`);
+      const fitsNormally = width <= usableWidth && height <= usableHeight;
+      const fitsRotated = rotate && height <= usableWidth && width <= usableHeight;
+      if (!fitsNormally && !fitsRotated) throw new Error(`${toFraction(width, 64)} × ${toFraction(height, 64)} in does not fit the usable sheet area.`);
+      if (pieces.length + quantity > 500) throw new Error('Limit the layout to 500 total panels.');
+      for (let index = 0; index < quantity; index += 1) pieces.push({ width, height, label: `${toFraction(width, 64)} × ${toFraction(height, 64)}` });
+    }
+    pieces.sort((a, b) => b.width * b.height - a.width * a.height || Math.max(b.width, b.height) - Math.max(a.width, a.height));
+    type FreeRect = { x: number; y: number; width: number; height: number };
+    type WorkingSheet = SheetLayout & { free: FreeRect[] };
+    const sheets: WorkingSheet[] = [];
+    const newSheet = (): WorkingSheet => ({ width: sheetWidth, height: sheetLength, panels: [], free: [{ x: trim, y: trim, width: usableWidth, height: usableHeight }] });
+    for (const piece of pieces) {
+      let best: { sheet: WorkingSheet; freeIndex: number; width: number; height: number; rotated: boolean; score: number } | undefined;
+      const candidates = sheets.length ? sheets : [newSheet()];
+      if (!sheets.length) sheets.push(candidates[0]);
+      for (const sheet of candidates) {
+        sheet.free.forEach((free, freeIndex) => {
+          const orientations = [{ width: piece.width, height: piece.height, rotated: false }];
+          if (rotate && piece.width !== piece.height) orientations.push({ width: piece.height, height: piece.width, rotated: true });
+          for (const orientation of orientations) {
+            if (orientation.width <= free.width + 1e-9 && orientation.height <= free.height + 1e-9) {
+              const score = free.width * free.height - orientation.width * orientation.height;
+              if (!best || score < best.score) best = { sheet, freeIndex, ...orientation, score };
+            }
+          }
+        });
+      }
+      if (!best) {
+        const sheet = newSheet();
+        sheets.push(sheet);
+        const orientations = [{ width: piece.width, height: piece.height, rotated: false }];
+        if (rotate && piece.width !== piece.height) orientations.push({ width: piece.height, height: piece.width, rotated: true });
+        const orientation = orientations.filter((item) => item.width <= usableWidth && item.height <= usableHeight).sort((a, b) => (usableWidth * usableHeight - a.width * a.height) - (usableWidth * usableHeight - b.width * b.height))[0];
+        best = { sheet, freeIndex: 0, ...orientation, score: usableWidth * usableHeight - orientation.width * orientation.height };
+      }
+      const free = best.sheet.free.splice(best.freeIndex, 1)[0];
+      best.sheet.panels.push({ x: free.x, y: free.y, width: best.width, height: best.height, label: piece.label, rotated: best.rotated });
+      const rightWidth = free.width - best.width - kerf;
+      const lowerHeight = free.height - best.height - kerf;
+      if (rightWidth > 0) best.sheet.free.push({ x: free.x + best.width + kerf, y: free.y, width: rightWidth, height: best.height });
+      if (lowerHeight > 0) best.sheet.free.push({ x: free.x, y: free.y + best.height + kerf, width: free.width, height: lowerHeight });
+      best.sheet.free.sort((a, b) => a.width * a.height - b.width * b.height);
+    }
+    const partArea = pieces.reduce((sum, piece) => sum + piece.width * piece.height, 0);
+    const purchasedArea = sheets.length * sheetWidth * sheetLength;
+    const usableArea = sheets.length * usableWidth * usableHeight;
+    const utilization = partArea / purchasedArea * 100;
     return {
-      headline: `${Math.ceil(adjusted)} full sheet${Math.ceil(adjusted) === 1 ? '' : 's'} estimated`,
+      headline: `${sheets.length} full sheet${sheets.length === 1 ? '' : 's'} in this layout`,
       rows: [
-        { label: 'Theoretical minimum by area', value: `${formatNumber(theoretical, 2)} sheets` },
-        { label: 'Area with waste allowance', value: `${formatNumber(adjusted, 2)} sheets` },
-        { label: 'Total finished part area', value: `${formatNumber(area / 144, 2)} sq ft` },
+        { label: 'Panel utilization', value: `${formatNumber(utilization, 1)}% of purchased area` },
+        { label: 'Finished panel area', value: `${formatNumber(partArea / 144, 2)} sq ft` },
+        { label: 'Usable area after trim', value: `${formatNumber(usableArea / 144, 2)} sq ft` },
       ],
+      plan: sheets.map((sheet, index) => `Sheet ${index + 1}: ${sheet.panels.length} panel${sheet.panels.length === 1 ? '' : 's'} · ${sheet.panels.map((panel) => `${panel.label}${panel.rotated ? ' (rotated)' : ''}`).join(', ')}`),
+      layouts: sheets.map(({ width, height, panels }) => ({ width, height, panels })),
     };
   },
   'dowel-spacing-calculator': (form) => {
@@ -324,12 +380,15 @@ const calculators: Record<string, (form: HTMLFormElement) => CalculatorResult> =
     if (rise > chord / 2) throw new Error('For this minor-arc layout, the rise cannot exceed half the chord width.');
     const radius = chord * chord / (8 * rise) + rise / 2;
     const centerOffset = Math.abs(radius - rise);
+    const centralAngle = 2 * Math.asin(chord / (2 * radius));
+    const arcLength = radius * centralAngle;
     return {
       headline: `${formatInches(radius, 64)} radius`,
       rows: [
         { label: 'Circle diameter', value: formatInches(radius * 2, 64) },
         { label: 'Center behind chord', value: formatInches(centerOffset, 64) },
-        { label: 'Arc chord', value: formatInches(chord, 64) },
+        { label: 'Arc length', value: formatInches(arcLength, 64) },
+        { label: 'Central angle', value: `${formatNumber(centralAngle * 180 / Math.PI, 2)}°` },
       ],
     };
   },
@@ -349,16 +408,33 @@ const calculators: Record<string, (form: HTMLFormElement) => CalculatorResult> =
   },
 };
 
+const renderLayouts = (layouts: SheetLayout[]): string => {
+  const colors = ['#dbe967', '#ef6a32', '#7fb3bd', '#f4c95d', '#b8a1d9', '#8ecf9e'];
+  const sheets = layouts.slice(0, 8).map((sheet, sheetIndex) => {
+    const panels = sheet.panels.map((panel, panelIndex) => {
+      const fontSize = Math.max(2.4, Math.min(panel.width, panel.height) * 0.14);
+      const label = panel.width >= 7 && panel.height >= 7
+        ? `<text x="${panel.x + panel.width / 2}" y="${panel.y + panel.height / 2}" text-anchor="middle" dominant-baseline="middle" font-size="${fontSize}" fill="#18201d">${panel.label}</text>`
+        : '';
+      return `<g><rect x="${panel.x}" y="${panel.y}" width="${panel.width}" height="${panel.height}" fill="${colors[panelIndex % colors.length]}" stroke="#18201d" stroke-width="0.35"/>${label}</g>`;
+    }).join('');
+    return `<figure class="sheet-map"><figcaption>Sheet ${sheetIndex + 1} · ${sheet.panels.length} panels</figcaption><svg viewBox="0 0 ${sheet.width} ${sheet.height}" role="img" aria-label="Cut layout for sheet ${sheetIndex + 1}"><rect width="${sheet.width}" height="${sheet.height}" fill="#f4f1e9" stroke="#18201d" stroke-width="0.7"/>${panels}</svg></figure>`;
+  }).join('');
+  const remainder = layouts.length > 8 ? `<p class="sheet-map__more">${layouts.length - 8} additional sheet maps omitted from the preview.</p>` : '';
+  return `<div class="sheet-maps"><h4>Visual cutting map</h4>${sheets}${remainder}</div>`;
+};
+
 const renderResult = (container: HTMLElement, result: CalculatorResult): string => {
   const rows = result.rows.map((row) => `<div class="result-row"><span>${row.label}</span><strong>${row.value}</strong>${row.detail ? `<small>${row.detail}</small>` : ''}</div>`).join('');
   const plan = result.plan?.length ? `<div class="result-plan">${result.plan.map((item) => `<p>${item}</p>`).join('')}</div>` : '';
-  container.innerHTML = `<p class="result-label">Calculated result</p><h3>${result.headline}</h3><div class="result-grid">${rows}</div>${plan}`;
+  const layouts = result.layouts?.length ? renderLayouts(result.layouts) : '';
+  container.innerHTML = `<p class="result-label">Calculated result</p><h3>${result.headline}</h3><div class="result-grid">${rows}</div>${layouts}${plan}`;
   return [result.headline, ...result.rows.map((row) => `${row.label}: ${row.value}`), ...(result.plan ?? [])].join('\n');
 };
 
 const escapeHtml = (value: string): string => value.replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character] ?? character);
 
-document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((root) => {
+export const initCalculators = () => document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((root) => {
   const slug = root.dataset.calculator ?? '';
   const calculate = calculators[slug];
   const form = root.querySelector<HTMLFormElement>('form');
@@ -406,8 +482,9 @@ document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((root) => {
   run();
 });
 
-const recentSection = document.querySelector<HTMLElement>('[data-recent-tools]');
-if (recentSection) {
+export const initRecentTools = () => {
+  const recentSection = document.querySelector<HTMLElement>('[data-recent-tools]');
+  if (!recentSection) return;
   try {
     const recent = JSON.parse(localStorage.getItem('dama-recent-tools') ?? '[]') as string[];
     const cards = recent.map((slug) => document.querySelector<HTMLElement>(`[data-tool-card="${CSS.escape(slug)}"]`)).filter(Boolean) as HTMLElement[];
@@ -417,4 +494,9 @@ if (recentSection) {
       recentSection.removeAttribute('hidden');
     }
   } catch { /* Local storage is optional. */ }
+};
+
+if (typeof document !== 'undefined') {
+  initCalculators();
+  initRecentTools();
 }

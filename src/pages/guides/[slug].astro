@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { guides, type Guide } from '../../data/guides';
-import { getTool } from '../../data/tools';
+import { getTool, SOURCE_LIBRARY } from '../../data/tools';
 import { SITE } from '../../data/site';
 
 export function getStaticPaths() {
@@ -11,6 +11,7 @@ export function getStaticPaths() {
 
 const { guide } = Astro.props as { guide: Guide };
 const relatedTools = guide.relatedTools.map(getTool).filter((tool) => Boolean(tool));
+const sources = guide.sourceKeys.map((key) => SOURCE_LIBRARY[key]);
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -22,6 +23,7 @@ const schema = [
     author: { '@id': `${SITE.url}/#organization` },
     publisher: { '@id': `${SITE.url}/#organization` },
     mainEntityOfPage: new URL(`/guides/${guide.slug}/`, SITE.url).toString(),
+    citation: sources.map((source) => source.url),
   },
   {
     '@context': 'https://schema.org',
@@ -58,6 +60,12 @@ const schema = [
         </section>
       ))}
       <aside class="takeaway"><span>Bottom line</span><p>{guide.takeaway}</p></aside>
+      <section class="article-references" aria-labelledby="primary-references">
+        <span class="section-number">Sources</span>
+        <h2 id="primary-references">Primary references</h2>
+        <p>These sources define the measurement, safety or hardware conventions used in this guide. Product-specific work should still follow the current manual supplied with the exact tool or hardware.</p>
+        <ol class="source-list">{sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.title}</strong><span>{source.note}</span></a></li>)}</ol>
+      </section>
       <div class="article-disclosure"><strong>How this guide was made</strong><p>Dama Workshop writes from standard workshop math and clearly stated construction assumptions. We do not claim hands-on testing that did not occur. Corrections are logged through the public contact channel.</p></div>
     </div>
   </article>

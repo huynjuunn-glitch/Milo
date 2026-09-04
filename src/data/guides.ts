@@ -1,3 +1,5 @@
+import type { SourceKey } from './tools';
+
 export type GuideSection = {
   heading: string;
   paragraphs: string[];
@@ -16,6 +18,7 @@ export type Guide = {
   sections: GuideSection[];
   takeaway: string;
   relatedTools: string[];
+  sourceKeys: SourceKey[];
 };
 
 export const guides: Guide[] = [
@@ -61,6 +64,7 @@ export const guides: Guide[] = [
     ],
     takeaway: 'Read marks by halves, reduce the fraction, work from one reference edge and keep the cutting tool on the waste side. Those four habits prevent more mistakes than memorizing a chart.',
     relatedTools: ['fraction-calculator', 'decimal-fraction-converter', 'equal-spacing-calculator'],
+    sourceKeys: ['nistLength', 'nistHandbook'],
   },
   {
     slug: 'saw-kerf-explained',
@@ -103,6 +107,7 @@ export const guides: Guide[] = [
     ],
     takeaway: 'Kerf is a material cost and a positioning decision. Measure it, count it, and place it entirely on the waste side of the finished line.',
     relatedTools: ['kerf-calculator', 'cut-list-optimizer', 'fraction-calculator'],
+    sourceKeys: ['oshaWoodworking', 'nistLength'],
   },
   {
     slug: 'board-feet-and-lumber-buying',
@@ -146,6 +151,7 @@ export const guides: Guide[] = [
     ],
     takeaway: 'Calculate clean volume, translate it into rough stock, add waste for specific reasons, and verify how the yard tallies thickness and length.',
     relatedTools: ['board-foot-calculator', 'cut-list-optimizer', 'plywood-sheet-estimator'],
+    sourceKeys: ['woodHandbook'],
   },
   {
     slug: 'cut-list-planning-workflow',
@@ -188,6 +194,7 @@ export const guides: Guide[] = [
     ],
     takeaway: 'Use the optimizer for material allocation, but keep finished size, rough size, reference faces and grain choices under explicit human control.',
     relatedTools: ['cut-list-optimizer', 'kerf-calculator', 'board-foot-calculator'],
+    sourceKeys: ['woodHandbook', 'oshaWoodworking'],
   },
   {
     slug: 'drawer-slide-clearance-guide',
@@ -230,6 +237,7 @@ export const guides: Guide[] = [
     ],
     takeaway: 'The calculator converts a verified hardware requirement into dimensions; it cannot replace the slide specification or a physical test installation.',
     relatedTools: ['drawer-box-calculator', 'cabinet-door-calculator', 'shelf-spacing-calculator'],
+    sourceKeys: ['blumRunners'],
   },
   {
     slug: 'cabinet-door-overlay-and-reveal',
@@ -271,6 +279,7 @@ export const guides: Guide[] = [
     ],
     takeaway: 'Add overlay at every outside edge, subtract inset reveal at every inside edge, reserve one center gap for a pair, and verify the result against the hinge chart.',
     relatedTools: ['cabinet-door-calculator', 'drawer-box-calculator', 'equal-spacing-calculator'],
+    sourceKeys: ['blumHinges'],
   },
 ];
 

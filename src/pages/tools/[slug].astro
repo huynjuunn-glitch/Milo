@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Calculator from '../../components/Calculator.astro';
 import ToolCard from '../../components/ToolCard.astro';
-import { tools, getRelatedTools, type Tool } from '../../data/tools';
+import { tools, getRelatedTools, SOURCE_LIBRARY, type Tool } from '../../data/tools';
 import { CATEGORIES, SITE } from '../../data/site';
 
 export function getStaticPaths() {
@@ -11,6 +11,7 @@ export function getStaticPaths() {
 
 const { tool } = Astro.props as { tool: Tool };
 const related = getRelatedTools(tool);
+const sources = tool.sourceKeys.map((key) => SOURCE_LIBRARY[key]);
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -22,6 +23,8 @@ const schema = [
     operatingSystem: 'Any',
     browserRequirements: 'Requires JavaScript',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    dateModified: '2026-09-04',
+    isBasedOn: sources.map((source) => source.url),
   },
   {
     '@context': 'https://schema.org',
@@ -53,6 +56,7 @@ const schema = [
           <p class="eyebrow">{CATEGORIES[tool.category].label}</p>
           <h1>{tool.title}</h1>
           <p>{tool.intro}</p>
+          <div class="verification-meta"><span>Version {tool.version}</span><span>Verified {tool.verifiedAt}</span><a href="/standards/">Testing standard</a></div>
         </div>
         <div class="tool-hero__note"><span aria-hidden="true">✓</span><div><strong>Free. Private. Immediate.</strong><p>No sign-up. No measurements uploaded. Copy or print the result when you are done.</p></div></div>
       </div>
@@ -87,6 +91,12 @@ const schema = [
         <p class="eyebrow">Common questions</p>
         <h2>About this calculation</h2>
         <div class="faq-list">{tool.faqs.map((faq) => <details><summary>{faq.question}<span aria-hidden="true">＋</span></summary><p>{faq.answer}</p></details>)}</div>
+      </section>
+      <section>
+        <p class="eyebrow">Reference foundation</p>
+        <h2>Sources used for definitions and limits</h2>
+        <p>These primary references establish units, material terminology, safety boundaries or manufacturer-specific constraints. The calculator formula and implementation are original to Dama Workshop unless otherwise noted.</p>
+        <ol class="source-list">{sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.title}</strong><span>{source.note}</span></a></li>)}</ol>
       </section>
     </div>
   </article>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { tools } from '../data/tools';
+---
+
+<BaseLayout title="Verification Log" description="Version and verification history for every Dama Workshop woodworking calculator." activeNav="/standards/">
+  <section class="page-hero page-hero--guides">
+    <div class="shell page-hero__grid">
+      <div><p class="eyebrow">Public change record</p><h1>Verification log.</h1></div>
+      <p>Material changes to formulas, inputs and planning assumptions are recorded here so a saved result can be traced to the method that produced it.</p>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell about-grid">
+      <div><p class="eyebrow">September 4, 2026</p><h2>Layout planning and source review.</h2></div>
+      <div class="prose"><p>The plywood estimator was upgraded from an area-only estimate to a two-dimensional guillotine-layout planner. It now accounts for sheet trim, blade kerf, panel rotation and per-sheet placement, and draws a visual cutting map.</p><p>All calculators were reviewed against their stated method. Primary references, visible version numbers, verification dates and automated edge-case checks were added across the library.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-head"><div><p class="eyebrow">Calculator register</p><h2>Current verified versions.</h2></div><p>The date records the latest calculation or assumptions review, not physical testing of every material or hardware product.</p></div>
+      <div class="verification-table" role="region" aria-label="Calculator verification register" tabindex="0">
+        <table>
+          <thead><tr><th>Calculator</th><th>Version</th><th>Verified</th><th>References</th></tr></thead>
+          <tbody>{tools.map((tool) => <tr><td><a href={`/tools/${tool.slug}/`}>{tool.title}</a></td><td>{tool.version}</td><td>{tool.verifiedAt}</td><td>{tool.sourceKeys.length}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p class="verification-note">Found a discrepancy? Send the calculator name, exact inputs, expected result and observed result through the <a href="/contact/">correction channel</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="shell standards-grid"><div><p class="eyebrow">What the record means</p><h2>Transparent, not infallible.</h2></div><div class="prose prose--light"><p>“Verified” means the implemented arithmetic passed our documented examples and automated checks on the recorded date. It does not mean a result replaces measurement, a manufacturer specification or safe workshop practice.</p><p><a class="text-link text-link--light" href="/standards/">Read the complete calculation standard →</a></p></div></div>
+  </section>
+</BaseLayout>

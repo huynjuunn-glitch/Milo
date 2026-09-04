@@ -6,7 +6,7 @@ const failures = [];
 const expectedToolCount = 13;
 const expectedGuideCount = 6;
 const publisherId = 'ca-pub-5504483871402657';
-const requiredRoutes = new Set(['/', '/tools/', '/guides/', '/about/', '/contact/', '/privacy/', '/terms/', '/404/']);
+const requiredRoutes = new Set(['/', '/tools/', '/guides/', '/about/', '/standards/', '/changelog/', '/contact/', '/privacy/', '/terms/', '/404/']);
 const excludedFromSitemap = new Set(['/404/', '/contact/', '/privacy/', '/terms/']);
 
 if (!fs.existsSync(root)) {
@@ -71,9 +71,12 @@ for (const file of htmlFiles) {
   if (route.startsWith('/tools/') && route !== '/tools/') {
     if (!html.includes('data-calculator=')) failures.push(`${route} is missing calculator markup.`);
     if (!html.includes('Calculation method') || !html.includes('Assumptions and limitations')) failures.push(`${route} is missing supporting method content.`);
+    if (!html.includes('Verified ') || !html.includes('Testing standard')) failures.push(`${route} is missing its public verification record.`);
+    if (!html.includes('Reference foundation') || !html.includes('target="_blank"')) failures.push(`${route} is missing primary references.`);
   }
   if (route.startsWith('/guides/') && route !== '/guides/') {
     if (!html.includes('How this guide was made')) failures.push(`${route} is missing its editorial disclosure.`);
+    if (!html.includes('Primary references') || !html.includes('target="_blank"')) failures.push(`${route} is missing primary references.`);
   }
 
   const localTargets = [
@@ -94,6 +97,7 @@ for (const file of htmlFiles) {
 
 if (adsenseScriptCount !== 0) failures.push(`Build contains ${adsenseScriptCount} AdSense script references; expected 0 before consent setup.`);
 if (jsonLdCount < htmlFiles.length * 2) failures.push(`Only ${jsonLdCount} JSON-LD blocks were found across ${htmlFiles.length} pages.`);
+if (sitemapUrls.size !== routes.size - excludedFromSitemap.size) failures.push(`Expected ${routes.size - excludedFromSitemap.size} sitemap URLs, found ${sitemapUrls.size}.`);
 
 if (failures.length) {
   console.error(`Site QA failed with ${failures.length} issue(s):`);

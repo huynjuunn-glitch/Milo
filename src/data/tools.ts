@@ -15,6 +15,41 @@ export type ToolInput = {
   wide?: boolean;
 };
 
+export const SOURCE_LIBRARY = {
+  nistLength: {
+    title: 'NIST — SI Units: Length',
+    url: 'https://www.nist.gov/pml/owm/si-units-length',
+    note: 'Defines the international inch as exactly 25.4 millimeters.',
+  },
+  nistHandbook: {
+    title: 'NIST Handbook 133 (2026), Appendix E',
+    url: 'https://www.nist.gov/document/2026-hb-133-appendix-e',
+    note: 'Official U.S. customary and SI unit conversion tables.',
+  },
+  woodHandbook: {
+    title: 'USDA Forest Products Laboratory — Wood Handbook',
+    url: 'https://www.fpl.fs.usda.gov/documnts/fplgtr/fplgtr282/fpl_gtr282.pdf',
+    note: 'Government reference covering lumber, panel products, moisture and wood properties.',
+  },
+  oshaWoodworking: {
+    title: 'OSHA — Woodworking eTool',
+    url: 'https://www.osha.gov/etools/woodworking/',
+    note: 'Official reference for woodworking machine hazards and safeguards.',
+  },
+  blumRunners: {
+    title: 'Blum — TANDEM technical downloads',
+    url: 'https://www.blum.com/us/en/products/runnersystems/tandem/downloads-videos/',
+    note: 'Manufacturer instructions illustrating product-specific drawer dimensions and clearances.',
+  },
+  blumHinges: {
+    title: 'Blum technical catalogue — hinge dimensions',
+    url: 'https://publications.blum.com/2026/catalogue/en/736/',
+    note: 'Manufacturer reference for overlay, inset and hinge installation geometry.',
+  },
+} as const;
+
+export type SourceKey = keyof typeof SOURCE_LIBRARY;
+
 export type Tool = {
   slug: string;
   title: string;
@@ -24,6 +59,9 @@ export type Tool = {
   intro: string;
   featured?: boolean;
   badge?: string;
+  version: string;
+  verifiedAt: string;
+  sourceKeys: SourceKey[];
   inputs: ToolInput[];
   resultHint: string;
   method: string[];
@@ -40,7 +78,10 @@ export const tools: Tool[] = [
     title: 'Woodworking Fraction Calculator',
     shortTitle: 'Fraction Calculator',
     category: 'layout',
-    badge: 'Shop essential',
+    badge: 'Fractions',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength', 'nistHandbook'],
     featured: true,
     description: 'Add, subtract, multiply or divide fractional-inch measurements and round the answer to a shop-friendly precision.',
     intro: 'Enter whole numbers, decimals or mixed fractions such as 12 7/16. The result is shown as a reduced fraction, decimal inches and feet-and-inches so you can move from the plan to the tape measure without a second conversion.',
@@ -76,7 +117,10 @@ export const tools: Tool[] = [
     title: 'Equal Spacing Calculator',
     shortTitle: 'Equal Spacing',
     category: 'layout',
-    badge: 'Most useful',
+    badge: 'Layout marks',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength'],
     featured: true,
     description: 'Lay out slats, balusters, hooks or panels with equal gaps across a fixed opening.',
     intro: 'This calculator handles the two common layouts: equal gaps around every piece, or the first and last pieces held flush to the ends. Results include clear gap, center-to-center pitch and a printable mark sequence.',
@@ -109,7 +153,10 @@ export const tools: Tool[] = [
     title: '1D Cut List Optimizer',
     shortTitle: 'Cut List Optimizer',
     category: 'materials',
-    badge: 'Save material',
+    badge: 'Linear stock',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength', 'oshaWoodworking'],
     featured: true,
     description: 'Arrange repeated linear parts across standard boards while accounting for saw kerf.',
     intro: 'Paste the required lengths and quantities, choose a stock length and kerf, then get a board-by-board cutting plan. The optimizer uses a first-fit decreasing layout: fast, transparent and well suited to straight linear stock.',
@@ -135,7 +182,10 @@ export const tools: Tool[] = [
     title: 'Board Foot & Lumber Cost Calculator',
     shortTitle: 'Board Foot Calculator',
     category: 'materials',
-    badge: 'Lumber yard',
+    badge: 'Cost planning',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['woodHandbook'],
     featured: true,
     description: 'Calculate board feet, total volume and lumber cost from actual or rough dimensions.',
     intro: 'Board-foot pricing can be confusing when thickness is written in quarters and project dimensions are in inches. Enter actual thickness, width, length and quantity to produce a transparent purchase estimate.',
@@ -163,6 +213,9 @@ export const tools: Tool[] = [
     title: 'Saw Kerf & Yield Calculator',
     shortTitle: 'Kerf Calculator',
     category: 'materials',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength', 'oshaWoodworking'],
     description: 'Find how many repeated parts fit in a board and how much stock the blade turns into sawdust.',
     intro: 'A small kerf becomes a missing part when repeated across a board. This calculator reports maximum yield, material consumed, total kerf and leftover stock for repeat cuts.',
     inputs: [
@@ -187,6 +240,9 @@ export const tools: Tool[] = [
     title: 'Miter Angle Calculator',
     shortTitle: 'Miter Angle',
     category: 'layout',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength', 'oshaWoodworking'],
     description: 'Calculate the saw setting for two equal miter cuts that close a measured corner.',
     intro: 'Walls and assemblies are rarely a perfect 90 degrees. Enter the included corner angle and this calculator returns the equal miter setting, joint turn and a test-cut reminder.',
     inputs: [
@@ -211,7 +267,10 @@ export const tools: Tool[] = [
     title: 'Drawer Box Size Calculator',
     shortTitle: 'Drawer Box Sizing',
     category: 'cabinetry',
-    badge: 'Cabinet shop',
+    badge: 'Cut list',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['blumRunners'],
     featured: true,
     description: 'Convert a cabinet opening and slide clearance into drawer-box dimensions and a simple butt-joint cut list.',
     intro: 'Start from the measured opening, not the cabinet label. The calculator subtracts slide and vertical clearances, limits box depth, and generates front/back, side and captured-bottom dimensions for a basic drawer box.',
@@ -240,6 +299,9 @@ export const tools: Tool[] = [
     title: 'Cabinet Door Size Calculator',
     shortTitle: 'Cabinet Doors',
     category: 'cabinetry',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['blumHinges'],
     description: 'Size single or paired overlay and inset cabinet doors from the actual opening.',
     intro: 'Choose overlay or inset construction, enter the opening and reveal, then calculate finished door dimensions. Paired doors automatically reserve the center gap.',
     inputs: [
@@ -270,6 +332,9 @@ export const tools: Tool[] = [
     title: 'Equal Shelf Spacing Calculator',
     shortTitle: 'Shelf Spacing',
     category: 'cabinetry',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength', 'woodHandbook'],
     description: 'Calculate equal clear openings and shelf-bottom marks inside a cabinet or bookcase.',
     intro: 'Enter the clear interior height, shelf thickness and number of fixed shelves. The calculator divides the remaining height into equal openings and lists the bottom-edge mark for every shelf.',
     inputs: [
@@ -294,27 +359,33 @@ export const tools: Tool[] = [
   },
   {
     slug: 'plywood-sheet-estimator',
-    title: 'Plywood Sheet Quantity Estimator',
-    shortTitle: 'Plywood Estimator',
+    title: 'Plywood Cut Layout Planner',
+    shortTitle: 'Plywood Layout',
     category: 'materials',
-    description: 'Estimate full-sheet quantity from repeated rectangular parts and a practical waste allowance.',
-    intro: 'This area-based estimator is useful for early budgeting before a detailed cutting diagram exists. It compares total part area with the selected sheet size and clearly separates the theoretical minimum from the waste-adjusted purchase quantity.',
+    badge: '2D layout',
+    version: '2.0',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['woodHandbook', 'nistLength'],
+    description: 'Arrange rectangular project parts across plywood sheets with kerf, edge trim, optional rotation and a visual cutting map.',
+    intro: 'Enter multiple rectangular part sizes and quantities, choose the sheet size, kerf and edge trim, then generate a sheet-by-sheet layout. The planner uses a transparent guillotine-packing heuristic and shows every placed part instead of relying on area alone.',
     inputs: [
-      { id: 'partWidth', label: 'Part width', value: '18', unit: 'in' },
-      { id: 'partLength', label: 'Part length', value: '30', unit: 'in' },
-      { id: 'partQuantity', label: 'Part quantity', type: 'number', value: '10', min: 1, max: 10000, step: '1' },
       { id: 'sheetWidth', label: 'Sheet width', value: '48', unit: 'in' },
       { id: 'sheetLength', label: 'Sheet length', value: '96', unit: 'in' },
-      { id: 'sheetWaste', label: 'Waste allowance', type: 'number', value: '20', min: 0, max: 200, step: '1', unit: '%' },
+      { id: 'sheetKerf', label: 'Saw kerf', value: '1/8', unit: 'in' },
+      { id: 'sheetTrim', label: 'Edge trim per side', value: '1/4', unit: 'in' },
+      { id: 'allowRotation', label: 'Allow 90° rotation', type: 'select', value: 'yes', options: [
+        { value: 'yes', label: 'Yes — no grain restriction' }, { value: 'no', label: 'No — preserve grain direction' },
+      ] },
+      { id: 'panelList', label: 'Required panels', type: 'textarea', value: '18 x 30 x 10\n6 x 24 x 4', placeholder: '18 x 30 x 10\n6 x 24 x 4', help: 'One size per line: width × length × quantity.', wide: true },
     ],
-    resultHint: 'Area alone cannot prove that every rectangle will physically nest on the sheet.',
-    method: ['Multiply part width × length × quantity for required area.', 'Divide by sheet area for the theoretical minimum.', 'Add the waste allowance and round up to full sheets.'],
-    formula: 'Estimated sheets = ceil(total part area × (1 + waste %) ÷ sheet area)',
-    example: { setup: 'Ten 18 × 30 in panels from 48 × 96 in sheets with 20% waste', result: '1.17 theoretical sheets; purchase estimate rounds to 2 sheets.' },
-    limits: ['Grain direction, kerf and part geometry can require more sheets than an area calculation.', 'Create a full cut diagram before purchasing expensive veneered panels.'],
+    resultHint: 'The map is a planning aid. Inspect grain, face quality, cut sequence and safe support before cutting.',
+    method: ['Reserve the selected trim around each sheet and sort panels from largest to smallest.', 'Place each panel into the best-fitting available rectangle, rotating only when permitted.', 'Split the remaining region along straight guillotine cuts, reserve kerf and repeat on additional sheets.'],
+    formula: 'Layout = best-area-fit guillotine packing within sheet − edge trim − saw kerf',
+    example: { setup: 'Ten 18 × 30 in panels and four 6 × 24 in strips from 48 × 96 in sheets', result: 'The visual map reports the actual packed sheet count, part utilization and offcut regions.' },
+    limits: ['The heuristic produces a practical layout but does not guarantee the mathematical optimum.', 'Veneer grain matching, defects and safe saw handling can require a different cut sequence.', 'Labels describe finished rectangles; add machining allowance to the entered part sizes when needed.'],
     faqs: [
-      { question: 'Is this a plywood cut optimizer?', answer: 'No. It is an early quantity and cost-planning estimate. The one-dimensional cut-list tool is also not a substitute for rectangular nesting.' },
-      { question: 'What waste factor should I use?', answer: 'Start around 15–20% for simple paint-grade rectangles and increase it for grain matching, defects, large parts or expensive veneer sequencing.' },
+      { question: 'Does the planner rotate plywood parts?', answer: 'Only when rotation is enabled. Turn it off for veneered or patterned panels whose grain direction must remain consistent.' },
+      { question: 'Is this the absolute minimum number of sheets?', answer: 'Not necessarily. Two-dimensional cutting is an optimization problem; this planner uses a fast, repeatable guillotine heuristic and clearly states that limitation.' },
     ],
     related: ['cut-list-optimizer', 'board-foot-calculator', 'kerf-calculator'],
   },
@@ -323,6 +394,9 @@ export const tools: Tool[] = [
     title: 'Dowel & Fastener Spacing Calculator',
     shortTitle: 'Dowel Spacing',
     category: 'layout',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength'],
     description: 'Place a chosen number of dowels, hooks or fasteners evenly between two end margins.',
     intro: 'Use the actual workpiece length, protect the desired end margins, and receive the center-to-center interval plus every center mark from the reference edge.',
     inputs: [
@@ -349,6 +423,9 @@ export const tools: Tool[] = [
     title: 'Arc Radius Calculator',
     shortTitle: 'Arc Radius',
     category: 'layout',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength'],
     description: 'Find the radius and diameter of a circular arc from its chord width and rise.',
     intro: 'When a cabinet rail, headboard or template has a known width and crown height, this calculator finds the circle needed to reproduce that arc and the distance from the chord to the circle center.',
     inputs: [
@@ -371,6 +448,9 @@ export const tools: Tool[] = [
     title: 'Decimal to Fraction Inch Converter',
     shortTitle: 'Decimal ↔ Fraction',
     category: 'layout',
+    version: '1.1',
+    verifiedAt: 'September 4, 2026',
+    sourceKeys: ['nistLength', 'nistHandbook'],
     description: 'Convert decimal inches to the nearest tape-measure fraction and compare rounding error.',
     intro: 'Plans, calipers and CAD files often output decimal inches while shop tools use fractions. Choose a practical denominator and see the nearest reduced fraction, metric equivalent and exact rounding difference.',
     inputs: [

@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:site": "node scripts/check-site.mjs",
-    "quality": "npm run build"
+    "test:calculations": "node scripts/test-calculations.mjs",
+    "quality": "npm run test:calculations && npm run build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
