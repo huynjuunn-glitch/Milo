@@ -1,13 +1,1 @@
-# Exact redirects are kept above wildcard rules for Cloudflare Pages.
-/archive /culture/ 301
-/blog /culture/ 301
-/guides/first-trip-korea-checklist /guides/korea-heritage-trip-planning-checklist/ 301
-/guides/first-trip-korea-checklist/ /guides/korea-heritage-trip-planning-checklist/ 301
-/guides/naver-map-for-foreigners /guides/using-korean-maps-for-heritage-sites/ 301
-/guides/naver-map-for-foreigners/ /guides/using-korean-maps-for-heritage-sites/ 301
-
-# Previous broad archives
-/archive/* /culture/ 301
-/blog/* /culture/ 301
-
-# Unrelated former living, banking and telecom pages intentionally return 404.
+# Canonical host and transport are managed by Cloudflare Pages.

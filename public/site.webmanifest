@@ -1,0 +1,12 @@
+{
+  "name": "Dama Workshop",
+  "short_name": "Dama",
+  "description": "Practical woodworking calculators for the shop.",
+  "start_url": "/tools/",
+  "display": "standalone",
+  "background_color": "#f4f1e9",
+  "theme_color": "#18201d",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

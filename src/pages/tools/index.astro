@@ -1,82 +1,36 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { tools } from '../../data/tools';
+import { CATEGORIES } from '../../data/site';
 ---
 
-<BaseLayout title="Korea Heritage Visit Worksheet" description="A private, browser-based worksheet for checking official notices, Korean map data, route effort and respectful conduct before a heritage visit.">
-  <section class="page-hero"><div class="shell visual-shell"><div><p class="eyebrow">Free planning tool</p><h1>Check the heritage day before leaving reliable Wi-Fi.</h1><p class="page-hero__lede">This worksheet stores selections only in this browser. It does not replace the official notice for a site or transport service.</p></div></div></section>
-  <section class="section section--paper"><div class="shell tool-layout">
-    <aside><p class="eyebrow">Use it in order</p><h2>Remove the failures that can erase the visit.</h2><p>Site context makes the day meaningful. These checks make sure the gate, route and conduct assumptions still hold when you arrive.</p><button class="button button--secondary" type="button" data-reset-checklists>Reset worksheet</button></aside>
-    <div class="tool-stack">
-      <section class="interactive-tool" data-checklist="authority"><span>01 · Authority</span><h2>Current site information</h2><div class="tool-checks">
-        <label><input type="checkbox" /><span>I opened the responsible heritage authority’s current notice, not only a map listing.</span></label>
-        <label><input type="checkbox" /><span>I checked closure days, last admission and any reservation or guided-access requirement.</span></label>
-        <label><input type="checkbox" /><span>I saved the official page or a current screenshot for the visit date.</span></label>
-      </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
-      <section class="interactive-tool" data-checklist="route"><span>02 · Route</span><h2>Place and transport data</h2><div class="tool-checks">
-        <label><input type="checkbox" /><span>I saved the official Korean place name and the practical entrance, not only a general pin.</span></label>
-        <label><input type="checkbox" /><span>I checked the final walk, slopes, stairs and the return journey.</span></label>
-        <label><input type="checkbox" /><span>I have an offline address or route if mobile data fails.</span></label>
-      </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
-      <section class="interactive-tool" data-checklist="respect"><span>03 · Respect</span><h2>Weather, access and conduct</h2><div class="tool-checks">
-        <label><input type="checkbox" /><span>I checked weather and walking conditions for exposed stone, mountain paths or large grounds.</span></label>
-        <label><input type="checkbox" /><span>I will follow posted photography, worship and restricted-access instructions on site.</span></label>
-        <label><input type="checkbox" /><span>I chose one fallback if a building, trail, ceremony or transport link is unavailable.</span></label>
-      </div><div class="tool-progress" aria-hidden="true"><span></span></div><p class="tool-result" aria-live="polite">0 of 3 checks complete</p></section>
-      <div class="tool-summary"><strong data-total-result>0 of 9 visit checks complete</strong><p>Completion is not a safety guarantee. Recheck time-sensitive information with the responsible organization.</p><button class="button" type="button" data-print-worksheet>Print or save as PDF</button></div>
+<BaseLayout title="Woodworking Calculators" description="Browse free woodworking calculators for shop math, layout, cut lists, lumber, sheet goods, cabinet doors and drawers." activeNav="/tools/">
+  <section class="page-hero page-hero--tools">
+    <div class="shell page-hero__grid">
+      <div><p class="eyebrow">Calculator library</p><h1>One clean answer.<br />Back to the bench.</h1></div>
+      <p>{tools.length} focused tools for measurements that repeat: fractional inches, spacing, material yield, angles and cabinet sizing. Every calculator works without an account and keeps inputs in your browser.</p>
     </div>
-  </div></section>
-  <script is:inline>
-    const tools = [...document.querySelectorAll('[data-checklist]')];
-    const total = document.querySelector('[data-total-result]');
-    const readChecklist = (key) => {
-      try {
-        const value = JSON.parse(localStorage.getItem(key) || '[]');
-        return Array.isArray(value) ? value : [];
-      } catch {
-        return [];
-      }
-    };
-    const writeChecklist = (key, value) => {
-      try {
-        localStorage.setItem(key, JSON.stringify(value));
-      } catch {}
-    };
-    const clearChecklist = (key) => {
-      try {
-        localStorage.removeItem(key);
-      } catch {}
-    };
-    const updateAll = (persist = true) => {
-      let complete = 0;
-      let count = 0;
-      tools.forEach((tool) => {
-        const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
-        const boxes = [...tool.querySelectorAll('input[type="checkbox"]')];
-        const done = boxes.filter((box) => box.checked).length;
-        complete += done;
-        count += boxes.length;
-        tool.querySelector('.tool-progress span').style.width = `${done / boxes.length * 100}%`;
-        tool.querySelector('.tool-result').textContent = `${done} of ${boxes.length} checks complete`;
-        if (persist) writeChecklist(key, boxes.map((box) => box.checked));
-      });
-      total.textContent = `${complete} of ${count} visit checks complete`;
-    };
-    tools.forEach((tool) => {
-      const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
-      const boxes = [...tool.querySelectorAll('input[type="checkbox"]')];
-      const saved = readChecklist(key);
-      boxes.forEach((box, index) => { box.checked = Boolean(saved[index]); });
-      boxes.forEach((box) => box.addEventListener('change', updateAll));
-    });
-    document.querySelector('[data-reset-checklists]')?.addEventListener('click', () => {
-      tools.forEach((tool) => {
-        const key = `dama-heritage-${tool.getAttribute('data-checklist')}`;
-        tool.querySelectorAll('input[type="checkbox"]').forEach((box) => { box.checked = false; });
-        clearChecklist(key);
-      });
-      updateAll(false);
-    });
-    document.querySelector('[data-print-worksheet]')?.addEventListener('click', () => window.print());
-    updateAll();
-  </script>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell category-stack">
+      {Object.entries(CATEGORIES).map(([key, category]) => {
+        const categoryTools = tools.filter((tool) => tool.category === key);
+        return (
+          <section class="tool-category" id={key}>
+            <div class="category-heading"><div><span>{String(categoryTools.length).padStart(2, '0')} tools</span><h2>{category.label}</h2></div><p>{category.description}</p></div>
+            <div class="tool-grid">{categoryTools.map((tool) => <ToolCard tool={tool} />)}</div>
+          </section>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section standards-callout">
+    <div class="shell standards-grid">
+      <div><p class="eyebrow">Before you cut</p><h2>A precise result is still an estimate of the physical work.</h2></div>
+      <div><p>Actual stock, blade kerf, hardware specifications and machine setup control the finished result. Use these calculators to remove arithmetic—not test cuts and judgment.</p><a class="text-link" href="/about/">Read our calculation policy →</a></div>
+    </div>
+  </section>
 </BaseLayout>

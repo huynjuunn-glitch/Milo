@@ -1,33 +1,40 @@
 ---
-import { NAVIGATION } from '../data/site';
+import { CATEGORIES, SITE } from '../data/site';
 ---
 
 <footer class="site-footer">
   <div class="shell footer-grid">
-    <div class="footer-intro">
-      <a class="brand brand-light" href="/" aria-label="담Dama Korea Field Guides, home">
-        <span class="brand-mark" aria-hidden="true">담</span>
-        <span class="brand-type"><strong>Dama</strong><small>KOREA FIELD GUIDES</small></span>
+    <div class="footer-brand">
+      <a class="brand brand--footer" href="/">
+        <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true"><path d="M7 8h16c8 0 13 5 13 13S31 34 23 34H7V8Zm8 7v12h7c4 0 6-2 6-6s-2-6-6-6h-7Z" fill="currentColor" /></svg>
+        <span class="brand-type"><strong>Dama</strong><small>WORKSHOP</small></span>
       </a>
-      <p>Independent English-language field guides for seeing Korean heritage with context, practical preparation and respect.</p>
-      <p class="footer-disclosure">Dama Korea is a house publishing name. Its topic-desk bylines are transparent editorial labels, not separate people or official authorities.</p>
+      <p>Practical woodworking calculators built for the moment between a sketch and a cut.</p>
     </div>
     <div>
-      <strong>Explore</strong>
-      {NAVIGATION.slice(0, 5).map((item) => <a href={item.href}>{item.label}</a>)}
-      <a href="/culture/">All heritage guides</a>
+      <h2>Tool groups</h2>
+      <ul>
+        {Object.entries(CATEGORIES).map(([key, category]) => <li><a href={`/tools/#${key}`}>{category.label}</a></li>)}
+      </ul>
     </div>
     <div>
-      <strong>Editorial</strong>
-      <a href="/about/">About & methodology</a>
-      <a href="/contributors/">Editorial desks</a>
-      <a href="/contact/">Corrections & suggestions</a>
-      <a href="/privacy/">Privacy</a>
-      <a href="/terms/">Terms</a>
+      <h2>Site</h2>
+      <ul>
+        <li><a href="/guides/">Workshop guides</a></li>
+        <li><a href="/about/">How calculations are made</a></li>
+        <li><a href="/contact/">Contact & corrections</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Legal</h2>
+      <ul>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/terms/">Terms & disclaimer</a></li>
+      </ul>
     </div>
   </div>
   <div class="shell footer-bottom">
-    <span>© {new Date().getFullYear()} Dama Korea</span>
-    <span>Research before recommendation. Context before checklist.</span>
+    <p>© {new Date().getFullYear()} {SITE.name}. Calculations run locally in your browser.</p>
+    <p>Measure twice. Test on scrap. Cut once.</p>
   </div>
 </footer>

@@ -1,67 +1,97 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ToolCard from '../components/ToolCard.astro';
 import GuideCard from '../components/GuideCard.astro';
-import { HUBS } from '../data/site';
-import { getPublicGuides } from '../lib/guides';
+import { tools } from '../data/tools';
+import { guides } from '../data/guides';
 
-const guides = await getPublicGuides();
-const featured = guides.filter((guide) => guide.data.featured).slice(0, 4);
-const hubOrder = ['seoul-palaces', 'gyeongju', 'korean-temples', 'visit'] as const;
+const featured = tools.filter((tool) => tool.featured);
 ---
 
-<BaseLayout
-  title="Dama Korea"
-  description="Independent English-language field guides to Korean palaces, temples, historic cities and practical heritage visits."
->
+<BaseLayout title="Dama Workshop" description="Free woodworking calculators for fractions, equal spacing, cut lists, board feet, saw kerf, cabinet doors and drawer boxes.">
   <section class="home-hero">
     <div class="shell home-hero__grid">
       <div class="home-hero__copy">
-        <p class="eyebrow">Korean heritage field guides</p>
-        <h1>See the place.<br /><em>Read the layers.</em></h1>
-        <p>Practical, source-led guides for understanding Korean palaces, temples and historic landscapes while planning a visit that works on the ground.</p>
-        <div class="actions"><a class="button" href="/start-here/">Choose a starting point</a><a class="text-link" href="/about/">How the guides are made <span>→</span></a></div>
+        <p class="eyebrow">Free woodworking calculators</p>
+        <h1>Less shop math.<br /><em>More making.</em></h1>
+        <p>Fast, practical calculators for the numbers between a sketch and a clean cut. Fractions in, tape-ready answers out—no account, no download.</p>
+        <div class="actions">
+          <a class="button" href="/tools/">Open all calculators</a>
+          <a class="text-link" href="/tools/fraction-calculator/">Start with fractions <span>→</span></a>
+        </div>
+        <ul class="trust-list" aria-label="Site benefits">
+          <li>Works on phone and desktop</li>
+          <li>Imperial fractions supported</li>
+          <li>Calculations stay on your device</li>
+        </ul>
       </div>
-      <div class="home-hero__visual" aria-hidden="true">
-        <div class="roof-lines"><span></span><span></span><span></span></div>
-        <div class="field-stamp"><strong>담</strong><small>FIELD GUIDE<br />NO. 01</small></div>
-        <p>Architecture · ritual · landscape · route</p>
+      <div class="hero-tool" aria-label="Example workshop calculation">
+        <div class="hero-tool__bar"><span></span><span>BENCH NOTE / 001</span></div>
+        <p>Available span</p><strong>48 in</strong>
+        <div class="dimension-line" aria-hidden="true"><i></i><b></b><b></b><b></b><b></b><b></b><b></b><b></b><i></i></div>
+        <div class="hero-tool__result"><span>7 slats · 1 1/2 in each</span><strong>4 11/16 in gaps</strong></div>
+        <a href="/tools/equal-spacing-calculator/">Open Equal Spacing Calculator →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="quick-strip" aria-label="Popular tool links">
+    <div class="shell quick-strip__inner">
+      <span>Popular now</span>
+      <a href="/tools/cut-list-optimizer/">Cut List</a>
+      <a href="/tools/board-foot-calculator/">Board Feet</a>
+      <a href="/tools/miter-angle-calculator/">Miter Angle</a>
+      <a href="/tools/drawer-box-calculator/">Drawer Box</a>
+    </div>
+  </section>
+
+  <section class="section" data-recent-tools hidden>
+    <div class="shell">
+      <div class="section-head"><div><p class="eyebrow">Pick up where you left off</p><h2>Recently used</h2></div></div>
+      <div class="tool-grid" data-recent-grid></div>
     </div>
   </section>
 
   <section class="section section--paper">
     <div class="shell">
-      <div class="section-head"><div><p class="eyebrow">Explore by field</p><h2>Four ways into Korean heritage</h2></div><p>Start with a place, a living tradition or the practical decisions that connect the day.</p></div>
-      <div class="hub-card-grid">
-        {hubOrder.map((key, index) => {
-          const hub = HUBS[key];
-          return <a class="hub-card" href={hub.href}><span>{String(index + 1).padStart(2, '0')} · {hub.eyebrow}</span><h3>{hub.label}</h3><p>{hub.description}</p><strong>Open the collection →</strong></a>;
-        })}
+      <div class="section-head">
+        <div><p class="eyebrow">Start here</p><h2>Tools built for real shop questions</h2></div>
+        <p>Each result includes the working assumption, useful precision and the limitation you should check before cutting.</p>
       </div>
+      <div class="tool-grid">{featured.map((tool) => <ToolCard tool={tool} />)}</div>
+      <div class="section-action"><a class="button button--secondary" href="/tools/">Browse all {tools.length} calculators</a></div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="shell editorial-principles">
-      <div><p class="eyebrow">Editorial method</p><h2>A field guide should show its work.</h2><p>We separate durable historical context from details that need a fresh official check. Every published guide identifies what each source verifies and records material updates.</p><a class="button button--secondary" href="/about/">Read the methodology</a></div>
+  <section class="section workflow-section">
+    <div class="shell workflow-grid">
+      <div>
+        <p class="eyebrow">One useful workflow</p>
+        <h2>Plan the board before the blade starts.</h2>
+        <p>Turn a finished parts list into a practical stock estimate without hiding kerf, trim allowance or offcuts.</p>
+        <a class="text-link" href="/guides/cut-list-planning-workflow/">Read the cut-list workflow →</a>
+      </div>
       <ol>
-        <li><span>01</span><div><strong>Begin with the responsible source</strong><p>Heritage authorities, museums and transport operators anchor claims that can change.</p></div></li>
-        <li><span>02</span><div><strong>Add original decision value</strong><p>Routes, comparisons and visual reading cues help readers act on the information.</p></div></li>
-        <li><span>03</span><div><strong>Keep uncertainty visible</strong><p>Access restrictions, weather and site-specific conduct are never hidden behind certainty.</p></div></li>
+        <li><span>01</span><div><strong>List finished parts</strong><p>Keep final size separate from rough milling allowance.</p></div></li>
+        <li><span>02</span><div><strong>Reserve kerf and trim</strong><p>Use the blade and stock you will actually cut.</p></div></li>
+        <li><span>03</span><div><strong>Optimize, then inspect</strong><p>Let grain, defects and reference faces overrule the algorithm.</p></div></li>
       </ol>
     </div>
   </section>
 
-  {featured.length > 0 && (
-    <section class="section section--paper">
-      <div class="shell">
-        <div class="section-head"><div><p class="eyebrow">Editorial selection</p><h2>Begin with these field guides</h2></div><a class="text-link" href="/culture/">Browse all guides →</a></div>
-        <div class="guide-grid">{featured.map((guide, index) => <GuideCard guide={guide} featured={index === 0} />)}</div>
-      </div>
-    </section>
-  )}
-
-  <section class="section source-callout">
-    <div class="shell source-callout__inner"><div><p class="eyebrow">Before the gate</p><h2>Check the plan, then stay curious.</h2></div><p>Use the free planning worksheet to save the official notice, Korean place name, practical entrance and one fallback before leaving reliable Wi-Fi.</p><a class="button button--light" href="/tools/">Open the visit worksheet</a></div>
+  <section class="section section--dark">
+    <div class="shell">
+      <div class="section-head section-head--light"><div><p class="eyebrow">Know the number</p><h2>Short guides for better decisions</h2></div><a class="text-link" href="/guides/">All workshop guides →</a></div>
+      <div class="guide-grid">{guides.slice(0, 3).map((guide) => <GuideCard guide={guide} />)}</div>
+    </div>
   </section>
+
+  <section class="section closing-callout">
+    <div class="shell closing-callout__inner">
+      <div><p class="eyebrow">Keep it close</p><h2>Bookmark the workshop page.</h2><p>The best calculator is the one you can reach before reaching for a scrap of paper.</p></div>
+      <a class="button" href="/tools/">Choose your shop tools</a>
+    </div>
+  </section>
+
+  <script src="../scripts/calculators.ts"></script>
 </BaseLayout>

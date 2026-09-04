@@ -3,13 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site';
 ---
 
-<BaseLayout title="Corrections & Suggestions" description="Report a correction or propose a Korean heritage field-guide topic through Dama Korea’s public GitHub issue tracker." noindex={true}>
-  <section class="page-hero"><div class="shell visual-shell"><div><p class="eyebrow">Corrections desk</p><h1>Help keep the field notes accurate.</h1><p class="page-hero__lede">Reports use a public GitHub tracker so the issue, replies and status remain visible. Never post personal or sensitive information.</p></div></div></section>
-  <article class="legal-shell article-body">
-    <div class="contact-action"><strong>Open a public report</strong><a class="button" href={SITE.correctionsUrl} rel="external">Create a correction or guide suggestion</a></div>
-    <h2>For a correction</h2><ul class="checklist"><li>Include the Dama Korea page URL.</li><li>Identify the sentence, visual, caption or instruction in question.</li><li>Explain what changed and when you observed it.</li><li>Include the responsible organization’s current page when available.</li></ul>
-    <h2>For a guide suggestion</h2><p>Describe the place or practical problem, who encounters it and what existing English-language resources fail to make clear. Dama Korea prioritizes topics that fit the heritage field-guide mission and can be verified responsibly.</p>
-    <h2>How the channel works</h2><p>A GitHub account is required to open an issue. The issue, replies and status are public. Dama Korea does not provide a private email address, private contact form, booking service or urgent travel support.</p>
-    <h2>Privacy</h2><p>Do not post passport details, reservation codes, faces, private addresses, financial information or unpublished personal correspondence. If a matter cannot be described safely in public, do not submit it through this channel.</p>
-  </article>
+<BaseLayout title="Contact & Corrections" description="Contact Dama Workshop, report a calculator error or request a clarification." noindex>
+  <section class="legal-hero"><div class="legal-shell"><p class="eyebrow">Contact</p><h1>Corrections make the tools better.</h1><p>If a formula, label, result or explanation appears wrong, send the exact calculator URL, your inputs, expected result and browser.</p></div></section>
+  <section class="legal-content"><div class="legal-shell"><h2>Working contact channel</h2><p>Use the public GitHub issue form linked below. It is monitored as the official correction and technical-support channel for this site.</p><p><a class="button" href={SITE.correctionsUrl} target="_blank" rel="noopener noreferrer">Open the contact form</a></p><h2>What to include</h2><ul><li>The page URL and calculator name</li><li>Every input exactly as entered</li><li>The result you received and the result you expected</li><li>Whether the issue happened on phone or desktop</li></ul><h2>Response and privacy</h2><p>Do not post private or sensitive information in a public issue. Reports may be used to correct the tool and document the change. We cannot provide project-specific engineering, structural or safety approval.</p><p>For privacy requests, use the same contact channel and begin the title with “Privacy request.”</p></div></section>
 </BaseLayout>

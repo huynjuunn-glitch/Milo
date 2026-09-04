@@ -1,9 +1,0 @@
----
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import HubPage from '../../components/HubPage.astro';
-import { HUBS } from '../../data/site';
-import { getPublicGuides } from '../../lib/guides';
-const hub = HUBS['korean-temples'];
-const guides = await getPublicGuides('korean-temples');
----
-<BaseLayout title={hub.label} description={hub.description} activeNav={hub.href}><HubPage hub={hub} guides={guides} /></BaseLayout>

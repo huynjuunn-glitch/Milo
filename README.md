@@ -1,48 +1,28 @@
-# Dama Korea
+# Dama Workshop
 
-An independent English-language field-guide hub for Korean heritage sites, history and practical visits.
+Dama Workshop is a static, English-language woodworking calculator library published at `damaheritage.com`. It is built with Astro and deployed through GitHub-connected Cloudflare Pages.
 
-## Editorial goal
-
-1. Publish original, useful and clearly sourced content suitable for AdSense review.
-2. Build sustainable search traffic through distinctive palace, temple, Gyeongju and heritage-planning resources.
-
-The site does not present third-party API data as original publisher content. Time-sensitive guides show a checked date and link to the organizations responsible for current rules.
-
-## Technology
-
-- Astro static site generation
-- Plain CSS
-- Markdown-ready structured guide data
-- Automatic XML sitemap
-- Cloudflare Pages deployment
-
-Every public route is generated as complete HTML during the build. JavaScript is not required to read core content.
-
-## Local development
+## Commands
 
 ```bash
 npm install
 npm run dev
+npm run quality
 ```
 
-## Quality check
+`npm run quality` performs Astro type checks, builds the static site, then checks routes, internal links, metadata, structured data, calculator coverage and retired-topic leakage.
 
-```bash
-npm run build
-```
+## Architecture
 
-This runs Astro diagnostics before generating the production site in `dist/`.
+- `src/data/tools.ts` — calculator definitions, explanations, FAQs and relationships
+- `src/scripts/calculators.ts` — browser-only calculation logic
+- `src/data/guides.ts` — workshop reference guides
+- `src/pages/tools/[slug].astro` — generated calculator pages
+- `src/pages/guides/[slug].astro` — generated guide pages
+- `scripts/check-site.mjs` — production-output quality gate
 
-## Publishing workflow
+Calculator inputs remain in the visitor's browser. No user account, database or paid API is required.
 
-1. Research and verify the guide.
-2. Add or update one Markdown file in `src/content/guides/`.
-3. Follow the schema and publication gate in `CONTENT_AUTHORING.md`.
-4. Run `npm run build`.
-5. Review desktop and mobile output.
-6. Commit only after source-link, schema, visual, route and accessibility checks pass.
+## Advertising state
 
-## Advertising
-
-The AdSense publisher ID remains in `public/ads.txt` and the global ownership-verification meta tag. AdSense JavaScript and ad units stay disabled until the required consent-management setup has been completed and reviewed.
+The AdSense ownership meta tag and `ads.txt` record are present. Ad scripts and ad units are intentionally absent until consent-management requirements and approval state are ready.

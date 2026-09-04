@@ -1,38 +1,32 @@
-# Dama Korea guide authoring
+# Dama Workshop publishing standard
 
-Each guide lives in one file under `src/content/guides/`. Keep `draft: true`, `index: false` and `adStatus: none` until research, source-link, visual-metadata, schema and publication checks are complete.
+## New calculators
 
-Assign the guide to the editorial desk that matches its section. Desk bylines are topical publishing labels within Dama Korea, not separate people, credentials or fieldwork claims. Their public definitions live in `src/data/contributors.ts`.
+Add one complete definition to `src/data/tools.ts` and one matching calculation handler to `src/scripts/calculators.ts`.
 
-Every guide must state its `editorialValue`: the reader question it solves, the original synthesis or tool it adds, and the limits readers still need to verify. These statements must describe the actual page rather than make generic quality claims.
+Every calculator must include:
 
-## Publication requirements
+1. A single, narrow workshop problem.
+2. Inputs with units and usable defaults.
+3. The core formula or algorithm.
+4. A worked example whose displayed answer has been verified.
+5. Physical assumptions and limitations.
+6. At least two genuinely useful FAQs.
+7. Three related tools.
+8. Invalid-input handling and a mobile-usable result.
 
-- Use the real publication, update and source-check dates. Never backdate or invent a visit.
-- Add a licensed hero visual with width, height, credit, license and alt text. Current SVG schematics must declare `kind: original-editorial-diagram`, `aiAssisted: true` and `documentary: false`.
-- Give every source a precise role and checked date. Cite consequential claims near the relevant paragraph in the Markdown body.
-- Add at least two useful `atAGlance` facts, one change-log item and only relevant related-guide slugs.
-- Choose article-specific modules. Do not force every guide into the same sequence.
-- When the guide is finished, set `draft: false` and `index: true`, while keeping `adStatus: none`.
+Do not publish a calculator whose only value is a generic arithmetic operation already handled by the fraction calculator. Prefer tools that connect multiple workshop decisions or produce a mark/cut sequence.
 
-## Advertising state
+## New guides
 
-The current site uses only the publisher meta tag and `public/ads.txt` for AdSense ownership and review verification. It must not load AdSense JavaScript or request ads while a certified consent management platform is not configured.
+Add a structured entry to `src/data/guides.ts`. A guide must explain a decision that improves use of one or more calculators. It should distinguish mathematical facts, common practice, manufacturer-specific instructions and physical verification.
 
-`adStatus: review` may be introduced only after the required certified CMP is configured and the corresponding reviewed script implementation is added. `adStatus: article` is reserved for a later, approved ad-placement review. Until then, all guides remain `adStatus: none`.
+Never fabricate first-person experience, testing, credentials or an author identity. Do not rewrite another publisher's article. Examples must be presented as calculations, not personal projects.
 
-## Variable module example
+## Pre-publication checks
 
-```yaml
-modules:
-  - type: look-for
-    title: "Read the main courtyard"
-    intro: "Use three visual clues instead of trying to identify every building."
-    items:
-      - heading: "Axis"
-        text: "Explain the observable feature and why it matters, with an appropriate source."
-      - heading: "Scale"
-        text: "Explain the second clue without presenting an illustration as documentary evidence."
-```
-
-Run `npm run quality` before requesting review. The command validates the content schema, builds the static site, checks guide routes, links, visuals, JSON-LD and sitemap inclusion, and confirms that no AdSense JavaScript is present.
+- Recalculate every default and worked example independently.
+- Test zero, negative, impossible and unusually large inputs.
+- Verify all linked related-tool slugs.
+- Run `npm run quality`.
+- Review at 375px, 768px and desktop widths.

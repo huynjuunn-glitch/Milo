@@ -1,162 +1,65 @@
 ---
-import { render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import GuideCard from '../../components/GuideCard.astro';
-import GuideModule from '../../components/GuideModule.astro';
-import TableOfContents from '../../components/TableOfContents.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { guides, type Guide } from '../../data/guides';
+import { getTool } from '../../data/tools';
 import { SITE } from '../../data/site';
-import { getEditorialDeskForSection } from '../../data/contributors';
-import { formatEditorialDate, getPublicGuides, guideUrl, isoDate, sectionLabel, sectionUrl, type GuideEntry } from '../../lib/guides';
 
-export async function getStaticPaths() {
-  const guides = await getPublicGuides();
-  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
 }
 
-const { guide } = Astro.props as { guide: GuideEntry };
-const { Content, headings } = await render(guide as CollectionEntry<'guides'>);
-const allGuides = await getPublicGuides();
-const relatedGuides = guide.data.related
-  .map((slug) => allGuides.find((candidate) => candidate.id === slug))
-  .filter((candidate): candidate is GuideEntry => Boolean(candidate));
-const canonical = new URL(guideUrl(guide), SITE.url).toString();
-const hero = guide.data.heroImage;
-const editorialDesk = getEditorialDeskForSection(guide.data.section);
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  '@id': `${canonical}#article`,
-  headline: guide.data.title,
-  description: guide.data.description,
-  datePublished: isoDate(guide.data.publishedAt),
-  dateModified: isoDate(guide.data.updatedAt),
-  inLanguage: 'en',
-  isAccessibleForFree: true,
-  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  image: hero ? new URL(hero.src, SITE.url).toString() : undefined,
-  author: {
-    '@type': 'Organization',
-    '@id': new URL(guide.data.author.url, SITE.url).toString(),
-    name: guide.data.author.name,
-    url: new URL(guide.data.author.url, SITE.url).toString(),
-    parentOrganization: { '@id': `${SITE.url}/#organization` },
+const { guide } = Astro.props as { guide: Guide };
+const relatedTools = guide.relatedTools.map(getTool).filter((tool) => Boolean(tool));
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.title,
+    description: guide.description,
+    datePublished: guide.publishedAt,
+    dateModified: guide.updatedAt,
+    author: { '@id': `${SITE.url}/#organization` },
+    publisher: { '@id': `${SITE.url}/#organization` },
+    mainEntityOfPage: new URL(`/guides/${guide.slug}/`, SITE.url).toString(),
   },
-  publisher: { '@id': `${SITE.url}/#organization` },
-};
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-    { '@type': 'ListItem', position: 2, name: sectionLabel(guide.data.section), item: new URL(sectionUrl(guide.data.section), SITE.url).toString() },
-    { '@type': 'ListItem', position: 3, name: guide.data.title, item: canonical },
-  ],
-};
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/guides/', SITE.url).toString() },
+      { '@type': 'ListItem', position: 3, name: guide.title, item: new URL(`/guides/${guide.slug}/`, SITE.url).toString() },
+    ],
+  },
+];
 ---
 
-<BaseLayout
-  title={guide.data.title}
-  description={guide.data.description}
-  image={hero?.src}
-  imageAlt={hero?.alt}
-  type="article"
-  activeNav={sectionUrl(guide.data.section)}
->
-  <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-  </Fragment>
-
-  <article>
-    <header class="article-hero">
-      <div class="shell visual-shell">
-        <div class="article-hero__copy">
-          <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <a href="/">Home</a><span aria-hidden="true">/</span>
-            <a href={sectionUrl(guide.data.section)}>{sectionLabel(guide.data.section)}</a><span aria-hidden="true">/</span>
-            <span aria-current="page">Field guide</span>
-          </nav>
-          <p class="eyebrow">{sectionLabel(guide.data.section)}</p>
-          <h1>{guide.data.title}</h1>
-          <p class="article-dek">{guide.data.summary}</p>
-          <div class="article-meta">
-            <span>By <a href={guide.data.author.url}>{guide.data.author.name}</a></span>
-            <span>Published {formatEditorialDate(guide.data.publishedAt)}</span>
-            <span>Checked {formatEditorialDate(guide.data.checkedAt)}</span>
-          </div>
-        </div>
-        {hero && (
-          <figure class="article-hero__figure">
-            <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" />
-            <a class="article-hero__fullsize" href={hero.src} target="_blank" rel="noopener noreferrer">Open full-size diagram <span aria-hidden="true">↗</span></a>
-            {(hero.caption || hero.credit) && <figcaption>{hero.caption} <span>Visual: {hero.credit} · {hero.license}</span></figcaption>}
-          </figure>
-        )}
+<BaseLayout title={guide.title} description={guide.description} type="article" activeNav="/guides/" schema={schema}>
+  <article class="guide-article">
+    <header class="guide-hero">
+      <div class="article-shell">
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>{guide.category}</span></nav>
+        <p class="eyebrow">{guide.category} · {guide.readTime}</p>
+        <h1>{guide.title}</h1>
+        <p class="guide-deck">{guide.intro}</p>
+        <div class="article-meta"><span>Published {guide.publishedAt}</span><span>Updated {guide.updatedAt}</span><span>By Dama Workshop</span></div>
       </div>
     </header>
 
-    <div class="shell article-layout">
-      <aside class="article-sidebar"><TableOfContents headings={headings} moduleTitles={guide.data.modules.map((module) => module.title)} /></aside>
-      <div class="article-column">
-        <section class="at-a-glance" id="at-a-glance" aria-labelledby="at-a-glance-title">
-          <p class="eyebrow">Field notes</p>
-          <h2 id="at-a-glance-title">At a glance</h2>
-          <dl>{guide.data.atAGlance.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
+    <div class="article-shell article-body">
+      <nav class="article-toc" aria-label="On this page"><strong>On this page</strong><ol>{guide.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.heading}</a></li>)}</ol></nav>
+      {guide.sections.map((section, index) => (
+        <section id={`section-${index + 1}`}>
+          <span class="section-number">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {section.bullets && <ul class="check-list">{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}
         </section>
-
-        <section class="editorial-value" id="editorial-value" aria-labelledby="editorial-value-title">
-          <p class="eyebrow">Original contribution</p>
-          <h2 id="editorial-value-title">Why this guide exists</h2>
-          <dl>
-            <div><dt>Reader question</dt><dd>{guide.data.editorialValue.question}</dd></div>
-            <div><dt>What this page adds</dt><dd>{guide.data.editorialValue.contribution}</dd></div>
-            <div><dt>Limits</dt><dd>{guide.data.editorialValue.limits}</dd></div>
-          </dl>
-        </section>
-
-        {guide.data.modules.map((module, index) => <GuideModule module={module} index={index} />)}
-
-        <div class="article-body"><Content /></div>
-
-        <section class="source-box" id="sources">
-          <p class="eyebrow">Verification desk</p>
-          <h2>Sources and what each one verifies</h2>
-          <p>Sources are linked for a defined job. They do not imply that the organization endorses Dama Korea.</p>
-          <ol>
-            {guide.data.sources.map((source) => (
-              <li>
-                <h3><a href={source.url} rel="external">{source.label}</a></h3>
-                <p>{source.role}</p>
-                <small>Source checked {formatEditorialDate(source.checkedAt)}</small>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section class="change-log" id="change-log">
-          <p class="eyebrow">Editorial record</p>
-          <h2>Change log</h2>
-          <ol>{guide.data.changes.map((change) => <li><time datetime={isoDate(change.date)}>{formatEditorialDate(change.date)}</time><span>{change.summary}</span></li>)}</ol>
-          <p>See something that changed? <a href="/contact/">Send a correction with the page URL and an official source.</a></p>
-        </section>
-
-        <section class="author-box" id="author" aria-labelledby="author-box-title">
-          <p class="eyebrow">Responsible desk</p>
-          <h2 id="author-box-title"><a href={guide.data.author.url}>{guide.data.author.name}</a></h2>
-          <p>{editorialDesk.description}</p>
-          <p><strong>Scope:</strong> {editorialDesk.role}. {editorialDesk.limits}</p>
-          <a class="text-link" href={guide.data.author.url}>Read the verification method and published work →</a>
-        </section>
-      </div>
+      ))}
+      <aside class="takeaway"><span>Bottom line</span><p>{guide.takeaway}</p></aside>
+      <div class="article-disclosure"><strong>How this guide was made</strong><p>Dama Workshop writes from standard workshop math and clearly stated construction assumptions. We do not claim hands-on testing that did not occur. Corrections are logged through the public contact channel.</p></div>
     </div>
   </article>
-
-  {relatedGuides.length > 0 && (
-    <section class="section section--paper">
-      <div class="shell">
-        <div class="section-head"><div><p class="eyebrow">Continue in context</p><h2>Related field guides</h2></div></div>
-        <div class="guide-grid">{relatedGuides.map((item) => <GuideCard guide={item} />)}</div>
-      </div>
-    </section>
-  )}
+  <section class="section section--paper"><div class="shell"><div class="section-head"><div><p class="eyebrow">Use the numbers</p><h2>Related calculators</h2></div></div><div class="tool-grid">{relatedTools.map((tool) => tool && <ToolCard tool={tool} compact />)}</div></div></section>
 </BaseLayout>

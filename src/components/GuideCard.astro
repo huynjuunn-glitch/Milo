@@ -1,29 +1,12 @@
 ---
-import type { GuideEntry } from '../lib/guides';
-import { formatEditorialDate, guideUrl, sectionLabel } from '../lib/guides';
+import type { Guide } from '../data/guides';
 
-const { guide, featured = false } = Astro.props as { guide: GuideEntry; featured?: boolean };
+const { guide } = Astro.props as { guide: Guide };
 ---
 
-<article class:list={['guide-card', { 'guide-card--featured': featured }] }>
-  {guide.data.heroImage && (
-    <div class="guide-card__image">
-      <img
-        src={guide.data.heroImage.src}
-        width={guide.data.heroImage.width}
-        height={guide.data.heroImage.height}
-        alt=""
-        loading="lazy"
-      />
-    </div>
-  )}
-  <div class="guide-card__body">
-    <p class="guide-card__kicker">{sectionLabel(guide.data.section)}</p>
-    <h3><a href={guideUrl(guide)}>{guide.data.title}</a></h3>
-    <p>{guide.data.description}</p>
-    <div class="guide-card__meta">
-      <span>{guide.data.category.replace('-', ' ')}</span>
-      {guide.data.updatedAt && <span>Checked {formatEditorialDate(guide.data.checkedAt ?? guide.data.updatedAt)}</span>}
-    </div>
-  </div>
-</article>
+<a class="guide-card" href={`/guides/${guide.slug}/`}>
+  <div><span>{guide.category}</span><span>{guide.readTime}</span></div>
+  <h3>{guide.title}</h3>
+  <p>{guide.description}</p>
+  <strong>Read the guide →</strong>
+</a>

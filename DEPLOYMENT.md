@@ -1,4 +1,4 @@
-# Cloudflare Pages Deployment
+# Dama Workshop — Cloudflare Pages deployment
 
 The GitHub repository `huynjuunn-glitch/Milo` is connected to Cloudflare Pages. A push to `main` triggers the production build and deployment.
 
@@ -18,14 +18,14 @@ No API key is required by the current static site.
 
 1. Run `npm run quality` locally. It uses the same build and post-build checks as Cloudflare Pages.
 2. Confirm that Astro reports zero errors and warnings.
-3. Review the home page, one category page and at least two article pages at desktop and mobile widths.
+3. Review the home page, calculator library, two calculators and one guide at desktop and mobile widths.
 4. Verify `dist/sitemap-index.xml`, `robots.txt`, `ads.txt` and redirects.
 5. Check `git diff` and ensure no environment file or generated `dist/` output is included.
 
 ## After Cloudflare deploys
 
 1. Open `https://damaheritage.com/` in a private browser window.
-2. Check `/start-here/`, `/seoul-palaces/`, `/gyeongju/`, `/korean-temples/`, `/visit/`, `/culture/`, `/tools/` and a guide URL.
-3. Confirm that `/archive`, `/blog`, `/guides/first-trip-korea-checklist` and `/guides/naver-map-for-foreigners` redirect with and without trailing slashes.
+2. Check `/tools/`, at least two calculator URLs, `/guides/`, a guide URL and `/about/`.
+3. Confirm that an intentionally invalid URL renders the custom 404 page.
 4. Submit the generated sitemap at `https://damaheritage.com/sitemap-index.xml` in Google Search Console.
 5. Inspect representative URLs in Search Console before requesting an AdSense review.

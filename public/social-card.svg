@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#f7f5ef"/><circle cx="940" cy="170" r="105" fill="#f2b84b"/><path d="M650 630 840 270l120 150 95-110 145 210v110z" fill="#173f35"/><rect x="110" y="100" width="70" height="70" rx="20" fill="#173f35"/><text x="145" y="151" text-anchor="middle" font-family="serif" font-size="42" fill="white">담</text><text x="110" y="285" font-family="Georgia,serif" font-size="88" fill="#17211d">Korea, made easier.</text><text x="115" y="350" font-family="Arial,sans-serif" font-size="28" fill="#627069">Practical guides for visiting, moving to and living in Korea.</text><text x="115" y="520" font-family="Arial,sans-serif" font-weight="bold" font-size="24" fill="#173f35">DAMA KOREA</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Dama Workshop</title>
+  <desc id="desc">Woodworking calculators for shop math, layout and material planning.</desc>
+  <rect width="1200" height="630" fill="#f4f1e9"/>
+  <path d="M0 0h1200v630H0z" fill="none" stroke="#18201d" stroke-width="28"/>
+  <g opacity=".08" stroke="#18201d"><path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200"/><path d="M90 0v630M180 0v630M270 0v630M360 0v630M450 0v630M540 0v630M630 0v630M720 0v630M810 0v630M900 0v630M990 0v630M1080 0v630"/></g>
+  <rect x="75" y="76" width="92" height="92" rx="5" fill="#18201d"/>
+  <path fill="#dbe967" d="M91 92h32c17 0 28 11 28 30s-11 30-28 30H91V92Zm18 16v28h13c7 0 11-5 11-14s-4-14-11-14h-13Z"/>
+  <text x="190" y="133" fill="#18201d" font-family="Georgia,serif" font-size="58" font-weight="700">Dama</text>
+  <text x="194" y="159" fill="#18201d" font-family="Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="8">WORKSHOP</text>
+  <text x="75" y="335" fill="#18201d" font-family="Georgia,serif" font-size="82">Less shop math.</text>
+  <text x="75" y="425" fill="#c84d1b" font-family="Georgia,serif" font-size="82">More making.</text>
+  <rect x="75" y="495" width="750" height="54" fill="#dbe967"/>
+  <text x="98" y="530" fill="#18201d" font-family="monospace" font-size="23">FRACTIONS · CUT LISTS · CABINETRY · LUMBER</text>
+</svg>
