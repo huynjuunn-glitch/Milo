@@ -1,30 +1,33 @@
 ---
-import { NAVIGATION } from '../data/site';
-
-const { activeNav } = Astro.props as { activeNav?: string };
+import { NAVIGATION, SITE } from "../data/site";
+const { activeNav } = Astro.props;
 ---
 
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href="/" aria-label="Dama Workshop home">
-      <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true">
-        <path d="M7 8h16c8 0 13 5 13 13S31 34 23 34H7V8Zm8 7v12h7c4 0 6-2 6-6s-2-6-6-6h-7Z" fill="currentColor" />
-      </svg>
-      <span class="brand-type"><strong>Dama</strong><small>WORKSHOP</small></span>
-    </a>
-
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      {NAVIGATION.map((item) => (
-        <a href={item.href} aria-current={activeNav === item.href ? 'page' : undefined}>{item.label}</a>
-      ))}
-    </nav>
-
-    <details class="mobile-nav">
-      <summary aria-label="Open navigation"><span>Menu</span><span aria-hidden="true">＋</span></summary>
-      <nav aria-label="Mobile navigation">
-        {NAVIGATION.map((item) => (
-          <a href={item.href} aria-current={activeNav === item.href ? 'page' : undefined}>{item.label}</a>
-        ))}
+    <a class="brand" href="/" aria-label={`${SITE.name} home`}
+      ><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"
+        ><rect x="2" y="2" width="36" height="36" rx="10" fill="currentColor"
+        ></rect><path
+          d="M12 12h8a8 8 0 0 1 0 16h-8V12Zm5 5v6h3a3 3 0 0 0 0-6h-3Z"
+          fill="white"></path></svg
+      ><span class="brand-type"
+        ><strong>Dama</strong><small>IMAGE PREP</small></span
+      ></a
+    ><nav class="desktop-nav" aria-label="Primary navigation">
+      {
+        NAVIGATION.map((n) => (
+          <a
+            href={n.href}
+            aria-current={activeNav === n.href ? "page" : undefined}
+          >
+            {n.label}
+          </a>
+        ))
+      }
+    </nav><details class="mobile-nav">
+      <summary>Menu</summary><nav aria-label="Mobile navigation">
+        {NAVIGATION.map((n) => <a href={n.href}>{n.label}</a>)}
       </nav>
     </details>
   </div>

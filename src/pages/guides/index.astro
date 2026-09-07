@@ -1,19 +1,29 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import GuideCard from '../../components/GuideCard.astro';
-import ToolCard from '../../components/ToolCard.astro';
-import { guides } from '../../data/guides';
-import { tools } from '../../data/tools';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { guides } from "../../data/guides";
 ---
 
-<BaseLayout title="Woodworking Guides" description="Practical workshop guides to tape measures, saw kerf, board feet, cut lists, drawer slides and cabinet door sizing." activeNav="/guides/">
-  <section class="page-hero page-hero--guides">
-    <div class="shell page-hero__grid"><div><p class="eyebrow">Workshop guides</p><h1>Understand the number<br />before trusting it.</h1></div><p>Concise explanations for the measurements behind the calculators. No invented projects, recycled product lists or anonymous “expert” claims—only transparent methods, examples and limits.</p></div>
-  </section>
-  <section class="section section--paper">
-    <div class="shell guide-index-grid">{guides.map((guide) => <GuideCard guide={guide} />)}</div>
-  </section>
-  <section class="section">
-    <div class="shell"><div class="section-head"><div><p class="eyebrow">Put it to work</p><h2>Useful with the guides</h2></div><a class="text-link" href="/tools/">All calculators →</a></div><div class="tool-grid">{tools.slice(0, 3).map((tool) => <ToolCard tool={tool} compact />)}</div></div>
-  </section>
-</BaseLayout>
+<BaseLayout
+  title="Product Photo Preparation Guides"
+  description="Practical guides to product image framing, thumbnail crops, file quality, naming and browser batch troubleshooting."
+  activeNav="/guides/"
+  ><section class="shell legal-hero">
+    <p class="eyebrow">THE PREP DESK</p><h1>
+      Better decisions before you export.
+    </h1><p>
+      Worked examples and checklists for a repeatable product-photo workflow.
+    </p>
+  </section><section class="shell legal-content guide-grid">
+    {
+      guides.map((g) => (
+        <a class="guide-card" href={`/guides/${g.slug}/`}>
+          <>
+            <span>{g.category.toUpperCase()}</span>
+            <h2>{g.title}</h2>
+            <p>{g.description}</p>
+          </>
+        </a>
+      ))
+    }
+  </section></BaseLayout
+>

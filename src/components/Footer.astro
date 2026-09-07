@@ -1,42 +1,28 @@
 ---
-import { CATEGORIES, SITE } from '../data/site';
+import { SITE } from "../data/site";
 ---
 
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div class="footer-brand">
-      <a class="brand brand--footer" href="/">
-        <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true"><path d="M7 8h16c8 0 13 5 13 13S31 34 23 34H7V8Zm8 7v12h7c4 0 6-2 6-6s-2-6-6-6h-7Z" fill="currentColor" /></svg>
-        <span class="brand-type"><strong>Dama</strong><small>WORKSHOP</small></span>
-      </a>
-      <p>Practical woodworking calculators built for the moment between a sketch and a cut.</p>
-    </div>
-    <div>
-      <h2>Tool groups</h2>
-      <ul>
-        {Object.entries(CATEGORIES).map(([key, category]) => <li><a href={`/tools/#${key}`}>{category.label}</a></li>)}
-      </ul>
-    </div>
-    <div>
-      <h2>Site</h2>
-      <ul>
-        <li><a href="/guides/">Workshop guides</a></li>
-        <li><a href="/about/">How calculations are made</a></li>
-        <li><a href="/standards/">Calculation standards</a></li>
-        <li><a href="/changelog/">Verification log</a></li>
-        <li><a href="/contact/">Contact & corrections</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Legal</h2>
-      <ul>
-        <li><a href="/privacy/">Privacy</a></li>
-        <li><a href="/terms/">Terms & disclaimer</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="shell footer-bottom">
-    <p>© {new Date().getFullYear()} {SITE.name}. Calculations run locally in your browser.</p>
-    <p>Measure twice. Test on scrap. Cut once.</p>
-  </div>
+      <a class="brand" href="/"
+        ><span class="brand-type"
+          ><strong>Dama</strong><small>IMAGE PREP</small></span
+        ></a
+      ><p>
+        Less repetitive prep. More time for your shop.<br />An independent tool,
+        not affiliated with Etsy or Shopify.
+      </p>
+    </div><nav class="footer-links" aria-label="Footer navigation">
+      <a href="/guides/">Photo guides</a><a href="/standards/"
+        >Limits & methods</a
+      ><a href="/about/">About</a><a href="/contact/">Contact & corrections</a
+      ><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a
+        href="/changelog/">Release notes</a
+      >
+    </nav>
+  </div><p class="shell footer-bottom">
+    © {new Date().getFullYear()}{" "}{SITE.name}. Image processing happens on
+    your device.
+  </p>
 </footer>

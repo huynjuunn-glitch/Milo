@@ -1,11 +1,11 @@
 {
-  "name": "Dama Workshop",
+  "name": "Dama Image Prep",
   "short_name": "Dama",
-  "description": "Practical woodworking calculators for the shop.",
-  "start_url": "/tools/",
+  "description": "Local product photo resizing, framing and batch export.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#f4f1e9",
-  "theme_color": "#18201d",
+  "background_color": "#f5f7fa",
+  "theme_color": "#135ceb",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]

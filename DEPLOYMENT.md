@@ -1,31 +1,11 @@
-# Dama Workshop — Cloudflare Pages deployment
+# Dama Image Prep — existing Cloudflare Pages deployment
 
-The GitHub repository `huynjuunn-glitch/Milo` is connected to Cloudflare Pages. A push to `main` triggers the production build and deployment.
+Keep the existing GitHub `huynjuunn-glitch/Milo` → Cloudflare Pages connection. Production branch: `main`; framework: Astro; build command: `npm run build`; public output: `dist`. Node version follows `.node-version`. No Functions, R2, D1, API secret or upload endpoint is required.
 
-## Cloudflare build settings
+Before a production push: run `npm run quality`, review the exact diff, and obtain the operator's go-ahead to replace the live site. Do not commit generated dist, local test outputs or secrets.
 
-- Framework preset: Astro
-- Production branch: `main`
-- Build command: `npm run build`
-- Build output directory: `dist`
-- Node.js: 22.16.0, pinned in `.node-version` (Astro requires Node 22.12 or later)
+After deployment: verify `/`, `/guides/`, a guide, privacy and a genuine unknown-route 404; run a small local-file batch through preparation, crop review, individual/ZIP download and saved-settings reload on desktop and mobile. Test going to a guide and back with a prepared batch. Confirm the deployed response has no injected analytics/ad script before relying on the stated privacy policy.
 
-`npm run build` runs Astro diagnostics, generates `dist/` and then invokes the site QA script through the `postbuild` lifecycle. A failed route, metadata, redirect, structured-data, image or advertising-state check therefore stops the Cloudflare build.
+The canonical domain remains https://damaheritage.com. Old woodworking URLs have no relevant replacements and should return genuine 404s, not redirect en masse to the homepage. Sitemap: `/sitemap-index.xml`. Review new URLs in Search Console; sitemap submission or indexing does not guarantee AdSense approval.
 
-No API key is required by the current static site.
-
-## Before pushing
-
-1. Run `npm run quality` locally. It uses the same build and post-build checks as Cloudflare Pages.
-2. Confirm that Astro reports zero errors and warnings.
-3. Review the home page, calculator library, two calculators and one guide at desktop and mobile widths.
-4. Verify `dist/sitemap-index.xml`, `robots.txt`, `ads.txt` and redirects.
-5. Check `git diff` and ensure no environment file or generated `dist/` output is included.
-
-## After Cloudflare deploys
-
-1. Open `https://damaheritage.com/` in a private browser window.
-2. Check `/tools/`, at least two calculator URLs, `/guides/`, a guide URL and `/about/`.
-3. Confirm that an intentionally invalid URL renders the custom 404 page.
-4. Submit the generated sitemap at `https://damaheritage.com/sitemap-index.xml` in Google Search Console.
-5. Inspect representative URLs in Search Console before requesting an AdSense review.
+Cloudflare Pages static asset requests are currently free and unlimited; platform build/file limits still apply. User-selected images are local browser data, not deployed assets or server uploads. Domain registration cost is separate.

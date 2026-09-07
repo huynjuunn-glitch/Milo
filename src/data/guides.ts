@@ -1,286 +1,316 @@
-import type { SourceKey } from './tools';
-
-export type GuideSection = {
-  heading: string;
-  paragraphs: string[];
-  bullets?: string[];
-};
-
 export type Guide = {
   slug: string;
   title: string;
   description: string;
   category: string;
-  readTime: string;
-  publishedAt: string;
-  updatedAt: string;
-  intro: string;
-  sections: GuideSection[];
-  takeaway: string;
-  relatedTools: string[];
-  sourceKeys: SourceKey[];
+  sections: { title: string; paragraphs: string[]; steps?: string[] }[];
+  example?: { headers: string[]; rows: string[][] };
+  source?: { title: string; url: string };
+  diagram?: boolean;
 };
-
 export const guides: Guide[] = [
   {
-    slug: 'how-to-read-a-tape-measure',
-    title: 'How to Read a Tape Measure Without Guessing',
-    description: 'A practical system for reading fractional-inch marks, reducing mistakes and transferring measurements in the workshop.',
-    category: 'Measurement',
-    readTime: '7 min read',
-    publishedAt: '2026-09-04',
-    updatedAt: '2026-09-04',
-    intro: 'A tape measure looks simple until a plan calls for 13 11/16 inches and the workpiece is upside down on the bench. Reliable measurement is less about memorizing every tick and more about using a repeatable reading and marking routine.',
+    slug: "fit-vs-fill",
+    title: "Fit or fill: keep the important edges in your product photos",
+    description:
+      "Compare exact fit and crop calculations, choose a margin, and avoid cutting important details out of product images.",
+    category: "Framing",
+    diagram: true,
     sections: [
       {
-        heading: 'Understand the hierarchy of marks',
+        title: "Start with what cannot be cut off",
         paragraphs: [
-          'On a common imperial tape, the longest numbered marks indicate whole inches. The next-longest mark splits the inch in half, the next level indicates quarters, and shorter marks divide the inch into eighths and sixteenths. Each level doubles the denominator because it doubles the number of equal spaces.',
-          'Read from the largest known division toward the smallest. For 11/16, locate 1/2, move past 5/8, and land one sixteenth later. This is faster and less error-prone than counting eleven tiny marks from zero.',
-        ],
-        bullets: ['Whole inch: numbered line', 'Half inch: 1/2', 'Quarter inch: 1/4 and 3/4', 'Eighth inch: odd eighths between quarters', 'Sixteenth inch: shortest standard marks'],
-      },
-      {
-        heading: 'Reduce fractions before taking them to the tape',
-        paragraphs: [
-          'A calculated answer such as 24/32 is mathematically correct but visually awkward. Divide numerator and denominator by their greatest common factor: 24/32 becomes 3/4. Reduced fractions match the hierarchy printed on the tape and make the target mark easier to recognize.',
-          'When a decimal measurement comes from software, select a shop precision before converting. Rounding 6.683 inches to 1/16 produces 6 11/16. Rounding to 1/32 produces 6 11/16 as well, but the converter should still show the rounding error so you understand what was discarded.',
+          "Before choosing a size, identify what makes the product understandable: its entire outline, a handle, the number of pieces included, or the label. If any of these touches the edge of the original, filling a different shape is risky.",
+          "Fit preserves the entire source photograph. Fill covers the output canvas and crops whatever extends beyond it. Neither mode recognizes your product or removes its background. A margin adds space around the photograph, not automatically around the product itself.",
         ],
       },
       {
-        heading: 'Use one reference edge',
+        title: "A worked example: landscape to square",
         paragraphs: [
-          'Choose a reference face and reference edge after milling, mark them, and take related measurements from those same surfaces. Switching edges silently transfers thickness variation and out-of-square errors into the layout.',
-          'For repeated marks, calculate and mark every position from the same zero point. Stepping 6 13/32 inches six times allows each pencil and rounding error to accumulate. A list of cumulative marks—6 13/32, 12 13/16, 19 7/32—keeps each mark independent.',
+          "Take a 3000 × 2000 photo and a 2000 × 2000 output. With Fit, no margin and no enlargement, the scale is 2000 ÷ 3000, or two-thirds. The image becomes approximately 2000 × 1333 pixels, leaving about 333 pixels above and below it. Fractional edges are rendered with browser interpolation.",
+          "With Fill, the scale is one. The image remains 3000 × 2000, and the canvas shows only 2000 pixels of its width. A centered crop discards 500 pixels from each side. Left position keeps the left edge and removes all 1000 excess pixels from the right.",
         ],
       },
       {
-        heading: 'Account for the tape hook and the pencil line',
+        title: "What the margin setting actually does",
         paragraphs: [
-          'The metal hook is designed to slide by approximately its own thickness so inside and outside measurements share the same zero. A bent, clogged or loose hook beyond its intended travel changes every measurement. Compare the first few inches against a trusted rule before precision work.',
-          'A thick pencil line is a range, not a coordinate. Use a knife line for joinery, or consistently keep the saw kerf on the waste side of a sharp pencil mark. Label the waste side immediately so the correct half of the line survives the cut.',
+          "A 5% margin on a 2000 × 2000 canvas reserves 100 pixels along each edge. Fit places the image inside the remaining 1800 × 1800 area. A 3000 × 2000 source therefore becomes 1800 × 1200, with 100-pixel side margins and 400-pixel top and bottom margins.",
+          "Margin is ignored in Fill mode. When enlargement is off and a source is too small to cover the output, the tool adds background instead of stretching it. If a frame must be completely filled, you need a larger original or must deliberately enable enlargement.",
+        ],
+      },
+      {
+        title: "A reliable decision routine",
+        paragraphs: [
+          "For a varied batch, Fit is the safer starting point because it preserves source content. That does not mean every result will have equal apparent product size: empty space already inside an original remains.",
+        ],
+        steps: [
+          "Prepare one representative landscape photo and one portrait photo.",
+          "Open Check crops on each result. Look for missing edges and unreadable labels.",
+          "Use Fill only when the removed background is expendable. Move the crop position if the subject is off-center.",
+          "If the source contains too much empty space, frame it in an image editor first. This tool does not provide per-photo manual crop handles.",
+          "Review the final downloaded file and the storefront preview before publishing.",
         ],
       },
     ],
-    takeaway: 'Read marks by halves, reduce the fraction, work from one reference edge and keep the cutting tool on the waste side. Those four habits prevent more mistakes than memorizing a chart.',
-    relatedTools: ['fraction-calculator', 'decimal-fraction-converter', 'equal-spacing-calculator'],
-    sourceKeys: ['nistLength', 'nistHandbook'],
+    source: {
+      title: "Canvas drawImage: destination size and image scaling",
+      url: "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage",
+    },
   },
   {
-    slug: 'saw-kerf-explained',
-    title: 'Saw Kerf Explained: The Missing Eighth Inch',
-    description: 'Understand how blade kerf changes cut lists, repeated-part yield and which side of a layout line to cut.',
-    category: 'Cutting',
-    readTime: '6 min read',
-    publishedAt: '2026-09-04',
-    updatedAt: '2026-09-04',
-    intro: 'Kerf is the slot removed by a cutting tool. It is small enough to ignore once and large enough to ruin the final part when ignored repeatedly. Planning with kerf connects the numbers on a cut list to the physical loss created by the blade.',
+    slug: "thumbnail-crop-checklist",
+    title: "Check the thumbnail, not just the full-size product photo",
+    description:
+      "Use square, landscape and portrait crop checks to find clipped product edges before publishing a listing.",
+    category: "Thumbnail checks",
     sections: [
       {
-        heading: 'Blade thickness is not always kerf width',
+        title: "The file and the storefront are different frames",
         paragraphs: [
-          'A circular-saw or table-saw blade has a steel plate and cutting teeth. The teeth can project wider than the plate, so the slot they leave may be wider than the plate itself. Runout, tooth geometry and blade condition also influence the actual cut.',
-          'For a generous rough estimate, the kerf printed by the manufacturer is adequate. For a tight repeated layout, make one clean cut in representative material and measure the slot or compare the before-and-after width with reliable calipers.',
+          "A 2000 × 2000 export is square, but a website can display it in a differently shaped container. A theme or search layout may crop the sides, add empty space, or use a focal point. The source file alone does not tell you exactly what a shopper will see.",
+          "Dama shows center crops of your prepared image at 1:1, 4:3 and 3:4. These are geometric checks, not a reproduction of any marketplace screen. The crop previews do not change the downloaded file.",
         ],
       },
       {
-        heading: 'Place the kerf on the waste side',
+        title: "How much a new crop can remove",
         paragraphs: [
-          'The layout line represents the finished edge. If the blade is centered on that line, roughly half the kerf is removed from the intended part. Instead, align the edge of the tooth with the waste side so the full line remains on the keeper piece until the final pass.',
-          'A stop block changes the workflow: set the distance from the stop to the correct side of the blade, make a test piece, and measure that piece before producing the batch. Do not compensate by nudging every board by eye.',
+          "Starting with a 2000 × 2000 square, a centered 4:3 frame retains the full width but only 1500 pixels of height. The top and bottom each lose 250 pixels. A centered 3:4 frame instead loses 250 pixels from each side.",
+          "In percentage terms, an important detail sitting inside the outer 12.5% of a square is at risk in one of these previews. This is a check for these specific ratios, not a universal safe-area rule. Actual storefronts can use different shapes or positions.",
         ],
       },
       {
-        heading: 'Count cuts, not gaps between finished pieces',
+        title: "Inspect meaning, not just symmetry",
         paragraphs: [
-          'A conservative cut-list estimate charges one kerf for every finished piece. A factory end can occasionally eliminate a final cut, but rough stock often needs squaring and the last offcut may not be usable. Conservative planning is more useful than a theoretical result that leaves no room for cleanup.',
-          'For eight 11 7/8-inch parts with a 1/8-inch blade, the parts consume 95 inches and eight kerfs consume another inch. That fills a 96-inch board exactly before any end trim. A quarter-inch squaring allowance means the same list no longer fits.',
+          "A centered subject is not automatically a good thumbnail. A thin necklace can remain fully inside the frame but become too small to understand. A group of products may fit while hiding how many pieces are included.",
+        ],
+        steps: [
+          "Check the full product boundary, including handles, sleeves, stems and cables.",
+          "Check that a crop does not change the apparent quantity or exclude an included accessory.",
+          "View the preview at its small display size. Do not rely only on zoomed detail.",
+          "Use a separate detail image if a label needs close inspection; do not force every detail into the first image.",
+          "After uploading, inspect the listing and collection/search previews provided by your platform.",
         ],
       },
       {
-        heading: 'Separate budgeting from final layout',
+        title: "When the three previews disagree",
         paragraphs: [
-          'A calculator answers whether dimensions fit in ideal straight stock. The final shop layout must also respond to knots, checks, bow, grain direction, color matching and the sequence of reference cuts. Buy and rough-cut with enough margin for those decisions.',
+          "If one crop clips the subject, return to Fit and add more margin, then prepare the batch again. If the subject becomes too small in every preview, a new source composition may be necessary. Adding more pixels does not fix composition.",
+          "Etsy provides its own image and thumbnail guidance. Read that alongside these checks, especially when a listing layout changes. Dama presets are independent starting sizes rather than official Etsy templates.",
         ],
-        bullets: ['Use measured kerf for tight batches', 'Reserve stock for squaring ends', 'Mark the waste side', 'Test one finished part before cutting the run'],
       },
     ],
-    takeaway: 'Kerf is a material cost and a positioning decision. Measure it, count it, and place it entirely on the waste side of the finished line.',
-    relatedTools: ['kerf-calculator', 'cut-list-optimizer', 'fraction-calculator'],
-    sourceKeys: ['oshaWoodworking', 'nistLength'],
+    source: {
+      title: "Etsy: image requirements and thumbnail best practices",
+      url: "https://help.etsy.com/hc/en-us/articles/115015663347-Requirements-and-Best-Practices-for-Images-in-Your-Etsy-Shop",
+    },
   },
   {
-    slug: 'board-feet-and-lumber-buying',
-    title: 'Board Feet, Quarter Sawn Labels and a Real Lumber Budget',
-    description: 'Translate rough-lumber dimensions and board-foot prices into a usable project purchase estimate.',
-    category: 'Materials',
-    readTime: '8 min read',
-    publishedAt: '2026-09-04',
-    updatedAt: '2026-09-04',
-    intro: 'Hardwood is commonly priced by volume rather than by a simple per-board sticker. Understanding board feet lets you compare sizes, estimate a project and recognize why the final invoice differs from the neat finished dimensions on a drawing.',
+    slug: "consistent-product-grid",
+    title: "Build a consistent product grid without stretching photos",
+    description:
+      "Understand why equal image dimensions do not guarantee equal product scale, and prepare a coherent listing gallery.",
+    category: "Shop presentation",
     sections: [
       {
-        heading: 'What one board foot represents',
+        title: "Standardize the frame before the subject",
         paragraphs: [
-          'One board foot is 144 cubic inches: a board 1 inch thick, 12 inches wide and 12 inches long. Any combination with the same volume is also one board foot. A 2-inch-thick board that is 6 inches wide and 12 inches long has the same 144-cubic-inch volume.',
-          'The working formula is thickness in inches multiplied by width in inches multiplied by length in inches, divided by 144. Multiply by quantity only after confirming whether the dimensions describe every board or an average.',
+          "Choose a single aspect ratio for the images that belong together. A square is a convenient starting shape, but your storefront theme and product type should decide the final choice. Use the same output width and height for the batch.",
+          "Do not distort a portrait photo into a square by changing width and height independently. Dama scales both axes by the same factor and either adds a background or crops the overflow. Circular objects remain circular.",
         ],
       },
       {
-        heading: 'Quarter notation describes rough thickness',
+        title: "Equal canvases can still look inconsistent",
         paragraphs: [
-          'Rough hardwood thickness is often written in quarters: 4/4 is nominally one inch, 5/4 is one and one-quarter inches, and 8/4 is two inches before surfacing. The usable finished thickness is smaller after flattening and planing.',
-          'Ask whether the dealer calculates board feet from the nominal rough thickness or the actual surfaced thickness. Also ask whether lengths are tallied exactly or rounded up to a pricing increment. The calculator can reproduce either convention only when you enter the convention the seller uses.',
+          "Imagine two 2000 × 2000 originals. In the first, a product occupies 80% of the frame height. In the second, it occupies 40%. Exporting both to the same size with the same margin preserves that difference: the first product will still appear twice as tall.",
+          "This tool does not detect product boundaries. Its padding applies to the source rectangle. If a source already has excessive empty space, adding margin compounds it. Adjust that original’s framing first, or separate it from the batch.",
         ],
       },
       {
-        heading: 'Waste is not one universal percentage',
+        title: "A portrait source on a square canvas",
         paragraphs: [
-          'A simple painted project using straight, uniform stock may need only 10–15% extra. Furniture that requires grain continuity, color matching and clear faces can require 20–35%. Wide, defect-prone or live-edge boards need decisions that a percentage cannot capture.',
-          'Break the allowance into causes: milling loss, crosscut defects, rip-width combinations, grain selection and one recovery part. This turns “buy 20% extra” into a plan rather than a superstition.',
+          "A 1600 × 2400 source fitted to 2000 × 2000 with zero margin becomes approximately 1333 × 2000, with about 333 pixels of padding at each side. With a 5% margin it becomes 1200 × 1800.",
+          "Filling the same square would require a 1.25× enlargement and would remove top and bottom content. With Dama’s default “Allow enlarging” turned off, it will not perform that enlargement; some padding remains. This is intentional protection against silently stretching a small original.",
         ],
-        bullets: ['Milling and squaring allowance', 'Knots, checks and sapwood exclusions', 'Grain and color matching', 'One replacement part for risky operations'],
       },
       {
-        heading: 'Build the purchase estimate in two passes',
+        title: "Check the collection, not just one listing",
         paragraphs: [
-          'First, calculate the clean finished volume from the project list. Second, convert each finished thickness and width into realistic rough stock and add the appropriate waste. Apply the supplier’s price only after this second pass.',
-          'The result remains an estimate until actual boards are selected. Random-width lumber can be efficient when part widths are flexible, but it requires evaluating every board against the cut list before purchase.',
+          "Shopify notes that matching aspect ratios can help collection images look consistent. Your theme still controls display behavior, so a local preview cannot guarantee the final grid.",
+        ],
+        steps: [
+          "Compare representative products side by side after uploading.",
+          "Check background tone as well as the border color. Added white padding cannot remove a gray studio background inside a source.",
+          "Keep intentional close-ups separate from primary product images.",
+          "Inspect phone and desktop layouts in your actual theme.",
+          "Save your Dama settings only after the final storefront check.",
         ],
       },
     ],
-    takeaway: 'Calculate clean volume, translate it into rough stock, add waste for specific reasons, and verify how the yard tallies thickness and length.',
-    relatedTools: ['board-foot-calculator', 'cut-list-optimizer', 'plywood-sheet-estimator'],
-    sourceKeys: ['woodHandbook'],
+    source: {
+      title: "Shopify: product media types and image presentation",
+      url: "https://help.shopify.com/en/manual/products/product-media/product-media-types",
+    },
   },
   {
-    slug: 'cut-list-planning-workflow',
-    title: 'A Cut-List Workflow That Survives the Workshop',
-    description: 'Turn project dimensions into a reliable milling and cutting sequence without losing reference faces or grain decisions.',
-    category: 'Planning',
-    readTime: '8 min read',
-    publishedAt: '2026-09-04',
-    updatedAt: '2026-09-04',
-    intro: 'A cut list is not only a shopping list. It is a record of finished sizes, rough allowances, grain priorities and the order that parts become trustworthy. A good list reduces arithmetic while preserving the choices a computer cannot make.',
+    slug: "file-size-and-quality",
+    title: "Pixels, file size and quality: three different controls",
+    description:
+      "Choose output dimensions and JPG, PNG or WebP using a repeatable comparison instead of a promised file-size target.",
+    category: "File quality",
     sections: [
       {
-        heading: 'Separate finished size from rough size',
+        title: "Dimensions are not a file-size promise",
         paragraphs: [
-          'Keep one column for final thickness, width and length, and a second for the rough blank. If the same number serves both purposes, it becomes impossible to tell whether milling allowance has already been added.',
-          'Long parts often need more length allowance than short parts because end checks and jointer snipe consume a larger absolute distance. Width and thickness allowances depend on stock condition and the flattening process, not a single rule copied to every project.',
+          "Dimensions describe the pixel grid. A 2000 × 2000 image contains four million pixels regardless of whether its encoded file occupies 300 KB or 3 MB. File size also depends on the content, format and encoder. A detailed fabric photograph can need more bytes than a plain background at the same quality setting.",
+          "The quality percentage is an encoder input, not a visual quality score. An 85% setting does not guarantee a specific number of kilobytes or identical results in every browser. Dama displays the actual output file size after preparation; it does not promise a hard KB target.",
         ],
       },
       {
-        heading: 'Name identical-looking parts by role',
+        title: "Choose a format with the image in mind",
         paragraphs: [
-          '“Rail, quantity four” is ambiguous if two rails receive grooves and two receive mortises. Give each part a stable name tied to location or operation: upper front rail, lower back rail, left stile. Labels reduce the chance of machining the correct dimension on the wrong face.',
-          'Mark reference faces and edges on the physical blanks using the same abbreviations that appear on the list. The list then stays connected to the material after parts leave the milling area.',
+          "JPG is a practical starting point for photographs when the destination accepts it. WebP may provide smaller files, but confirm destination support before choosing it. PNG is lossless at the encoding stage and can be useful for sharp graphics, although photo files can be much larger.",
+          "The PNG quality slider is disabled because the canvas PNG encoder ignores that parameter. All Dama exports are composited onto the selected background. This includes transparent PNG and WebP inputs; the tool currently does not preserve transparent backgrounds.",
         ],
       },
       {
-        heading: 'Optimize only after grain decisions',
+        title: "A controlled comparison",
         paragraphs: [
-          'A length optimizer can reduce offcuts, but it cannot see cathedral grain on a door rail, color transitions across a tabletop or a defect hidden under chalk. Choose show faces and matching groups before accepting the shortest theoretical layout.',
-          'Reserve contiguous stock for parts that should visually relate. Run the remaining utility parts through the optimizer and keep the plan as a guide rather than a command.',
+          "Keep the source and dimensions unchanged while comparing compression. Otherwise you cannot tell which control caused a visible change.",
+        ],
+        steps: [
+          "Export a representative photo at the starting quality of 85%.",
+          "Inspect text, fine texture, diagonals and high-contrast edges at normal viewing size and at 100%.",
+          "Export again at 75%, from the original file rather than the previous export.",
+          "Compare both actual file sizes. If edge artifacts or smearing become visible, use the higher quality version.",
+          "Only then apply the chosen settings to the full batch; check more than one result.",
         ],
       },
       {
-        heading: 'Cut one, verify, then batch',
+        title: "What re-encoding can change",
         paragraphs: [
-          'The first completed part tests the arithmetic, machine setup and measuring convention. Compare it with the drawing and mating hardware before producing the rest of the batch. A stop block provides consistency only after its position is correct.',
+          "Re-encoding a compressed source can compound visible damage. Keep originals separately and start each new variation from them. Enlargement adds pixels, not detail; it cannot recover a blurry label.",
+          "Canvas creates a new encoded image rather than copying the original metadata container. Original EXIF/IPTC metadata and color-profile behavior are not preserved as an archival workflow. Browser decoding, color management and interpolation can differ, so compare important product colors against the original.",
+          "If a browser cannot encode the chosen format and returns PNG, the download uses the actual .png extension and displays a fallback notice. Do not rename a .png file to .webp to make it acceptable to a platform.",
         ],
-        bullets: ['Confirm finished size', 'Check joinery reference face', 'Test the mating part or hardware', 'Record any corrected dimension on the master list'],
       },
     ],
-    takeaway: 'Use the optimizer for material allocation, but keep finished size, rough size, reference faces and grain choices under explicit human control.',
-    relatedTools: ['cut-list-optimizer', 'kerf-calculator', 'board-foot-calculator'],
-    sourceKeys: ['woodHandbook', 'oshaWoodworking'],
+    source: {
+      title: "Canvas toBlob: formats, quality and browser fallback",
+      url: "https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob",
+    },
   },
   {
-    slug: 'drawer-slide-clearance-guide',
-    title: 'Drawer Slide Clearances: Measure First, Calculate Second',
-    description: 'Plan drawer-box width and depth around the actual opening and the hardware manufacturer’s requirements.',
-    category: 'Cabinetry',
-    readTime: '7 min read',
-    publishedAt: '2026-09-04',
-    updatedAt: '2026-09-04',
-    intro: 'Drawer slides fail quietly on paper: a familiar half-inch clearance is copied into a design even though the chosen hardware needs something different. The reliable workflow begins with the slide specification and the smallest measured cabinet opening.',
+    slug: "product-photo-workflow",
+    title: "A repeatable product photo batch: from originals to named files",
+    description:
+      "Set a product-code naming pattern, review every export and reuse browser-saved settings for your next listing.",
+    category: "Batch workflow",
+    example: {
+      headers: ["Source name", "Export name"],
+      rows: [
+        ["IMG_1048.jpg", "MUG-042-001.jpg"],
+        ["IMG_1051.jpg", "MUG-042-002.jpg"],
+        ["detail-final.png", "MUG-042-003.jpg"],
+      ],
+    },
     sections: [
       {
-        heading: 'Treat total clearance and per-side clearance differently',
+        title: "One product, one batch",
         paragraphs: [
-          'Many side-mount ball-bearing slides use approximately one-half inch per side, or one inch total. That familiar dimension is not universal. Undermount slides reference inside drawer dimensions, bottom recesses, notches and locking devices. Center-mount and wooden runners use other relationships.',
-          'Write “total side clearance” beside the calculator input. This prevents a one-half-inch-per-side instruction from being subtracted only once, or a total dimension from being subtracted twice.',
+          "Choose a stable identifier such as MUG-042 before adding photos. Dama uses one shared filename prefix per batch, so separating products prevents unrelated images from receiving the same code. Keep your original folder unchanged.",
+          "Files receive sequence numbers in the order shown in the workspace. If order matters, add files in the desired order; operating-system file pickers may return their own ordering. Dama does not currently offer drag-to-reorder. Check and arrange image order inside the marketplace after uploading.",
         ],
       },
       {
-        heading: 'Measure the opening at multiple positions',
+        title: "Make a small test export first",
         paragraphs: [
-          'Measure width at the front, middle and back, then use the smallest relevant width. Check diagonals or use a square to understand whether a narrow reading comes from taper or racking. A perfectly sized rectangular drawer will not travel through a twisted opening.',
-          'Face-frame cabinets may require blocking or rear brackets to place the slide members in one plane. The nominal cabinet width does not reveal that geometry, so calculate from the surfaces that will actually support the hardware.',
+          "Add one landscape image, one portrait image and a detail photo. Choose dimensions, fit, background and format. A convenient default is a square canvas with Fit and a small margin, but review your destination rather than treating the preset as a requirement.",
+          "After Prepare images, compare the actual byte sizes, check crops and save a result. Open the downloaded copy to verify appearance. A successful export only means the browser created a file; it does not guarantee that a marketplace will accept it.",
         ],
       },
       {
-        heading: 'Choose depth from available slide lengths',
+        title: "Naming rules you can predict",
         paragraphs: [
-          'Usable cabinet depth is not automatically drawer depth. Reserve space for the closed front, cabinet back, inset obstacles and the manufacturer’s rear clearance. Select a standard slide length that fits, then make the box depth suit that hardware.',
-          'Check hinge intrusion on pull-out trays and drawers behind doors. A door that opens slightly past 90 degrees can still leave a hinge or door edge inside the drawer path.',
+          "With prefix MUG-042 and first number 1, the first file becomes MUG-042-001.jpg when exported as JPG. Numbers are padded to at least three digits. Prefix characters outside letters A–Z, digits, hyphens and underscores are replaced with hyphens. Empty prefixes become product. The preview shows the final sanitized prefix, including adjustments for reserved filenames.",
+          "Each input keeps its assigned position during processing. If the second image fails, successful exports may be numbered 001 and 003. The gap is useful evidence of a failed file: review the error list and archive contents. Remove a failed file and prepare again if you need a continuous sequence.",
+          "Sequence numbers help organize files; they do not guarantee search rankings or storefront order. Never rely on filenames alone to select a listing’s primary photo.",
         ],
       },
       {
-        heading: 'Verify one physical box before batching',
-        paragraphs: [
-          'Build or dry-assemble one representative box, install both slide members and confirm movement through the full travel. Finish thickness, edge banding and an out-of-square box can consume the small tolerance left by the calculation.',
+        title: "Close the batch deliberately",
+        paragraphs: [],
+        steps: [
+          "Confirm that the number of prepared images matches the number you expect.",
+          "Download the ZIP or save individual successful images. ZIP is an archive, not extra image compression.",
+          "Extract the archive and inspect names, dimensions and appearance.",
+          "Upload to your platform and check the actual listing preview.",
+          "Save settings for next time. The prefix is saved too, so change the product code for a new item.",
+          "Clear the batch when finished. Clearing removes selected files and results from the workspace but leaves your controls and optional saved settings unchanged.",
         ],
-        bullets: ['Use the hardware manual', 'Measure the smallest opening', 'Keep slide members parallel', 'Test one box before batch production'],
+      },
+      {
+        title: "What comes back next visit",
+        paragraphs: [
+          "Saved settings belong to this browser profile on this device. They do not sync with another phone or computer, and clearing site data can remove them. Photos and ZIP files are not saved in a cloud library. Use “Forget saved settings” to delete the stored recipe without changing the controls currently on screen.",
+        ],
       },
     ],
-    takeaway: 'The calculator converts a verified hardware requirement into dimensions; it cannot replace the slide specification or a physical test installation.',
-    relatedTools: ['drawer-box-calculator', 'cabinet-door-calculator', 'shelf-spacing-calculator'],
-    sourceKeys: ['blumRunners'],
+    source: {
+      title: "Browser localStorage: persistence and limitations",
+      url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage",
+    },
   },
   {
-    slug: 'cabinet-door-overlay-and-reveal',
-    title: 'Cabinet Door Overlay and Reveal, Made Measurable',
-    description: 'Understand overlay, inset reveal and paired-door gaps before calculating finished cabinet-door size.',
-    category: 'Cabinetry',
-    readTime: '7 min read',
-    publishedAt: '2026-09-04',
-    updatedAt: '2026-09-04',
-    intro: 'Door sizing becomes straightforward when every gap is assigned to a specific edge. Problems begin when “half-inch overlay” is applied without checking adjacent doors, face-frame width or the hinge’s supported range.',
+    slug: "browser-image-troubleshooting",
+    title: "Why a local image batch can fail—and how to recover",
+    description:
+      "Resolve unsupported formats, large images, memory pressure, failed ZIP downloads and blocked browser settings storage.",
+    category: "Troubleshooting",
     sections: [
       {
-        heading: 'Overlay belongs to an opening edge',
+        title: "A small file can become a large image in memory",
         paragraphs: [
-          'An overlay door extends beyond the opening and covers part of the cabinet face. A one-half-inch overlay on a single opening adds one-half inch at the left, right, top and bottom. Finished width therefore grows by one inch, not one-half inch.',
-          'Shared face-frame stiles can support doors from adjacent openings. Draw the complete front elevation and assign the desired reveal between finished doors before selecting overlay. The hinge must support the resulting door position.',
+          "Compressed bytes are not the same as decoded memory. A 4000 × 3000 photo has 12 million pixels. A basic four-byte-per-pixel buffer alone is about 48 MB before output canvases, thumbnails and browser overhead. Several full-resolution copies can use considerably more.",
+          "Dama processes images sequentially and limits inputs to 24 megapixels, 20 MB per file, 20 images and 100 MB total. Outputs are capped at 12 megapixels per image and 100 MB per batch. These are product safeguards, not a guarantee that every low-memory device can handle a full batch.",
         ],
       },
       {
-        heading: 'Inset reveal is subtracted from the opening',
+        title: "If a file is rejected before preparation",
         paragraphs: [
-          'An inset door sits within the opening, so clearance is removed at every edge. A 1/16-inch reveal on the left and right reduces a single door’s width by 1/8 inch. Top and bottom reveals reduce height by the same combined amount.',
-          'Solid-wood doors move with seasonal humidity. The reveal must remain functional across that movement, finishing thickness and any small cabinet variation. A mathematically tiny reveal is not automatically a better-looking or more durable result.',
+          "The tool checks image headers rather than trusting a filename extension. Renaming picture.heic to picture.jpg does not convert it. Open the original in a trusted editor and export JPG, PNG or static WebP. GIF, SVG, HEIC and animated PNG/WebP are outside the supported scope.",
+          "A damaged or incomplete file may have a familiar extension but lack valid image data. Try opening it outside the browser. If it cannot be opened there, recover the original rather than repeatedly trying the same broken export.",
         ],
       },
       {
-        heading: 'A pair needs a separate center gap',
-        paragraphs: [
-          'For paired doors, first calculate the total finished coverage or inset space. Subtract the center gap once, then divide by two. Subtracting a full gap from each door accidentally doubles the intended reveal.',
-          'Decide whether the pair uses an astragal, shiplap or plain meeting edges. Those details can change machining and apparent gap even when the outside dimensions remain the same.',
+        title: "If processing slows or stops",
+        paragraphs: [],
+        steps: [
+          "Cancel the run; cancellation takes effect after the current decode or encode operation finishes.",
+          "Keep or download any successful outputs, then try fewer photos.",
+          "Reduce output dimensions and close other memory-heavy tabs.",
+          "Test the failing file by itself. Large pixel dimensions matter even if the compressed size is small.",
+          "Try a current browser with image bitmap and canvas support.",
+          "Keep originals outside the browser. An open tab is not a backup.",
         ],
       },
       {
-        heading: 'Test hinge geometry before committing',
+        title: "If the ZIP is missing",
         paragraphs: [
-          'Use the hinge manufacturer’s boring distance, plate height and overlay chart. Make a scrap corner or test door when the project uses thick doors, edge profiles or an unusually large overlay. The calculator establishes the rectangle; the hardware controls its motion.',
+          "A browser may block a download or ask where to save it. Check its downloads list first. Dama says “download requested” because a web page cannot verify that you saved and extracted a file.",
+          "If building an archive fails, use Save image on individual results or prepare a smaller batch. PNG outputs can become large; a suitable JPG or WebP may reduce memory use when your destination supports it. The 100 MB output limit is checked as results are created, so some files can succeed and later files can fail.",
+        ],
+      },
+      {
+        title: "If saved settings do not return",
+        paragraphs: [
+          "Private browsing, storage restrictions, cleared site data, a different browser profile, or a different device can explain missing settings. The workspace should still function with defaults. A failed save displays a message instead of silently promising persistence.",
+          "Do not rely on browser navigation to preserve or clear a batch. Use Clear batch when finished, and keep originals separately. Browser and operating-system caches are outside Dama’s control; local processing is not a promise of secure erasure of every trace.",
         ],
       },
     ],
-    takeaway: 'Add overlay at every outside edge, subtract inset reveal at every inside edge, reserve one center gap for a pair, and verify the result against the hinge chart.',
-    relatedTools: ['cabinet-door-calculator', 'drawer-box-calculator', 'equal-spacing-calculator'],
-    sourceKeys: ['blumHinges'],
+    source: {
+      title: "Canvas image data and pixel buffers",
+      url: "https://developer.mozilla.org/en-US/docs/Web/API/ImageData",
+    },
   },
 ];
-
-export const getGuide = (slug: string) => guides.find((guide) => guide.slug === slug);

@@ -1,9 +1,41 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../data/site';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Contact & Corrections" description="Contact Dama Workshop, report a calculator error or request a clarification." noindex>
-  <section class="legal-hero"><div class="legal-shell"><p class="eyebrow">Contact</p><h1>Corrections make the tools better.</h1><p>If a formula, label, result or explanation appears wrong, send the exact calculator URL, your inputs, expected result and browser.</p></div></section>
-  <section class="legal-content"><div class="legal-shell"><h2>Working contact channel</h2><p>Use the public GitHub issue form linked below. It is monitored as the official correction and technical-support channel for this site.</p><p><a class="button" href={SITE.correctionsUrl} target="_blank" rel="noopener noreferrer">Open the contact form</a></p><h2>What to include</h2><ul><li>The page URL and calculator name</li><li>Every input exactly as entered</li><li>The result you received and the result you expected</li><li>Whether the issue happened on phone or desktop</li></ul><h2>Response and privacy</h2><p>Do not post private or sensitive information in a public issue. Reports may be used to correct the tool and document the change. We cannot provide project-specific engineering, structural or safety approval.</p><p>For privacy requests, use the same contact channel and begin the title with “Privacy request.”</p></div></section>
-</BaseLayout>
+<BaseLayout
+  title="Contact & Corrections"
+  description="Report a reproducible image-processing problem or a correction to a Dama Image Prep guide."
+  noindex
+  activeNav="/contact/"
+  ><header class="legal-hero legal-shell">
+    <p class="eyebrow">DAMA IMAGE PREP</p><h1>Contact & Corrections</h1>
+  </header><section class="legal-content legal-shell">
+    <p>
+      The current technical-contact channel is the project’s public GitHub issue
+      tracker. A GitHub account is required to submit a report. This is not a
+      private email or live chat service.
+    </p><p>
+      <a
+        class="button"
+        href="https://github.com/huynjuunn-glitch/Milo/issues/new"
+        target="_blank"
+        rel="noopener noreferrer">Open a GitHub issue</a>
+    </p><h2>Help us reproduce the problem</h2><ul>
+      <li>Page URL, browser name/version and operating system.</li><li>
+        Input format, pixel dimensions and approximate file size.
+      </li><li>Output settings and the exact error message.</li><li>
+        What you expected and what actually happened.
+      </li>
+    </ul><p>
+      Do not attach private photos or reveal customer details, addresses or
+      confidential product information. A description or a non-sensitive test
+      pattern is preferable. Reports are public and governed by GitHub’s
+      policies.
+    </p><h2>Guide corrections and privacy</h2><p>
+      For a guide correction, include the passage and a primary reference. For a
+      privacy concern, describe it without publishing personal information.
+      There is currently no private support inbox; do not send sensitive data
+      through the public tracker. We do not promise a specific response time.
+    </p>
+  </section></BaseLayout
+>

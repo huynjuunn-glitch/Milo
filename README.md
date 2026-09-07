@@ -1,28 +1,28 @@
-# Dama Workshop
+# Dama Image Prep
 
-Dama Workshop is a static, English-language woodworking calculator library published at `damaheritage.com`. It is built with Astro and deployed through GitHub-connected Cloudflare Pages.
+English product-photo batch preparation at damaheritage.com. Astro static output, GitHub → Cloudflare Pages. No server-side photo processing, database, authentication or paid API.
 
-## Commands
+## Workflows
 
-```bash
-npm install
-npm run dev
-npm run quality
-```
+- Batch fit/pad or positioned fill/crop; JPEG/PNG/WebP export.
+- Three illustrative thumbnail center crops of prepared output.
+- Sanitized prefix + sequence filenames, individual downloads and streamed ZIP assembly.
+- Optional versioned localStorage recipe (including prefix, never selected photos).
 
-`npm run quality` performs Astro type checks, builds the static site, then checks routes, internal links, metadata, structured data, calculator coverage and retired-topic leakage.
+## Development
 
-## Architecture
+`npm ci`, `npm run dev`, `npm run quality`.
 
-- `src/data/tools.ts` — calculator definitions, explanations, FAQs and relationships
-- `src/scripts/calculators.ts` — browser-only calculation logic
-- `src/data/guides.ts` — workshop reference guides
-- `src/pages/tools/[slug].astro` — generated calculator pages
-- `src/pages/guides/[slug].astro` — generated guide pages
-- `scripts/check-site.mjs` — production-output quality gate
+The quality gate checks pure image geometry, header rejection, naming and ZIP roundtrips; then Astro types/build, generated metadata, routes, labels, internal links and advertising state. It does not replace real-device browser validation.
 
-Calculator inputs remain in the visitor's browser. No user account, database or paid API is required.
+## Structure
 
-## Advertising state
+- `src/scripts/image-core.ts`: pure validation, header inspection, geometry and naming.
+- `src/scripts/workspace.ts`: browser file lifecycle, canvas, UI, previews and exports.
+- `src/pages/index.astro`: working surface; global styles in `src/styles/global.css`.
+- `src/data/guides.ts`: original technical guide content; shared static guide routes.
+- `scripts/test-images.mjs` and `scripts/check-site.mjs`: automated quality gates.
 
-The AdSense ownership meta tag and `ads.txt` record are present. Ad scripts and ad units are intentionally absent until consent-management requirements and approval state are ready.
+Input limits: 20 images, 20 MB each, 100 MB total, 24 MP each. Output: 64–4096 px per edge, 12 MP each, 100 MB total. Decimal MB. Static JPEG/PNG/WebP only. Bounds reduce risk; device memory still matters.
+
+The AdSense publisher meta tag and ads.txt are retained. No ad/analytics scripts ship. Consent and privacy configuration must be reviewed before any are enabled. No claim of guaranteed approval or traffic.

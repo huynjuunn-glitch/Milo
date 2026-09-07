@@ -1,32 +1,11 @@
-# Dama Workshop publishing standard
+# Product-photo editorial standard
 
-## New calculators
+Add guides in `src/data/guides.ts` only when they solve a distinct workflow question. Include an original worked example or practical decision routine, limitations and an appropriate primary reference. Recalculate numeric examples against image-core.ts.
 
-Add one complete definition to `src/data/tools.ts` and one matching calculation handler to `src/scripts/calculators.ts`.
+Do not invent personal experience, seller results, author credentials, testimonials, user counts or approval probabilities. Use Dama Image Prep as the organizational author. AI-assisted technical explanations must be reviewed against actual behavior.
 
-Every calculator must include:
+Presets are Dama starting settings, not official Etsy/Shopify requirements. Crop previews are illustrative geometry, not an exact storefront. Do not multiply near-duplicate tool pages for keywords.
 
-1. A single, narrow workshop problem.
-2. Inputs with units and usable defaults.
-3. The core formula or algorithm.
-4. A worked example whose displayed answer has been verified.
-5. Physical assumptions and limitations.
-6. At least two genuinely useful FAQs.
-7. Three related tools.
-8. Invalid-input handling and a mobile-usable result.
+Keep format, memory, naming, storage and privacy descriptions aligned with the code. No metadata preservation, secure-erasure, fixed-KB or guaranteed-color promises. Check official platform guidance before adding new specific specifications.
 
-Do not publish a calculator whose only value is a generic arithmetic operation already handled by the fraction calculator. Prefer tools that connect multiple workshop decisions or produce a mark/cut sequence.
-
-## New guides
-
-Add a structured entry to `src/data/guides.ts`. A guide must explain a decision that improves use of one or more calculators. It should distinguish mathematical facts, common practice, manufacturer-specific instructions and physical verification.
-
-Never fabricate first-person experience, testing, credentials or an author identity. Do not rewrite another publisher's article. Examples must be presented as calculations, not personal projects.
-
-## Pre-publication checks
-
-- Recalculate every default and worked example independently.
-- Test zero, negative, impossible and unusually large inputs.
-- Verify all linked related-tool slugs.
-- Run `npm run quality`.
-- Review at 375px, 768px and desktop widths.
+Before publishing, run quality checks, verify the cited source and review for overlap with existing guides. Advertising scripts require a separate consent and privacy review; no ads beside processing/download controls.

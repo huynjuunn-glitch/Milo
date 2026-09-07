@@ -1,73 +1,192 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ToolCard from '../../components/ToolCard.astro';
-import { guides, type Guide } from '../../data/guides';
-import { getTool, SOURCE_LIBRARY } from '../../data/tools';
-import { SITE } from '../../data/site';
-
-export function getStaticPaths() {
-  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
-}
-
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { guides, type Guide } from "../../data/guides";
+import { SITE } from "../../data/site";
+export const getStaticPaths = () =>
+  guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
 const { guide } = Astro.props as { guide: Guide };
-const relatedTools = guide.relatedTools.map(getTool).filter((tool) => Boolean(tool));
-const sources = guide.sourceKeys.map((key) => SOURCE_LIBRARY[key]);
-const schema = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: guide.title,
-    description: guide.description,
-    datePublished: guide.publishedAt,
-    dateModified: guide.updatedAt,
-    author: { '@id': `${SITE.url}/#organization` },
-    publisher: { '@id': `${SITE.url}/#organization` },
-    mainEntityOfPage: new URL(`/guides/${guide.slug}/`, SITE.url).toString(),
-    citation: sources.map((source) => source.url),
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-      { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/guides/', SITE.url).toString() },
-      { '@type': 'ListItem', position: 3, name: guide.title, item: new URL(`/guides/${guide.slug}/`, SITE.url).toString() },
-    ],
-  },
-];
 ---
 
-<BaseLayout title={guide.title} description={guide.description} type="article" activeNav="/guides/" schema={schema}>
-  <article class="guide-article">
-    <header class="guide-hero">
-      <div class="article-shell">
-        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>{guide.category}</span></nav>
-        <p class="eyebrow">{guide.category} · {guide.readTime}</p>
-        <h1>{guide.title}</h1>
-        <p class="guide-deck">{guide.intro}</p>
-        <div class="article-meta"><span>Published {guide.publishedAt}</span><span>Updated {guide.updatedAt}</span><span>By Dama Workshop</span></div>
-      </div>
-    </header>
-
-    <div class="article-shell article-body">
-      <nav class="article-toc" aria-label="On this page"><strong>On this page</strong><ol>{guide.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.heading}</a></li>)}</ol></nav>
-      {guide.sections.map((section, index) => (
-        <section id={`section-${index + 1}`}>
-          <span class="section-number">{String(index + 1).padStart(2, '0')}</span>
-          <h2>{section.heading}</h2>
-          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-          {section.bullets && <ul class="check-list">{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}
-        </section>
-      ))}
-      <aside class="takeaway"><span>Bottom line</span><p>{guide.takeaway}</p></aside>
-      <section class="article-references" aria-labelledby="primary-references">
-        <span class="section-number">Sources</span>
-        <h2 id="primary-references">Primary references</h2>
-        <p>These sources define the measurement, safety or hardware conventions used in this guide. Product-specific work should still follow the current manual supplied with the exact tool or hardware.</p>
-        <ol class="source-list">{sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.title}</strong><span>{source.note}</span></a></li>)}</ol>
-      </section>
-      <div class="article-disclosure"><strong>How this guide was made</strong><p>Dama Workshop writes from standard workshop math and clearly stated construction assumptions. We do not claim hands-on testing that did not occur. Corrections are logged through the public contact channel.</p></div>
+<BaseLayout
+  title={guide.title}
+  description={guide.description}
+  type="article"
+  activeNav="/guides/"
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.description,
+    author: {
+      "@type": "Organization",
+      name: SITE.name,
+      url: SITE.url + "/about/",
+    },
+    mainEntityOfPage: SITE.url + `/guides/${guide.slug}/`,
+  }}
+>
+  <article>
+    <header class="legal-hero legal-shell">
+      <a href="/guides/">← Photo guides</a><p
+        class="eyebrow"
+        style="margin-top:24px"
+      >
+        {guide.category}
+      </p><h1>{guide.title}</h1><p>{guide.description}</p><p
+        class="article-meta"
+      >
+        Dama Image Prep · Technical workflow guide · Updated September 7, 2026
+      </p>
+    </header><div class="legal-content legal-shell">
+      {
+        guide.diagram && (
+          <figure class="diagram">
+            <>
+              <svg
+                viewBox="0 0 660 270"
+                role="img"
+                aria-label="Fit preserves a landscape rectangle with top and bottom padding. Fill crops its left and right edges."
+              >
+                <>
+                  <text x="40" y="28" font-size="20" fill="#17252b">
+                    FIT · whole source
+                  </text>
+                  <rect
+                    x="40"
+                    y="48"
+                    width="180"
+                    height="180"
+                    fill="#eef3fa"
+                    stroke="#9aadc2"
+                  />
+                  <rect x="40" y="78" width="180" height="120" fill="#135ceb" />
+                  <text x="60" y="143" font-size="18" fill="white">
+                    3000 × 2000
+                  </text>
+                  <text x="360" y="28" font-size="20" fill="#17252b">
+                    FILL · center retained
+                  </text>
+                  <rect
+                    x="315"
+                    y="48"
+                    width="270"
+                    height="180"
+                    fill="#f4b0a8"
+                  />
+                  <rect
+                    x="360"
+                    y="48"
+                    width="180"
+                    height="180"
+                    fill="#135ceb"
+                  />
+                  <path
+                    d="M360 44V232M540 44V232"
+                    stroke="#17252b"
+                    stroke-width="2"
+                    stroke-dasharray="5 4"
+                  />
+                  <text x="387" y="143" font-size="18" fill="white">
+                    2000 × 2000
+                  </text>
+                  <text x="40" y="259" font-size="16" fill="#52636d">
+                    Illustration: 0% margin, 2000 × 2000 output.
+                  </text>
+                </>
+              </svg>
+              <figcaption>
+                Blue is the retained source area; pale gray is padding; red is
+                cropped away. Proportions illustrate the worked example below.
+              </figcaption>
+            </>
+          </figure>
+        )
+      }
+      {
+        guide.sections.map((section) => (
+          <section>
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((p) => (
+              <p>{p}</p>
+            ))}
+            {section.steps && (
+              <ol>
+                {section.steps.map((step) => (
+                  <li>{step}</li>
+                ))}
+              </ol>
+            )}
+          </section>
+        ))
+      }
+      {
+        guide.example && (
+          <section>
+            <>
+              <h2>Example filename mapping</h2>
+              <table>
+                <>
+                  <thead>
+                    <tr>
+                      {guide.example.headers.map((h) => (
+                        <th scope="col">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {guide.example.rows.map((row) => (
+                      <tr>
+                        {row.map((cell) => (
+                          <td>
+                            <code>{cell}</code>
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </>
+              </table>
+            </>
+          </section>
+        )
+      }
+      <aside class="notice">
+        <h2>How this guide was made</h2><p>
+          This is an editorial explanation of Dama’s workflow, not a claim of
+          first-hand selling experience. Examples are illustrative and based on
+          the documented processing method. Browser output and marketplace
+          presentation can vary.
+        </p>{
+          guide.source && (
+            <p>
+              Reference:{" "}
+              <a
+                href={guide.source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {guide.source.title}
+              </a>
+            </p>
+          )
+        }<p>
+          <a href="/standards/">Processing methods and limits</a> · <a
+            href="/contact/">Report a correction</a>
+        </p>
+      </aside><p><a class="button" href="/">Open the image workspace</a></p><h2>
+        Continue reading
+      </h2><ul>
+        {
+          guides
+            .filter((g) => g.slug !== guide.slug)
+            .slice(0, 3)
+            .map((g) => (
+              <li>
+                <a href={`/guides/${g.slug}/`}>{g.title}</a>
+              </li>
+            ))
+        }
+      </ul>
     </div>
-  </article>
-  <section class="section section--paper"><div class="shell"><div class="section-head"><div><p class="eyebrow">Use the numbers</p><h2>Related calculators</h2></div></div><div class="tool-grid">{relatedTools.map((tool) => tool && <ToolCard tool={tool} compact />)}</div></div></section>
-</BaseLayout>
+  </article></BaseLayout
+>

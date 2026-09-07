@@ -1,5 +1,5 @@
 {
-  "name": "dama-workshop",
+  "name": "dama-image-prep",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,15 +10,20 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:site": "node scripts/check-site.mjs",
-    "test:calculations": "node scripts/test-calculations.mjs",
-    "quality": "npm run test:calculations && npm run build"
+    "test": "node --experimental-strip-types scripts/test-images.mjs",
+    "test:workspace": "node --experimental-strip-types scripts/test-workspace.mjs",
+    "quality": "npm test && npm run build && npm run test:workspace"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.2.4"
+    "astro": "^7.2.4",
+    "fflate": "^0.8.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "happy-dom": "^20.14.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3"
   }
 }

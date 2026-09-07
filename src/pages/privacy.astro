@@ -1,8 +1,58 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Privacy Policy" description="Privacy policy for Dama Workshop woodworking calculators." noindex>
-  <section class="legal-hero"><div class="legal-shell"><p class="eyebrow">Privacy</p><h1>Privacy policy</h1><p>Effective September 4, 2026</p></div></section>
-  <section class="legal-content"><div class="legal-shell"><h2>Calculator inputs</h2><p>Calculator inputs are processed in your browser. Dama Workshop does not require an account and does not intentionally transmit or store the measurements you enter.</p><h2>Local storage</h2><p>The site may store a short list of recently used calculator page identifiers on your device so you can reopen them quickly. This list contains calculator names only, not your measurement inputs. You can remove it by clearing this site’s browser storage.</p><h2>Server logs</h2><p>Our hosting provider may process standard request information such as IP address, browser type, requested URL, timestamp and security signals to deliver and protect the site. Retention and handling are governed by the provider’s infrastructure policies.</p><h2>Advertising and cookies</h2><p>The current site does not load display-advertising scripts. If advertising is enabled, this policy and the site’s consent controls will be updated before personalized advertising or advertising cookies are activated where consent is required.</p><h2>Third-party links</h2><p>Links to external services, including our public correction channel, are governed by those services’ privacy policies. Do not submit private information through a public issue.</p><h2>Children</h2><p>The site is a general-purpose utility and is not directed to children under 13. We do not knowingly collect children’s personal information.</p><h2>Questions and requests</h2><p>Use the channel on the <a href="/contact/">contact page</a> and label the report “Privacy request.”</p></div></section>
-</BaseLayout>
+<BaseLayout
+  title="Privacy & Local Image Processing"
+  description="What stays on your device, how saved settings work, and what ordinary website requests involve."
+  noindex
+  activeNav="/privacy/"
+  ><header class="legal-hero legal-shell">
+    <p class="eyebrow">DAMA IMAGE PREP</p><h1>
+      Privacy & Local Image Processing
+    </h1>
+  </header><section class="legal-content legal-shell">
+    <p>Updated September 7, 2026.</p><h2>Your selected image files</h2><p>
+      The image workspace processes selected files in your browser. It does not
+      upload them to Dama or store them in a server-side image library. Exports
+      are created locally, and originals are not modified. There is no account
+      or cloud synchronization.
+    </p><h2>Saved settings</h2><p>
+      Saving is optional. Width, height, fit, margin, crop position, background,
+      format, quality, enlargement choice, sequence start and filename prefix
+      are stored in this browser’s local storage. Photos and source filenames
+      are not stored there. The prefix you enter is part of the saved settings.
+    </p><p>
+      Use “Forget saved settings” to remove the saved recipe. “Reset” changes
+      the current controls but does not delete saved settings; “Clear batch”
+      removes the active photos and results from the workspace. Browser
+      site-data controls can also remove local storage.
+    </p><h2>Ordinary website requests</h2><p>
+      Loading the site involves network requests. Cloudflare, our hosting
+      provider, may process connection and security information such as IP
+      addresses, requested URLs and request times. Local image processing does
+      not mean every website visit is anonymous. See <a
+        href="https://www.cloudflare.com/privacypolicy/"
+        target="_blank"
+        rel="noopener noreferrer">Cloudflare’s privacy policy</a
+      >.
+    </p><h2>Advertising and analytics</h2><p>
+      This release does not load advertising or analytics scripts. The
+      publisher-verification meta tag and ads.txt record are identifiers, not
+      advertising JavaScript. If advertising or analytics is enabled later, this
+      policy and any applicable consent controls must be updated before those
+      scripts run.
+    </p><h2>Device caches and downloads</h2><p>
+      Browser and operating-system caches are outside Dama’s direct control.
+      Closing a tab is not a guarantee of secure erasure of all local traces.
+      Downloaded files remain wherever you choose to save them. Follow your
+      device’s privacy practices when using shared computers.
+    </p><h2>External links and contact</h2><p>
+      Links to marketplace documentation and GitHub open services with their own
+      privacy practices. GitHub issue reports are public; do not post images,
+      personal details or confidential business information. <a href="/contact/"
+        >Contact and corrections</a
+      >.
+    </p>
+  </section></BaseLayout
+>

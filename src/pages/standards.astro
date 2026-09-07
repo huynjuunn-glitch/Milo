@@ -1,65 +1,88 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { SOURCE_LIBRARY, tools } from '../data/tools';
-
-const sources = Object.values(SOURCE_LIBRARY);
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Calculation & Editorial Standards" description="How Dama Workshop verifies woodworking calculations, handles rounding, documents limitations and corrects errors." activeNav="/standards/">
-  <section class="page-hero">
-    <div class="shell page-hero__grid">
-      <div><p class="eyebrow">Calculation standards</p><h1>Results you can reproduce.</h1></div>
-      <p>Every published result is tied to a visible formula, an explicit unit convention and a repeatable test. This page explains what “verified” means—and what it does not mean.</p>
-    </div>
-  </section>
-
-  <section class="section section--paper">
-    <div class="shell about-grid">
-      <div><p class="eyebrow">Verification pipeline</p><h2>Four checks before publication.</h2></div>
-      <ol class="standards-steps">
-        <li><span>01</span><div><strong>Define the relationship</strong><p>We write the formula and name each assumption before implementing it. A calculator cannot silently decide hardware clearance, waste allowance or rounding precision.</p></div></li>
-        <li><span>02</span><div><strong>Test known examples</strong><p>Automated checks cover default examples, fractional inputs, boundary values and invalid physical dimensions. The production build fails when a required page, reference block or local link is missing.</p></div></li>
-        <li><span>03</span><div><strong>Compare explanation and output</strong><p>The method, worked example and calculator must use the same convention. When a result is an estimate or heuristic, the page says so.</p></div></li>
-        <li><span>04</span><div><strong>Publish the verification record</strong><p>Each tool displays its version and last verification date. Material changes are recorded in the public verification log.</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell standards-grid">
-      <div><p class="eyebrow">Precision</p><h2>Units, fractions and rounding.</h2></div>
-      <div class="prose">
-        <p>One international inch is exactly 25.4 millimetres. Decimal-to-fraction results are rounded to the denominator selected by the user, then reduced. The displayed rounding difference makes that approximation visible.</p>
-        <p>Fraction inputs accept whole numbers, decimals, simple fractions and mixed numbers. Denominators of zero, non-finite values and physically impossible dimensions return an error instead of a plausible-looking result.</p>
-        <p>Displayed values may be rounded for readability. They are planning values, not evidence that stock, machinery or an opening is dimensionally exact.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--dark">
-    <div class="shell standards-grid">
-      <div><p class="eyebrow">Scope limits</p><h2>A calculator is not a shop inspection.</h2></div>
-      <ul class="check-list check-list--light">
-        <li>Measure actual stock, openings, blades and hardware before cutting.</li>
-        <li>Follow the current manufacturer manual for product-specific clearances.</li>
-        <li>Inspect grain, defects and machine setup; software cannot see them.</li>
-        <li>Use appropriate guards, dust controls and personal protective equipment.</li>
-        <li>Treat cutting layouts as planning aids and confirm every mark on the workpiece.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section--paper">
-    <div class="shell">
-      <div class="section-head"><div><p class="eyebrow">Reference foundation</p><h2>Primary sources we use.</h2></div><p>Official standards, government technical guidance and manufacturer documentation take priority over anonymous summaries.</p></div>
-      <ol class="source-list source-list--grid">{sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener noreferrer"><strong>{source.title}</strong><span>{source.note}</span></a></li>)}</ol>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell about-grid">
-      <div><p class="eyebrow">Current coverage</p><h2>{tools.length} calculators under one standard.</h2></div>
-      <div class="prose"><p>Verification reduces avoidable arithmetic and interface errors; it does not convert general planning guidance into engineering advice. If you find a mismatch between a formula, example and output, report the exact input and result.</p><p><a class="button button--primary" href="/contact/">Report a correction</a> <a class="text-link" href="/changelog/">Read the verification log →</a></p></div>
-    </div>
-  </section>
-</BaseLayout>
+<BaseLayout
+  title="Image Processing Methods & Limits"
+  description="Supported formats, batch limits, resize geometry, browser encoding and known limitations of Dama Image Prep."
+  activeNav="/standards/"
+  ><header class="legal-hero legal-shell">
+    <p class="eyebrow">DAMA IMAGE PREP</p><h1>
+      Image Processing Methods & Limits
+    </h1>
+  </header><section class="legal-content legal-shell">
+    <h2>Supported inputs and safety limits</h2><table>
+      <thead><tr><th scope="col">Item</th><th scope="col">Limit</th></tr></thead
+      ><tbody
+        ><tr><td>Input formats</td><td>JPG, PNG and static WebP</td></tr><tr
+          ><td>Batch</td><td>20 images, 100 MB total input</td></tr
+        ><tr
+          ><td>Each input</td><td
+            >20 MB, 24 megapixels; maximum edge 32,768 px</td
+          ></tr
+        ><tr
+          ><td>Output dimensions</td><td
+            >64–4096 px per edge, at most 12 megapixels</td
+          ></tr
+        ><tr><td>Combined output</td><td>100 MB before ZIP overhead</td></tr
+        ></tbody>
+    </table><p>
+      MB means 1,000,000 bytes. GIF, HEIC, SVG and animated PNG/WebP are not
+      supported. Image headers are checked before decoding; malformed or
+      unusually structured images may be rejected. These limits reduce memory
+      pressure but cannot guarantee stability on every device.
+    </p><h2>Resize and crop method</h2><p>
+      Fit uses the smaller width/height scale factor inside the margin area. A
+      5% margin reserves 5% of each canvas dimension on each corresponding edge.
+      Fill uses the larger factor to cover the canvas, clips overflow and uses
+      the selected crop position. Both preserve source proportions.
+    </p><p>
+      Enlargement is off by default. Scale is capped at 1 when it is off; small
+      sources can therefore leave background even in Fill mode. Margin is
+      ignored in Fill mode. Every output is filled with the chosen background
+      before drawing the image, so alpha transparency is not preserved.
+    </p><h2>Decoding and encoding</h2><p>
+      The browser decodes images using its image bitmap API with source
+      orientation. The tool does not manually rotate EXIF-tagged photos a second
+      time. Images are processed one at a time, and temporary full-size canvases
+      are released after use. List previews are small thumbnails.
+    </p><p>
+      JPG and WebP use the quality setting as an encoder hint; PNG ignores it.
+      Exact bytes, colors and interpolation can vary between browsers. The
+      actual encoded MIME type determines the file extension. If WebP is
+      unsupported and PNG is returned, a fallback notice is shown.
+    </p><h2>Preview and download meaning</h2><p>
+      The three crop previews are centered 1:1, 4:3 and 3:4 crops of the
+      prepared output. They do not alter the output and do not reproduce any
+      specific marketplace layout. ZIP stores successful outputs without
+      additional compression. Failed inputs are listed and can leave
+      sequence-number gaps.
+    </p><h2>Not an archival or color-proofing tool</h2><p>
+      Exports are newly encoded images. The original metadata container is not
+      copied. Do not rely on this workflow to preserve EXIF/IPTC metadata, ICC
+      profiles or exact color appearance. It is not a certified metadata eraser
+      either. Keep originals separately and inspect downloaded files before
+      publishing.
+    </p><h2>Verification scope</h2><p>
+      The project includes automated checks for resize geometry, naming, setting
+      validation, image headers, generated routes, metadata and local links.
+      These are not a claim of certification across every device or marketplace. <a
+        href="/contact/">Report reproducible errors</a
+      > with the settings and browser, without attaching private product images.
+    </p><p>
+      Technical references: <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap"
+        target="_blank"
+        rel="noopener noreferrer">image decoding</a
+      >, <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob"
+        target="_blank"
+        rel="noopener noreferrer">canvas encoding</a
+      >, <a
+        href="https://github.com/101arrowz/fflate"
+        target="_blank"
+        rel="noopener noreferrer">ZIP library</a
+      >.
+    </p>
+  </section></BaseLayout
+>

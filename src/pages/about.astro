@@ -1,11 +1,43 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="About Dama Workshop" description="How Dama Workshop builds, checks and maintains its free woodworking calculators and practical measurement guides." activeNav="/about/">
-  <section class="page-hero page-hero--about"><div class="shell page-hero__grid"><div><p class="eyebrow">About Dama Workshop</p><h1>Arithmetic you can inspect.</h1></div><p>Dama Workshop is an independent calculator library for hobby woodworkers and small shops. It exists to answer a measurement question quickly without hiding the formula or pretending a digital result replaces physical verification.</p></div></section>
-  <section class="section section--paper"><div class="shell about-grid"><div><p class="eyebrow">Our purpose</p><h2>Make repetitive shop math easier to trust.</h2></div><div class="prose"><p>Plans mix decimal dimensions, tape-measure fractions, hardware clearances and material-pricing conventions. A generic calculator can perform arithmetic, but it rarely explains which measurement belongs in the box or where the result stops being reliable.</p><p>Dama Workshop combines each calculator with a plain-language method, worked example, rounding choice and limitation. Inputs are processed locally in the browser. No account is required and measurements are not sent to our server.</p></div></div></section>
-  <section class="section"><div class="shell principles-grid"><article><span>01</span><h2>Formula first</h2><p>Every calculator states the core relationship it uses. Results should be reproducible with a pencil or another calculator.</p></article><article><span>02</span><h2>Assumptions visible</h2><p>Joinery type, kerf treatment, reveal and waste allowance are exposed instead of silently built into a result.</p></article><article><span>03</span><h2>No invented testing</h2><p>We distinguish established shop math from physical testing and never present generated examples as personal workshop experience.</p></article><article><span>04</span><h2>Corrections welcomed</h2><p>Ambiguous labels, arithmetic errors and accessibility problems can be reported through the public correction channel.</p></article></div></section>
-  <section class="section section--dark"><div class="shell standards-grid"><div><p class="eyebrow">Editorial standard</p><h2>What we check before publishing</h2><p><a class="text-link text-link--light" href="/standards/">Read the complete standard →</a></p></div><ul class="check-list check-list--light"><li>Default examples calculate correctly</li><li>Mixed fractions reduce correctly</li><li>Invalid physical dimensions return a useful error</li><li>Formula, explanation and code agree</li><li>Every local link resolves in the production build</li><li>Mobile inputs remain usable without horizontal scrolling</li></ul></div></section>
-  <section class="section"><div class="shell about-grid"><div><p class="eyebrow">Ownership & funding</p><h2>Independent and free to use.</h2></div><div class="prose"><p>Dama Workshop is operated as an independent web property. The site may display clearly identified advertising after the required consent and policy controls are implemented. Advertising does not change calculator outputs or editorial conclusions.</p><p>Current calculator pages do not contain paid product rankings, sponsored claims or affiliate recommendations. Any future commercial relationship will be disclosed where it appears.</p><p><a class="text-link" href="/contact/">Report a correction or contact the publisher →</a></p></div></div></section>
-</BaseLayout>
+<BaseLayout
+  title="About Dama Image Prep"
+  description="Why Dama Image Prep exists, what it does and how its technical guides are produced."
+  activeNav="/about/"
+  ><header class="legal-hero legal-shell">
+    <p class="eyebrow">DAMA IMAGE PREP</p><h1>About Dama Image Prep</h1>
+  </header><section class="legal-content legal-shell">
+    <p>
+      Dama Image Prep is an independent browser-based utility for small sellers
+      who repeatedly prepare product photos. It brings canvas sizing, padding,
+      crop checks, naming and ZIP export into one workspace.
+    </p><h2>A deliberately small scope</h2><p>
+      This is not an image retouching suite, background-removal service or
+      marketplace integration. It does not upload your photos, manage listings
+      or promise marketplace acceptance. It preserves your original files and
+      creates separate exports.
+    </p><h2>Who creates the site</h2><p>
+      The site is maintained under the Dama Image Prep name. Technical guides
+      and software may be developed with AI assistance and are reviewed against
+      the implemented workflow and cited documentation. The editorial name does
+      not represent a claimed team of professional photographers or first-hand
+      seller experience.
+    </p><h2>Useful explanations, not invented credentials</h2><p>
+      Our examples are illustrative calculations, checklists and framing
+      diagrams. We do not invent testimonials, sales results, user counts or
+      personal experience. Platform references link to their original
+      documentation; our presets are independent starting points.
+    </p><h2>Funding and independence</h2><p>
+      The workspace is free to use. The site may seek advertising support, but
+      the current version does not load advertising or analytics scripts.
+      Advertising approval and revenue are not guaranteed. Dama is not
+      affiliated with Etsy, Shopify or Google.
+    </p><p>
+      <a href="/standards/">Read the methods and limitations</a> or <a
+        href="/contact/">report a problem</a
+      >.
+    </p>
+  </section></BaseLayout
+>
