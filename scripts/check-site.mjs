@@ -27,6 +27,7 @@ const routeFor = (f) => {
 const routes = new Set(html.map(routeFor));
 const expected = [
   "/",
+  "/start-here/",
   "/guides/",
   "/about/",
   "/contact/",
@@ -34,6 +35,18 @@ const expected = [
   "/terms/",
   "/standards/",
   "/changelog/",
+  "/updates/",
+  "/methodology/",
+  "/marketplace/",
+  "/marketplace/etsy/",
+  "/marketplace/shopify/",
+  "/experiments/",
+  "/experiments/jpg-png-webp/",
+  "/experiments/crop-geometry/",
+  "/experiments/browser-limits/",
+  "/tools/",
+  "/tools/image-prep/",
+  "/tools/image-qa/",
   "/404/",
   "/guides/fit-vs-fill/",
   "/guides/thumbnail-crop-checklist/",
@@ -47,7 +60,24 @@ requireCondition(
   `Expected ${expected.length} pages, found ${routes.size}`,
 );
 for (const r of expected) requireCondition(routes.has(r), `Missing route ${r}`);
-const excluded = new Set(["/404/", "/contact/", "/privacy/", "/terms/"]);
+const excluded = new Set([
+  "/404/",
+  "/contact/",
+  "/privacy/",
+  "/terms/",
+  "/standards/",
+  "/updates/",
+  "/changelog/",
+  "/start-here/",
+  "/guides/",
+  "/guides/consistent-product-grid/",
+  "/marketplace/",
+  "/marketplace/shopify/",
+  "/experiments/",
+  "/tools/",
+  "/tools/image-prep/",
+  "/tools/image-qa/",
+]);
 const sitemap = new Set(
   files
     .filter((f) => /sitemap-\d+\.xml$/.test(f))
@@ -105,8 +135,9 @@ for (const file of html) {
     !/adsbygoogle\.js|googletagmanager|cloudflareinsights\.com/.test(text),
     `${route}: unexpected ad/analytics script`,
   );
+  requireCondition(!text.includes("innerHTML"), `${route}: unsafe HTML interpolation`);
   requireCondition(
-    !/Dama Workshop|board feet|data-calculator|Workshop Guides/.test(text),
+    !/Dama Workshop|board feet|data-calculator|Workshop Guides|Dama Image Prep/.test(text),
     `${route}: retired content`,
   );
   if (excluded.has(route))
@@ -138,12 +169,19 @@ for (const file of html) {
   requireCondition(ids.length === new Set(ids).size, `${route}: duplicate IDs`);
   for (const m of text.matchAll(/<label[^>]*for="([^"]+)"/g))
     requireCondition(ids.includes(m[1]), `${route}: broken label ${m[1]}`);
-  if (route.startsWith("/guides/") && route !== "/guides/") {
+  if (
+    (route.startsWith("/guides/") && route !== "/guides/") ||
+    (route.startsWith("/marketplace/") && route !== "/marketplace/") ||
+    (route.startsWith("/experiments/") && route !== "/experiments/")
+  ) {
     requireCondition(
-      text.includes("How this guide was made"),
-      `${route}: editorial disclosure`,
+      route.startsWith("/guides/")
+        ? text.includes("How this guide was made")
+        : text.includes("Sources checked"),
+      `${route}: editorial/source disclosure`,
     );
-    requireCondition(text.includes("Reference:"), `${route}: source`);
+    if (route.startsWith("/guides/"))
+      requireCondition(text.includes("Reference:"), `${route}: source`);
   }
 }
 requireCondition(jsonCount >= html.length * 2, "Missing structured data");

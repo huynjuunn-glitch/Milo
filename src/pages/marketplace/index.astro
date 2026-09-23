@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContentCard from "../../components/ContentCard.astro";
+import { marketplaceReferences } from "../../data/content";
+---
+
+<BaseLayout
+  title="Marketplace Reference for Etsy Sellers"
+  description="Source-checked Etsy and Shopify product-image references with explicit verification dates, workflow examples and limitations."
+  noindex
+  activeNav="/marketplace/"
+>
+  <section class="legal-hero legal-shell">
+    <p class="eyebrow">MARKETPLACE REFERENCE</p>
+    <h1>Platform facts without the guesswork.</h1>
+    <p>Etsy is the primary workflow context. A separate Shopify reference is available for sellers who publish across platforms.</p>
+  </section>
+  <section class="shell content-grid two-up page-section">
+    {marketplaceReferences.filter((item) => item.slug === "etsy").map((item) => (
+      <ContentCard eyebrow={item.category} title={item.title} description={item.description} href={`/marketplace/${item.slug}/`} meta={`Checked ${item.lastVerified}`} />
+    ))}
+    <article class="content-card secondary-card">
+      <p class="eyebrow">SECONDARY REFERENCE</p>
+      <h2><a href="/marketplace/shopify/">Shopify product image reference</a></h2>
+      <p>Use this comparison only when the same seller workflow extends beyond Etsy. Shopify themes and storefront breakpoints require their own final check.</p>
+      <a class="text-link" href="/marketplace/shopify/">Read the Shopify reference →</a>
+    </article>
+  </section>
+</BaseLayout>

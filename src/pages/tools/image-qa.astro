@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Image QA Checker for Etsy Listings"
+  description="Inspect an image's dimensions, aspect ratio, file type and byte size locally before uploading it to an Etsy listing."
+  noindex
+  activeNav="/tools/"
+>
+  <section class="legal-hero legal-shell">
+    <p class="eyebrow">TOOL · LOCAL CHECK</p>
+    <h1>Inspect one product image before uploading.</h1>
+    <p>Choose a file to read basic metadata in this browser. The file is not uploaded by this page.</p>
+  </section>
+  <section class="shell qa-panel page-section" data-image-qa>
+    <label class="button" for="qa-file">Choose an image</label>
+    <input class="visually-hidden" id="qa-file" type="file" accept="image/jpeg,image/png,image/webp" />
+    <p id="qa-status" class="status-line" role="status">No image selected.</p>
+    <dl id="qa-results" class="qa-results" hidden></dl>
+    <p class="field-note">This is a technical check, not a guarantee that Etsy or a theme will accept or display the file as expected. Image QA can inspect WebP, but Etsy's current supported image-type list does not include WebP; use JPG or PNG for an Etsy upload. <a href="/marketplace/etsy/">Check the official-source reference</a>.</p>
+  </section>
+  <section class="shell page-section two-column-copy">
+    <div><h2>What it checks</h2><ul><li>Pixel dimensions</li><li>Aspect ratio</li><li>File size</li><li>Recognized JPG, PNG or static WebP header</li></ul></div>
+    <div><h2>What it cannot check</h2><ul><li>Subject quality or composition</li><li>Etsy's current listing interface</li><li>Theme-specific crops</li><li>Color accuracy across devices</li></ul></div>
+  </section>
+</BaseLayout>
+<script>
+  import { inspectImage } from "../../scripts/image-core";
+  const input = document.querySelector("#qa-file") as HTMLInputElement | null;
+  const status = document.querySelector("#qa-status") as HTMLElement | null;
+  const results = document.querySelector("#qa-results") as HTMLElement | null;
+  input?.addEventListener("change", async () => {
+    const file = input.files?.[0];
+    if (!file || !status || !results) return;
+    results.hidden = true;
+    status.classList.remove("error");
+    try {
+      const info = inspectImage(new Uint8Array(await file.arrayBuffer()));
+      const ratio = (info.width / info.height).toFixed(3);
+      const rows = [
+        ["File", file.name],
+        ["Dimensions", `${info.width} × ${info.height}px`],
+        ["Ratio", ratio],
+        ["Type", info.mime],
+        ["Size", `${(file.size / 1000000).toFixed(2)} MB`],
+      ];
+      results.replaceChildren(
+        ...rows.map(([label, value]) => {
+          const row = document.createElement("div");
+          const term = document.createElement("dt");
+          const detail = document.createElement("dd");
+          term.textContent = label;
+          detail.textContent = value;
+          row.append(term, detail);
+          return row;
+        }),
+      );
+      results.hidden = false;
+      status.textContent = "Image inspected locally.";
+    } catch (error) {
+      status.textContent = error instanceof Error ? error.message : "This file could not be inspected.";
+      status.classList.add("error");
+    }
+  });
+</script>

@@ -1,7 +1,7 @@
 {
-  "name": "Dama Image Prep",
-  "short_name": "Dama",
-  "description": "Local product photo resizing, framing and batch export.",
+  "name": "Seller Operations Lab",
+  "short_name": "Seller Lab",
+  "description": "Source-led Etsy seller workflows and privacy-first browser tools.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f7fa",

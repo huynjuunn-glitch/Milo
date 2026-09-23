@@ -1,0 +1,12 @@
+---
+const { date, label = "Verified" } = Astro.props as {
+  date: string;
+  label?: string;
+};
+const formatted = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "long",
+  timeZone: "UTC",
+}).format(new Date(`${date}T00:00:00Z`));
+---
+
+<p class="verified-badge"><span aria-hidden="true">✓</span> {label} {formatted}</p>

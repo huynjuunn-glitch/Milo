@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleHeader from "../../components/ArticleHeader.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import SourceList from "../../components/SourceList.astro";
+import { marketplaceReferences } from "../../data/content";
+import { SITE } from "../../data/site";
+
+export const getStaticPaths = () => marketplaceReferences.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+const { item } = Astro.props;
+const pageUrl = `${SITE.url}/marketplace/${item.slug}/`;
+---
+
+<BaseLayout
+  title={item.title}
+  description={item.description}
+  noindex={item.slug === "shopify"}
+  type="article"
+  activeNav="/marketplace/"
+  schema={[{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: item.title,
+    description: item.description,
+    datePublished: item.published,
+    dateModified: item.updated,
+    author: { "@type": "Organization", name: SITE.name, url: `${SITE.url}/about/` },
+    publisher: { "@id": `${SITE.url}/#organization` },
+    mainEntityOfPage: pageUrl,
+  }, {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Marketplace reference", item: `${SITE.url}/marketplace/` },
+      { "@type": "ListItem", position: 3, name: item.title, item: pageUrl },
+    ],
+  }]}
+>
+  <ArticleHeader eyebrow={item.category} title={item.title} description={item.description} updated={item.lastVerified} crumbs={[{ label: "Home", href: "/" }, { label: "Marketplace reference", href: "/marketplace/" }, { label: item.title }]} />
+  <div class="legal-content legal-shell article-layout">
+    {item.sections.map((section, index) => (
+      <section><h2 id={`section-${index + 1}`}>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.steps && <ol>{section.steps.map((step) => <li>{step}</li>)}</ol>}</section>
+    ))}
+    <aside class="notice editorial-disclosure"><h2>Editorial boundary</h2><p>This reference is independent and is not affiliated with Etsy or Shopify. Platform rules can change; the linked official page is the authority for current requirements.</p></aside>
+    <SourceList sources={item.sources} />
+    <RelatedLinks links={item.related} />
+  </div>
+</BaseLayout>

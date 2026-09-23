@@ -1,11 +1,13 @@
-# Product-photo editorial standard
+# Editorial standard
 
-Add guides in `src/data/guides.ts` only when they solve a distinct workflow question. Include an original worked example or practical decision routine, limitations and an appropriate primary reference. Recalculate numeric examples against image-core.ts.
+Publish a page only when it answers a distinct seller question and remains useful without the tool. Include a worked calculation, controlled comparison, reproducible procedure or clearly labeled workflow recommendation.
 
-Do not invent personal experience, seller results, author credentials, testimonials, user counts or approval probabilities. Use Dama Image Prep as the organizational author. AI-assisted technical explanations must be reviewed against actual behavior.
+Separate these claims:
 
-Presets are Dama starting settings, not official Etsy/Shopify requirements. Crop previews are illustrative geometry, not an exact storefront. Do not multiply near-duplicate tool pages for keywords.
+- **Official source:** quote or link the current platform or web-standard documentation.
+- **Measured result:** state the input, browser/implementation and observed output.
+- **Seller Operations Lab recommendation:** label independent workflow advice as advice, not a marketplace rule.
 
-Keep format, memory, naming, storage and privacy descriptions aligned with the code. No metadata preservation, secure-erasure, fixed-KB or guaranteed-color promises. Check official platform guidance before adding new specific specifications.
+Never invent selling experience, author credentials, testimonials, user counts, approval results or performance numbers. Explain limitations, platform variability and the date a changing source was checked. Keep Etsy and Shopify references independent; the project is not affiliated with either platform.
 
-Before publishing, run quality checks, verify the cited source and review for overlap with existing guides. Advertising scripts require a separate consent and privacy review; no ads beside processing/download controls.
+Before publishing, check for duplicate intent with existing routes, verify every numeric example against the implementation, validate all links and run `npm run quality`. Do not place ads on tool-only, download, navigation or no-content screens, and never place an ad beside processing controls in a way that could invite a click. Any future advertising requires a separate consent and privacy review.

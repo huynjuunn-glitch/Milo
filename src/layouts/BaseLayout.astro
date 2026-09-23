@@ -11,6 +11,8 @@ const {
   type = "website",
   activeNav,
   schema,
+  image,
+  imageAlt,
 } = Astro.props as {
   title?: string;
   description?: string;
@@ -23,6 +25,7 @@ const {
 };
 
 const canonical = new URL(Astro.url.pathname, SITE.url);
+const imageUrl = image ? new URL(image, SITE.url).toString() : undefined;
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 const globalSchema = [
   {
@@ -70,13 +73,35 @@ const pageSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Seller Operations Lab — research and guides"
+      href="/rss.xml"
+    />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={SITE.name} />
-    <meta name="twitter:card" content="summary" />
+    {
+      imageUrl && (
+        <>
+          <meta property="og:image" content={imageUrl} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:alt" content={imageAlt} />
+          <meta name="twitter:image" content={imageUrl} />
+          <meta name="twitter:image:alt" content={imageAlt} />
+        </>
+      )
+    }
+    <meta
+      name="twitter:card"
+      content={imageUrl ? "summary_large_image" : "summary"}
+    />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="google-adsense-account" content={SITE.publisherId} />

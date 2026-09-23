@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContentCard from "../../components/ContentCard.astro";
+import { experiments } from "../../data/content";
+---
+
+<BaseLayout
+  title="Product Image Experiments"
+  description="Reproducible format measurements, crop calculations and browser-processing limits for product images."
+  noindex
+  activeNav="/experiments/"
+>
+  <section class="legal-hero legal-shell">
+    <p class="eyebrow">THE LAB</p>
+    <h1>Small experiments, clear limits.</h1>
+    <p>Each note states its question, environment, result and the part it cannot prove.</p>
+  </section>
+  <section class="shell content-grid three-up page-section">
+    {experiments.map((item) => (
+      <ContentCard eyebrow={item.category} title={item.title} description={item.description} href={`/experiments/${item.slug}/`} meta={`Rechecked ${item.lastVerified}`} />
+    ))}
+  </section>
+</BaseLayout>

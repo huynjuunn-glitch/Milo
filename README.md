@@ -1,28 +1,28 @@
-# Dama Image Prep
+# Seller Operations Lab
 
-English product-photo batch preparation at damaheritage.com. Astro static output, GitHub → Cloudflare Pages. No server-side photo processing, database, authentication or paid API.
+Seller Operations Lab is a static Astro site for small online sellers. It combines source-led marketplace references, reproducible image experiments and browser-only product-image tools.
 
-## Workflows
-
-- Batch fit/pad or positioned fill/crop; JPEG/PNG/WebP export.
-- Three illustrative thumbnail center crops of prepared output.
-- Sanitized prefix + sequence filenames, individual downloads and streamed ZIP assembly.
-- Optional versioned localStorage recipe (including prefix, never selected photos).
+The current deployment target is `https://damaheritage.com` through GitHub and Cloudflare Pages. Image files stay in the visitor's browser; this project has no upload server, database, authentication or paid API.
 
 ## Development
 
-`npm ci`, `npm run dev`, `npm run quality`.
+```text
+npm ci
+npm run dev
+npm run quality
+npm run measure:format
+```
 
-The quality gate checks pure image geometry, header rejection, naming and ZIP roundtrips; then Astro types/build, generated metadata, routes, labels, internal links and advertising state. It does not replace real-device browser validation.
+`npm run quality` checks image processing, Astro types/build, internal links, metadata, schema, RSS, sitemap and static-only deployment assumptions. It does not replace real-device visual review or Google Search Console checks.
 
 ## Structure
 
-- `src/scripts/image-core.ts`: pure validation, header inspection, geometry and naming.
-- `src/scripts/workspace.ts`: browser file lifecycle, canvas, UI, previews and exports.
-- `src/pages/index.astro`: working surface; global styles in `src/styles/global.css`.
-- `src/data/guides.ts`: original technical guide content; shared static guide routes.
-- `scripts/test-images.mjs` and `scripts/check-site.mjs`: automated quality gates.
+- `src/data/guides.ts`: evergreen workflow guides.
+- `src/data/content.ts`: marketplace references and experiments.
+- `src/pages/tools/`: browser-only tools.
+- `src/scripts/image-core.ts`: pure image validation, geometry and naming logic.
+- `src/scripts/workspace.ts`: browser file lifecycle, canvas and downloads.
+- `scripts/test-*.mjs`: automated QA gates.
+- `scripts/measure-format-fixture.mjs`: deterministic reference-encoder byte benchmark used by the format note.
 
-Input limits: 20 images, 20 MB each, 100 MB total, 24 MP each. Output: 64–4096 px per edge, 12 MP each, 100 MB total. Decimal MB. Static JPEG/PNG/WebP only. Bounds reduce risk; device memory still matters.
-
-The AdSense publisher meta tag and ads.txt are retained. No ad/analytics scripts ship. Consent and privacy configuration must be reviewed before any are enabled. No claim of guaranteed approval or traffic.
+Editorial rules are documented in `CONTENT_AUTHORING.md`. The site does not claim first-hand seller experience, platform affiliation or guaranteed AdSense approval.

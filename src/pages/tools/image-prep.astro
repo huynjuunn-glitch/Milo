@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../data/site";
+---
+
+<BaseLayout
+  title="Image Prep: Resize and Prepare Etsy Product Photos"
+  description="Resize, pad, crop-preview, rename and ZIP-export product photos in your browser. Files stay on your device; no account or upload is required."
+  noindex
+  image="/images/image-workspace.png"
+  imageAlt="Browser image preparation workspace with product photo settings and local batch export."
+  activeNav="/tools/"
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": `${SITE.url}/tools/image-prep/#app`,
+    name: "Seller Operations Lab Image Prep",
+    url: `${SITE.url}/tools/image-prep/`,
+    description:
+      "A browser-based product image preparation tool for small online sellers.",
+    applicationCategory: "MultimediaApplication",
+    operatingSystem: "Any operating system with a supported web browser",
+    browserRequirements: "JavaScript, Canvas and image decoding support required",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    featureList: [
+      "Batch image resizing",
+      "Fit and padding",
+      "Thumbnail crop previews",
+      "Sequential file naming",
+      "ZIP export",
+      "Local saved settings",
+    ],
+  }}
+>
+  <section class="tool-heading shell">
+    <div>
+      <p class="eyebrow">TOOL · LOCAL BROWSER PROCESSING</p>
+      <h1>Prepare a product-photo batch.</h1>
+      <p>
+        Resize, add padding, preview crops, rename files and download a ZIP.
+        The workspace does not upload your images or connect to Etsy.
+      </p>
+    </div>
+    <span class="local-badge">● Files stay on your device</span>
+  </section>
+
+  <div class="shell workspace" id="workspace">
+    <aside class="settings-panel">
+      <form id="settings-form">
+        <div class="panel-heading">
+          <h2><span class="step">01</span> Set output</h2>
+          <button type="button" class="text-button" id="reset-settings">Reset</button>
+        </div>
+        <label for="preset">Starting size</label>
+        <select id="preset">
+          <option value="square">Square · 2000 × 2000</option>
+          <option value="landscape">Landscape · 2400 × 1800</option>
+          <option value="portrait">Portrait · 1800 × 2400</option>
+          <option value="custom">Custom dimensions</option>
+        </select>
+        <p class="field-note">Presets are workflow starting points, not Etsy requirements.</p>
+        <div class="field-pair">
+          <div><label for="width">Width (px)</label><input id="width" type="number" min="64" max="4096" step="1" value="2000" required /></div>
+          <div><label for="height">Height (px)</label><input id="height" type="number" min="64" max="4096" step="1" value="2000" required /></div>
+        </div>
+        <label for="fit">How the photo fits</label>
+        <select id="fit"><option value="contain">Fit whole photo + padding</option><option value="cover">Fill frame + crop edges</option></select>
+        <div id="padding-control">
+          <label for="padding">Inner margin <output id="padding-value">5%</output></label>
+          <input id="padding" type="range" min="0" max="20" value="5" />
+        </div>
+        <div class="field-pair">
+          <div><label for="background">Background</label><input id="background" type="color" value="#ffffff" /></div>
+          <div><label for="anchor">Crop position</label><select id="anchor"><option value="center">Center</option><option value="top">Top</option><option value="bottom">Bottom</option><option value="left">Left</option><option value="right">Right</option></select></div>
+        </div>
+        <label class="check-label"><input type="checkbox" id="upscale" /> Allow enlarging small photos</label>
+        <p class="field-note">Enlarging cannot restore missing detail.</p>
+        <div class="section-rule"></div>
+        <div class="field-pair">
+          <div><label for="format">File format</label><select id="format"><option value="jpeg">JPG</option><option value="webp">WebP</option><option value="png">PNG</option></select></div>
+          <div><label for="quality">Quality <output id="quality-value">85%</output></label><input id="quality" type="range" min="40" max="100" value="85" /></div>
+        </div>
+        <p class="field-note">PNG ignores quality. Transparent input is composited onto your selected background.</p>
+        <p class="notice"><strong>Uploading to Etsy?</strong> Etsy's current supported image-type list does not include WebP. Choose JPG or PNG, then confirm the draft preview. <a href="/marketplace/etsy/">See the source-checked Etsy image reference</a>.</p>
+        <label for="prefix">Product code / filename prefix</label>
+        <input id="prefix" type="text" maxlength="60" value="product" autocomplete="off" spellcheck="false" />
+        <label for="start">First sequence number</label>
+        <input id="start" type="number" min="1" max="999999" step="1" value="1" required />
+        <p class="filename-example">Example: <code id="filename-example">product-001.jpg</code></p>
+        <button type="button" class="button secondary full" id="save-settings">Save these settings</button>
+        <button type="button" class="text-button full" id="forget-settings">Forget saved settings</button>
+        <p class="field-note" id="saved-status" role="status">Optional. Saved in this browser only; never your photos.</p>
+      </form>
+    </aside>
+
+    <section class="batch-panel" aria-labelledby="batch-title">
+      <div class="panel-heading"><h2 id="batch-title"><span class="step">02</span> Add photos</h2><span class="count" id="file-count">0 / 20</span></div>
+      <div class="drop-zone" id="drop-zone">
+        <div class="upload-symbol" aria-hidden="true">↑</div>
+        <h3>Drop product photos here</h3>
+        <p>JPG, PNG or static WebP · up to 20 photos</p>
+        <label class="button" for="file-input">Choose photos</label>
+        <input class="visually-hidden" type="file" id="file-input" accept="image/jpeg,image/png,image/webp" multiple />
+        <button class="text-button" type="button" id="demo">Try a sample batch</button>
+        <p class="field-note">20 MB per file · 24 megapixels · 100 MB total input</p>
+      </div>
+      <noscript><p class="notice">JavaScript is needed for local image processing. The guides remain available without it.</p></noscript>
+      <p id="status" role="status" aria-live="polite" class="status-line">Choose a few photos to begin. Your originals are never changed.</p>
+      <ul id="file-errors" class="file-errors" aria-live="polite"></ul>
+      <p class="field-note"><a href="#settings-form" id="settings-summary">2000 × 2000 · JPG · Fit — change settings</a></p>
+      <div class="batch-toolbar"><p id="batch-summary">No photos selected</p><button type="button" id="clear" class="text-button" disabled>Clear batch</button></div>
+      <div class="file-grid" id="file-grid"></div>
+      <div class="export-bar">
+        <div><strong id="export-summary">Prepare your photos, then review and download.</strong><p>Output limited to 12 megapixels per image.</p></div>
+        <div class="export-actions"><button class="button" type="button" id="process" disabled>Prepare images</button><button class="button dark" type="button" id="download" disabled>Download ZIP</button><button class="text-button" type="button" id="cancel" hidden>Cancel</button></div>
+      </div>
+      <progress id="progress" max="100" value="0" hidden aria-label="Batch progress"></progress>
+      <section id="preview-panel" class="preview-panel" hidden aria-labelledby="preview-title">
+        <div class="panel-heading"><h2 id="preview-title"><span class="step">03</span> Check framing</h2><button class="text-button" id="close-preview" type="button">Close preview</button></div>
+        <p id="preview-name"></p>
+        <div class="crop-grid"><figure><canvas role="img" aria-label="Prepared image crop preview" id="crop-square" width="300" height="300"></canvas><figcaption>Square · 1:1</figcaption></figure><figure><canvas role="img" aria-label="Prepared image crop preview" id="crop-landscape" width="400" height="300"></canvas><figcaption>Landscape · 4:3</figcaption></figure><figure><canvas role="img" aria-label="Prepared image crop preview" id="crop-portrait" width="300" height="400"></canvas><figcaption>Portrait · 3:4</figcaption></figure></div>
+        <p class="field-note">Illustrative center crops, not exact platform previews. Check your listing before publishing.</p>
+      </section>
+    </section>
+  </div>
+
+  <section class="shell reading-section tool-explanation">
+    <div><p class="eyebrow">WHAT IT DOES</p><h2>Useful preparation, not image retouching.</h2><p>Image Prep changes canvas size, framing, format and filenames. It does not remove backgrounds, restore blur, preserve metadata or guarantee marketplace acceptance.</p></div>
+    <div><p class="eyebrow">READ BEFORE USING</p><p><a href="/experiments/crop-geometry/">See the crop geometry experiment</a>, <a href="/guides/file-size-and-quality/">compare formats</a> and review <a href="/methodology/">methods and limits</a>.</p></div>
+  </section>
+</BaseLayout>
+<script>
+  import "../../scripts/workspace";
+</script>

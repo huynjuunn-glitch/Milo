@@ -1,0 +1,25 @@
+---
+import VerifiedBadge from "./VerifiedBadge.astro";
+const { eyebrow, title, description, updated, crumbs } = Astro.props as {
+  eyebrow: string;
+  title: string;
+  description: string;
+  updated: string;
+  crumbs?: Array<{ label: string; href?: string }>;
+};
+---
+
+<header class="article-header legal-shell">
+  {crumbs && <nav aria-label="Breadcrumb">
+    {crumbs.map((crumb, index) => (
+      <>
+        {index > 0 && " / "}
+        {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
+      </>
+    ))}
+  </nav>}
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  <p class="article-lede">{description}</p>
+  <VerifiedBadge date={updated} label="Last checked" />
+</header>

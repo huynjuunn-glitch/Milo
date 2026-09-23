@@ -1,43 +1,111 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
 import { guides, type Guide } from "../../data/guides";
 import { SITE } from "../../data/site";
 export const getStaticPaths = () =>
   guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
 const { guide } = Astro.props as { guide: Guide };
+const pageUrl = `${SITE.url}/guides/${guide.slug}/`;
+const imagePath = `/images/${guide.slug}.png`;
+const sectionId = (index: number) => `section-${index + 1}`;
+const updatedLabel = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "long",
+  timeZone: "UTC",
+}).format(new Date(`${guide.updated}T00:00:00Z`));
 ---
 
 <BaseLayout
   title={guide.title}
   description={guide.description}
+  noindex={guide.slug === "consistent-product-grid"}
   type="article"
   activeNav="/guides/"
-  schema={{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: guide.title,
-    description: guide.description,
-    author: {
-      "@type": "Organization",
-      name: SITE.name,
-      url: SITE.url + "/about/",
+  image={imagePath}
+  imageAlt={guide.imageAlt}
+  schema={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: guide.title,
+      description: guide.description,
+      "@id": `${pageUrl}#article`,
+      image: new URL(imagePath, SITE.url).toString(),
+      datePublished: guide.published,
+      dateModified: guide.updated,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE.url}/#organization` },
+      author: {
+        "@type": "Organization",
+        name: SITE.name,
+        url: SITE.url + "/about/",
+      },
+      mainEntityOfPage: pageUrl,
     },
-    mainEntityOfPage: SITE.url + `/guides/${guide.slug}/`,
-  }}
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Image workspace",
+          item: SITE.url + "/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Photo guides",
+          item: SITE.url + "/guides/",
+        },
+        { "@type": "ListItem", position: 3, name: guide.title, item: pageUrl },
+      ],
+    },
+  ]}
 >
+  <Fragment slot="head">
+    <meta property="article:published_time" content={guide.published} />
+    <meta property="article:modified_time" content={guide.updated} />
+  </Fragment>
   <article>
     <header class="legal-hero legal-shell">
-      <a href="/guides/">← Photo guides</a><p
-        class="eyebrow"
-        style="margin-top:24px"
-      >
+      <nav aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/guides/">Guides</a> / <span
+          aria-current="page">{guide.category}</span>
+      </nav><p class="eyebrow" style="margin-top:24px">
         {guide.category}
       </p><h1>{guide.title}</h1><p>{guide.description}</p><p
         class="article-meta"
       >
-        Dama Image Prep · Technical workflow guide · Updated September 7, 2026
+        <a href="/about/">Seller Operations Lab</a> · Evidence-led workflow guide · Updated
+        <time datetime={guide.updated}>{updatedLabel}</time>
       </p>
     </header><div class="legal-content legal-shell">
+      <figure class="guide-illustration">
+        <img
+          src={imagePath}
+          width="1200"
+          height="630"
+          alt={guide.imageAlt}
+          decoding="async"
+        />
+        <figcaption>
+          Illustration of the workflow explained below, not a marketplace
+          screenshot.
+        </figcaption>
+      </figure>
+      <nav class="notice article-toc" aria-label="On this page">
+        <h2>On this page</h2>
+        <ol>
+          {
+            guide.sections.map((section, index) => (
+              <li>
+                <a href={`#${sectionId(index)}`}>{section.title}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
       {
         guide.diagram && (
           <figure class="diagram">
@@ -103,9 +171,9 @@ const { guide } = Astro.props as { guide: Guide };
         )
       }
       {
-        guide.sections.map((section) => (
+        guide.sections.map((section, index) => (
           <section>
-            <h2>{section.title}</h2>
+            <h2 id={sectionId(index)}>{section.title}</h2>
             {section.paragraphs.map((p) => (
               <p>{p}</p>
             ))}
@@ -152,10 +220,10 @@ const { guide } = Astro.props as { guide: Guide };
       }
       <aside class="notice">
         <h2>How this guide was made</h2><p>
-          This is an editorial explanation of Dama’s workflow, not a claim of
-          first-hand selling experience. Examples are illustrative and based on
-          the documented processing method. Browser output and marketplace
-          presentation can vary.
+          This is an editorial explanation of a documented workflow, not a claim
+          of first-hand selling experience. Examples are illustrative or
+          reproducible calculations based on the implemented processing method.
+          Browser output and marketplace presentation can vary.
         </p>{
           guide.source && (
             <p>
@@ -171,22 +239,22 @@ const { guide } = Astro.props as { guide: Guide };
           )
         }<p>
           <a href="/standards/">Processing methods and limits</a> · <a
-            href="/contact/">Report a correction</a>
+            href="/contact/">Report a correction</a
+          >
         </p>
       </aside><p><a class="button" href="/">Open the image workspace</a></p><h2>
         Continue reading
       </h2><ul>
         {
-          guides
-            .filter((g) => g.slug !== guide.slug)
-            .slice(0, 3)
+          guide.related
+            .map((slug) => guides.find((g) => g.slug === slug)!)
             .map((g) => (
               <li>
                 <a href={`/guides/${g.slug}/`}>{g.title}</a>
               </li>
             ))
         }
-      </ul>
+      </ul>{guide.relatedLab && <RelatedLinks links={guide.relatedLab} />}
     </div>
   </article></BaseLayout
 >

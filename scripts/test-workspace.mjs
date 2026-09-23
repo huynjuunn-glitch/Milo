@@ -14,7 +14,7 @@ const window = new Window({
 });
 window.document.write(
   fs
-    .readFileSync("dist/index.html", "utf8")
+    .readFileSync("dist/tools/image-prep/index.html", "utf8")
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, ""),
 );
 const document = window.document;
@@ -201,14 +201,14 @@ check("settings invalidate exports and archive", () => {
 $("prefix").value = "../CON";
 $("save-settings").click();
 check("sanitized settings only stored", () => {
-  const saved = JSON.parse(localStorage.getItem("dama-image-prep-settings-v1"));
+  const saved = JSON.parse(localStorage.getItem("seller-operations-lab-settings-v1"));
   assert.equal(saved.settings.prefix, "product-CON");
   assert.equal(saved.settings.width, 1000);
   assert.ok(!JSON.stringify(saved).includes("sample-1"));
 });
 $("forget-settings").click();
 check("forget removes saved recipe", () =>
-  assert.equal(localStorage.getItem("dama-image-prep-settings-v1"), null),
+  assert.equal(localStorage.getItem("seller-operations-lab-settings-v1"), null),
 );
 $("width").value = "0";
 $("process").click();

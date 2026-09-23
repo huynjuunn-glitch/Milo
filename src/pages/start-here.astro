@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { guides } from "../data/guides";
+import { marketplaceReferences } from "../data/content";
+---
+
+<BaseLayout
+  title="Start Here: Etsy Listing Preparation"
+  description="A short path through the Seller Operations Lab for Etsy sellers preparing product images and listing files."
+  noindex
+  activeNav="/guides/"
+>
+  <section class="legal-hero legal-shell"><p class="eyebrow">START HERE</p><h1>A practical path before you publish.</h1><p>Read one workflow guide, check the current platform reference and run a local test on a representative file.</p></section>
+  <section class="shell numbered-path page-section">
+    <ol>
+      <li><strong>Understand the frame.</strong><a href={`/guides/${guides[0].slug}/`}>{guides[0].title}</a></li>
+      <li><strong>Read the current platform note.</strong><a href={`/marketplace/${marketplaceReferences[0].slug}/`}>{marketplaceReferences[0].title}</a></li>
+      <li><strong>Run a local check.</strong><a href="/tools/image-prep/">Open Image Prep</a> or <a href="/tools/image-qa/">inspect one file</a>.</li>
+      <li><strong>Verify the final listing.</strong>Check the actual Etsy draft or listing preview after upload.</li>
+    </ol>
+  </section>
+</BaseLayout>

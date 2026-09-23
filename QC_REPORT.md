@@ -33,7 +33,7 @@ Tested in the Codex Chromium-based in-app browser, at default desktop viewport a
 
 ## Production verification — September 8, 2026
 
-- Release `0be7dead93e54fccf1cb3c79a03a095b68746f49` was pushed to `main`; the GitHub Cloudflare Pages check completed successfully. The canonical domain serves Dama Image Prep rather than Dama Workshop.
+- The earlier production release was verified on the existing Cloudflare Pages connection. This working-tree rebuild has not been pushed or deployed; run the current quality gate and repeat production checks after an authorized push.
 - All 14 non-error HTML routes, robots.txt, ads.txt, sitemap files, favicon and referenced production CSS/JavaScript returned HTTP 200. An unknown route and the retired fraction-calculator route returned genuine branded HTTP 404 responses.
 - No advertising or analytics script was found in the fetched pages. Cloudflare injects Rocket Loader; the workspace initialized and completed the tested actions with it present.
 - In the live Chromium-based in-app browser, three sample photos were prepared as 2000 × 2000 JPGs; all three crop-preview shapes rendered. A saved filename prefix survived reload; test settings were then removed.

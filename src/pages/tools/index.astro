@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContentCard from "../../components/ContentCard.astro";
+---
+
+<BaseLayout
+  title="Browser Tools for Etsy Sellers"
+  description="Privacy-first browser tools for checking and preparing Etsy product files. No account, server upload or marketplace connection."
+  noindex
+  activeNav="/tools/"
+>
+  <section class="legal-hero legal-shell">
+    <p class="eyebrow">TOOLS</p>
+    <h1>Small tools for the last check before publishing.</h1>
+    <p>
+      The tools support the research. They run in your browser, keep selected
+      files on your device and explain what they cannot verify.
+    </p>
+  </section>
+  <section class="shell content-grid two-up page-section">
+    <ContentCard
+      eyebrow="IMAGE WORKFLOW"
+      title="Image Prep"
+      description="Resize, pad, preview crops, rename and export a batch locally."
+      href="/tools/image-prep/"
+      meta="JPG · PNG · static WebP"
+    />
+    <ContentCard
+      eyebrow="QUALITY CHECK"
+      title="Image QA Checker"
+      description="Inspect dimensions, aspect ratio, file size and format before uploading."
+      href="/tools/image-qa/"
+      meta="No upload · one file at a time"
+    />
+  </section>
+  <section class="shell method-strip page-section">
+    <p class="eyebrow">PRIVACY NOTE</p>
+    <p>
+      These tools do not create a cloud library. Browser storage is optional
+      and stores settings, not your selected photos. Read the <a href="/privacy/">privacy explanation</a>
+      before using a shared device.
+    </p>
+  </section>
+</BaseLayout>

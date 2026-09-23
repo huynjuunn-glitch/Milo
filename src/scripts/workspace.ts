@@ -29,7 +29,7 @@ let items: Item[] = [],
   previewToken = 0,
   previewBusy = false,
   zipUrl: string | undefined;
-const STORAGE = "dama-image-prep-settings-v1";
+const STORAGE = "seller-operations-lab-settings-v1";
 const status = (message: string, error = false) => {
   $("status").textContent = message;
   $("status").classList.toggle("error", error);

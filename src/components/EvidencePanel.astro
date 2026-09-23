@@ -1,0 +1,24 @@
+---
+import type { Evidence } from "../data/content";
+const { evidence } = Astro.props as { evidence: Evidence };
+---
+
+<aside class="evidence-panel" aria-labelledby="evidence-heading">
+  <p class="eyebrow">REPRODUCIBLE METHOD</p>
+  <h2 id="evidence-heading">What this test can tell you</h2>
+  <dl>
+    <div><dt>Question</dt><dd>{evidence.question}</dd></div>
+    <div><dt>Method</dt><dd>{evidence.method}</dd></div>
+    <div><dt>Result</dt><dd>{evidence.result}</dd></div>
+    <div><dt>Limitation</dt><dd>{evidence.limitation}</dd></div>
+    {evidence.environment && <div><dt>Environment</dt><dd>{evidence.environment}</dd></div>}
+  </dl>
+  {evidence.measurements && <>
+    <h3>Recorded values or calculations</h3>
+    <div class="table-wrap"><table><thead><tr><th>Item</th><th>Value</th><th>Basis</th></tr></thead><tbody>{evidence.measurements.map((row) => <tr><th scope="row">{row.label}</th><td>{row.value}</td><td>{row.basis}</td></tr>)}</tbody></table></div>
+  </>}
+  {evidence.reproduce && <>
+    <h3>Reproduce it</h3>
+    <ol>{evidence.reproduce.map((step) => <li>{step}</li>)}</ol>
+  </>}
+</aside>
