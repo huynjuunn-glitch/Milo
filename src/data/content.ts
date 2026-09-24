@@ -123,37 +123,39 @@ export const marketplaceReferences: LabContent[] = [
   {
     slug: "shopify",
     type: "reference",
-    title: "Shopify Product Image Reference: Consistency Before Pixel Chasing",
+    title: "Shopify Product Image Requirements and Theme Checks",
     description:
-      "A practical Shopify image reference that distinguishes the platform's media guidance from independent checks for consistent product grids.",
+      "Current Shopify image limits, format guidance and collection-image behavior, with a practical check that accounts for theme crops and this site's tool limits.",
     category: "Shopify reference",
     published: "2026-09-22",
-    updated: "2026-09-22",
-    lastVerified: "2026-09-22",
+    updated: "2026-09-24",
+    lastVerified: "2026-09-24",
     sections: [
       {
-        title: "What the official guidance does and does not decide",
+        title: "Current image limits and accepted formats",
         paragraphs: [
-          "Shopify's product media documentation describes supported media and image presentation considerations. A single pixel preset cannot override a theme's crop, card ratio or responsive behavior.",
-          "Use one aspect ratio for images that appear together when the visual goal is a calm collection grid. Use a different ratio when the product or theme genuinely requires it; consistency is not a reason to crop away important information.",
+          "Shopify's product-media documentation, checked September 24, 2026, says product and collection images can be up to 5000 × 5000 pixels or 25 megapixels, and must be smaller than 20 MB. It lists PNG as the preferred format for most product images, followed by JPEG; it also lists PSD, TIFF, BMP, GIF, SVG, HEIC and WebP. Shopify's image service selects a format supported by each customer's web client.",
+          "The 2048 × 2048 square recommendation applies to square product images that usually display best; it is not a universal upload requirement. Use the current linked help page if a platform rule matters to your workflow, because requirements can change.",
         ],
       },
       {
-        title: "A practical comparison",
+        title: "Why the collection can still look uneven",
         paragraphs: [
-          "Prepare one landscape and one portrait original at the same target canvas. Compare the output side by side, then inspect the actual storefront at desktop and phone widths. Equal canvases do not guarantee equal apparent product size if the originals contain different amounts of empty space.",
+          "Shopify says consistent aspect ratios for featured images can help collection images appear the same size side by side. It also notes that themes can request consistent sizes from Shopify's CDN and that different image sizes are created for different theme areas. A matching source ratio can improve consistency, but theme crops and responsive layouts still affect the final display.",
+          "Equal output canvases do not equalize the size of the objects inside them. If one source product fills 80% of its frame and another fills 40%, fitting both into the same square preserves the apparent-size difference. Added padding surrounds the source rectangle; it does not detect or trim empty background around a product.",
         ],
         steps: [
-          "Read Shopify's current product media guidance and record the verification date.",
-          "Choose the aspect ratio used by the theme or the product family, not a generic internet template.",
-          "Use Fit when preserving the full object matters; use Fill only when the removed area is expendable.",
-          "Check the uploaded images in the actual theme and collection view.",
+          "Choose the featured-image ratio used by the product family or theme, rather than assuming square is always best.",
+          "Use Fit to preserve all source edges. Use Fill only if the part removed by cropping is genuinely expendable.",
+          "Compare one portrait and one landscape product at the same output dimensions; note whether empty source margins cause unequal object scale.",
+          "Upload representative images and inspect both the collection grid and product page on phone and desktop.",
         ],
       },
       {
-        title: "Known limits",
+        title: "Shopify limits versus Image Prep limits",
         paragraphs: [
-          "Seller Operations Lab cannot see your Shopify theme, CDN transformation settings or storefront breakpoints. The final storefront preview remains the authoritative presentation check.",
+          "Shopify allows images up to 5000 pixels per edge and 25 megapixels. Image Prep is deliberately smaller: it limits each output to 4096 pixels per edge and 12 megapixels. Shopify may accept file types this tool cannot open; Image Prep supports JPG, PNG and static WebP. A platform-valid file is not automatically within this browser tool's limits.",
+          "Seller Operations Lab cannot see your store theme, its custom image settings or Shopify's final CDN response. Use the live theme preview as the presentation check; use this reference for the linked platform facts and the tool pages for local file checks.",
         ],
       },
     ],
@@ -165,9 +167,10 @@ export const marketplaceReferences: LabContent[] = [
       },
     ],
     related: [
+      { label: "Shopify product image sizes and a worked fit calculation", href: "/guides/consistent-product-grid/" },
       { label: "Crop geometry experiment", href: "/experiments/crop-geometry/" },
       { label: "Image Prep tool", href: "/tools/image-prep/" },
-      { label: "Product grid guide", href: "/guides/consistent-product-grid/" },
+      { label: "Compare browser output formats", href: "/tools/format-compare/" },
     ],
   },
 ];

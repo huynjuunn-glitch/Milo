@@ -5,19 +5,48 @@ import { experiments } from "../../data/content";
 ---
 
 <BaseLayout
-  title="Product Image Experiments"
-  description="Reproducible format measurements, crop calculations and browser-processing limits for product images."
-  noindex
+  title="Product Image Lab Notes"
+  description="Reproducible product-image tests covering browser format encoding, thumbnail crop geometry, and image memory estimates."
   activeNav="/experiments/"
 >
   <section class="legal-hero legal-shell">
     <p class="eyebrow">THE LAB</p>
-    <h1>Small experiments, clear limits.</h1>
-    <p>Each note states its question, environment, result and the part it cannot prove.</p>
+    <h1>Small tests. Explicit limits.</h1>
+    <p>
+      Each note states the input, environment, method and result so a reader
+      can reproduce it. A controlled fixture or geometry calculation can
+      explain one behavior; it cannot predict every seller photo, browser or
+      marketplace pipeline.
+    </p>
   </section>
-  <section class="shell content-grid three-up page-section">
+  <section class="shell page-section two-column-copy">
+    <div>
+      <h2>What is measured</h2>
+      <p>
+        The format test records the bytes produced from the same deterministic
+        sample. The crop test calculates which centered pixels a frame removes.
+        The memory note estimates one decoded RGBA buffer from pixel count.
+      </p>
+    </div>
+    <div>
+      <h2>What the results do not prove</h2>
+      <p>
+        The format sample is not a photograph and its byte counts are not a
+        universal format ranking. Geometry does not recreate an Etsy or Shopify
+        theme. Memory arithmetic is not a device limit. Use the local tools to
+        test your own files and inspect the actual destination preview.
+      </p>
+    </div>
+  </section>
+  <section class="shell content-grid three-up page-section" aria-label="All lab notes">
     {experiments.map((item) => (
-      <ContentCard eyebrow={item.category} title={item.title} description={item.description} href={`/experiments/${item.slug}/`} meta={`Rechecked ${item.lastVerified}`} />
+      <ContentCard
+        eyebrow={item.category}
+        title={item.title}
+        description={item.description}
+        href={`/experiments/${item.slug}/`}
+        meta={`Rechecked ${item.lastVerified}`}
+      />
     ))}
   </section>
 </BaseLayout>

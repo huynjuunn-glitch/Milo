@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Compare JPG, PNG and WebP Image Formats"
+  description="Compare actual JPG, PNG, and WebP output sizes and previews in your browser. The original image stays on your device."
+  noindex
+  activeNav="/tools/"
+>
+  <section class="legal-hero legal-shell">
+    <p class="eyebrow">LOCAL BROWSER TOOL</p>
+    <h1>Compare formats using your own image.</h1>
+    <p>
+      Encode one unchanged image as JPG, PNG and WebP in this browser. Compare
+      the byte counts and inspect the outputs before choosing a format for your
+      listing.
+    </p>
+  </section>
+
+  <section class="shell comparison-panel page-section" data-format-compare>
+    <div class="comparison-controls">
+      <div>
+        <label for="compare-file">Choose one product image</label>
+        <input id="compare-file" type="file" accept="image/jpeg,image/png,image/webp" />
+        <p class="field-note">JPG, PNG or static WebP · up to 20 MB and 6 megapixels</p>
+      </div>
+      <div>
+        <label for="compare-quality">JPG / WebP quality: <output id="compare-quality-value">85%</output></label>
+        <input id="compare-quality" type="range" min="40" max="100" value="85" />
+        <p class="field-note">PNG encoding does not use this quality setting.</p>
+      </div>
+      <div>
+        <label for="compare-background">Preview / JPG background</label>
+        <input id="compare-background" type="color" value="#ffffff" />
+        <p class="field-note">Transparent PNG/WebP previews use this background for comparison; their alpha channel is preserved.</p>
+      </div>
+      <button class="button" id="compare-run" type="button" disabled>Compare formats</button>
+    </div>
+
+    <p id="compare-status" class="status-line" role="status" aria-live="polite">
+      Choose an image to begin. Your file is processed locally and is not uploaded.
+    </p>
+
+    <section id="compare-results" hidden aria-labelledby="compare-results-title">
+      <h2 id="compare-results-title">Results from this browser</h2>
+      <p id="compare-summary" class="field-note"></p>
+      <div class="table-wrap">
+        <table class="format-results">
+          <thead>
+            <tr>
+              <th scope="col">Requested format</th>
+              <th scope="col">Actual output</th>
+              <th scope="col">File size</th>
+              <th scope="col">Change vs original</th>
+              <th scope="col">Download</th>
+            </tr>
+          </thead>
+          <tbody id="compare-rows"></tbody>
+        </table>
+      </div>
+      <div id="compare-previews" class="format-previews"></div>
+    </section>
+  </section>
+
+  <section class="shell reading-section">
+    <h2>How to make a fair comparison</h2>
+    <ol>
+      <li>Use the same original file for all three encodings; this tool does not resize it.</li>
+      <li>Compare the actual byte counts, then inspect fine texture, text and edges at normal size and at 100%.</li>
+      <li>Try another image with different texture or transparency. One photo cannot predict every image.</li>
+      <li>Confirm that the destination accepts the output type, then inspect its real listing preview.</li>
+    </ol>
+    <p>
+      Browser encoders can differ. If WebP is unsupported, the browser may
+      return another format; the result table reports the actual MIME type and
+      download extension instead of disguising it. For Etsy, see the
+      <a href="/marketplace/etsy/">source-checked image reference</a> before
+      uploading. Read the <a href="/privacy/">privacy explanation</a> and
+      <a href="/methodology/">test limitations</a> for more detail.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  import "../../scripts/format-compare";
+</script>

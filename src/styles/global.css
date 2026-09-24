@@ -1092,6 +1092,83 @@ progress {
   background: #fff;
   padding: 28px;
 }
+.comparison-panel {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  padding: clamp(20px, 4vw, 36px);
+}
+.comparison-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.5fr) minmax(180px, 1fr) minmax(170px, 0.8fr) auto;
+  align-items: end;
+  gap: 22px;
+}
+.comparison-controls > div {
+  min-width: 0;
+}
+.comparison-controls input[type="file"],
+.comparison-controls input[type="range"] {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}
+.comparison-controls input[type="color"] {
+  display: block;
+  width: 54px;
+  height: 42px;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+}
+.comparison-controls label {
+  font-weight: 700;
+}
+.comparison-panel > .status-line {
+  margin-block: 24px;
+}
+.format-results {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  margin-block: 18px 30px;
+}
+.format-results th,
+.format-results td {
+  border: 1px solid var(--line);
+  padding: 11px 13px;
+  text-align: left;
+  vertical-align: top;
+}
+.format-results th[scope="row"] {
+  white-space: nowrap;
+}
+.format-previews {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.format-preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.format-preview-card img {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+}
+.format-preview-card figcaption {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
 .qa-results {
   display: grid;
   gap: 10px;
@@ -1142,6 +1219,9 @@ progress {
   .content-grid.three-up {
     grid-template-columns: 1fr 1fr;
   }
+  .comparison-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (max-width: 620px) {
   .hub-hero {
@@ -1149,7 +1229,8 @@ progress {
   }
   .content-grid.three-up,
   .content-grid.two-up,
-  .two-column-copy {
+  .two-column-copy,
+  .format-previews {
     grid-template-columns: 1fr;
   }
   .tinted {
@@ -1159,6 +1240,9 @@ progress {
   .tool-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+  .comparison-controls {
+    grid-template-columns: 1fr;
   }
   .evidence-panel dl > div {
     grid-template-columns: 1fr;

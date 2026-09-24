@@ -4,41 +4,52 @@ import ContentCard from "../../components/ContentCard.astro";
 ---
 
 <BaseLayout
-  title="Browser Tools for Etsy Sellers"
-  description="Privacy-first browser tools for checking and preparing Etsy product files. No account, server upload or marketplace connection."
-  noindex
+  title="Free Product Image Browser Tools"
+  description="Prepare, inspect, and compare product images with free browser tools. Files stay on your device; no account or upload is required."
   activeNav="/tools/"
 >
   <section class="legal-hero legal-shell">
-    <p class="eyebrow">TOOLS</p>
-    <h1>Small tools for the last check before publishing.</h1>
+    <p class="eyebrow">BROWSER TOOLS</p>
+    <h1>Check the file before it leaves your device.</h1>
     <p>
-      The tools support the research. They run in your browser, keep selected
-      files on your device and explain what they cannot verify.
+      These tools perform technical image checks locally in your browser. They
+      do not retouch a product, connect to a marketplace or promise acceptance.
+      Keep your original files and review every export before publishing.
     </p>
   </section>
-  <section class="shell content-grid two-up page-section">
+  <section class="shell content-grid three-up page-section" aria-label="Available browser tools">
     <ContentCard
-      eyebrow="IMAGE WORKFLOW"
+      eyebrow="BATCH PREPARATION"
       title="Image Prep"
-      description="Resize, pad, preview crops, rename and export a batch locally."
+      description="Resize, add padding, inspect likely crops, rename, and export a batch locally."
       href="/tools/image-prep/"
-      meta="JPG · PNG · static WebP"
+      meta="Up to 20 images · no upload"
     />
     <ContentCard
-      eyebrow="QUALITY CHECK"
+      eyebrow="FORMAT COMPARISON"
+      title="Compare JPG, PNG, and WebP"
+      description="Encode one unchanged image in this browser, compare actual byte sizes, and inspect each result side by side."
+      href="/tools/format-compare/"
+      meta="Same dimensions · local-only"
+    />
+    <ContentCard
+      eyebrow="FILE INSPECTION"
       title="Image QA Checker"
-      description="Inspect dimensions, aspect ratio, file size and format before uploading."
+      description="Inspect dimensions, aspect ratio, file size, and recognized image format before upload."
       href="/tools/image-qa/"
-      meta="No upload · one file at a time"
+      meta="One file · no upload"
     />
   </section>
-  <section class="shell method-strip page-section">
-    <p class="eyebrow">PRIVACY NOTE</p>
+  <section class="shell reading-section">
+    <h2>How local processing works</h2>
     <p>
-      These tools do not create a cloud library. Browser storage is optional
-      and stores settings, not your selected photos. Read the <a href="/privacy/">privacy explanation</a>
-      before using a shared device.
+      Image files are decoded and processed by browser APIs on your device.
+      Image Prep currently accepts up to 20 files, 20 MB per file and 24
+      megapixels per input; outputs are limited to 12 megapixels each. Device
+      memory, browser support and downloads still vary. Read the
+      <a href="/privacy/">privacy explanation</a> and
+      <a href="/methodology/">methods and limitations</a> before using the tools
+        on a shared or low-memory device.
     </p>
   </section>
 </BaseLayout>

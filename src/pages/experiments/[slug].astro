@@ -33,12 +33,12 @@ const pageUrl = `${SITE.url}/experiments/${item.slug}/`;
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Experiments", item: `${SITE.url}/experiments/` },
+      { "@type": "ListItem", position: 2, name: "Lab notes", item: `${SITE.url}/experiments/` },
       { "@type": "ListItem", position: 3, name: item.title, item: pageUrl },
     ],
   }]}
 >
-  <ArticleHeader eyebrow={item.category} title={item.title} description={item.description} updated={item.lastVerified} crumbs={[{ label: "Home", href: "/" }, { label: "Experiments", href: "/experiments/" }, { label: item.title }]} />
+  <ArticleHeader eyebrow={item.category} title={item.title} description={item.description} updated={item.lastVerified} crumbs={[{ label: "Home", href: "/" }, { label: "Lab notes", href: "/experiments/" }, { label: item.title }]} />
   <div class="legal-content legal-shell article-layout">
     {item.evidence && <EvidencePanel evidence={item.evidence} />}
     {item.sections.map((section, index) => (

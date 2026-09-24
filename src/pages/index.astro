@@ -7,8 +7,8 @@ import { SITE } from "../data/site";
 ---
 
 <BaseLayout
-  title="Practical Etsy Seller Workflows"
-  description="Source-led Etsy seller guides, marketplace references and reproducible image experiments, with privacy-first browser tools for small shops."
+  title="Product Image Workflows for Online Sellers"
+  description="Prepare product photos with practical guides, source-checked Etsy and Shopify references, reproducible browser tests, and local tools."
   image="/images/image-workspace.png"
   imageAlt="Seller Operations Lab content hub with guides, source references and browser tools."
   activeNav="/"
@@ -26,23 +26,24 @@ import { SITE } from "../data/site";
   <section class="hub-hero shell">
     <div class="hub-hero-copy">
       <p class="eyebrow">SELLER OPERATIONS LAB</p>
-      <h1>Make fewer listing decisions by guesswork.</h1>
+        <h1>Prepare product photos with fewer unknowns.</h1>
       <p class="hero-lede">
-        Practical Etsy workflows, source-checked marketplace references and
-        small browser tools for preparing product files before you publish.
+        Practical image workflows for independent online sellers: frame the
+        product, compare real export sizes, and check platform-specific facts
+        before publishing.
       </p>
       <div class="hero-actions">
         <a class="button" href="/start-here/">Start with a workflow</a>
         <a class="button secondary" href="/tools/">Browse tools</a>
       </div>
-      <p class="trust-line">Independent · English only · Files stay on your device</p>
+      <p class="trust-line">Independent · English · Files stay on your device</p>
     </div>
     <aside class="hub-hero-note">
       <p class="eyebrow">OUR PROMISE</p>
       <h2>Evidence before certainty.</h2>
       <p>
-        We separate official platform guidance from independent tests, show
-        what was checked and state the limits of every recommendation.
+        We separate platform requirements from workflow advice, show how
+        browser tests were run, and state what each result cannot prove.
       </p>
       <a href="/methodology/">How the research is checked →</a>
     </aside>
@@ -52,12 +53,12 @@ import { SITE } from "../data/site";
     <div class="section-heading">
       <div>
         <p class="eyebrow">START HERE</p>
-        <h2 id="start-heading">Three questions before a listing goes live</h2>
+        <h2 id="start-heading">Three image decisions before you publish</h2>
       </div>
       <a href="/guides/">View all guides →</a>
     </div>
     <div class="content-grid three-up">
-      {guides.slice(0, 3).map((guide) => (
+      {guides.filter((guide) => guide.slug !== "consistent-product-grid").slice(0, 3).map((guide) => (
         <ContentCard
           eyebrow={guide.category}
           title={guide.title}
@@ -73,12 +74,12 @@ import { SITE } from "../data/site";
     <div class="section-heading">
       <div>
         <p class="eyebrow">MARKETPLACE REFERENCE</p>
-        <h2 id="reference-heading">Platform facts, clearly separated from our advice</h2>
+        <h2 id="reference-heading">Platform facts, separated from workflow advice</h2>
       </div>
       <a href="/marketplace/">All references →</a>
     </div>
     <div class="content-grid two-up">
-      {marketplaceReferences.filter((item) => item.slug === "etsy").map((item) => (
+      {marketplaceReferences.map((item) => (
         <ContentCard
           eyebrow={item.category}
           title={item.title}
@@ -87,12 +88,6 @@ import { SITE } from "../data/site";
           meta={`Official sources checked ${item.lastVerified}`}
         />
       ))}
-      <article class="content-card secondary-card">
-        <p class="eyebrow">SECONDARY REFERENCE</p>
-        <h3><a href="/marketplace/shopify/">Shopify product image reference</a></h3>
-        <p>Kept as a secondary comparison for sellers who also publish outside Etsy. Theme behavior is discussed separately from Etsy guidance.</p>
-        <a class="text-link" href="/marketplace/shopify/">Read the Shopify reference →</a>
-      </article>
     </div>
   </section>
 
@@ -100,7 +95,7 @@ import { SITE } from "../data/site";
     <div class="section-heading">
       <div>
         <p class="eyebrow">THE LAB</p>
-        <h2 id="experiment-heading">Small tests that answer practical questions</h2>
+        <h2 id="experiment-heading">Reproducible tests with visible limits</h2>
       </div>
       <a href="/experiments/">See all experiments →</a>
     </div>
@@ -119,26 +114,28 @@ import { SITE } from "../data/site";
 
   <section class="shell tool-callout" aria-labelledby="tool-heading">
     <div>
-      <p class="eyebrow">TOOLS ARE THE SHORTCUT, NOT THE WHOLE SITE</p>
-      <h2 id="tool-heading">Prepare files locally before you publish.</h2>
+      <p class="eyebrow">TOOLS WITH A CLEAR JOB</p>
+      <h2 id="tool-heading">Prepare and compare files locally.</h2>
       <p>
-        Resize, pad, preview crops, rename and export a batch without sending
-        images to a server. Use the guides to understand the decision before
-        opening the tool.
+        Resize, preview crops, compare formats, rename and export without
+        sending images to a server. The guides explain what to check and why.
       </p>
     </div>
-    <a class="button dark" href="/tools/image-prep/">Open Image Prep →</a>
+    <div class="hero-actions">
+      <a class="button dark" href="/tools/image-prep/">Open Image Prep →</a>
+      <a class="button secondary" href="/tools/format-compare/">Compare formats →</a>
+    </div>
   </section>
 
   <section class="shell hub-section final-note" aria-labelledby="method-heading">
     <div>
       <p class="eyebrow">TRANSPARENT BY DESIGN</p>
-      <h2 id="method-heading">No invented credentials. No marketplace affiliation.</h2>
+        <h2 id="method-heading">Clear sources. No claimed seller results.</h2>
       <p>
-        The site is maintained as an independent editorial and software
-        project. Examples are reproducible calculations or browser tests, not
-        claims of personal sales history. Read the methodology, limitations and
-        source list before relying on a result.
+        Seller Operations Lab is an independent editorial and software
+        project, not an Etsy or Shopify partner. Platform facts link to their
+        sources; tests disclose their inputs and limits. We do not claim
+        personal sales results or firsthand seller experience.
       </p>
     </div>
     <div class="final-links">

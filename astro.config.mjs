@@ -18,7 +18,7 @@ export default defineConfig({
         const updated =
           guide?.updated ?? lab?.updated ??
           (["/", "/guides/", "/marketplace/", "/experiments/", "/tools/"].includes(path)
-            ? "2026-09-22"
+            ? "2026-09-24"
             : undefined);
         return updated ? { ...item, lastmod: updated } : item;
       },
@@ -32,14 +32,9 @@ export default defineConfig({
           "https://damaheritage.com/updates/",
           "https://damaheritage.com/changelog/",
           "https://damaheritage.com/start-here/",
-          "https://damaheritage.com/guides/",
-          "https://damaheritage.com/marketplace/",
-          "https://damaheritage.com/marketplace/shopify/",
-          "https://damaheritage.com/guides/consistent-product-grid/",
-          "https://damaheritage.com/experiments/",
-          "https://damaheritage.com/tools/",
           "https://damaheritage.com/tools/image-prep/",
           "https://damaheritage.com/tools/image-qa/",
+          "https://damaheritage.com/tools/format-compare/",
         ].includes(page),
     }),
   ],

@@ -124,60 +124,54 @@ export const guides: Guide[] = [
   },
   {
     slug: "consistent-product-grid",
-    title: "Shopify Product Image Sizes: Make a Consistent Grid",
+    title: "Shopify Product Image Sizes: What 2048 px Does—and Doesn't—Mean",
     published: "2026-09-07",
-    updated: "2026-09-08",
+    updated: "2026-09-24",
     related: ["fit-vs-fill", "file-size-and-quality", "product-photo-workflow"],
     imageAlt:
       "Three equal square canvases form a consistent grid while the objects inside retain different apparent sizes.",
     description:
-      "Use consistent aspect ratios for Shopify product images, try a 2048-pixel square canvas, and fix uneven grids without stretching your photos.",
+      "Understand Shopify's current image limits, when a 2048-pixel square is useful, and why a consistent image frame still needs a theme preview.",
     category: "Shop presentation",
     sections: [
       {
-        title: "A practical Shopify starting size, not a theme guarantee",
+        title: "What Shopify currently recommends",
         paragraphs: [
-          "Shopify's product-media guidance, checked September 8, 2026, recommends 2048 × 2048 pixels as a useful square product-image size. It emphasizes consistent aspect ratios for featured images shown together. There is no single canvas size that overrides every theme's crop and display settings.",
-           "In Image Prep, choose Custom dimensions, enter 2048 for both sides, and start with Fit. Prepare a portrait and a landscape original together. If your theme uses portrait cards, choose matching portrait dimensions instead of forcing a square. Image Prep has its own lower processing limits; a file accepted by Shopify is not automatically supported here.",
+          "Shopify's product-media page, checked September 24, 2026, says product and collection images can be up to 5000 × 5000 pixels or 25 megapixels, with a file size under 20 MB. It says 2048 × 2048 pixels usually displays best for square product images; that is a starting recommendation, not a mandatory upload size.",
+          "The same page lists PNG as the best type for most product images, followed by JPEG, and says Shopify's Imagery service selects a format supported by a customer's web client. This site's browser tools accept JPG, PNG and static WebP only. Shopify accepting another type does not mean Image Prep can process it.",
         ],
       },
       {
-        title: "Standardize the frame before the subject",
+        title: "Choose one featured-image ratio for a collection",
         paragraphs: [
-          "Choose a single aspect ratio for the images that belong together. A square is a convenient starting shape, but your storefront theme and product type should decide the final choice. Use the same output width and height for the batch.",
-           "Do not distort a portrait photo into a square by changing width and height independently. Image Prep scales both axes by the same factor and either adds a background or crops the overflow. Circular objects remain circular.",
+          "Shopify notes that featured images with a consistent aspect ratio can appear the same size beside one another on collection pages. It also says themes can request consistent image sizes from Shopify's CDN, and that Shopify creates different image sizes for different theme areas. This means a matching source ratio can help a collection grid, but it does not control every display crop or resolution.",
+          "Choose a ratio that fits the product family and inspect it in the actual theme. Do not stretch a portrait image into a square: Image Prep preserves proportions and uses padding or cropping instead. A square canvas also cannot make two products appear equally large if one source includes much more empty space.",
         ],
       },
       {
-        title: "Equal canvases can still look inconsistent",
+        title: "Worked example: portrait photo on a square canvas",
         paragraphs: [
-          "Imagine two 2000 × 2000 originals. In the first, a product occupies 80% of the frame height. In the second, it occupies 40%. Exporting both to the same size with the same margin preserves that difference: the first product will still appear twice as tall.",
-          "This tool does not detect product boundaries. Its padding applies to the source rectangle. If a source already has excessive empty space, adding margin compounds it. Adjust that original’s framing first, or separate it from the batch.",
+          "A 1600 × 2400 portrait fitted inside a 2048 × 2048 square at zero margin scales to about 1365 × 2048. That leaves about 341 pixels of canvas at each side. With a 5% inner margin, the usable square is 1843 × 1843; the portrait scales to about 1229 × 1843, leaving about 410 pixels per side.",
+          "These are geometric calculations from the source dimensions and fit rule, not a Shopify preview. Fill would crop the top and bottom to cover the square. If the source is smaller than the target and enlarging is disabled, Fit will preserve its original pixel size rather than invent detail.",
         ],
       },
       {
-        title: "A portrait source on a square canvas",
+        title: "Check the theme, then check the file limit",
         paragraphs: [
-          "A 1600 × 2400 source fitted to 2000 × 2000 with zero margin becomes approximately 1333 × 2000, with about 333 pixels of padding at each side. With a 5% margin it becomes 1200 × 1800.",
-           "Filling the same square would require a 1.25× enlargement and would remove top and bottom content. With Image Prep's default “Allow enlarging” turned off, it will not perform that enlargement; some padding remains. This is intentional protection against silently stretching a small original.",
-        ],
-      },
-      {
-        title: "Check the collection, not just one listing",
-        paragraphs: [
-          "Shopify notes that matching aspect ratios can help collection images look consistent. Your theme still controls display behavior, so a local preview cannot guarantee the final grid.",
+          "The platform allows up to 5000 pixels on an edge and 25 megapixels, but Image Prep is intentionally more conservative: dimensions top out at 4096 pixels per edge and 12 megapixels per output. A file can be valid for Shopify and still exceed this tool's limits. Use another trusted editor for a larger output rather than repeatedly retrying it here.",
         ],
         steps: [
-          "Compare representative products side by side after uploading.",
-          "Check background tone as well as the border color. Added white padding cannot remove a gray studio background inside a source.",
-          "Keep intentional close-ups separate from primary product images.",
-          "Inspect phone and desktop layouts in your actual theme.",
-           "Save your Image Prep settings only after the final storefront check.",
+          "Choose the featured-image ratio used by the product family or theme; do not assume square is always best.",
+          "Prepare one portrait and one landscape source with Fit before trying any crop.",
+          "Compare the complete exports side by side and check whether empty margins—not canvas dimensions—explain uneven product scale.",
+          "Upload representative files and inspect the collection page at both phone and desktop widths.",
+          "Check the image's actual uploaded type, pixel dimensions and byte size against Shopify's current requirements.",
+          "Revisit Shopify's official media page when its published limits or supported types change.",
         ],
       },
     ],
     source: {
-      title: "Shopify: product media types and image presentation",
+        title: "Shopify: product media types, image requirements and presentation",
       url: "https://help.shopify.com/en/manual/products/product-media/product-media-types",
     },
   },
@@ -185,13 +179,16 @@ export const guides: Guide[] = [
     slug: "file-size-and-quality",
     title: "Reduce Product Photo File Size: JPG, PNG or WebP?",
     published: "2026-09-07",
-    updated: "2026-09-23",
+    updated: "2026-09-24",
     related: [
       "consistent-product-grid",
       "thumbnail-crop-checklist",
       "browser-image-troubleshooting",
     ],
-    relatedLab: [{ label: "See exact JPG, PNG and WebP fixture measurements", href: "/experiments/jpg-png-webp/" }],
+    relatedLab: [
+      { label: "Compare formats using your own image", href: "/tools/format-compare/" },
+      { label: "See the fixed-fixture encoder benchmark", href: "/experiments/jpg-png-webp/" },
+    ],
     imageAlt:
       "Dimensions, encoding quality and output format are three separate controls; the final file size must be measured.",
     description:
@@ -215,14 +212,15 @@ export const guides: Guide[] = [
       {
         title: "Compare your own product photos consistently",
         paragraphs: [
-          "This workflow is for choosing settings for your own source image. Keep its dimensions and source unchanged while comparing compression, then inspect the actual exports. For a separate, reproducible benchmark using one fixed sample image, see the linked reference-encoder experiment; its byte counts are not predictions for your photos.",
+          "This workflow is for choosing settings for your own source image. Keep its dimensions and source unchanged while comparing compression, then inspect the actual exports. The local format-comparison tool encodes your image in the current browser and records its actual output MIME type and byte count. For a separate controlled reference-encoder benchmark, see the fixed-fixture experiment; its byte counts are not predictions for your photos.",
         ],
         steps: [
-          "Export a representative photo at the starting quality of 85%.",
+          "Use the local format-comparison tool to encode one original as JPG, PNG and WebP at the same target dimensions.",
+          "Record the actual format and byte count returned by your browser; a browser may fall back to a different MIME type.",
           "Inspect text, fine texture, diagonals and high-contrast edges at normal viewing size and at 100%.",
-          "Export again at 75%, from the original file rather than the previous export.",
-          "Compare both actual file sizes. If edge artifacts or smearing become visible, use the higher quality version.",
-          "Only then apply the chosen settings to the full batch; check more than one result.",
+          "Repeat with a second source that differs in texture, text or transparency; one file does not establish a general winner.",
+          "If edge artifacts or smearing become visible, use a less compressed output and verify the destination accepts that format.",
+          "Only then prepare a batch; check more than one result and the real listing preview.",
         ],
       },
       {

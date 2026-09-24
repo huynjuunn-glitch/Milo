@@ -19,12 +19,15 @@ const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((entr
 const htmlFiles = walk("dist").filter((file) => file.endsWith(".html"));
 
 const home = parse(read("index.html"));
-check(home.querySelector("h1")?.textContent.includes("listing decisions"), "Content-first homepage heading");
+check(home.querySelector("h1")?.textContent.includes("product photos"), "Content-first homepage heading");
 check(!meta(home, "robots")?.includes("noindex"), "Homepage remains indexable");
 check(!schemas(home).some((s) => s["@type"] === "WebApplication"), "Homepage is not tool-only schema");
 const tool = parse(read("tools/image-prep/index.html"));
 const app = schemas(tool).find((s) => s["@type"] === "WebApplication");
 check(app?.offers.price === "0" && !app.aggregateRating && !app.review, "Truthful free app data without invented reviews");
+const formatTool = parse(read("tools/format-compare/index.html"));
+check(meta(formatTool, "robots")?.includes("noindex"), "Functional format tool is not treated as an editorial search landing page");
+check(bodyText(formatTool).includes("same original file") && bodyText(formatTool).includes("not uploaded"), "Format tool explains a fair local comparison and privacy boundary");
 
 const descriptions = new Set();
 const titles = new Set();
@@ -64,7 +67,7 @@ const feed = parse(read("rss.xml"), "application/xml");
 check(!feed.querySelector("parsererror"), "Valid RSS");
 check(feed.querySelectorAll("item").length === guides.length + allLabContent.length, "RSS contains all editorial content");
 check(!sitemap.querySelector("parsererror"), "Valid sitemap XML");
-const excluded = /rss\.xml|404|privacy|terms|contact|standards|updates|changelog|start-here|\/guides\/$|\/guides\/consistent-product-grid\/$|\/marketplace\/$|\/marketplace\/shopify\/$|\/experiments\/$|\/tools\/$|tools\/image-(prep|qa)/;
+const excluded = /rss\.xml|404|privacy|terms|contact|standards|updates|changelog|start-here|tools\/image-(prep|qa|format-compare)\//;
 check(![...sitemap.querySelectorAll("loc")].some((el) => excluded.test(el.textContent)), "Only canonical indexable pages in sitemap");
 for (const guide of guides) {
   const route = `/guides/${guide.slug}/`;
@@ -101,6 +104,7 @@ for (const route of ["tools/image-prep", "tools/image-qa"]) {
   const doc = parse(read(`${route}/index.html`));
   check(bodyText(doc).includes("does not include WebP"), `${route}: warns against assuming Etsy accepts WebP`);
 }
+check(bodyText(formatTool).includes("For Etsy"), "Format comparison page links its result to the destination requirements");
 for (const guide of guides.filter((item) => item.relatedLab?.length)) {
   const doc = parse(read(fileFor(`/guides/${guide.slug}/`)));
   for (const related of guide.relatedLab ?? []) {

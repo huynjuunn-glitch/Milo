@@ -4,27 +4,50 @@ import { guides } from "../../data/guides";
 ---
 
 <BaseLayout
-  title="Etsy Seller Workflow Guides"
-  description="Practical, evidence-led guides to product image framing, thumbnail crops, file quality, naming and browser batch troubleshooting."
-  noindex
+  title="Product Photo Workflow Guides"
+  description="Practical, evidence-led guides to framing, thumbnails, image formats, batch naming, and browser troubleshooting for online product listings."
   activeNav="/guides/"
-  ><section class="shell legal-hero">
-    <p class="eyebrow">SELLER OPERATIONS LAB</p><h1>
-      Etsy seller workflow guides
-    </h1><p>
-      Worked examples, source checks and limitations for a repeatable product-file workflow.
-    </p>
-  </section><section class="shell legal-content guide-grid">
-    {
-      guides.map((g) => (
-        <a class="guide-card" href={`/guides/${g.slug}/`}>
-          <>
-            <span>{g.category.toUpperCase()}</span>
-            <h2>{g.title}</h2>
-            <p>{g.description}</p>
-          </>
-        </a>
-      ))
-    }
-  </section></BaseLayout
 >
+  <section class="legal-hero legal-shell">
+    <p class="eyebrow">SELLER OPERATIONS LAB</p>
+    <h1>Product photo workflow guides</h1>
+    <p>
+      Make the file decisions that affect a listing image: what to keep in
+      frame, how to encode it, and how to catch a failed export before upload.
+      These guides describe repeatable technical workflows, not promises about
+      marketplace ranking or sales.
+    </p>
+  </section>
+  <section class="shell page-section two-column-copy">
+    <div>
+      <h2>Start with the risk you need to control</h2>
+      <p>
+        If the product edge or included quantity matters, compare Fit with Fill
+        before batch processing. If a file is too large, compare encodings from
+        the same original and inspect the actual output rather than targeting
+        an assumed kilobyte limit. If a browser stalls, reduce image dimensions
+        and batch size before changing unrelated settings.
+      </p>
+    </div>
+    <div>
+      <h2>Pair platform facts with your own preview</h2>
+      <p>
+        Platform references link to the current help pages and show when they
+        were checked. Your storefront theme, device and listing preview still
+        decide how an uploaded file appears. Use the guides with the
+        <a href="/tools/format-compare/">local format comparison</a> and
+        <a href="/tools/image-prep/">Image Prep</a> rather than treating a
+        preset as a platform rule.
+      </p>
+    </div>
+  </section>
+  <section class="shell legal-content guide-grid" aria-label="All workflow guides">
+    {guides.map((g) => (
+      <a class="guide-card" href={`/guides/${g.slug}/`}>
+        <span>{g.category.toUpperCase()}</span>
+        <h2>{g.title}</h2>
+        <p>{g.description}</p>
+      </a>
+    ))}
+  </section>
+</BaseLayout>

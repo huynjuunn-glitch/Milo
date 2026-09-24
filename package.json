@@ -12,10 +12,11 @@
     "check:site": "node scripts/check-site.mjs",
     "test": "node --experimental-strip-types scripts/test-images.mjs",
     "test:workspace": "node --experimental-strip-types scripts/test-workspace.mjs",
+    "test:format-compare": "node --experimental-strip-types scripts/test-format-compare.mjs",
     "test:seo": "node --experimental-strip-types scripts/test-seo.mjs",
     "measure:format": "node scripts/measure-format-fixture.mjs",
     "generate:images": "node --experimental-strip-types scripts/generate-preview-images.mjs",
-    "quality": "npm test && npm run build && npm run test:workspace"
+    "quality": "npm test && npm run build && npm run test:workspace && npm run test:format-compare"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

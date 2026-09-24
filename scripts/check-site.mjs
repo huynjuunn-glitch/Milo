@@ -47,6 +47,7 @@ const expected = [
   "/tools/",
   "/tools/image-prep/",
   "/tools/image-qa/",
+  "/tools/format-compare/",
   "/404/",
   "/guides/fit-vs-fill/",
   "/guides/thumbnail-crop-checklist/",
@@ -69,14 +70,9 @@ const excluded = new Set([
   "/updates/",
   "/changelog/",
   "/start-here/",
-  "/guides/",
-  "/guides/consistent-product-grid/",
-  "/marketplace/",
-  "/marketplace/shopify/",
-  "/experiments/",
-  "/tools/",
   "/tools/image-prep/",
   "/tools/image-qa/",
+  "/tools/format-compare/",
 ]);
 const sitemap = new Set(
   files
@@ -144,6 +140,11 @@ for (const file of html) {
     requireCondition(
       text.includes("noindex, follow"),
       `${route}: expected noindex`,
+    );
+  else
+    requireCondition(
+      text.includes("index, follow, max-image-preview:large"),
+      `${route}: expected indexable page`,
     );
   for (const m of text.matchAll(
     /<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,

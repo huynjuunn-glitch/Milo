@@ -5,25 +5,67 @@ import { marketplaceReferences } from "../../data/content";
 ---
 
 <BaseLayout
-  title="Marketplace Reference for Etsy Sellers"
-  description="Source-checked Etsy and Shopify product-image references with explicit verification dates, workflow examples and limitations."
-  noindex
+  title="Product Image Platform References"
+  description="Source-checked image guidance for Etsy and Shopify, with platform requirements kept separate from independent workflow advice."
   activeNav="/marketplace/"
 >
   <section class="legal-hero legal-shell">
-    <p class="eyebrow">MARKETPLACE REFERENCE</p>
-    <h1>Platform facts without the guesswork.</h1>
-    <p>Etsy is the primary workflow context. A separate Shopify reference is available for sellers who publish across platforms.</p>
+    <p class="eyebrow">PLATFORM REFERENCES</p>
+    <h1>Check the platform rule before choosing a preset.</h1>
+    <p>
+      Upload support, image dimensions and storefront presentation are not the
+      same thing. These references separate documented platform facts from
+      independent preparation advice and link to the original help pages.
+    </p>
   </section>
-  <section class="shell content-grid two-up page-section">
-    {marketplaceReferences.filter((item) => item.slug === "etsy").map((item) => (
-      <ContentCard eyebrow={item.category} title={item.title} description={item.description} href={`/marketplace/${item.slug}/`} meta={`Checked ${item.lastVerified}`} />
+  <section class="shell page-section">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Question</th><th scope="col">Etsy</th><th scope="col">Shopify</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Where to verify</th>
+            <td>Current listing-image and Search Visibility help pages.</td>
+            <td>Current product-media documentation and your store theme.</td>
+          </tr>
+          <tr>
+            <th scope="row">What can change the result</th>
+            <td>Upload conditions, thumbnail editor and the listing surface.</td>
+            <td>Theme crop, collection-card ratio and responsive layout.</td>
+          </tr>
+          <tr>
+            <th scope="row">Final check</th>
+            <td>Inspect the saved draft and its actual thumbnail preview.</td>
+            <td>Inspect the uploaded product in the live theme on phone and desktop.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="field-note">
+      This comparison is a navigation aid, not a complete list of platform
+      rules. Follow the linked official documentation for the current details.
+    </p>
+  </section>
+  <section class="shell content-grid two-up page-section" aria-label="Platform references">
+    {marketplaceReferences.map((item) => (
+      <ContentCard
+        eyebrow={item.category}
+        title={item.title}
+        description={item.description}
+        href={`/marketplace/${item.slug}/`}
+        meta={`Official sources checked ${item.lastVerified}`}
+      />
     ))}
-    <article class="content-card secondary-card">
-      <p class="eyebrow">SECONDARY REFERENCE</p>
-      <h2><a href="/marketplace/shopify/">Shopify product image reference</a></h2>
-      <p>Use this comparison only when the same seller workflow extends beyond Etsy. Shopify themes and storefront breakpoints require their own final check.</p>
-      <a class="text-link" href="/marketplace/shopify/">Read the Shopify reference →</a>
-    </article>
+  </section>
+  <section class="shell reading-section">
+    <h2>How to use a reference</h2>
+    <ol>
+      <li>Open the official sources linked on the platform page.</li>
+      <li>Use the workflow notes to prepare a representative image copy.</li>
+      <li>Check the result in the actual draft or storefront before publishing.</li>
+    </ol>
+    <p>Seller Operations Lab is independent and is not affiliated with Etsy or Shopify.</p>
   </section>
 </BaseLayout>

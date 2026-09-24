@@ -1,7 +1,7 @@
 {
   "name": "Seller Operations Lab",
   "short_name": "Seller Lab",
-  "description": "Source-led Etsy seller workflows and privacy-first browser tools.",
+  "description": "Product-image workflows and privacy-first browser tools for online sellers.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f7fa",

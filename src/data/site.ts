@@ -3,15 +3,15 @@ export const SITE = {
   shortName: "Seller Lab",
   url: "https://damaheritage.com",
   description:
-    "Practical, source-led workflows for Etsy sellers: check product images, compare formats, and prepare files locally in your browser.",
+    "Practical product-image workflows for online sellers, with source-checked marketplace references, reproducible browser tests, and private local tools.",
   publisherId: "ca-pub-5504483871402657",
   correctionsUrl: "https://github.com/huynjuunn-glitch/Milo/issues/new",
 };
 
 export const NAVIGATION = [
   { href: "/guides/", label: "Guides" },
-  { href: "/marketplace/", label: "Marketplace reference" },
-  { href: "/experiments/", label: "Experiments" },
+  { href: "/marketplace/", label: "Platform references" },
+  { href: "/experiments/", label: "Lab notes" },
   { href: "/tools/", label: "Tools" },
   { href: "/methodology/", label: "Methodology" },
 ] as const;
