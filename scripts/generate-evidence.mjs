@@ -2,7 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import sharp from "sharp";
-import { DEFAULTS, geometry } from "../src/scripts/image-core.ts";
+import { zipSync } from "fflate";
+import { DEFAULTS, geometry, outputName } from "../src/scripts/image-core.ts";
 
 // This generates reference-encoder evidence, not browser or marketplace results.
 const measuredOn = process.argv[2];
@@ -63,6 +64,23 @@ const transparency = {
   white:await save("transparent-white.jpg",await sharp(transparent).flatten({background:"white"}).jpeg({quality:85}).toBuffer()),
   black:await save("transparent-black.jpg",await sharp(transparent).flatten({background:"black"}).jpeg({quality:85}).toBuffer()),
 };
-const manifest = {measuredOn,encoder:{node:process.versions.node,sharp:sharp.versions.sharp,vips:sharp.versions.vips},parameters:{width:1200,height:900,jpegQuality:85,webpQuality:85,background:"white",png:"lossless default encoder"},cases,framing,transparency};
+const square = await fs.readFile(path.join(root,"portrait-contain.png"));
+const crops = [
+  {label:"Square",ratio:"1:1",removed:"No crop",file:framing.outputs[0].file},
+  {label:"Landscape",ratio:"4:3",removed:"100 px from top and bottom",file:await save("crop-landscape.png",await sharp(square).extract({left:0,top:100,width:800,height:600}).png().toBuffer())},
+  {label:"Portrait",ratio:"3:4",removed:"100 px from left and right",file:await save("crop-portrait.png",await sharp(square).extract({left:100,top:0,width:600,height:800}).png().toBuffer())},
+];
+const smaller = await sharp(portrait).resize({height:400}).png().toBuffer();
+const scale = await save("extra-source-margin.png",await sharp({create:{width:800,height:800,channels:3,background:"white"}}).composite([{input:smaller,left:248,top:200}]).png().toBuffer());
+const entries = cases.slice(0,3).map((item,index)=>({source:item.input.url,output:item.outputs.jpeg.url,name:outputName({...DEFAULTS,prefix:"MUG-042"},index,"image/jpeg")}));
+const archiveEntries = await Promise.all(entries.map(async item => [item.name, new Uint8Array(await fs.readFile(`public${item.output}`))]));
+const archiveBytes = zipSync(Object.fromEntries(archiveEntries),{level:0});
+await fs.writeFile(path.join(root,"example-batch.zip"),archiveBytes);
+const batch = {url:"/evidence/example-batch.zip",bytes:archiveBytes.length,sha256:digest(archiveBytes),entries};
+const previews = {};
+for (const [name,input] of [["source",portrait],["contain",square],["cover",await fs.readFile(path.join(root,"portrait-cover.png"))]]) {
+  previews[name] = await save(`preview-${name}.webp`,await sharp(input).resize({width:600}).webp({quality:82}).toBuffer());
+}
+const manifest = {measuredOn,encoder:{node:process.versions.node,sharp:sharp.versions.sharp,vips:sharp.versions.vips},parameters:{width:1200,height:900,jpegQuality:85,webpQuality:85,background:"white",png:"lossless default encoder"},cases,framing,transparency,crops,scale,batch,previews};
 await fs.writeFile(path.join(root,"manifest.json"),JSON.stringify(manifest,null,2)+"\n");
 console.log(JSON.stringify({measuredOn,cases:cases.map(c=>({id:c.id,jpeg:c.outputs.jpeg.bytes,png:c.outputs.png.bytes,webp:c.outputs.webp.bytes})),framing:{source:framing.source,outputs:framing.outputs},encoder:manifest.encoder},null,2));

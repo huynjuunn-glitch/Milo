@@ -1,259 +1,34 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedLinks from "../../components/RelatedLinks.astro";
+import ImageEvidence from "../../components/ImageEvidence.astro";
 import { guides, type Guide } from "../../data/guides";
 import { SITE } from "../../data/site";
-export const getStaticPaths = () =>
-  guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
-const { guide } = Astro.props as { guide: Guide };
+export const getStaticPaths = () => guides.map(guide => ({params:{slug:guide.slug},props:{guide}}));
+const { guide } = Astro.props as {guide:Guide};
+const demonstrations: Record<string,string> = {"fit-vs-fill":"framing","thumbnail-crop-checklist":"crops","consistent-product-grid":"scale","file-size-and-quality":"formats","product-photo-workflow":"batch","browser-image-troubleshooting":"memory"};
 const pageUrl = `${SITE.url}/guides/${guide.slug}/`;
-const imagePath = `/images/${guide.slug}.png`;
-const sectionId = (index: number) => `section-${index + 1}`;
-const updatedLabel = new Intl.DateTimeFormat("en-US", {
-  dateStyle: "long",
-  timeZone: "UTC",
-}).format(new Date(`${guide.updated}T00:00:00Z`));
+const imagePath = "/evidence/portrait-contain.png";
+const updatedLabel = new Intl.DateTimeFormat("en-US",{dateStyle:"long",timeZone:"UTC"}).format(new Date(`${guide.updated}T00:00:00Z`));
 ---
-
-<BaseLayout
-  title={guide.title}
-  description={guide.description}
-  type="article"
-  activeNav="/guides/"
-  image={imagePath}
-  imageAlt={guide.imageAlt}
-  schema={[
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: guide.title,
-      description: guide.description,
-      "@id": `${pageUrl}#article`,
-      image: new URL(imagePath, SITE.url).toString(),
-      datePublished: guide.published,
-      dateModified: guide.updated,
-      inLanguage: "en",
-      publisher: { "@id": `${SITE.url}/#organization` },
-      author: {
-        "@type": "Organization",
-        name: SITE.name,
-        url: SITE.url + "/about/",
-      },
-      mainEntityOfPage: pageUrl,
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Image workspace",
-          item: SITE.url + "/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Photo guides",
-          item: SITE.url + "/guides/",
-        },
-        { "@type": "ListItem", position: 3, name: guide.title, item: pageUrl },
-      ],
-    },
-  ]}
->
-  <Fragment slot="head">
-    <meta property="article:published_time" content={guide.published} />
-    <meta property="article:modified_time" content={guide.updated} />
-  </Fragment>
+<BaseLayout title={guide.title} description={guide.description} type="article" activeNav="/guides/" image={imagePath} imageAlt="A public-domain porcelain cup photograph fitted inside a square, from the downloadable worked examples." schema={[
+  {"@context":"https://schema.org","@type":"Article","@id":`${pageUrl}#article`,headline:guide.title,description:guide.description,image:new URL(imagePath,SITE.url).toString(),datePublished:guide.published,dateModified:guide.updated,inLanguage:"en",publisher:{"@id":`${SITE.url}/#organization`},author:{"@type":"Organization",name:SITE.name,url:`${SITE.url}/about/`},mainEntityOfPage:pageUrl},
+  {"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Home",item:SITE.url+"/"},{"@type":"ListItem",position:2,name:"Photo guides",item:SITE.url+"/guides/"},{"@type":"ListItem",position:3,name:guide.title,item:pageUrl}]}
+]}>
+  <Fragment slot="head"><meta property="article:published_time" content={guide.published}/><meta property="article:modified_time" content={guide.updated}/></Fragment>
   <article>
-    <header class="legal-hero legal-shell">
-      <nav aria-label="Breadcrumb">
-        <a href="/">Home</a> / <a href="/guides/">Guides</a> / <span
-          aria-current="page">{guide.category}</span>
-      </nav><p class="eyebrow" style="margin-top:24px">
-        {guide.category}
-      </p><h1>{guide.title}</h1><p>{guide.description}</p><p
-        class="article-meta"
-      >
-        <a href="/about/">Seller Operations Lab</a> · Evidence-led workflow guide · Updated
-        <time datetime={guide.updated}>{updatedLabel}</time>
-      </p>
-    </header><div class="legal-content legal-shell">
-      <figure class="guide-illustration">
-        <img
-          src={imagePath}
-          width="1200"
-          height="630"
-          alt={guide.imageAlt}
-          decoding="async"
-        />
-        <figcaption>
-          Illustration of the workflow explained below, not a marketplace
-          screenshot.
-        </figcaption>
-      </figure>
-      <nav class="notice article-toc" aria-label="On this page">
-        <h2>On this page</h2>
-        <ol>
-          {
-            guide.sections.map((section, index) => (
-              <li>
-                <a href={`#${sectionId(index)}`}>{section.title}</a>
-              </li>
-            ))
-          }
-        </ol>
-      </nav>
-      {
-        guide.diagram && (
-          <figure class="diagram">
-            <>
-              <svg
-                viewBox="0 0 660 270"
-                role="img"
-                aria-label="Fit preserves a landscape rectangle with top and bottom padding. Fill crops its left and right edges."
-              >
-                <>
-                  <text x="40" y="28" font-size="20" fill="#17252b">
-                    FIT · whole source
-                  </text>
-                  <rect
-                    x="40"
-                    y="48"
-                    width="180"
-                    height="180"
-                    fill="#eef3fa"
-                    stroke="#9aadc2"
-                  />
-                  <rect x="40" y="78" width="180" height="120" fill="#135ceb" />
-                  <text x="60" y="143" font-size="18" fill="white">
-                    3000 × 2000
-                  </text>
-                  <text x="360" y="28" font-size="20" fill="#17252b">
-                    FILL · center retained
-                  </text>
-                  <rect
-                    x="315"
-                    y="48"
-                    width="270"
-                    height="180"
-                    fill="#f4b0a8"
-                  />
-                  <rect
-                    x="360"
-                    y="48"
-                    width="180"
-                    height="180"
-                    fill="#135ceb"
-                  />
-                  <path
-                    d="M360 44V232M540 44V232"
-                    stroke="#17252b"
-                    stroke-width="2"
-                    stroke-dasharray="5 4"
-                  />
-                  <text x="387" y="143" font-size="18" fill="white">
-                    2000 × 2000
-                  </text>
-                  <text x="40" y="259" font-size="16" fill="#52636d">
-                    Illustration: 0% margin, 2000 × 2000 output.
-                  </text>
-                </>
-              </svg>
-              <figcaption>
-                Blue is the retained source area; pale gray is padding; red is
-                cropped away. Proportions illustrate the worked example below.
-              </figcaption>
-            </>
-          </figure>
-        )
-      }
-      {
-        guide.sections.map((section, index) => (
-          <section>
-            <h2 id={sectionId(index)}>{section.title}</h2>
-            {section.paragraphs.map((p) => (
-              <p>{p}</p>
-            ))}
-            {section.steps && (
-              <ol>
-                {section.steps.map((step) => (
-                  <li>{step}</li>
-                ))}
-              </ol>
-            )}
-          </section>
-        ))
-      }
-      {
-        guide.example && (
-          <section>
-            <>
-              <h2>Example filename mapping</h2>
-              <table>
-                <>
-                  <thead>
-                    <tr>
-                      {guide.example.headers.map((h) => (
-                        <th scope="col">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {guide.example.rows.map((row) => (
-                      <tr>
-                        {row.map((cell) => (
-                          <td>
-                            <code>{cell}</code>
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </>
-              </table>
-            </>
-          </section>
-        )
-      }
-      <aside class="notice">
-        <h2>How this guide was made</h2><p>
-          This is an editorial explanation of a documented workflow, not a claim
-          of first-hand selling experience. Examples are illustrative or
-          reproducible calculations based on the implemented processing method.
-          Browser output and marketplace presentation can vary.
-        </p>{
-          guide.source && (
-            <p>
-              Reference:{" "}
-              <a
-                href={guide.source.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {guide.source.title}
-              </a>
-            </p>
-          )
-        }<p>
-          <a href="/standards/">Processing methods and limits</a> · <a
-            href="/contact/">Report a correction</a
-          >
-        </p>
-      </aside><p><a class="button" href="/">Open the image workspace</a></p><h2>
-        Continue reading
-      </h2><ul>
-        {
-          guide.related
-            .map((slug) => guides.find((g) => g.slug === slug)!)
-            .map((g) => (
-              <li>
-                <a href={`/guides/${g.slug}/`}>{g.title}</a>
-              </li>
-            ))
-        }
-      </ul>{guide.relatedLab && <RelatedLinks links={guide.relatedLab} />}
+    <header class="legal-hero legal-shell"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/">Guides</a></nav><h1>{guide.title}</h1><p>{guide.description}</p><p class="article-meta"><a href="/about/">Seller Operations Lab</a> · Updated <time datetime={guide.updated}>{updatedLabel}</time></p></header>
+    <div class="legal-content legal-shell">
+      <nav class="article-toc" aria-label="On this page"><h2>In this guide</h2><ol>{guide.sections.map((section,index)=><li><a href={`#section-${index+1}`}>{section.title}</a></li>)}</ol></nav>
+      {guide.sections.map((section,index)=><>
+        <section><h2 id={`section-${index+1}`}>{section.title}</h2>{section.paragraphs.map(paragraph=><p>{paragraph}</p>)}{section.steps&&<ol>{section.steps.map(step=><li>{step}</li>)}</ol>}</section>
+        {index===0&&<ImageEvidence kind={demonstrations[guide.slug]}/>}
+        {guide.slug==="file-size-and-quality"&&index===1&&<ImageEvidence kind="transparency"/>}
+      </>)}
+      {guide.example&&<div class="table-wrap"><table><thead><tr>{guide.example.headers.map(label=><th scope="col">{label}</th>)}</tr></thead><tbody>{guide.example.rows.map(row=><tr>{row.map(value=><td>{value}</td>)}</tr>)}</tbody></table></div>}
+      <section class="guide-method"><h2>How this guide was made</h2><p>Written from the documented sources and downloadable examples on this page. Reference-encoder results explain the file decisions; the final browser output and destination preview still need checking.</p>{guide.source&&<p>Reference: <a href={guide.source.url} target="_blank" rel="noopener noreferrer">{guide.source.title}</a></p>}<p><a href="/methodology/">Methods and image credits</a> · <a href="/contact/">Report a correction</a></p></section>
+      <p><a class="button" href="/tools/image-prep/">Open Image Prep</a></p>
+      <RelatedLinks links={[...guide.related.map(slug=>guides.find(item=>item.slug===slug)).filter((item):item is Guide=>Boolean(item)).map(item=>({label:item.title,href:`/guides/${item.slug}/`})),...(guide.relatedLab??[])]}/>
     </div>
-  </article></BaseLayout
->
+  </article>
+</BaseLayout>

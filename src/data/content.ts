@@ -1,3 +1,5 @@
+import measured from "../../public/evidence/manifest.json" with { type: "json" };
+
 export type Source = {
   title: string;
   url: string;
@@ -39,13 +41,13 @@ export const marketplaceReferences: LabContent[] = [
   {
     slug: "etsy",
     type: "reference",
-    title: "Etsy Listing Photo Requirements: File Types, Sizes and Upload Fixes",
+    title: "Etsy Image Requirements",
     description:
       "Check Etsy's supported photo types, pixel recommendations, upload-size warnings and thumbnail workflow using directly linked Etsy help sources.",
     category: "Etsy reference",
     published: "2026-09-22",
-    updated: "2026-09-23",
-    lastVerified: "2026-09-23",
+    updated: "2026-10-20",
+    lastVerified: "2026-10-20",
     sections: [
       {
         title: "Check the file type before exporting",
@@ -123,18 +125,18 @@ export const marketplaceReferences: LabContent[] = [
   {
     slug: "shopify",
     type: "reference",
-    title: "Shopify Product Image Requirements and Theme Checks",
+    title: "Shopify Image Requirements",
     description:
       "Current Shopify image limits, format guidance and collection-image behavior, with a practical check that accounts for theme crops and this site's tool limits.",
     category: "Shopify reference",
     published: "2026-09-22",
-    updated: "2026-09-24",
-    lastVerified: "2026-09-24",
+    updated: "2026-10-20",
+    lastVerified: "2026-10-20",
     sections: [
       {
         title: "Current image limits and accepted formats",
         paragraphs: [
-          "Shopify's product-media documentation, checked September 24, 2026, says product and collection images can be up to 5000 × 5000 pixels or 25 megapixels, and must be smaller than 20 MB. It lists PNG as the preferred format for most product images, followed by JPEG; it also lists PSD, TIFF, BMP, GIF, SVG, HEIC and WebP. Shopify's image service selects a format supported by each customer's web client.",
+          "Shopify's product-media documentation, checked October 20, 2026, says product and collection images can be up to 5000 × 5000 pixels or 25 megapixels, and must be smaller than 20 MB. It lists PNG as the preferred format for most product images, followed by JPEG; it also lists TIFF, BMP, GIF, SVG, HEIC and WebP. It also supports animated GIF and WebP, unlike this site's static-image tools. Shopify's image service selects a format supported by each customer's web client.",
           "The 2048 × 2048 square recommendation applies to square product images that usually display best; it is not a universal upload requirement. Use the current linked help page if a platform rule matters to your workflow, because requirements can change.",
         ],
       },
@@ -177,246 +179,65 @@ export const marketplaceReferences: LabContent[] = [
 
 export const experiments: LabContent[] = [
   {
-    slug: "jpg-png-webp",
-    type: "experiment",
-    title: "JPG, PNG or WebP for Product Photos? A Reference Encoder Benchmark",
-    description:
-      "A reproducible reference-encoder comparison of image formats, with a clear record of what varies by encoder and source image.",
-    category: "Format experiment",
-    published: "2026-09-22",
-    updated: "2026-09-22",
-    lastVerified: "2026-09-22",
+    slug: "jpg-png-webp", type: "experiment", title: "JPG, PNG and WebP Compared",
+    description: "Six downloadable inputs and actual format exports show how photographs, text, patterns and noise change file-size results.",
+    category: "Measured format comparison", published: "2026-09-22", updated: "2026-10-20", lastVerified: "2026-10-20",
     evidence: {
-      question: "Which output format gives a useful starting point for a product photograph?",
-      method:
-        "Rasterize one deterministic 1600 × 1200 fixture with the repository's sharp reference encoder. Export the same pixels as JPG and WebP at quality 85 and as PNG, then compare the actual bytes. The browser tool can produce different numbers and is tested separately.",
-      result:
-        "On the checked fixture, JPG was 34,980 bytes, PNG was 64,198 bytes and WebP at quality 85 was 14,846 bytes. This single fixture demonstrates why format choice changes bytes; it does not establish a universal winner or prove marketplace acceptance.",
-      limitation:
-        "This is a repeatable reference-encoder comparison, not a universal compression benchmark. It does not test every browser, color profile or marketplace pipeline; run the browser workflow separately before relying on a result.",
-      environment:
-        "Node sharp reference encoder, deterministic SVG fixture rasterized to 1600 × 1200, JPG/WebP quality 85. The values below are repository measurements from that exact fixture, not Etsy requirements.",
-      measurements: [
-        {
-          label: "Controlled input",
-          value: "1600 × 1200 deterministic fixture",
-          basis: "Same rasterized pixels for every output",
-        },
-        {
-          label: "Primary output",
-          value: "JPG 34,980 B · PNG 64,198 B · WebP 14,846 B",
-          basis: "sharp reference encoder; quality 85 for JPG/WebP",
-        },
-        {
-          label: "Visual checks",
-          value: "Compare texture, text and edges at normal size and 100%",
-          basis: "Visual follow-up still depends on the browser and destination",
-        },
-      ],
-      reproduce: [
-        "Run `node scripts/measure-format-fixture.mjs` from the repository to reproduce the reference values.",
-        "Use Image Prep to export the same source as JPG, PNG and WebP in your browser.",
-        "Record each browser file's MIME type and byte count from Image QA; do not substitute the reference values.",
-        "Repeat with a second image containing text or transparency, then report the browser used.",
-      ],
+      question: "Does one image format always produce the smallest useful file?",
+      method: "Normalize two CC0 photographs and four generated test fixtures to the same 1200 × 900 opaque canvas. Encode each unchanged input as JPG and WebP at quality 85 and as lossless PNG. Record dimensions, actual bytes and SHA-256 for the downloadable files.",
+      result: "WebP is smaller than JPG for both photographs in this set. PNG strongly favors the repeated woven pattern, while the seeded noise has a smaller JPG than WebP. The table and downloadable files are the result; no universal winner is implied.",
+      limitation: "Quality 85 is an encoder parameter, not equal perceptual quality across formats. The photographs were already JPEG-compressed before normalization. Synthetic stress cases do not represent a random sample of product photos. Browser and marketplace encoders can produce different files.",
+      environment: `Node ${measured.encoder.node}; sharp ${measured.encoder.sharp}; libvips ${measured.encoder.vips}; measured ${measured.measuredOn}. PNG uses default lossless encoding; all format inputs are flattened onto white.`,
+      reproduce: ["Download one normalized input and its three outputs below.", "Verify dimensions and actual bytes with Image QA or file properties; inspect lettering, edges and texture at 100%.", "Regenerate the reference files with npm run generate:evidence -- YYYY-MM-DD using the actual measurement date, then npm run test:evidence.", "Run the normalized input separately through the browser comparison tool and record that browser's own results."]
     },
     sections: [
-      {
-        title: "Hold the variables still",
-        paragraphs: [
-          "A fair format comparison changes one encoding choice at a time. Start from the original for every export; re-encoding a previously compressed file can add artifacts that obscure the result.",
-        ],
-        steps: [
-          "Use the same source image and target dimensions for every output.",
-          "Record the actual output MIME type and byte count, not only the selected extension.",
-          "Inspect fine texture, text, diagonal edges and flat color at normal viewing size.",
-          "Repeat with a second image whose texture and background differ.",
-        ],
-      },
-      {
-        title: "Interpret the result carefully",
-        paragraphs: [
-          "A smaller file is not automatically a better file. A product label that becomes unreadable or a color that shifts in a way your storefront cannot tolerate may outweigh the byte reduction. PNG can be appropriate for crisp graphics, but it is not a promise of small photographs.",
-        ],
-      },
+      {title: "What stayed constant", paragraphs: ["Every row uses one normalized PNG input. Dimensions, background and source pixels remain unchanged while the format changes. Photographs are fitted to the canvas; the generated cases already use the target size. The normalized inputs are published so a repeat test does not depend on recreating a museum download or a drawing.", "The transparent test graphic is deliberately flattened to white before the three-format comparison. Its byte counts are therefore not an alpha-preservation test. The file-quality guide separately shows the transparent source and white/black composites."]},
+      {title: "Interpret the trade-off", paragraphs: ["Repeated structures can compress efficiently in PNG. Random noise contains many unpredictable pixels and is deliberately difficult to compress. A photograph of a real fabric or a detailed label can behave differently from either generated fixture.", "Byte counts are reproducible; acceptable quality is a viewing decision. Compare important detail at normal display size and at 100%. No visual-quality score, marketplace acceptance, sales improvement or device-speed claim was measured."],steps:["Choose a destination-supported format before optimizing bytes.", "Compare outputs from the same input and dimensions.", "Inspect label text, edges and texture rather than only file size.", "Repeat with a second relevant image before committing to a batch setting."]}
     ],
     sources: [
-      {
-        title: "Seller Operations Lab: deterministic format fixture script",
-        url: "https://github.com/huynjuunn-glitch/Milo/blob/main/scripts/measure-format-fixture.mjs",
-        publisher: "Seller Operations Lab",
-      },
-      {
-        title: "MDN: HTMLCanvasElement.toBlob()",
-        url: "https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob",
-        publisher: "MDN Web Docs",
-      },
+      {title:"Evidence generator and recorded input sources",url:"https://github.com/huynjuunn-glitch/Milo/blob/main/scripts/generate-evidence.mjs",publisher:"Seller Operations Lab"},
+      {title:"MDN: toBlob format and quality behavior",url:"https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob",publisher:"MDN Web Docs"}
     ],
-    related: [
-      { label: "Run Image Prep", href: "/tools/image-prep/" },
-      { label: "Browser limits experiment", href: "/experiments/browser-limits/" },
-      { label: "File quality guide", href: "/guides/file-size-and-quality/" },
-    ],
+    related:[{label:"Choose a format for your own photos",href:"/guides/file-size-and-quality/"},{label:"Compare your own image in this browser",href:"/tools/format-compare/"}]
   },
   {
-    slug: "crop-geometry",
-    type: "experiment",
-    title: "Crop Geometry: How Much of a Product Image Can a Thumbnail Remove?",
-    description:
-      "Use transparent calculations and controlled frames to see what centered 1:1, 4:3 and 3:4 crops remove from the same source.",
-    category: "Framing experiment",
-    published: "2026-09-22",
-    updated: "2026-09-22",
-    lastVerified: "2026-09-22",
-    evidence: {
-      question: "What content is removed when one image is shown in different aspect ratios?",
-      method:
-        "Render the same prepared image into centered square, landscape and portrait canvases. Calculate the retained source rectangle before checking the visual result.",
-      result:
-        "For a 2000 × 2000 square, a centered 4:3 crop removes 250 pixels from the top and bottom, while a centered 3:4 crop removes 250 pixels from each side. The calculation changes with every source ratio.",
-      limitation:
-        "These frames illustrate geometry only. A real storefront may use a different crop position, focal point or responsive container.",
-      environment:
-        "Deterministic aspect-ratio calculations using a 2000 × 2000 source and centered frames. The calculations are independent of a marketplace UI; the visual preview still needs a browser check.",
-      measurements: [
-        {
-          label: "4:3 frame",
-          value: "2000 × 1500; 250 px removed from top and bottom",
-          basis: "2000 − 1500 = 500 total vertical pixels",
-        },
-        {
-          label: "3:4 frame",
-          value: "1500 × 2000; 250 px removed from left and right",
-          basis: "2000 − 1500 = 500 total horizontal pixels",
-        },
-        {
-          label: "1:1 frame",
-          value: "2000 × 2000; no crop on a square source",
-          basis: "Same source and output aspect ratio",
-        },
-      ],
-      reproduce: [
-        "Start with a square test image and mark its four edges.",
-        "Render centered 4:3 and 3:4 frames at the same scale.",
-        "Compare the calculated removed pixels with the visible preview.",
-        "Repeat with a non-square source before applying the result to a listing.",
-      ],
+    slug:"crop-geometry",type:"experiment",title:"How Center Crops Work",
+    description:"Inspect actual square, landscape and portrait files from one image, with the retained dimensions and removed edges explained.",
+    category:"Worked crop example",published:"2026-09-22",updated:"2026-10-20",lastVerified:"2026-10-20",
+    evidence:{
+      question:"Which edges disappear when a square image is center-cropped?",
+      method:"Start from the published 800 × 800 square export. Extract an 800 × 600 landscape frame and a 600 × 800 portrait frame with equal removal on opposite edges. Save both resulting image files.",
+      result:"The 4:3 export removes 100 pixels from both top and bottom; the 3:4 export removes 100 from both left and right. The downloadable images show what those pixels contained.",
+      limitation:"This is a controlled crop demonstration, not an Etsy screenshot or evidence that every storefront uses the same focal point.",
+      environment:"Published reference files generated with sharp. The dimensions are encoded in the files, and their hashes are in the manifest.",
+      reproduce:["Download the square source from the examples below.", "In a crop-capable editor, select a centered 4:3 frame without scaling the source.", "Export and check that the output is 800 × 600.", "Repeat with a centered 3:4 frame and compare the removed image content."]
     },
-    sections: [
-      {
-        title: "The geometry",
-        paragraphs: [
-          "A centered crop keeps the smaller dimension and trims the larger one. On a 2000 × 2000 source, a 4:3 frame is 2000 × 1500, so 500 vertical pixels are removed in total. A 3:4 frame is 1500 × 2000, so 500 horizontal pixels are removed in total.",
-          "Those pixels are not inherently unimportant. A handle, label or accessory near the edge can be more valuable than empty background in the center.",
-        ],
-      },
-      {
-        title: "The visual check",
-        paragraphs: [
-          "Use a crop preview after preparing the image, then inspect it at approximately the size a customer will see. A centered crop is useful for identifying risk, not for claiming that a marketplace uses the same frame.",
-        ],
-        steps: [
-          "Mark the full product boundary before choosing a crop.",
-          "Compare square, landscape and portrait frames.",
-          "Move the source composition or add margin when a meaningful edge is clipped.",
-          "Verify the final listing preview after upload.",
-        ],
-      },
+    sections:[
+      {title:"Calculate the retained frame",paragraphs:["For a square of side S, a centered 4:3 crop retains a height of 3S/4 and removes S/8 from each vertical edge. A 3:4 crop retains a width of 3S/4 and removes S/8 from each horizontal edge. With S = 800, that is 100 pixels at each affected edge.", "The same fractions apply to a larger square: a 2000 × 2000 source loses 250 pixels at each affected edge. A non-square source requires its own calculation. Do not carry the square example over to every source ratio."]},
+      {title:"Judge the content removed",paragraphs:["The padded cup example has spare space at its sides, so removing side pixels need not remove the cup. The same crop could clip a handle in a tighter composition. Compare the actual product boundary, not merely the retained percentage.", "Use the separate thumbnail checklist to assess meaning, readability and the final marketplace preview. Its job is a publishing decision; this page provides the file geometry behind that decision."]}
     ],
-    sources: [
-      {
-        title: "MDN: CanvasRenderingContext2D.drawImage()",
-        url: "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage",
-        publisher: "MDN Web Docs",
-      },
-    ],
-    related: [
-      { label: "Etsy image reference", href: "/marketplace/etsy/" },
-      { label: "Fit versus fill guide", href: "/guides/fit-vs-fill/" },
-      { label: "Image Prep tool", href: "/tools/image-prep/" },
-    ],
+    sources:[{title:"MDN: drawImage source and destination rectangles",url:"https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage",publisher:"MDN Web Docs"}],
+    related:[{label:"Thumbnail review checklist",href:"/guides/thumbnail-crop-checklist/"},{label:"Choose Fit or Fill",href:"/guides/fit-vs-fill/"}]
   },
   {
-    slug: "browser-limits",
-    type: "experiment",
-    title: "Browser Image Limits: Why a Small Photo File Can Use a Lot of Memory",
-    description:
-      "A reproducible explanation of pixel buffers, browser limits and why local processing still needs conservative batch sizes.",
-    category: "Browser experiment",
-    published: "2026-09-22",
-    updated: "2026-09-22",
-    lastVerified: "2026-09-22",
-    evidence: {
-      question: "Why can an apparently small image make a browser tab slow or fail?",
-      method:
-        "Compare compressed file bytes with the decoded pixel count. A basic RGBA buffer uses roughly four bytes per pixel before canvases, thumbnails and browser overhead.",
-      result:
-        "A 4000 × 3000 image contains 12 million pixels and needs roughly 48 MB for one raw RGBA buffer. Several copies can exist during decode, preview and export.",
-      limitation:
-        "The estimate is a teaching model, not a device memory guarantee. Browser implementations, color depth and concurrent tabs vary.",
-      environment:
-        "RGBA estimate: decoded pixel count × 4 bytes. It describes one raw buffer before browser overhead, duplicate canvases, thumbnails or other tabs.",
-      measurements: [
-        {
-          label: "2000 × 2000",
-          value: "4,000,000 pixels ≈ 16 MB per RGBA buffer",
-          basis: "4,000,000 × 4 bytes",
-        },
-        {
-          label: "4000 × 3000",
-          value: "12,000,000 pixels ≈ 48 MB per RGBA buffer",
-          basis: "12,000,000 × 4 bytes",
-        },
-        {
-          label: "6000 × 4000",
-          value: "24,000,000 pixels ≈ 96 MB per RGBA buffer",
-          basis: "24,000,000 × 4 bytes",
-        },
-      ],
-      reproduce: [
-        "Record the compressed file size before opening the image.",
-        "Multiply width × height × 4 to estimate one RGBA buffer.",
-        "Process one file, then a small batch, and note when the browser slows down.",
-        "Repeat on the device that will actually be used; do not treat the estimate as a memory limit.",
-      ],
+    slug:"browser-limits",type:"experiment",title:"Why Small Files Need Memory",
+    description:"Compare actual compressed file sizes with a transparent pixel-buffer calculation, without claiming a device memory benchmark.",
+    category:"Technical explanation",published:"2026-09-22",updated:"2026-10-20",lastVerified:"2026-10-20",
+    evidence:{
+      question:"Why can a small file still demand substantial working memory?",
+      method:"Read the dimensions and byte count of the published JPEG files. Separately calculate width × height × 4 as a teaching estimate for one 8-bit RGBA pixel buffer.",
+      result:"A 1200 × 900 cup photo and a 1200 × 900 noise image have different compressed sizes but the same 4,320,000-byte one-buffer estimate. This result is arithmetic based on actual file dimensions.",
+      limitation:"No total browser RAM, processing speed or mobile-device capacity was measured. Extra copies, decoders, canvases, color formats and other tabs change real memory use.",
+      environment:"File metadata plus an explicitly identified RGBA calculation. Decimal MB means 1,000,000 bytes.",
+      measurements:[{label:"2000 × 2000",value:"16 MB for one RGBA buffer",basis:"4,000,000 × 4 bytes"},{label:"4000 × 3000",value:"48 MB for one RGBA buffer",basis:"12,000,000 × 4 bytes"},{label:"6000 × 4000",value:"96 MB for one RGBA buffer",basis:"24,000,000 × 4 bytes"}],
+      reproduce:["Download the cup and noise JPEGs from the examples below.", "Read each file's width, height and actual encoded bytes.", "Calculate width × height × 4 separately from the compressed byte size.", "Use a device's own profiler for a true memory measurement; do not label this estimate as measured RAM."]
     },
-    sections: [
-      {
-        title: "Compressed bytes are not decoded memory",
-        paragraphs: [
-          "A JPG may occupy only a few megabytes on disk while expanding into millions of pixels in memory. The browser needs decoded data to draw a canvas, create a thumbnail and encode a new result.",
-          "The Image Prep tool limits files to 24 megapixels, 20 MB per input, 20 files and 100 MB total input. The limits reduce risk; they cannot guarantee a successful run on every phone or low-memory device.",
-        ],
-      },
-      {
-        title: "A safer batch routine",
-        paragraphs: [],
-        steps: [
-          "Test one landscape and one portrait image first.",
-          "Process smaller batches when the device becomes slow.",
-          "Reduce output dimensions before assuming a format change will solve memory pressure.",
-          "Keep originals outside the browser and inspect every downloaded result.",
-        ],
-      },
+    sections:[
+      {title:"The file and its decoded pixels",paragraphs:["JPEG and WebP store an encoded representation. To display or manipulate it, a browser decodes image information and may create canvases, thumbnails and additional buffers. Compression efficiency therefore does not describe all working-memory costs.", "The four-bytes-per-pixel model is useful for explaining scale. It is not a claim that every browser uses exactly that representation for every operation. High-bit-depth sources, decoder storage and implementation details can require a different amount."]},
+      {title:"Use the distinction to diagnose",paragraphs:["When a tab struggles, test one image and reduce dimensions before assuming that changing the extension will fix it. Reducing both width and height by half reduces pixel count to one quarter; the visual result must still be sufficient for the destination.", "Image Prep limits batch size and output pixels to reduce risk. Those safeguards are not a guarantee that a low-memory device can complete the maximum batch. The troubleshooting guide gives the recovery procedure without presenting a theoretical estimate as a device benchmark."]}
     ],
-    sources: [
-      {
-        title: "MDN: ImageData and pixel data",
-        url: "https://developer.mozilla.org/en-US/docs/Web/API/ImageData",
-        publisher: "MDN Web Docs",
-      },
-      {
-        title: "MDN: createImageBitmap()",
-        url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap",
-        publisher: "MDN Web Docs",
-      },
-    ],
-    related: [
-      { label: "Browser troubleshooting guide", href: "/guides/browser-image-troubleshooting/" },
-      { label: "Image Prep tool", href: "/tools/image-prep/" },
-      { label: "Methods and limits", href: "/methodology/" },
-    ],
-  },
+    sources:[{title:"MDN: ImageData pixel representations",url:"https://developer.mozilla.org/en-US/docs/Web/API/ImageData",publisher:"MDN Web Docs"},{title:"MDN: createImageBitmap",url:"https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap",publisher:"MDN Web Docs"}],
+    related:[{label:"Recover from an export failure",href:"/guides/browser-image-troubleshooting/"},{label:"Inspect a file locally",href:"/tools/image-qa/"}]
+  }
 ];
-
-export const allLabContent = [...marketplaceReferences, ...experiments];
+export const allLabContent = [...marketplaceReferences,...experiments];

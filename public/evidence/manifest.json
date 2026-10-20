@@ -343,5 +343,102 @@
       "format": "jpeg",
       "sha256": "f4c6530b43f4f4e870a3623434c43a4b3ba066f67dc4d2b2e02312e75a15823f"
     }
+  },
+  "crops": [
+    {
+      "label": "Square",
+      "ratio": "1:1",
+      "removed": "No crop",
+      "file": {
+        "url": "/evidence/portrait-contain.png",
+        "bytes": 581262,
+        "width": 800,
+        "height": 800,
+        "format": "png",
+        "sha256": "1052cdbdaeb8ccc8dc1e8d42125bc1e77774b318517b5a33118b64f08572f51f"
+      }
+    },
+    {
+      "label": "Landscape",
+      "ratio": "4:3",
+      "removed": "100 px from top and bottom",
+      "file": {
+        "url": "/evidence/crop-landscape.png",
+        "bytes": 489130,
+        "width": 800,
+        "height": 600,
+        "format": "png",
+        "sha256": "50943b5acfc082cbd6594cffc101e1e8d7dd18df66e28c75080e88c7940031ef"
+      }
+    },
+    {
+      "label": "Portrait",
+      "ratio": "3:4",
+      "removed": "100 px from left and right",
+      "file": {
+        "url": "/evidence/crop-portrait.png",
+        "bytes": 562801,
+        "width": 600,
+        "height": 800,
+        "format": "png",
+        "sha256": "7a4d4ebd7ff587a70f9e901d16d1e2db0a8f757725db6b6d4f627740a7a76572"
+      }
+    }
+  ],
+  "scale": {
+    "url": "/evidence/extra-source-margin.png",
+    "bytes": 156660,
+    "width": 800,
+    "height": 800,
+    "format": "png",
+    "sha256": "02403a1361aa9f14948f943ea9338fae3422b00727f02b22c81bbf1393da8c0b"
+  },
+  "batch": {
+    "url": "/evidence/example-batch.zip",
+    "bytes": 269019,
+    "sha256": "a6f0bd7ae8b697a76e4b5700b10d905ba8fb240739467a3d60f05fb889c1cdd5",
+    "entries": [
+      {
+        "source": "/evidence/cup-input.png",
+        "output": "/evidence/cup.jpg",
+        "name": "MUG-042-001.jpg"
+      },
+      {
+        "source": "/evidence/beans-input.png",
+        "output": "/evidence/beans.jpg",
+        "name": "MUG-042-002.jpg"
+      },
+      {
+        "source": "/evidence/text-input.png",
+        "output": "/evidence/text.jpg",
+        "name": "MUG-042-003.jpg"
+      }
+    ]
+  },
+  "previews": {
+    "source": {
+      "url": "/evidence/preview-source.webp",
+      "bytes": 17932,
+      "width": 600,
+      "height": 791,
+      "format": "webp",
+      "sha256": "a14f70a1e47bad15fda3028f01f9d6d6891160cddc15a461c0f977a967448eaa"
+    },
+    "contain": {
+      "url": "/evidence/preview-contain.webp",
+      "bytes": 12638,
+      "width": 600,
+      "height": 600,
+      "format": "webp",
+      "sha256": "713192bc1553e427cc5a3cbe9a9d41e360abd3323772a3a14228d416d71fa67f"
+    },
+    "cover": {
+      "url": "/evidence/preview-cover.webp",
+      "bytes": 17098,
+      "width": 600,
+      "height": 600,
+      "format": "webp",
+      "sha256": "207c84c7b37a3fd1ede31f9ceb0c2859ec7847ea60e4b9b414a61378035ee5d4"
+    }
   }
 }

@@ -54,7 +54,7 @@ for (const file of htmlFiles) {
     const href = anchor.getAttribute("href");
     if (!href?.startsWith("/") || href.startsWith("//") || href.includes("#")) continue;
     const target = href.includes("?") ? href.split("?")[0] : href;
-    const targetFile = target.endsWith(".xml") ? target.slice(1) : fileFor(target.endsWith("/") ? target : `${target}/`);
+    const targetFile = path.extname(target) ? target.slice(1) : fileFor(target.endsWith("/") ? target : `${target}/`);
     check(fs.existsSync(path.join("dist", targetFile)), `${route}: missing link ${href}`);
   }
   const ids = [...doc.querySelectorAll("[id]")].map((el) => el.id);

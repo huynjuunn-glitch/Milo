@@ -6,6 +6,7 @@ import RelatedLinks from "../../components/RelatedLinks.astro";
 import SourceList from "../../components/SourceList.astro";
 import { experiments } from "../../data/content";
 import { SITE } from "../../data/site";
+import ImageEvidence from "../../components/ImageEvidence.astro";
 
 export const getStaticPaths = () => experiments.map((item) => ({ params: { slug: item.slug }, props: { item } }));
 const { item } = Astro.props;
@@ -40,6 +41,7 @@ const pageUrl = `${SITE.url}/experiments/${item.slug}/`;
 >
   <ArticleHeader eyebrow={item.category} title={item.title} description={item.description} updated={item.lastVerified} crumbs={[{ label: "Home", href: "/" }, { label: "Lab notes", href: "/experiments/" }, { label: item.title }]} />
   <div class="legal-content legal-shell article-layout">
+    <ImageEvidence kind={item.slug==="jpg-png-webp"?"formats":item.slug==="crop-geometry"?"crops":"memory"} full={item.slug==="jpg-png-webp"}/>
     {item.evidence && <EvidencePanel evidence={item.evidence} />}
     {item.sections.map((section, index) => (
       <section><h2 id={`section-${index + 1}`}>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.steps && <ol>{section.steps.map((step) => <li>{step}</li>)}</ol>}</section>
