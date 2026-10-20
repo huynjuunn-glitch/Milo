@@ -15,8 +15,10 @@
     "test:format-compare": "node --experimental-strip-types scripts/test-format-compare.mjs",
     "test:seo": "node --experimental-strip-types scripts/test-seo.mjs",
     "measure:format": "node scripts/measure-format-fixture.mjs",
+    "generate:evidence": "node --experimental-strip-types scripts/generate-evidence.mjs",
+    "test:evidence": "node scripts/test-evidence.mjs",
     "generate:images": "node --experimental-strip-types scripts/generate-preview-images.mjs",
-    "quality": "npm test && npm run build && npm run test:workspace && npm run test:format-compare"
+    "quality": "npm test && npm run test:evidence && npm run build && npm run test:workspace && npm run test:format-compare"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

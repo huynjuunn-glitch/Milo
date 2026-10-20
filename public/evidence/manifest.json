@@ -1,0 +1,347 @@
+{
+  "measuredOn": "2026-10-20",
+  "encoder": {
+    "node": "24.13.1",
+    "sharp": "0.35.4",
+    "vips": "8.18.6"
+  },
+  "parameters": {
+    "width": 1200,
+    "height": 900,
+    "jpegQuality": 85,
+    "webpQuality": 85,
+    "background": "white",
+    "png": "lossless default encoder"
+  },
+  "cases": [
+    {
+      "id": "cup",
+      "label": "Porcelain cup photograph",
+      "kind": "Photograph",
+      "credit": {
+        "file": "museum-cup.jpg",
+        "title": "Coffee Cup, accession 39.18.3",
+        "creator": "The Metropolitan Museum of Art",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Coffee_Cup_-_MET_39.18.3.jpg",
+        "download": "https://images.metmuseum.org/CRDImages/ad/original/DP-26110-001.jpg"
+      },
+      "input": {
+        "url": "/evidence/cup-input.png",
+        "bytes": 656075,
+        "width": 1200,
+        "height": 900,
+        "format": "png",
+        "sha256": "ec1d163073635128d33a64c632d1e8b613ab8b5c6cc3f5ae2a78541dcb25908e"
+      },
+      "outputs": {
+        "jpeg": {
+          "url": "/evidence/cup.jpg",
+          "bytes": 47070,
+          "width": 1200,
+          "height": 900,
+          "format": "jpeg",
+          "sha256": "da33f15ec4a249ff936a2391bd8b4a1cbf98a09e20ba3efe56d810de1c81bf6e"
+        },
+        "png": {
+          "url": "/evidence/cup.png",
+          "bytes": 656075,
+          "width": 1200,
+          "height": 900,
+          "format": "png",
+          "sha256": "ec1d163073635128d33a64c632d1e8b613ab8b5c6cc3f5ae2a78541dcb25908e"
+        },
+        "webp": {
+          "url": "/evidence/cup.webp",
+          "bytes": 25952,
+          "width": 1200,
+          "height": 900,
+          "format": "webp",
+          "sha256": "1fa3f157f06a89f3e6854363fa864f6cc9434db684645ff3223939a3bef5fac4"
+        }
+      }
+    },
+    {
+      "id": "beans",
+      "label": "Coffee and fine texture",
+      "kind": "Photograph",
+      "credit": {
+        "file": "coffee-beans.jpg",
+        "title": "Coffee cup and coffee bean",
+        "creator": "mcfoodie",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Coffee_cup_and_coffee_bean.jpg"
+      },
+      "input": {
+        "url": "/evidence/beans-input.png",
+        "bytes": 1777392,
+        "width": 1200,
+        "height": 900,
+        "format": "png",
+        "sha256": "9adc2c8688225c830a9c809212bc324e206e7fd52d9d28f2786d5f4c397b9dbf"
+      },
+      "outputs": {
+        "jpeg": {
+          "url": "/evidence/beans.jpg",
+          "bytes": 186739,
+          "width": 1200,
+          "height": 900,
+          "format": "jpeg",
+          "sha256": "bd1328e882946ef4fd0b0a778be6016930a45937d53a1aecf055ebb5a5ab5b35"
+        },
+        "png": {
+          "url": "/evidence/beans.png",
+          "bytes": 1777392,
+          "width": 1200,
+          "height": 900,
+          "format": "png",
+          "sha256": "9adc2c8688225c830a9c809212bc324e206e7fd52d9d28f2786d5f4c397b9dbf"
+        },
+        "webp": {
+          "url": "/evidence/beans.webp",
+          "bytes": 128562,
+          "width": 1200,
+          "height": 900,
+          "format": "webp",
+          "sha256": "db91f8393d689d177248ad0705c68b42901fe937dc5900538f5ca33080487a67"
+        }
+      }
+    },
+    {
+      "id": "text",
+      "label": "Text and sharp edges",
+      "kind": "Synthetic test graphic",
+      "credit": null,
+      "input": {
+        "url": "/evidence/text-input.png",
+        "bytes": 27844,
+        "width": 1200,
+        "height": 900,
+        "format": "png",
+        "sha256": "20be8fa459fe08701e8765de1b5f69025a2c23e20957bca6cef7d6d7f1bd7559"
+      },
+      "outputs": {
+        "jpeg": {
+          "url": "/evidence/text.jpg",
+          "bytes": 34870,
+          "width": 1200,
+          "height": 900,
+          "format": "jpeg",
+          "sha256": "b787fdcbcb34a2d779d5ff6892036205f01b526007a3d2e8c4dc6ee8193e3f34"
+        },
+        "png": {
+          "url": "/evidence/text.png",
+          "bytes": 27844,
+          "width": 1200,
+          "height": 900,
+          "format": "png",
+          "sha256": "20be8fa459fe08701e8765de1b5f69025a2c23e20957bca6cef7d6d7f1bd7559"
+        },
+        "webp": {
+          "url": "/evidence/text.webp",
+          "bytes": 12646,
+          "width": 1200,
+          "height": 900,
+          "format": "webp",
+          "sha256": "3766ddbd9b9175635abbe23ad9f66d857c72b245c0ed4f6f635f0c7c39891554"
+        }
+      }
+    },
+    {
+      "id": "texture",
+      "label": "Fine woven pattern",
+      "kind": "Synthetic test graphic",
+      "credit": null,
+      "input": {
+        "url": "/evidence/texture-input.png",
+        "bytes": 32538,
+        "width": 1200,
+        "height": 900,
+        "format": "png",
+        "sha256": "6e87fca049358122ecd447473261b2f5a5fd0d9937dc35593f31bd9b22a16832"
+      },
+      "outputs": {
+        "jpeg": {
+          "url": "/evidence/texture.jpg",
+          "bytes": 477374,
+          "width": 1200,
+          "height": 900,
+          "format": "jpeg",
+          "sha256": "905179745c8dcdc2f2ffe410d87956d25fe54d6d9d52d90ca108bee0b6aea78c"
+        },
+        "png": {
+          "url": "/evidence/texture.png",
+          "bytes": 32538,
+          "width": 1200,
+          "height": 900,
+          "format": "png",
+          "sha256": "6e87fca049358122ecd447473261b2f5a5fd0d9937dc35593f31bd9b22a16832"
+        },
+        "webp": {
+          "url": "/evidence/texture.webp",
+          "bytes": 452292,
+          "width": 1200,
+          "height": 900,
+          "format": "webp",
+          "sha256": "29873f5c2b24ffa03f9f394e6dab26fc37f0130d075226cbe32fed3dbac8d61d"
+        }
+      }
+    },
+    {
+      "id": "alpha",
+      "label": "Transparent graphic",
+      "kind": "Synthetic test graphic",
+      "credit": null,
+      "input": {
+        "url": "/evidence/alpha-input.png",
+        "bytes": 25219,
+        "width": 1200,
+        "height": 900,
+        "format": "png",
+        "sha256": "8465bd263b15f3431b3ec62f0a241da8d1077fdd4f4cd80bd83f5518f6acb3e7"
+      },
+      "outputs": {
+        "jpeg": {
+          "url": "/evidence/alpha.jpg",
+          "bytes": 29182,
+          "width": 1200,
+          "height": 900,
+          "format": "jpeg",
+          "sha256": "5fc474feea805bf000c5bc684a628b0662075bc3bb95c578b3d1261f356f99f9"
+        },
+        "png": {
+          "url": "/evidence/alpha.png",
+          "bytes": 25219,
+          "width": 1200,
+          "height": 900,
+          "format": "png",
+          "sha256": "8465bd263b15f3431b3ec62f0a241da8d1077fdd4f4cd80bd83f5518f6acb3e7"
+        },
+        "webp": {
+          "url": "/evidence/alpha.webp",
+          "bytes": 11008,
+          "width": 1200,
+          "height": 900,
+          "format": "webp",
+          "sha256": "a99a5b4fe870590fbf408005320630ae895e08f5cf0c597b4b9fb017b8ddf295"
+        }
+      }
+    },
+    {
+      "id": "noise",
+      "label": "Seeded random noise",
+      "kind": "Synthetic stress test; not a photograph",
+      "credit": null,
+      "input": {
+        "url": "/evidence/noise-input.png",
+        "bytes": 3246714,
+        "width": 1200,
+        "height": 900,
+        "format": "png",
+        "sha256": "319706604626d59bfb04005212dcbea3c9a517de3468d53282f7664b16f4c0fa"
+      },
+      "outputs": {
+        "jpeg": {
+          "url": "/evidence/noise.jpg",
+          "bytes": 774165,
+          "width": 1200,
+          "height": 900,
+          "format": "jpeg",
+          "sha256": "87f817eee6d9e0266fc59dd7fa12bcc4345a3f8442e6cac7211911c3cc7a04c6"
+        },
+        "png": {
+          "url": "/evidence/noise.png",
+          "bytes": 3246714,
+          "width": 1200,
+          "height": 900,
+          "format": "png",
+          "sha256": "319706604626d59bfb04005212dcbea3c9a517de3468d53282f7664b16f4c0fa"
+        },
+        "webp": {
+          "url": "/evidence/noise.webp",
+          "bytes": 813096,
+          "width": 1200,
+          "height": 900,
+          "format": "webp",
+          "sha256": "2d6438a9299bd6a0b017180d36f6698c1bf44db41d183100b10c3c38231ffda6"
+        }
+      }
+    }
+  ],
+  "framing": {
+    "source": {
+      "url": "/evidence/portrait-source.png",
+      "bytes": 761901,
+      "width": 759,
+      "height": 1000,
+      "format": "png",
+      "sha256": "3e354c227ba6b02e5aaf0227ffd7b6bde711a9a100abf70920ecb8ae25b424c7"
+    },
+    "outputs": [
+      {
+        "mode": "contain",
+        "geometry": {
+          "dx": 96.39999999999998,
+          "dy": 0,
+          "dw": 607.2,
+          "dh": 800,
+          "scale": 0.8
+        },
+        "file": {
+          "url": "/evidence/portrait-contain.png",
+          "bytes": 581262,
+          "width": 800,
+          "height": 800,
+          "format": "png",
+          "sha256": "1052cdbdaeb8ccc8dc1e8d42125bc1e77774b318517b5a33118b64f08572f51f"
+        }
+      },
+      {
+        "mode": "cover",
+        "geometry": {
+          "dx": 0,
+          "dy": -127.00922266139662,
+          "dw": 800,
+          "dh": 1054.0184453227932,
+          "scale": 1.0540184453227932
+        },
+        "file": {
+          "url": "/evidence/portrait-cover.png",
+          "bytes": 722354,
+          "width": 800,
+          "height": 800,
+          "format": "png",
+          "sha256": "16237137ee8289df1a6b82bea68b74f4c9fbca2f2dc217d524ef687030995b6f"
+        }
+      }
+    ]
+  },
+  "transparency": {
+    "source": {
+      "url": "/evidence/transparent-source.png",
+      "bytes": 24634,
+      "width": 1200,
+      "height": 900,
+      "format": "png",
+      "sha256": "c040ab03e31503d8c1866f09c14a09ace9ae7b3a556d8f9aaecf7aa69c2354d3"
+    },
+    "white": {
+      "url": "/evidence/transparent-white.jpg",
+      "bytes": 29182,
+      "width": 1200,
+      "height": 900,
+      "format": "jpeg",
+      "sha256": "5fc474feea805bf000c5bc684a628b0662075bc3bb95c578b3d1261f356f99f9"
+    },
+    "black": {
+      "url": "/evidence/transparent-black.jpg",
+      "bytes": 20420,
+      "width": 1200,
+      "height": 900,
+      "format": "jpeg",
+      "sha256": "f4c6530b43f4f4e870a3623434c43a4b3ba066f67dc4d2b2e02312e75a15823f"
+    }
+  }
+}

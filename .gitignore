@@ -11,6 +11,8 @@ node_modules
 .astro
 dist
 dist-ssr
+.taste-skill/
+artifacts/
 *.local
 .env
 .env.local
