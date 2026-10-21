@@ -1,147 +1,570 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContentCard from "../components/ContentCard.astro";
 import { guides } from "../data/guides";
-import { experiments, marketplaceReferences } from "../data/content";
-import { SITE } from "../data/site";
+import data from "../../public/evidence/manifest.json";
+const cup = data.cases.find((item) => item.id === "cup")!;
+const beans = data.cases.find((item) => item.id === "beans")!;
+const pattern = data.cases.find((item) => item.id === "texture")!;
+const groups = [...new Set(guides.map((guide) => guide.category))];
+const formatBytes = (n: number) => n.toLocaleString("en-US") + " B";
 ---
 
 <BaseLayout
-  title="Product Image Workflows for Online Sellers"
-  description="Prepare product photos with practical guides, source-checked Etsy and Shopify references, reproducible browser tests, and local tools."
-  image="/images/image-workspace.png"
-  imageAlt="Seller Operations Lab content hub with guides, source references and browser tools."
+  title="Product Image Guides and Free Browser Tools"
+  description="Solve product-image sizing, cropping and format problems with downloadable worked examples, measured files and free local browser tools."
+  image="/evidence/preview-contain.webp"
+  imageWidth={600}
+  imageHeight={600}
+  imageAlt="A porcelain cup photograph fitted into a square, one of the site's downloadable worked examples."
   activeNav="/"
-  schema={{
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${SITE.url}/#website`,
-    name: SITE.name,
-    url: SITE.url,
-    description: SITE.description,
-    inLanguage: "en-US",
-    publisher: { "@id": `${SITE.url}/#organization` },
-  }}
 >
-  <section class="hub-hero shell">
-    <div class="hub-hero-copy">
-      <p class="eyebrow">SELLER OPERATIONS LAB</p>
-        <h1>Prepare product photos with fewer unknowns.</h1>
-      <p class="hero-lede">
-        Practical image workflows for independent online sellers: frame the
-        product, compare real export sizes, and check platform-specific facts
-        before publishing.
-      </p>
-      <div class="hero-actions">
-        <a class="button" href="/start-here/">Start with a workflow</a>
-        <a class="button secondary" href="/tools/">Browse tools</a>
+  <div class="evidence-home">
+    <section class="shell opening">
+      <h1>
+        <span>Make product </span><span
+          >photos <img
+            src={data.previews.source.url}
+            width="600"
+            height={data.previews.source.height}
+            alt=""
+            fetchpriority="high"
+          /> fit</span
+        >
+      </h1>
+      <div class="opening-bottom">
+        <p>
+          Practical image guides for online sellers, with real export files you
+          can inspect and free tools that keep photos on your device.
+        </p><a class="button" href="/tools/image-prep/">Open Image Prep</a>
       </div>
-      <p class="trust-line">Independent · English · Files stay on your device</p>
-    </div>
-    <aside class="hub-hero-note">
-      <p class="eyebrow">OUR PROMISE</p>
-      <h2>Evidence before certainty.</h2>
-      <p>
-        We separate platform requirements from workflow advice, show how
-        browser tests were run, and state what each result cannot prove.
-      </p>
-      <a href="/methodology/">How the research is checked →</a>
-    </aside>
-  </section>
+    </section>
 
-  <section class="shell hub-section" aria-labelledby="start-heading">
-    <div class="section-heading">
+    <section class="shell framing-story" aria-labelledby="framing-title">
+      <div class="story-copy">
+        <h2 id="framing-title">See what the frame changes</h2><p>
+          The same portrait can keep its edges or cover a square. Compare the
+          results before processing a whole product batch.
+        </p><p>
+          Our {data.framing.source.width} × {data.framing.source.height} source becomes
+          an 800 × 800 export in both cases. The subject and the canvas are different
+          boundaries.
+        </p><a href="/guides/fit-vs-fill/">Read the Fit vs Fill guide</a><p
+          class="image-source"
+        >
+          Cup photograph: <a href={cup.credit!.source}
+            >The Metropolitan Museum of Art, CC0</a
+          >. Preview images are reduced WebP copies of the downloadable
+          reference exports.
+        </p>
+      </div>
+      <div class="framing-demo" data-framing-demo>
+        <fieldset hidden data-demo-controls>
+          <legend>Compare the framing</legend><label
+            ><input type="radio" name="framing" value="contain" checked /> Fit whole
+            photo</label
+          ><label
+            ><input type="radio" name="framing" value="cover" /> Fill square</label
+          >
+        </fieldset>
+        <figure class="demo-figure">
+          <img
+            data-demo-image
+            src={data.previews.contain.url}
+            data-contain={data.previews.contain.url}
+            data-cover={data.previews.cover.url}
+            width="600"
+            height="600"
+            alt="Full portrait photograph fitted into a square with white side margins"
+            decoding="async"
+          /><figcaption data-demo-caption aria-live="polite">
+            Fit: the whole photograph stays visible, with white space at the
+            sides.
+          </figcaption>
+        </figure>
+        <p class="download-pair">
+          <a href={data.framing.outputs[0].file.url} download>Download Fit</a><a
+            href={data.framing.outputs[1].file.url}
+            download>Download Fill</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <section class="format-story" aria-labelledby="format-title">
+      <div class="shell format-inner">
+        <div>
+          <h2 id="format-title">The image changes the answer</h2><p>
+            In our reference exports, WebP is smaller for the cup photograph.
+            PNG is much smaller for the repeated pattern. The detailed coffee
+            photograph also needs more bytes than the cup. Compare your own
+            content before choosing a format.
+          </p><p>
+            Each row starts with the same 1200 × 900 pixels. JPG and WebP use
+            quality 85; equal parameters do not mean equal visual quality.
+          </p><a href="/experiments/jpg-png-webp/"
+            >Inspect all six tests and files</a
+          >
+        </div>
+        <div class="format-proof">
+          <div class="specimen-strip">
+            <figure>
+              <img
+                src={cup.outputs.webp.url}
+                width="1200"
+                height="900"
+                alt="Porcelain cup photograph used in the format comparison"
+                loading="lazy"
+              /><figcaption>Photograph</figcaption>
+            </figure><figure>
+              <img
+                src={beans.outputs.webp.url}
+                width="1200"
+                height="900"
+                alt="Coffee cup and beans with fine detail, used in the same format comparison"
+                loading="lazy"
+              /><figcaption>Detailed photograph</figcaption>
+            </figure><figure>
+              <img
+                src={pattern.outputs.png.url}
+                width="1200"
+                height="900"
+                alt="Generated fine woven-pattern compression test"
+                loading="lazy"
+              /><figcaption>Synthetic pattern</figcaption>
+            </figure>
+          </div><div class="table-wrap">
+            <table>
+              <caption>Actual file bytes from the reference encoder</caption
+              ><thead
+                ><tr><th>Input</th><th>JPG</th><th>PNG</th><th>WebP</th></tr
+                ></thead
+              ><tbody
+                >{
+                  [cup, beans, pattern].map((item) => (
+                    <tr>
+                      <th scope="row">
+                        {item.id === "cup"
+                          ? "Cup"
+                          : item.id === "beans"
+                            ? "Coffee"
+                            : "Pattern"}
+                      </th>
+                      {(["jpeg", "png", "webp"] as const).map((format) => (
+                        <td>
+                          <a href={item.outputs[format].url} download>
+                            {formatBytes(item.outputs[format].bytes)}
+                          </a>
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                }</tbody
+              >
+            </table>
+          </div><p class="measurement-note">
+            Measured {data.measuredOn} with sharp {data.encoder.sharp}. These
+            are reference-encoder files, not browser or marketplace benchmarks.
+            Coffee photograph: <a href={beans.credit!.source}>mcfoodie, CC0</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell reading-index" aria-labelledby="reading-title">
+      <h2 id="reading-title">Find your image problem</h2>{
+        groups.map((group) => (
+          <div class="reading-group">
+            <>
+              <h3>{group}</h3>
+              <ul>
+                {guides
+                  .filter((guide) => guide.category === group)
+                  .map((guide) => (
+                    <li>
+                      <a href={`/guides/${guide.slug}/`}>{guide.title}</a>
+                      <p>{guide.description}</p>
+                    </li>
+                  ))}
+              </ul>
+            </>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="shell platform-story" aria-labelledby="platform-title">
       <div>
-        <p class="eyebrow">START HERE</p>
-        <h2 id="start-heading">Three image decisions before you publish</h2>
+        <h2 id="platform-title">Check the destination</h2><p>
+          A correctly encoded image can still be unsuitable for a platform.
+          Check the accepted types, size guidance and actual listing preview.
+        </p>
+      </div><div>
+        <p><a href="/marketplace/etsy/">Etsy image requirements</a></p><p>
+          <a href="/marketplace/shopify/">Shopify image requirements</a>
+        </p><p>
+          Platform facts link to their official sources and carry a checked
+          date. <a href="/methodology/">See our methods and image credits</a>.
+        </p>
       </div>
-      <a href="/guides/">View all guides →</a>
-    </div>
-    <div class="content-grid three-up">
-      {guides.filter((guide) => guide.slug !== "consistent-product-grid").slice(0, 3).map((guide) => (
-        <ContentCard
-          eyebrow={guide.category}
-          title={guide.title}
-          description={guide.description}
-          href={`/guides/${guide.slug}/`}
-          meta={`Checked ${guide.updated}`}
-        />
-      ))}
-    </div>
-  </section>
-
-  <section class="shell hub-section tinted" aria-labelledby="reference-heading">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">MARKETPLACE REFERENCE</p>
-        <h2 id="reference-heading">Platform facts, separated from workflow advice</h2>
-      </div>
-      <a href="/marketplace/">All references →</a>
-    </div>
-    <div class="content-grid two-up">
-      {marketplaceReferences.map((item) => (
-        <ContentCard
-          eyebrow={item.category}
-          title={item.title}
-          description={item.description}
-          href={`/marketplace/${item.slug}/`}
-          meta={`Official sources checked ${item.lastVerified}`}
-        />
-      ))}
-    </div>
-  </section>
-
-  <section class="shell hub-section" aria-labelledby="experiment-heading">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">THE LAB</p>
-        <h2 id="experiment-heading">Reproducible tests with visible limits</h2>
-      </div>
-      <a href="/experiments/">See all experiments →</a>
-    </div>
-    <div class="content-grid three-up">
-      {experiments.map((item) => (
-        <ContentCard
-          eyebrow={item.category}
-          title={item.title}
-          description={item.description}
-          href={`/experiments/${item.slug}/`}
-          meta={`Rechecked ${item.lastVerified}`}
-        />
-      ))}
-    </div>
-  </section>
-
-  <section class="shell tool-callout" aria-labelledby="tool-heading">
-    <div>
-      <p class="eyebrow">TOOLS WITH A CLEAR JOB</p>
-      <h2 id="tool-heading">Prepare and compare files locally.</h2>
-      <p>
-        Resize, preview crops, compare formats, rename and export without
-        sending images to a server. The guides explain what to check and why.
-      </p>
-    </div>
-    <div class="hero-actions">
-      <a class="button dark" href="/tools/image-prep/">Open Image Prep →</a>
-      <a class="button secondary" href="/tools/format-compare/">Compare formats →</a>
-    </div>
-  </section>
-
-  <section class="shell hub-section final-note" aria-labelledby="method-heading">
-    <div>
-      <p class="eyebrow">TRANSPARENT BY DESIGN</p>
-        <h2 id="method-heading">Clear sources. No claimed seller results.</h2>
-      <p>
-        Seller Operations Lab is an independent editorial and software
-        project, not an Etsy or Shopify partner. Platform facts link to their
-        sources; tests disclose their inputs and limits. We do not claim
-        personal sales results or firsthand seller experience.
-      </p>
-    </div>
-    <div class="final-links">
-      <a href="/methodology/">Read the methodology</a>
-      <a href="/about/">About the project</a>
-      <a href="/contact/">Report a correction</a>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
+
+<script>
+  import { initFramingDemo } from "../scripts/framing-demo";
+  initFramingDemo();
+</script>
+<style>
+  .evidence-home {
+    --surface: #e8eef5;
+    --display: clamp(2.5rem, 7vw, 6.5rem);
+    --heading: clamp(1.8rem, 3vw, 2.7rem);
+    --copy: 1rem;
+    color: var(--ink);
+  }
+  .evidence-home p {
+    max-width: 65ch;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .evidence-home h1,
+  .evidence-home h2,
+  .evidence-home h3 {
+    text-wrap: balance;
+    letter-spacing: -0.04em;
+  }
+  .evidence-home h2 {
+    font-size: var(--heading);
+    margin-bottom: 24px;
+  }
+  .evidence-home h3 {
+    font-size: 1.25rem;
+  }
+  .opening {
+    padding-block: 60px 80px;
+  }
+  .opening h1 {
+    font-size: var(--display);
+    line-height: 1.02;
+    margin-bottom: 40px;
+  }
+  .opening h1 span {
+    display: block;
+  }
+  .opening h1 img {
+    display: inline-block;
+    width: 1.65em;
+    height: 0.78em;
+    object-fit: cover;
+    object-position: 50% 64%;
+    vertical-align: baseline;
+    margin-inline: 0.1em;
+  }
+  .opening-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .opening-bottom p {
+    max-width: 54ch;
+    margin: 0;
+  }
+  .evidence-home .button {
+    border: 0;
+    border-radius: 0;
+    white-space: nowrap;
+    min-height: 48px;
+    padding: 14px 24px;
+    color: white;
+    background: var(--blue);
+  }
+  .framing-story {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 8%;
+    align-items: center;
+    padding-block: 40px 120px;
+  }
+  .story-copy {
+    max-width: 500px;
+  }
+  .image-source,
+  .measurement-note {
+    font-size: 0.875rem;
+    margin-top: 24px;
+  }
+  .framing-demo {
+    background: var(--surface);
+    padding: 24px;
+    min-width: 0;
+  }
+  .framing-demo fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+  .framing-demo legend {
+    font-size: 1rem;
+    font-weight: 650;
+    margin-bottom: 12px;
+  }
+  .framing-demo fieldset[hidden] {
+    display: none;
+  }
+  .framing-demo label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    cursor: pointer;
+  }
+  .framing-demo input {
+    accent-color: var(--blue);
+    width: 18px;
+    height: 18px;
+  }
+  .demo-figure {
+    margin: 0;
+  }
+  .demo-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 540px;
+    object-fit: contain;
+    background: white;
+  }
+  .demo-figure figcaption {
+    font-size: 0.875rem;
+    margin-top: 16px;
+    min-height: 44px;
+  }
+  .download-pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 8px 0 0;
+  }
+  .format-story {
+    background: white;
+    padding-block: 100px;
+  }
+  .format-inner {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 8%;
+    align-items: center;
+  }
+  .format-proof {
+    min-width: 0;
+  }
+  .specimen-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .specimen-strip figure {
+    margin: 0;
+  }
+  .specimen-strip img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+  }
+  .specimen-strip figcaption {
+    font-size: 0.875rem;
+    margin-block: 12px 20px;
+  }
+  .format-proof table {
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.875rem;
+  }
+  .format-proof caption {
+    text-align: left;
+    margin-bottom: 12px;
+    font-size: 0.875rem;
+  }
+  .format-proof th,
+  .format-proof td {
+    padding: 12px 8px;
+  }
+  .format-proof a {
+    white-space: nowrap;
+  }
+  .reading-index {
+    padding-block: 110px;
+  }
+  .reading-index > h2 {
+    margin-bottom: 48px;
+  }
+  .reading-group {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 8%;
+    margin-top: 44px;
+  }
+  .reading-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .reading-group li + li {
+    margin-top: 32px;
+  }
+  .reading-group li a {
+    font-size: 1.25rem;
+    font-weight: 650;
+    text-decoration-thickness: 1px;
+  }
+  .reading-group li p {
+    margin: 8px 0 0;
+  }
+  .platform-story {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 8%;
+    padding-bottom: 100px;
+  }
+  .platform-story > div:last-child {
+    padding-top: 8px;
+  }
+  .platform-story > div:last-child > p:first-child a,
+  .platform-story > div:last-child > p:nth-child(2) a {
+    font-size: 1.25rem;
+    font-weight: 650;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .opening h1 img {
+      animation: open-image 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .opening h1 span,
+    .opening-bottom p,
+    .opening-bottom a {
+      animation: arrive 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .opening h1 span:nth-child(2) {
+      animation-delay: 80ms;
+    }
+    .opening-bottom p {
+      animation-delay: 120ms;
+    }
+    .opening-bottom a {
+      animation-delay: 180ms;
+    }
+    .evidence-home a {
+      transition:
+        color 160ms ease,
+        background-color 160ms ease,
+        transform 140ms ease;
+    }
+    .evidence-home .button:active {
+      transform: scale(0.98);
+    }
+    @supports (animation-timeline: view()) {
+      .story-copy,
+      .format-inner > div,
+      .reading-group,
+      .platform-story > div {
+        animation: arrive 650ms ease-out both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 22%;
+      }
+      .demo-figure img {
+        animation: picture-settle linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+      }
+    }
+  }
+  @keyframes arrive {
+    from {
+      opacity: 0.45;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes open-image {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0);
+    }
+  }
+  @keyframes picture-settle {
+    from {
+      transform: scale(0.97);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @media (max-width: 760px) {
+    .opening {
+      padding-block: 40px 48px;
+    }
+    .opening-bottom {
+      display: block;
+    }
+    .opening-bottom p {
+      margin-bottom: 24px;
+    }
+    .framing-story,
+    .format-inner,
+    .reading-group,
+    .platform-story {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .framing-story {
+      padding-block: 16px 64px;
+    }
+    .framing-demo {
+      padding: 18px;
+    }
+    .format-story {
+      padding-block: 60px;
+    }
+    .reading-index {
+      padding-block: 64px;
+    }
+    .reading-group {
+      margin-top: 36px;
+    }
+    .reading-group h3 {
+      margin-bottom: 0;
+    }
+    .platform-story {
+      padding-bottom: 64px;
+    }
+    .opening h1 {
+      margin-bottom: 28px;
+    }
+    .format-proof td,
+    .format-proof th {
+      padding: 10px 6px;
+    }
+    .format-proof table {
+      font-size: 14px;
+    }
+    .format-proof a {
+      white-space: normal;
+    }
+    .specimen-strip {
+      gap: 12px;
+    }
+    .evidence-home h2 {
+      max-width: 22ch;
+    }
+  }
+</style>
