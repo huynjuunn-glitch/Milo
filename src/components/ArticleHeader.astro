@@ -10,17 +10,26 @@ const { eyebrow, title, description, updated, crumbs } = Astro.props as {
 ---
 
 <header class="article-header legal-shell">
-  {crumbs && <nav aria-label="Breadcrumb">
-    {crumbs.map((crumb, index) => (
-      <>
-        {index > 0 && " / "}
-        {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
-      </>
-    ))}
-  </nav>}
-  <p class="eyebrow">{eyebrow}</p>
+  {
+    crumbs && (
+      <nav aria-label="Breadcrumb">
+        {crumbs.map((crumb, index) => (
+          <>
+            {index > 0 && " / "}
+            {crumb.href ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+          </>
+        ))}
+      </nav>
+    )
+  }
   <h1>{title}</h1>
   <p class="article-lede">{description}</p>
-  <p class="article-meta">Published by <a href="/about/">Seller Operations Lab</a>, the responsible editorial project.</p>
+  <p class="article-meta">
+    <a href="/about/">Seller Operations Lab</a> · {eyebrow}
+  </p>
   <VerifiedBadge date={updated} label="Last checked" />
 </header>

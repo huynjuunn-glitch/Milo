@@ -4,31 +4,188 @@ import RelatedLinks from "../../components/RelatedLinks.astro";
 import ImageEvidence from "../../components/ImageEvidence.astro";
 import { guides, type Guide } from "../../data/guides";
 import { SITE } from "../../data/site";
-export const getStaticPaths = () => guides.map(guide => ({params:{slug:guide.slug},props:{guide}}));
-const { guide } = Astro.props as {guide:Guide};
-const demonstrations: Record<string,string> = {"fit-vs-fill":"framing","thumbnail-crop-checklist":"crops","consistent-product-grid":"scale","file-size-and-quality":"formats","product-photo-workflow":"batch","browser-image-troubleshooting":"memory"};
+export const getStaticPaths = () =>
+  guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+const { guide } = Astro.props as { guide: Guide };
+const demonstrations: Record<string, string> = {
+  "fit-vs-fill": "framing",
+  "thumbnail-crop-checklist": "crops",
+  "consistent-product-grid": "scale",
+  "file-size-and-quality": "formats",
+  "product-photo-workflow": "batch",
+  "browser-image-troubleshooting": "memory",
+};
 const pageUrl = `${SITE.url}/guides/${guide.slug}/`;
 const imagePath = "/evidence/portrait-contain.png";
-const updatedLabel = new Intl.DateTimeFormat("en-US",{dateStyle:"long",timeZone:"UTC"}).format(new Date(`${guide.updated}T00:00:00Z`));
+const updatedLabel = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "long",
+  timeZone: "UTC",
+}).format(new Date(`${guide.updated}T00:00:00Z`));
 ---
-<BaseLayout title={guide.title} description={guide.description} type="article" activeNav="/guides/" image={imagePath} imageAlt="A public-domain porcelain cup photograph fitted inside a square, from the downloadable worked examples." schema={[
-  {"@context":"https://schema.org","@type":"Article","@id":`${pageUrl}#article`,headline:guide.title,description:guide.description,image:new URL(imagePath,SITE.url).toString(),datePublished:guide.published,dateModified:guide.updated,inLanguage:"en",publisher:{"@id":`${SITE.url}/#organization`},author:{"@type":"Organization",name:SITE.name,url:`${SITE.url}/about/`},mainEntityOfPage:pageUrl},
-  {"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Home",item:SITE.url+"/"},{"@type":"ListItem",position:2,name:"Photo guides",item:SITE.url+"/guides/"},{"@type":"ListItem",position:3,name:guide.title,item:pageUrl}]}
-]}>
-  <Fragment slot="head"><meta property="article:published_time" content={guide.published}/><meta property="article:modified_time" content={guide.updated}/></Fragment>
+
+<BaseLayout
+  title={guide.title}
+  description={guide.description}
+  type="article"
+  activeNav="/guides/"
+  image={imagePath}
+  imageWidth={800}
+  imageHeight={800}
+  imageAlt="A public-domain porcelain cup photograph fitted inside a square, from the downloadable worked examples."
+  schema={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: guide.title,
+      description: guide.description,
+      image: new URL(imagePath, SITE.url).toString(),
+      datePublished: guide.published,
+      dateModified: guide.updated,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE.url}/#organization` },
+      author: {
+        "@type": "Organization",
+        name: SITE.name,
+        url: `${SITE.url}/about/`,
+      },
+      mainEntityOfPage: pageUrl,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE.url + "/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Photo guides",
+          item: SITE.url + "/guides/",
+        },
+        { "@type": "ListItem", position: 3, name: guide.title, item: pageUrl },
+      ],
+    },
+  ]}
+>
+  <Fragment slot="head"
+    ><meta property="article:published_time" content={guide.published} /><meta
+      property="article:modified_time"
+      content={guide.updated}
+    /></Fragment
+  >
   <article>
-    <header class="legal-hero legal-shell"><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/">Guides</a></nav><h1>{guide.title}</h1><p>{guide.description}</p><p class="article-meta"><a href="/about/">Seller Operations Lab</a> · Updated <time datetime={guide.updated}>{updatedLabel}</time></p></header>
+    <header class="legal-hero legal-shell">
+      <nav aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/guides/">Guides</a>
+      </nav><h1>{guide.title}</h1><p>{guide.description}</p><p
+        class="article-meta"
+      >
+        <a href="/about/">Seller Operations Lab</a> · Updated <time
+          datetime={guide.updated}>{updatedLabel}</time>
+      </p>
+    </header>
     <div class="legal-content legal-shell">
-      <nav class="article-toc" aria-label="On this page"><h2>In this guide</h2><ol>{guide.sections.map((section,index)=><li><a href={`#section-${index+1}`}>{section.title}</a></li>)}</ol></nav>
-      {guide.sections.map((section,index)=><>
-        <section><h2 id={`section-${index+1}`}>{section.title}</h2>{section.paragraphs.map(paragraph=><p>{paragraph}</p>)}{section.steps&&<ol>{section.steps.map(step=><li>{step}</li>)}</ol>}</section>
-        {index===0&&<ImageEvidence kind={demonstrations[guide.slug]}/>}
-        {guide.slug==="file-size-and-quality"&&index===1&&<ImageEvidence kind="transparency"/>}
-      </>)}
-      {guide.example&&<div class="table-wrap"><table><thead><tr>{guide.example.headers.map(label=><th scope="col">{label}</th>)}</tr></thead><tbody>{guide.example.rows.map(row=><tr>{row.map(value=><td>{value}</td>)}</tr>)}</tbody></table></div>}
-      <section class="guide-method"><h2>How this guide was made</h2><p>Written from the documented sources and downloadable examples on this page. Reference-encoder results explain the file decisions; the final browser output and destination preview still need checking.</p>{guide.source&&<p>Reference: <a href={guide.source.url} target="_blank" rel="noopener noreferrer">{guide.source.title}</a></p>}<p><a href="/methodology/">Methods and image credits</a> · <a href="/contact/">Report a correction</a></p></section>
+      <nav class="article-toc" aria-label="On this page">
+        <h2>In this guide</h2><ol>
+          {
+            guide.sections.map((section, index) => (
+              <li>
+                <a href={`#section-${index + 1}`}>{section.title}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+      {
+        guide.sections.map((section, index) => (
+          <>
+            <section>
+              <h2 id={`section-${index + 1}`}>{section.title}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.steps && (
+                <ol>
+                  {section.steps.map((step) => (
+                    <li>{step}</li>
+                  ))}
+                </ol>
+              )}
+            </section>
+            {index === 0 && <ImageEvidence kind={demonstrations[guide.slug]} />}
+            {guide.slug === "file-size-and-quality" && index === 1 && (
+              <ImageEvidence kind="transparency" />
+            )}
+          </>
+        ))
+      }
+      {
+        guide.example && (
+          <div class="table-wrap">
+            <table>
+              <>
+                <thead>
+                  <tr>
+                    {guide.example.headers.map((label) => (
+                      <th scope="col">{label}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {guide.example.rows.map((row) => (
+                    <tr>
+                      {row.map((value) => (
+                        <td>{value}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            </table>
+          </div>
+        )
+      }
+      <section class="guide-method">
+        <h2>How this guide was made</h2><p>
+          Written from the documented sources and downloadable examples on this
+          page. Reference-encoder results explain the file decisions; the final
+          browser output and destination preview still need checking.
+        </p>{
+          guide.source && (
+            <p>
+              Reference:{" "}
+              <a
+                href={guide.source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {guide.source.title}
+              </a>
+            </p>
+          )
+        }<p>
+          <a href="/methodology/">Methods and image credits</a> · <a
+            href="/contact/">Report a correction</a>
+        </p>
+      </section>
       <p><a class="button" href="/tools/image-prep/">Open Image Prep</a></p>
-      <RelatedLinks links={[...guide.related.map(slug=>guides.find(item=>item.slug===slug)).filter((item):item is Guide=>Boolean(item)).map(item=>({label:item.title,href:`/guides/${item.slug}/`})),...(guide.relatedLab??[])]}/>
+      <RelatedLinks
+        links={[
+          ...guide.related
+            .map((slug) => guides.find((item) => item.slug === slug))
+            .filter((item): item is Guide => Boolean(item))
+            .map((item) => ({
+              label: item.title,
+              href: `/guides/${item.slug}/`,
+            })),
+          ...(guide.relatedLab ?? []),
+        ]}
+      />
     </div>
   </article>
 </BaseLayout>

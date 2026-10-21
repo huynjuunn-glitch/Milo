@@ -8,7 +8,8 @@ import { experiments } from "../../data/content";
 import { SITE } from "../../data/site";
 import ImageEvidence from "../../components/ImageEvidence.astro";
 
-export const getStaticPaths = () => experiments.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+export const getStaticPaths = () =>
+  experiments.map((item) => ({ params: { slug: item.slug }, props: { item } }));
 const { item } = Astro.props;
 const pageUrl = `${SITE.url}/experiments/${item.slug}/`;
 ---
@@ -18,34 +19,82 @@ const pageUrl = `${SITE.url}/experiments/${item.slug}/`;
   description={item.description}
   type="article"
   activeNav="/experiments/"
-  schema={[{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "@id": `${pageUrl}#article`,
-    headline: item.title,
-    description: item.description,
-    datePublished: item.published,
-    dateModified: item.updated,
-    author: { "@type": "Organization", name: SITE.name, url: `${SITE.url}/about/` },
-    publisher: { "@id": `${SITE.url}/#organization` },
-    mainEntityOfPage: pageUrl,
-  }, {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
-      { "@type": "ListItem", position: 2, name: "Lab notes", item: `${SITE.url}/experiments/` },
-      { "@type": "ListItem", position: 3, name: item.title, item: pageUrl },
-    ],
-  }]}
+  schema={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: item.title,
+      description: item.description,
+      datePublished: item.published,
+      dateModified: item.updated,
+      author: {
+        "@type": "Organization",
+        name: SITE.name,
+        url: `${SITE.url}/about/`,
+      },
+      publisher: { "@id": `${SITE.url}/#organization` },
+      mainEntityOfPage: pageUrl,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${SITE.url}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Lab notes",
+          item: `${SITE.url}/experiments/`,
+        },
+        { "@type": "ListItem", position: 3, name: item.title, item: pageUrl },
+      ],
+    },
+  ]}
 >
-  <ArticleHeader eyebrow={item.category} title={item.title} description={item.description} updated={item.lastVerified} crumbs={[{ label: "Home", href: "/" }, { label: "Lab notes", href: "/experiments/" }, { label: item.title }]} />
+  <ArticleHeader
+    eyebrow={item.category}
+    title={item.title}
+    description={item.description}
+    updated={item.lastVerified}
+    crumbs={[
+      { label: "Home", href: "/" },
+      { label: "Lab notes", href: "/experiments/" },
+      { label: item.title },
+    ]}
+  />
   <div class="legal-content legal-shell article-layout">
-    <ImageEvidence kind={item.slug==="jpg-png-webp"?"formats":item.slug==="crop-geometry"?"crops":"memory"} full={item.slug==="jpg-png-webp"}/>
+    <ImageEvidence
+      kind={item.slug === "jpg-png-webp"
+        ? "formats"
+        : item.slug === "crop-geometry"
+          ? "crops"
+          : "memory"}
+      full={item.slug === "jpg-png-webp"}
+    />
     {item.evidence && <EvidencePanel evidence={item.evidence} />}
-    {item.sections.map((section, index) => (
-      <section><h2 id={`section-${index + 1}`}>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.steps && <ol>{section.steps.map((step) => <li>{step}</li>)}</ol>}</section>
-    ))}
+    {
+      item.sections.map((section, index) => (
+        <section>
+          <h2 id={`section-${index + 1}`}>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {section.steps && (
+            <ol>
+              {section.steps.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+          )}
+        </section>
+      ))
+    }
     <SourceList sources={item.sources} />
     <RelatedLinks links={item.related} />
   </div>

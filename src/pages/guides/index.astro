@@ -1,53 +1,70 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { guides } from "../../data/guides";
+const groups = [...new Set(guides.map((guide) => guide.category))];
 ---
 
 <BaseLayout
   title="Product Photo Workflow Guides"
-  description="Practical, evidence-led guides to framing, thumbnails, image formats, batch naming, and browser troubleshooting for online product listings."
+  description="Solve image framing, format, batch naming and export problems with complete guides and downloadable worked examples."
   activeNav="/guides/"
 >
   <section class="legal-hero legal-shell">
-    <p class="eyebrow">SELLER OPERATIONS LAB</p>
-    <h1>Product photo workflow guides</h1>
-    <p>
-      Make the file decisions that affect a listing image: what to keep in
-      frame, how to encode it, and how to catch a failed export before upload.
-      These guides describe repeatable technical workflows, not promises about
-      marketplace ranking or sales.
+    <h1>Product photo guides</h1><p>
+      Choose the problem you need to solve. Each guide combines a practical
+      procedure with downloadable files or a worked example you can inspect.
     </p>
   </section>
-  <section class="shell page-section two-column-copy">
-    <div>
-      <h2>Start with the risk you need to control</h2>
-      <p>
-        If the product edge or included quantity matters, compare Fit with Fill
-        before batch processing. If a file is too large, compare encodings from
-        the same original and inspect the actual output rather than targeting
-        an assumed kilobyte limit. If a browser stalls, reduce image dimensions
-        and batch size before changing unrelated settings.
+  <div class="legal-content legal-shell guide-directory">
+    {
+      groups.map((group) => (
+        <section>
+          <>
+            <h2>{group}</h2>
+            <ul>
+              {guides
+                .filter((guide) => guide.category === group)
+                .map((guide) => (
+                  <li>
+                    <h3>
+                      <a href={`/guides/${guide.slug}/`}>{guide.title}</a>
+                    </h3>
+                    <p>{guide.description}</p>
+                  </li>
+                ))}
+            </ul>
+          </>
+        </section>
+      ))
+    }<section>
+      <h2>Before publishing</h2><p>
+        Check the <a href="/marketplace/">destination's current requirements</a> and
+        inspect its saved preview. A local export can verify file properties but does
+        not reproduce a storefront theme.
+      </p><p>
+        <a href="/experiments/">Inspect the examples and measurements</a> or <a
+          href="/tools/">open the local browser tools</a
+        >.
       </p>
-    </div>
-    <div>
-      <h2>Pair platform facts with your own preview</h2>
-      <p>
-        Platform references link to the current help pages and show when they
-        were checked. Your storefront theme, device and listing preview still
-        decide how an uploaded file appears. Use the guides with the
-        <a href="/tools/format-compare/">local format comparison</a> and
-        <a href="/tools/image-prep/">Image Prep</a> rather than treating a
-        preset as a platform rule.
-      </p>
-    </div>
-  </section>
-  <section class="shell legal-content guide-grid" aria-label="All workflow guides">
-    {guides.map((g) => (
-      <a class="guide-card" href={`/guides/${g.slug}/`}>
-        <span>{g.category.toUpperCase()}</span>
-        <h2>{g.title}</h2>
-        <p>{g.description}</p>
-      </a>
-    ))}
-  </section>
+    </section>
+  </div>
 </BaseLayout>
+<style>
+  .guide-directory > section {
+    margin-bottom: 48px;
+  }
+  .guide-directory ul {
+    list-style: none;
+    padding: 0;
+  }
+  .guide-directory li + li {
+    margin-top: 28px;
+  }
+  .guide-directory h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+  .guide-directory p {
+    color: var(--ink);
+  }
+</style>
