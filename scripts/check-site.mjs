@@ -33,8 +33,6 @@ const expected = [
   "/contact/",
   "/privacy/",
   "/terms/",
-  "/standards/",
-  "/changelog/",
   "/updates/",
   "/methodology/",
   "/marketplace/",
@@ -131,9 +129,14 @@ for (const file of html) {
     !/adsbygoogle\.js|googletagmanager|cloudflareinsights\.com/.test(text),
     `${route}: unexpected ad/analytics script`,
   );
-  requireCondition(!text.includes("innerHTML"), `${route}: unsafe HTML interpolation`);
   requireCondition(
-    !/Dama Workshop|board feet|data-calculator|Workshop Guides|Dama Image Prep/.test(text),
+    !text.includes("innerHTML"),
+    `${route}: unsafe HTML interpolation`,
+  );
+  requireCondition(
+    !/Dama Workshop|board feet|data-calculator|Workshop Guides|Dama Image Prep/.test(
+      text,
+    ),
     `${route}: retired content`,
   );
   if (excluded.has(route))

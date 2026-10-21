@@ -11,14 +11,23 @@ export default defineConfig({
       serialize(item) {
         const path = new URL(item.url).pathname;
         const guide = guides.find((g) => path === `/guides/${g.slug}/`);
-        const lab = allLabContent.find((item) =>
-          path === `/${item.type === "reference" ? "marketplace" : "experiments"}/${item.slug}/`,
+        const lab = allLabContent.find(
+          (item) =>
+            path ===
+            `/${item.type === "reference" ? "marketplace" : "experiments"}/${item.slug}/`,
         );
         // Dates describe reviewed changes, never the build or crawler visit time.
         const updated =
-          guide?.updated ?? lab?.updated ??
-          (["/", "/guides/", "/marketplace/", "/experiments/", "/tools/"].includes(path)
-            ? "2026-09-24"
+          guide?.updated ??
+          lab?.updated ??
+          ([
+            "/",
+            "/guides/",
+            "/marketplace/",
+            "/experiments/",
+            "/tools/",
+          ].includes(path)
+            ? "2026-10-21"
             : undefined);
         return updated ? { ...item, lastmod: updated } : item;
       },

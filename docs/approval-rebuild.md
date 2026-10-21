@@ -23,6 +23,19 @@ Audience: independent online sellers preparing image files, using free tools wit
 
 ## Design argument
 
-The output files become the page's proof: an image is shown before and after framing, and the same pixels are available in three measured formats. The homepage lets visitors compare framing before opening a full guide. Original imagery: a public-domain museum cup photograph and a CC0 coffee photograph, plus identified deterministic text, texture, transparency and noise fixtures. Existing blue/ink palette and system type remain.
+The output files become the page's proof: an image is shown before and after framing, and the same pixels are available in three measured formats. The homepage lets visitors compare framing before opening a full guide. Visual material: a third-party public-domain museum cup photograph and a third-party CC0 coffee photograph, plus identified deterministic text, texture, transparency and noise fixtures. The photographs are not original photography by this project; the controlled comparisons and explanations are the site's contribution. Existing blue/ink palette and system type remain.
 
 Baseline visual inspection found a three-line headline, repeated outlined cards, small labels and no visible homepage images. These are design observations, not Google approval rules.
+
+## Completion checkpoint — 2026-10-21
+
+All four local delivery slices are implemented. Publication has not been performed.
+
+- Six distinct guides now explain framing, thumbnail checks, apparent product scale, format decisions, batch naming and export recovery. Their intent is useful even without this site's tools.
+- Three lab notes use downloadable reference files or explicitly labeled calculations. The format comparison covers two licensed photographs and four synthetic inputs; it is not a representative survey of all product photographs.
+- The homepage shows real outputs, a keyboard-operable Fit/Fill comparison and measured files. Navigation and guide discovery are simplified.
+- Methods, photograph credits, limitations and source corrections are visible. Outdated/unsubstantiated platform details were corrected after checking the linked sources.
+- Old generated diagram assets and superseded generators were removed. The two retired policy/change-log routes use permanent redirect declarations rather than conflicting physical pages.
+- No dependencies, paid API, upload server, database or authentication were added. English, the domain and browser-only tools remain unchanged.
+
+Verification details and limits: [approval-rebuild-qc.md](approval-rebuild-qc.md).
