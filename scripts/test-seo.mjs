@@ -262,6 +262,15 @@ for (const guide of guides.filter((item) => item.relatedLab?.length)) {
     );
   }
 }
+const privacyText = bodyText(parse(read("privacy/index.html")));
+check(
+  privacyText.includes("Cloudflare Web Analytics"),
+  "Privacy discloses the observed hosting-injected performance beacon",
+);
+check(
+  !privacyText.includes("does not load advertising or analytics scripts"),
+  "Privacy does not claim hosting analytics is absent",
+);
 check(!read("robots.txt").includes("Disallow: /"), "Crawl access retained");
 check(
   !fs.existsSync("functions") && !fs.existsSync("src/pages/api"),
